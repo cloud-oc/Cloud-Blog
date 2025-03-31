@@ -657,7 +657,7 @@ module.exports = {
     {
       name: 'You\'re Going to Love Tomorrow\'s Story',
       artist: 'Yokaze',
-      url: 'https://Cloud-OG.github.io/FileHub/root/Music/You're Going to Love Tomorrow's Story.m4a',
+      url: 'https://Cloud-OG.github.io/FileHub/root/Music/You\'re Going to Love Tomorrow\'s Story.m4a',
       cover: 'https://jsd.cdn.zzko.cn/gh/Cloud-OG/FileHub@main/root/Picture/Unreal Life OST.png'
     }
   ],
