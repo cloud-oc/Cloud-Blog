@@ -655,10 +655,10 @@ module.exports = {
       cover: 'https://p2.music.126.net/yPW_EmIsyR7iD6awPiiQUQ==/109951170148303857.jpg'
     },
     {
-      name: 'You\'re Going to Love Tomorrow\'s Story',
-      artist: 'Yokaze',
-      url: 'https://Cloud-OG.github.io/FileHub/root/Music/You\'re Going to Love Tomorrow\'s Story.m4a',
-      cover: 'https://jsd.cdn.zzko.cn/gh/Cloud-OG/FileHub@main/root/Picture/Unreal Life OST.png'
+    name: "You're Going to Love Tomorrow's Story",
+    artist: "Yokaze",
+    url: "https://Cloud-OG.github.io/FileHub/root/Music/You're Going to Love Tomorrow's Story.m4a",
+    cover: "https://jsd.cdn.zzko.cn/gh/Cloud-OG/FileHub@main/root/Picture/Unreal Life OST.png"
     }
   ],
   MUSIC_PLAYER_METING: process.env.NEXT_PUBLIC_MUSIC_PLAYER_METING || false, // 是否要开启 MetingJS，从平台获取歌单。会覆盖自定义的 MUSIC_PLAYER_AUDIO_LIST，更多配置信息：https://github.com/metowolf/MetingJS
