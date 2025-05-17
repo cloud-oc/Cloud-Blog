@@ -39,7 +39,7 @@ module.exports = {
     {
       name: '鳥の詩',
       artist: 'Lia',
-      url: 'https://music.163.com/song/media/outer/url?id=28151022.mp3',
+      url: 'https://music.163.com/song/media/outer/url?id=761594.mp3',
       cover: 'http://p2.music.126.net/CI_u3SfBgdTIAQtFnn_wnQ==/6040716883009850.jpg'
     },
     {
