@@ -658,7 +658,7 @@ module.exports = {
     name: "You're Going to Love Tomorrow's Story",
     artist: "Yokaze",
     url: "https://cloud-oc.github.io/Audio-Bed/Music/You're Going to Love Tomorrow's Story.m4a",
-    cover: "https://cdn.jsdmirror.com/gh/Cloud-oc/FileHub@main/root/Picture/Unreal%20Life%20OST.png"
+    cover: "https://cdn.jsdmirror.com/gh/Cloud-oc/Audio-Bed/Picture/Unreal%20Life%20OST.png"
     }
   ],
   MUSIC_PLAYER_METING: process.env.NEXT_PUBLIC_MUSIC_PLAYER_METING || false, // 是否要开启 MetingJS，从平台获取歌单。会覆盖自定义的 MUSIC_PLAYER_AUDIO_LIST，更多配置信息：https://github.com/metowolf/MetingJS
