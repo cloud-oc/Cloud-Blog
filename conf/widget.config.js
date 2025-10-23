@@ -45,7 +45,7 @@ module.exports = {
     {
       name: 'Memoria-君の赴くままに',
       artist: '藤崎わと',
-      url: 'https://cloud-oc.github.io/FileHub/root/Music/Memoria-君の赴くままに.m4a',
+      url: 'https://cloud-oc.github.io/Audio-Bed/Music/Memoria-君の赴くままに.m4a',
       cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiMiehT3mFTCvo7gRCx6_e9e5DSAm8Q19M7w&s'
     },
     {
@@ -69,13 +69,13 @@ module.exports = {
     {
       name: 'Come on,sweet death',
       artist: 'ARIANNE',
-      url: 'https://cloud-oc.github.io/FileHub/root/Music/come on,sweet death.mp3',
+      url: 'https://cloud-oc.github.io/Audio-Bed/Music/come on,sweet death.mp3',
       cover: 'https://p1.music.126.net/S4Kcgr9CmA_1yM6wbjL3Rg==/109951165354140879.jpg'
     },
     {
       name: 'Beautiful World',
       artist: '宇多田ヒカル',
-      url: 'https://cloud-oc.github.io/FileHub/root/Music/Beautiful_World.mp3',
+      url: 'https://cloud-oc.github.io/Audio-Bed/Music/Beautiful_World.mp3',
       cover: 'https://p1.music.126.net/l3G4LigZnOxFE9lB4bz_LQ==/109951165791860501.jpg'
     },
     {
@@ -87,25 +87,25 @@ module.exports = {
     {
       name: 'Beautiful World(Da Capo Version)',
       artist: '宇多田ヒカル',
-      url: 'https://cloud-oc.github.io/FileHub/root/Music/Beautiful_World(Da_Capo_Version).mp3',
+      url: 'https://cloud-oc.github.io/Audio-Bed/Music/Beautiful_World(Da_Capo_Version).mp3',
       cover: 'https://p1.music.126.net/l3G4LigZnOxFE9lB4bz_LQ==/109951165791860501.jpg'
     },
     {
       name: 'One Last Kiss',
       artist: '宇多田ヒカル',
-      url: 'https://cloud-oc.github.io/FileHub/root/Music/One Last Kiss.mp3',
+      url: 'https://cloud-oc.github.io/Audio-Bed/Music/One Last Kiss.mp3',
       cover: 'https://p1.music.126.net/l3G4LigZnOxFE9lB4bz_LQ==/109951165791860501.jpg'
     },
     {
       name: 'Merry Christmas Mr. Lawrence',
       artist: '坂本龍一',
-      url: 'https://cloud-oc.github.io/FileHub/root/Music/Merry Christmas Mr. Lawrence.flac',
+      url: 'https://cloud-oc.github.io/Audio-Bed/Music/Merry Christmas Mr. Lawrence.flac',
       cover: 'https://p1.music.126.net/Vnb5M_-BCkEARNVGSF_KKg==/109951167113646412.jpg'
     },
     {
       name: 'energy flow',
       artist: '坂本龍一',
-      url: 'https://cloud-oc.github.io/FileHub/root/Music/energy flow.flac',
+      url: 'https://cloud-oc.github.io/Audio-Bed/Music/energy flow.flac',
       cover: 'https://p1.music.126.net/92bUIG25fZW2TqOT53dP9w==/109951168429185109.jpg'
     },
     {
@@ -117,7 +117,7 @@ module.exports = {
     {
       name: 'Let It Be (Remastered 2009)',
       artist: 'Beatles',
-      url: 'https://cloud-oc.github.io/FileHub/root/Music/Let It Be (Remastered 2009).flac',
+      url: 'https://cloud-oc.github.io/Audio-Bed/Music/Let It Be (Remastered 2009).flac',
       cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoPQLBmAd4ABWAtGQRQOyDWVOsiHPFOMRqhw&s'
     },
     {
@@ -195,25 +195,25 @@ module.exports = {
     {
       name: '在银河中孤独摇摆',
       artist: '知更鸟,HOYO-MiX,Chevy',
-      url: 'https://cloud-oc.github.io/FileHub/root/Music/01 在银河中孤独摇摆 Sway To My Beat In Cosmos.m4a',
+      url: 'https://cloud-oc.github.io/Audio-Bed/Music/01 在银河中孤独摇摆 Sway To My Beat In Cosmos.m4a',
       cover: 'http://p1.music.126.net/aR4BlDNkA84tFbg8bBpriA==/109951169585655912.jpg'
     },
     {
       name: '使一颗心免于哀伤',
       artist: '知更鸟,HOYO-MiX,Chevy',
-      url: 'https://cloud-oc.github.io/FileHub/root/Music/02 使一颗心免于哀伤 If I Can Stop One Heart From Breaking.m4a',
+      url: 'https://cloud-oc.github.io/Audio-Bed/Music/02 使一颗心免于哀伤 If I Can Stop One Heart From Breaking.m4a',
       cover: 'http://p1.music.126.net/aR4BlDNkA84tFbg8bBpriA==/109951169585655912.jpg'
     },
     {
       name: '希望有羽毛和翅膀',
       artist: '知更鸟,HOYO-MiX,Chevy',
-      url: 'https://cloud-oc.github.io/FileHub/root/Music/03 希望有羽毛和翅膀 Hope Is The Thing With Feathers.m4a',
+      url: 'https://cloud-oc.github.io/Audio-Bed/Music/03 希望有羽毛和翅膀 Hope Is The Thing With Feathers.m4a',
       cover: 'http://p1.music.126.net/aR4BlDNkA84tFbg8bBpriA==/109951169585655912.jpg'
     },
     {
       name: '若我不曾见过太阳',
       artist: '知更鸟,HOYO-MiX,Chevy',
-      url: 'https://cloud-oc.github.io/FileHub/root/Music/04 若我不曾见过太阳 Had I Not Seen The Sun.m4a',
+      url: 'https://cloud-oc.github.io/Audio-Bed/Music/04 若我不曾见过太阳 Had I Not Seen The Sun.m4a',
       cover: 'http://p1.music.126.net/aR4BlDNkA84tFbg8bBpriA==/109951169585655912.jpg'
     },
     {
@@ -657,7 +657,7 @@ module.exports = {
     {
     name: "You're Going to Love Tomorrow's Story",
     artist: "Yokaze",
-    url: "https://cloud-oc.github.io/FileHub/root/Music/You're Going to Love Tomorrow's Story.m4a",
+    url: "https://cloud-oc.github.io/Audio-Bed/Music/You're Going to Love Tomorrow's Story.m4a",
     cover: "https://cdn.jsdmirror.com/gh/Cloud-oc/FileHub@main/root/Picture/Unreal%20Life%20OST.png"
     }
   ],
