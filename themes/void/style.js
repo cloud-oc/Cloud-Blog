@@ -22,9 +22,9 @@ export const Style = () => {
         --void-text-secondary: #52525b;/* 次要文字 (中深灰) */
         --void-text-muted: #a1a1aa;    /* 装饰性文字 (浅灰) */
         
-        /* Accents - Adjusted for Light Mode */
-        --void-accent-yellow: #f59e0b; /* Deep Industrial Amber (Darker than neon yellow) */
-        --void-accent-yellow-dim: rgba(245, 158, 11, 0.1);
+        /* Accents - Pink Theme */
+        --void-accent-yellow: #ec4899; /* Pink accent color */
+        --void-accent-yellow-dim: rgba(236, 72, 153, 0.1);
         --void-accent-cyan: #06b6d4;   /* Deep Tech Cyan (Darker than neon cyan) */
         --void-accent-cyan-dim: rgba(6, 182, 212, 0.1);
         

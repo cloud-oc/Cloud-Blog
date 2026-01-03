@@ -15,7 +15,6 @@ import BlogListArchive from './components/BlogListArchive'
 import { BlogListPage } from './components/BlogListPage'
 import { BlogListScroll } from './components/BlogListScroll'
 import { Footer } from './components/Footer'
-import { Header } from './components/Header'
 import { PostLock } from './components/PostLock'
 import { PostMeta } from './components/PostMeta'
 import SearchInput from './components/SearchInput'
@@ -49,14 +48,11 @@ const LayoutBase = (props) => {
     >
       <Style />
 
-      {/* 顶部导航 */}
-      <Header {...props} />
-
       {/* 左侧垂直导航 */}
       <SideNav {...props} />
 
-      {/* 主体内容区 */}
-      <div className="md:ml-20 pt-16">
+      {/* 主体内容区 - 无顶栏 */}
+      <div className="md:ml-20">
         {/* 标题栏 */}
         {!fullWidth && <TitleBar {...props} />}
 

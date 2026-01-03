@@ -26,7 +26,7 @@ export const SideNav = () => {
     { name: 'Search', icon: 'fas fa-search', path: '/search', show: siteConfig('VOID_MENU_SEARCH', null, CONFIG) }
   ].filter(item => item.show !== false)
 
-  // 社交图标配置 (从 contact.config.js 获取)
+  // 社交图标配置 - 使用 contact.config.js 的配置
   const socialLinks = [
     { key: 'CONTACT_GITHUB', icon: 'fab fa-github', label: 'GitHub' },
     { key: 'CONTACT_TWITTER', icon: 'fab fa-twitter', label: 'Twitter' },
@@ -35,9 +35,9 @@ export const SideNav = () => {
     { key: 'CONTACT_TELEGRAM', icon: 'fab fa-telegram', label: 'Telegram' },
     { key: 'CONTACT_INSTAGRAM', icon: 'fab fa-instagram', label: 'Instagram' },
     { key: 'CONTACT_YOUTUBE', icon: 'fab fa-youtube', label: 'YouTube' },
-    { key: 'CONTACT_XIAOHONGSHU', icon: 'fas fa-leaf', label: '小红书' },
+    { key: 'CONTACT_XIAOHONGSHU', icon: null, svg: '/svg/xiaohongshu.svg', label: '小红书' },
     { key: 'CONTACT_LINKEDIN', icon: 'fab fa-linkedin', label: 'LinkedIn' },
-    { key: 'CONTACT_ZHISHIXINGQIU', icon: 'fas fa-star', label: '知识星球' },
+    { key: 'CONTACT_ZHISHIXINGQIU', icon: 'fas fa-planet-ringed', label: '知识星球' },
     { key: 'CONTACT_WEHCHAT_PUBLIC', icon: 'fab fa-weixin', label: '微信公众号' },
   ]
 
@@ -81,7 +81,7 @@ export const SideNav = () => {
 
   return (
     <div 
-      className={`fixed left-0 top-16 bottom-0 z-40 hidden md:flex flex-col bg-[var(--void-bg-base)] border-r border-[var(--void-border-base)] transition-all duration-300 ease-in-out ${isHovered ? 'w-64 shadow-2xl' : 'w-20'}`}
+      className={`fixed left-0 top-0 bottom-0 z-40 hidden md:flex flex-col bg-[var(--void-bg-base)] border-r border-[var(--void-border-base)] transition-all duration-300 ease-in-out ${isHovered ? 'w-64 shadow-2xl' : 'w-20'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -115,44 +115,39 @@ export const SideNav = () => {
                 <span className={`text-sm font-medium tracking-wide uppercase whitespace-nowrap transition-opacity duration-300 ${isHovered ? 'opacity-100 delay-75' : 'opacity-0 w-0'}`}>
                   {item.name.toUpperCase()}
                 </span>
-                
-                {/* Tech Line Decoration */}
-                {isActive && isHovered && (
-                  <div className="absolute right-4 w-2 h-2 rounded-full bg-[var(--void-accent-yellow)] animate-pulse" />
-                )}
               </div>
             </SmartLink>
           )
         })}
       </div>
 
-      {/* Footer / Contact Links - No divider, no gray background */}
+      {/* Footer / Contact Links */}
       <div className="py-4 transition-all duration-300">
         
-        {/* Collapsed State: Contact Button */}
+        {/* Collapsed State: Contact Button with gray background */}
         <div className={`flex justify-center transition-all duration-300 ${isHovered ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'}`}>
-          <div className="w-10 h-10 flex items-center justify-center text-[var(--void-text-secondary)] cursor-pointer hover:text-[var(--void-accent-yellow)] transition-colors">
-            <i className="fas fa-address-book text-lg" />
+          <div className="w-10 h-10 flex items-center justify-center bg-gray-400 text-gray-700 rounded cursor-pointer hover:text-white hover:bg-pink-500 transition-colors">
+            <i className="fas fa-address-book text-base" />
           </div>
         </div>
 
-        {/* Expanded State: Horizontal Icon Row - Single line, no wrap */}
-        <div className={`px-4 transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
-           {/* Social Icons - Horizontal Layout, single row */}
-           <div className="flex items-center justify-center gap-2 flex-nowrap">
+        {/* Expanded State: Horizontal Icon Row - Single line */}
+        <div className={`px-3 transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+           {/* Social Icons - Horizontal Layout, single row with gray background */}
+           <div className="flex items-center justify-center gap-1.5 flex-nowrap">
              {/* Email Icon */}
              {email && (
                <a 
                  href={`mailto:${email}`}
                  title={email}
-                 className="w-8 h-8 flex items-center justify-center text-[var(--void-text-secondary)] hover:text-[var(--void-accent-yellow)] transition-colors flex-shrink-0"
+                 className="w-7 h-7 flex items-center justify-center bg-gray-400 text-gray-700 rounded hover:text-white hover:bg-pink-500 transition-colors flex-shrink-0"
                >
-                 <i className="fas fa-envelope text-sm" />
+                 <i className="fas fa-envelope text-xs" />
                </a>
              )}
              
              {/* Social Links */}
-             {socialLinks.map(({ key, icon, label }) => {
+             {socialLinks.map(({ key, icon, svg, label }) => {
                const url = siteConfig(key)
                if (!url) return null
                return (
@@ -162,9 +157,13 @@ export const SideNav = () => {
                    target="_blank" 
                    rel="noreferrer"
                    title={label}
-                   className="w-8 h-8 flex items-center justify-center text-[var(--void-text-secondary)] hover:text-[var(--void-accent-yellow)] transition-colors flex-shrink-0"
+                   className="w-7 h-7 flex items-center justify-center bg-gray-400 text-gray-700 rounded hover:text-white hover:bg-pink-500 transition-colors flex-shrink-0"
                  >
-                   <i className={`${icon} text-sm`} />
+                   {svg ? (
+                     <img src={svg} alt={label} className="w-3 h-3 opacity-70 hover:opacity-100" />
+                   ) : (
+                     <i className={`${icon} text-xs`} />
+                   )}
                  </a>
                )
              })}
@@ -174,5 +173,6 @@ export const SideNav = () => {
     </div>
   )
 }
+
 
 
