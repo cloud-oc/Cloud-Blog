@@ -8,7 +8,7 @@ export const TitleBar = ({ post }) => {
   const marqueeText = 'CLOUD09_SPACE'
 
   return (
-    <div className="relative py-16 md:py-24 border-b-2 border-[var(--void-border-base)] overflow-hidden bg-[var(--void-bg-base)]">
+    <div className="relative py-20 md:py-28 border-b-2 border-[var(--void-border-base)] overflow-hidden bg-[var(--void-bg-base)]">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div

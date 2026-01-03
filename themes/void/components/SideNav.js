@@ -27,7 +27,9 @@ export const SideNav = () => {
     { name: 'Category', icon: 'fas fa-folder', path: '/category', show: siteConfig('VOID_MENU_CATEGORY', null, CONFIG) },
     { name: 'Tag', icon: 'fas fa-tag', path: '/tag', show: siteConfig('VOID_MENU_TAG', null, CONFIG) },
     { name: 'Archive', icon: 'fas fa-archive', path: '/archive', show: siteConfig('VOID_MENU_ARCHIVE', null, CONFIG) },
-    { name: 'Search', icon: 'fas fa-search', path: '/search', show: siteConfig('VOID_MENU_SEARCH', null, CONFIG) }
+    { name: 'Search', icon: 'fas fa-search', path: '/search', show: siteConfig('VOID_MENU_SEARCH', null, CONFIG) },
+    { name: 'Friends', icon: 'fas fa-users', path: '/friend' },
+    { name: 'Portfolio', icon: 'fas fa-briefcase', path: '/portfolio' }
   ].filter(item => item.show !== false)
 
   // 社交图标配置 - 使用 contact.config.js 的配置
@@ -70,6 +72,8 @@ export const SideNav = () => {
     else if (path.includes('/tag')) newTab = 'Tag'
     else if (path.includes('/archive')) newTab = 'Archive'
     else if (path.includes('/search')) newTab = 'Search'
+    else if (path.includes('/friend')) newTab = 'Friends'
+    else if (path.includes('/portfolio')) newTab = 'Portfolio'
     
     setActiveTab(newTab)
   }, [router.asPath])
@@ -89,20 +93,24 @@ export const SideNav = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Avatar Section - Top of sidebar */}
+      {/* Avatar Section - Top of sidebar, clickable to personal page */}
       <div className="flex-shrink-0 py-6 flex flex-col items-center">
-        <div className={`transition-all duration-300 ${isHovered ? 'w-20 h-20' : 'w-12 h-12'}`}>
-          <img 
-            src={AVATAR_URL}
-            alt="Avatar"
-            className="w-full h-full rounded-full object-cover border-2 border-[var(--void-accent-yellow)] shadow-lg"
-          />
-        </div>
+        <SmartLink href="/cloud09" title="个人页">
+          <div className={`transition-all duration-300 cursor-pointer hover:scale-105 ${isHovered ? 'w-20 h-20' : 'w-12 h-12'}`}>
+            <img 
+              src={AVATAR_URL}
+              alt="Avatar"
+              className="w-full h-full rounded-full object-cover border-2 border-[var(--void-accent-yellow)] shadow-lg hover:border-[var(--void-text-primary)] transition-colors"
+            />
+          </div>
+        </SmartLink>
         {/* Author Info - shown when expanded */}
         <div className={`mt-3 text-center transition-all duration-300 overflow-hidden ${isHovered ? 'opacity-100 max-h-24' : 'opacity-0 max-h-0'}`}>
-          <div className="text-sm font-bold text-[var(--void-text-primary)] uppercase tracking-wider">
-            {siteConfig('AUTHOR') || 'Cloud'}
-          </div>
+          <SmartLink href="/cloud09" className="hover:text-[var(--void-accent-yellow)] transition-colors">
+            <div className="text-sm font-bold text-[var(--void-text-primary)] uppercase tracking-wider">
+              {siteConfig('AUTHOR') || 'Cloud'}
+            </div>
+          </SmartLink>
           <div className="text-xs text-[var(--void-text-muted)] mt-1 px-4 line-clamp-2">
             {siteConfig('BIO') || ''}
           </div>
