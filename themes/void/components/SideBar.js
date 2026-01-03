@@ -1,6 +1,6 @@
-import { siteConfig } from '@/lib/config'
+// import { siteConfig } from '@/lib/config'
 import SmartLink from '@/components/SmartLink'
-import CONFIG from '../config'
+// import CONFIG from '../config'
 
 /**
  * SideBar Component - Light Industrial Minimalist

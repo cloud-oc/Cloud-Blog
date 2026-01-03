@@ -412,8 +412,8 @@ const LayoutTagIndex = (props) => {
   const { tagOptions } = props
   return (
     <>
-      <div className="void-card p-8">
-        <h2 className="text-2xl font-bold text-yellow-400 mb-6 tech-text">
+      <div className="void-frame p-8">
+        <h2 className="text-2xl font-bold text-[var(--void-accent-yellow)] mb-6 tech-text">
           // ALL_TAGS
         </h2>
         <div id="tags-list" className="flex flex-wrap gap-3">
@@ -422,12 +422,12 @@ const LayoutTagIndex = (props) => {
               key={tag.name}
               href={`/tag/${encodeURIComponent(tag.name)}`}
               passHref
-              className="px-4 py-2 bg-cyan-400/10 text-cyan-400 border border-cyan-400/30 tech-text hover:bg-cyan-400/20 hover:border-cyan-400/50 transition-all text-sm"
+              className="px-4 py-2 bg-[var(--void-bg-secondary)] text-[var(--void-text-secondary)] border border-[var(--void-border-base)] tech-text hover:bg-[var(--void-text-primary)] hover:text-white hover:border-[var(--void-text-primary)] transition-all text-sm rounded-sm"
             >
               <div>
                 #{tag.name}
                 {tag.count && (
-                  <span className="ml-2 text-xs text-gray-500">
+                  <span className="ml-2 text-xs opacity-60">
                     [{tag.count}]
                   </span>
                 )}
