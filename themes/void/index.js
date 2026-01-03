@@ -9,7 +9,7 @@ import { Transition } from '@headlessui/react'
 import dynamic from 'next/dynamic'
 import SmartLink from '@/components/SmartLink'
 import { useRouter } from 'next/router'
-import { createContext, useContext, useEffect, useRef } from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import ArticleAdjacent from './components/ArticleAdjacent'
 import ArticleCopyright from './components/ArticleCopyright'
 import { ArticleLock } from './components/ArticleLock'
@@ -56,6 +56,18 @@ const LayoutBase = props => {
   const router = useRouter()
   const showRandomButton = siteConfig('HEXO_MENU_RANDOM', false, CONFIG)
 
+  // Custom Loading State for "System Boot" effect
+  const [initLoading, setInitLoading] = useState(true)
+  useEffect(() => {
+    setInitLoading(true)
+    const timer = setTimeout(() => {
+      setInitLoading(false)
+    }, 2500) // Force 2.5s loading time for animation
+    return () => clearTimeout(timer)
+  }, []) // Only run on mount
+
+  const loading = onLoading || initLoading
+
   const headerSlot = post ? (
     <PostHero {...props} />
   ) : router.route === '/' &&
@@ -95,7 +107,7 @@ const LayoutBase = props => {
 
         {/* Loading Cover */}
         <Transition
-          show={onLoading}
+          show={loading}
           enter='transition-opacity duration-200'
           enterFrom='opacity-0'
           enterTo='opacity-100'
@@ -111,7 +123,7 @@ const LayoutBase = props => {
 
         {/* 顶部嵌入 */}
         <Transition
-          show={!onLoading}
+          show={!loading}
           appear={true}
           enter='transition ease-in-out duration-700 transform order-first'
           enterFrom='opacity-0 -translate-y-16'
@@ -138,7 +150,7 @@ const LayoutBase = props => {
             <div
               className={`${className || ''} w-full ${fullWidth ? '' : 'max-w-4xl'} h-full overflow-hidden`}>
               <Transition
-                show={!onLoading}
+                show={!loading}
                 appear={true}
                 enter='transition ease-in-out duration-700 transform order-first'
                 enterFrom='opacity-0 translate-y-16'
