@@ -203,44 +203,21 @@ export const SideNav = () => {
         </div>
       </div>
 
-      {/* Bottom Toggle Button - Double Arrow Style */}
+      {/* Bottom Toggle Button - Simple Black Triangle */}
       <div className="py-4">
         <div className="flex justify-center">
           <div 
-            className="group relative w-10 h-10 flex items-center justify-center cursor-pointer transition-all duration-300"
+            className="w-8 h-8 flex items-center justify-center cursor-pointer"
             title={isHovered ? 'Collapse' : 'Expand'}
           >
-            {/* Background - hexagonal/tech style border */}
-            <div className="absolute inset-0 border-2 border-gray-300 group-hover:border-[var(--void-accent-yellow)] transition-all duration-300 rotate-45" />
-            <div className="absolute inset-1 bg-[var(--void-bg-base)] group-hover:bg-[var(--void-bg-secondary)] transition-all duration-300 rotate-45" />
-            
-            {/* Double Chevron Arrows */}
-            <div className={`relative z-10 flex items-center gap-0.5 transition-transform duration-300 ${isHovered ? 'rotate-180' : ''}`}>
-              {/* First Arrow */}
-              <svg 
-                className="w-3 h-3 text-gray-400 group-hover:text-[var(--void-accent-yellow)] transition-colors duration-300" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-                strokeWidth="3"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-              {/* Second Arrow - slightly offset for double chevron effect */}
-              <svg 
-                className="w-3 h-3 -ml-2 text-gray-300 group-hover:text-[var(--void-accent-yellow)] opacity-60 group-hover:opacity-100 transition-all duration-300" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-                strokeWidth="3"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-            
-            {/* Corner accent dots */}
-            <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-gray-300 group-hover:bg-[var(--void-accent-yellow)] transition-colors duration-300" />
-            <div className="absolute -bottom-0.5 -left-0.5 w-1.5 h-1.5 bg-gray-300 group-hover:bg-[var(--void-accent-yellow)] transition-colors duration-300" />
+            {/* Simple Black Triangle */}
+            <div 
+              className={`w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent transition-transform duration-300 ${
+                isHovered 
+                  ? 'border-r-[10px] border-r-[var(--void-text-primary)] border-l-0' 
+                  : 'border-l-[10px] border-l-[var(--void-text-primary)] border-r-0'
+              }`}
+            />
           </div>
         </div>
       </div>

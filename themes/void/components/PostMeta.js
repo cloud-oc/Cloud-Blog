@@ -35,6 +35,14 @@ export const PostMeta = ({ post }) => {
                 <span>{post.publishDay}</span>
             </div>
 
+            {/* Last Update Time */}
+            {post.lastEditedDay && post.lastEditedDay !== post.publishDay && (
+                <div className="flex items-center gap-2">
+                    <i className="fas fa-sync-alt text-[var(--void-text-muted)]" />
+                    <span>UPDATED: {post.lastEditedDay}</span>
+                </div>
+            )}
+
             {/* Category */}
             {post.category && (
                 <div className="flex items-center gap-2">

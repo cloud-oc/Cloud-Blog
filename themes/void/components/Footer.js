@@ -13,11 +13,53 @@ export const Footer = ({ title }) => {
       {/* Spectrum Bar Top */}
       <div className="spectrum-bar opacity-30" />
       
-      <div className="container mx-auto px-6 py-8">
-        {/* Bottom Bar - Copyright only */}
+      <div className="container mx-auto px-6 py-8 space-y-4">
+        {/* Row 1: RSS and Sitemap Links */}
+        <div className="flex justify-center items-center gap-6 text-xs font-mono">
+          {siteConfig('ENABLE_RSS') && (
+            <a 
+              href="/rss/feed.xml" 
+              target="_blank" 
+              rel="noreferrer"
+              className="flex items-center gap-2 text-gray-400 hover:text-[var(--void-accent-yellow)] transition-colors"
+            >
+              <i className="fas fa-rss" />
+              <span>RSS</span>
+            </a>
+          )}
+          <a 
+            href="/sitemap.xml" 
+            target="_blank" 
+            rel="noreferrer"
+            className="flex items-center gap-2 text-gray-400 hover:text-[var(--void-accent-yellow)] transition-colors"
+          >
+            <i className="fas fa-sitemap" />
+            <span>SITEMAP</span>
+          </a>
+        </div>
+
+        {/* Row 2: ICP 备案 */}
+        {siteConfig('BEI_AN') && (
+          <div className="flex justify-center items-center text-xs font-mono text-gray-500">
+            {siteConfig('BEI_AN_LINK') ? (
+              <a 
+                href={siteConfig('BEI_AN_LINK')} 
+                target="_blank" 
+                rel="noreferrer"
+                className="hover:text-gray-300 transition-colors"
+              >
+                {siteConfig('BEI_AN')}
+              </a>
+            ) : (
+              <span>{siteConfig('BEI_AN')}</span>
+            )}
+          </div>
+        )}
+
+        {/* Row 3: Copyright */}
         <div className="flex justify-center items-center text-xs font-mono text-gray-500">
           <div>
-            © {y} {siteConfig('AUTHOR')}. All Rights Reserved.
+            © {siteConfig('SINCE') && siteConfig('SINCE') !== y ? `${siteConfig('SINCE')}-${y}` : y} {siteConfig('AUTHOR')}. All Rights Reserved.
           </div>
         </div>
       </div>
