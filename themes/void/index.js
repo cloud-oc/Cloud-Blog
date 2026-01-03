@@ -209,12 +209,28 @@ const LayoutSlug = (props) => {
         <PostLock validPassword={validPassword} />
       ) : (
         post && (
-          <div>
+          <div className="relative">
+            {/* Post Metadata Header */}
             <PostMeta post={post} />
-            <div id="article-wrapper" className="void-card p-8">
-              <NotionPage post={post} />
-              <ShareBar post={post} />
+
+             {/* Article Content Frame */}
+            <div id="article-wrapper" className="void-frame p-8 md:p-12 mb-12">
+               {/* Content Watermark/Background decoration */}
+               <div className="absolute top-4 right-4 text-[var(--void-text-muted)] opacity-10 text-6xl font-black pointer-events-none select-none z-0">
+                 VOID
+               </div>
+               
+              <div className="relative z-10">
+                <NotionPage post={post} />
+              </div>
+
+              {/* Footer of the card */}
+              <div className="mt-12 pt-8 border-t border-[var(--void-border-base)] flex justify-between items-center">
+                 <div className="text-xs text-[var(--void-text-muted)] font-mono">END_OF_RECORD</div>
+                 <ShareBar post={post} />
+              </div>
             </div>
+
             <Comment frontMatter={post} />
           </div>
         )

@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 /**
- * SearchInput Component - Technical Search Interface
+ * SearchInput Component - Refined Tech Interface
  * 搜索输入组件
  */
 export const SearchInput = ({ keyword = '', locale }) => {
   const router = useRouter()
   const [searchTerm, setSearchTerm] = useState(keyword || '')
+  const [isFocused, setIsFocused] = useState(false)
 
   useEffect(() => {
     setSearchTerm(keyword || '')
@@ -25,57 +26,57 @@ export const SearchInput = ({ keyword = '', locale }) => {
   }
 
   return (
-    <div className="void-card p-6">
+    <div className={`void-frame p-6 transition-colors ${isFocused ? 'border-[var(--void-accent-yellow)]' : ''}`}>
       <form onSubmit={handleSearch} className="space-y-4">
         {/* Search Label */}
-        <div className="flex items-center gap-2 text-yellow-400 tech-text">
+        <div className="flex items-center gap-2 text-[var(--void-accent-yellow)] tech-text text-xs tracking-wider">
           <i className="fas fa-search" />
-          <span className="text-sm">SEARCH_DATABASE</span>
+          <span>SEARCH_DATABASE</span>
         </div>
 
-        {/* Search Input */}
-        <div className="relative">
+        {/* Search Input Container */}
+        <div className="relative group">
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder={locale?.SEARCH?.ARTICLES || '搜索文章...'}
-            className="w-full px-4 py-4 bg-black border border-gray-700 text-white focus:border-yellow-400 focus:outline-none transition-colors pr-24 tech-text"
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            placeholder={locale?.SEARCH?.ARTICLES || 'Input query...'}
+            className="w-full px-4 py-3 bg-[var(--void-bg-secondary)] border border-[var(--void-border-base)] text-[var(--void-text-primary)] focus:border-[var(--void-accent-cyan)] focus:outline-none transition-colors pr-24 tech-text text-sm placeholder-[var(--void-text-muted)]"
           />
           
+          {/* Corner accents for input */}
+          <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[var(--void-border-active)] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[var(--void-border-active)] pointer-events-none" />
+
           {/* Clear Button */}
           {searchTerm && (
             <button
               type="button"
               onClick={handleClear}
-              className="absolute right-20 top-1/2 -translate-y-1/2 text-gray-500 hover:text-red-500 transition-colors"
-              title="Clear"
+              className="absolute right-16 top-1/2 -translate-y-1/2 text-[var(--void-text-muted)] hover:text-red-500 transition-colors px-2"
             >
               <i className="fas fa-times" />
             </button>
           )}
 
-          {/* Search Button */}
+          {/* Search Button (Enter) */}
           <button
             type="submit"
-            className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-2 bg-yellow-400 text-black hover:bg-cyan-400 transition-colors font-bold text-sm"
+            className="absolute right-1 top-1 bottom-1 px-3 bg-[var(--void-bg-tertiary)] text-[var(--void-accent-yellow)] hover:bg-[var(--void-accent-yellow)] hover:text-black transition-colors font-bold text-xs border-l border-[var(--void-border-base)]"
           >
-            <i className="fas fa-arrow-right" />
+            ⏎
           </button>
         </div>
 
-        {/* Search Stats */}
-        <div className="flex items-center justify-between text-xs text-gray-500 tech-text">
+        {/* Status Line */}
+        <div className="flex items-center justify-between text-[10px] text-[var(--void-text-muted)] font-mono">
           <div>
-            {keyword && (
-              <span>
-                QUERY: <span className="text-cyan-400">{keyword}</span>
-              </span>
-            )}
+            SYSTEM_STATUS: <span className="text-green-500">ONLINE</span>
           </div>
-          <div className="flex items-center gap-1">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span>READY</span>
+          <div>
+             Index_v4.2.0
           </div>
         </div>
       </form>

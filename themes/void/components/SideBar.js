@@ -3,7 +3,7 @@ import SmartLink from '@/components/SmartLink'
 import CONFIG from '../config'
 
 /**
- * SideBar Component - Right Sidebar
+ * SideBar Component - Endfield Style Refined
  * 右侧边栏组件
  */
 export const SideBar = (props) => {
@@ -12,49 +12,55 @@ export const SideBar = (props) => {
   return (
     <aside className="space-y-6">
       {/* About / Author Card */}
-      <div className="void-card p-6 tech-corner">
-        <h3 className="text-yellow-400 font-bold mb-4 tech-text text-sm">
+      <div className="void-frame p-6">
+        <h3 className="text-[var(--void-accent-yellow)] font-bold mb-4 tech-text text-xs tracking-wider flex items-center gap-2">
+          <div className="w-2 h-2 bg-[var(--void-accent-yellow)]" />
           // OPERATOR_INFO
         </h3>
-        <div className="space-y-3">
-          <div className="text-center mb-4">
+        <div className="flex gap-4 items-start">
             {siteConfig('AVATAR') && (
-              <img
-                src={siteConfig('AVATAR')}
-                alt={siteConfig('AUTHOR')}
-                className="w-24 h-24 mx-auto mb-3 border-2 border-yellow-400 p-1"
-              />
+              <div className="relative w-16 h-16 flex-shrink-0">
+                <img
+                  src={siteConfig('AVATAR')}
+                  alt={siteConfig('AUTHOR')}
+                  className="w-full h-full object-cover border border-[var(--void-border-base)]"
+                />
+                <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[var(--void-accent-cyan)]" />
+                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-[var(--void-accent-cyan)]" />
+              </div>
             )}
-            <h4 className="text-lg font-bold text-white">{siteConfig('AUTHOR')}</h4>
-          </div>
-          <p className="text-sm text-gray-400 text-center">
-            {siteConfig('BIO') || 'Exploring the frontier of technology'}
-          </p>
+            <div>
+               <h4 className="text-lg font-bold text-white leading-none mb-2">{siteConfig('AUTHOR')}</h4>
+               <p className="text-xs text-[var(--void-text-secondary)] leading-relaxed">
+                 {siteConfig('BIO') || 'Exploring the frontier of technology'}
+               </p>
+            </div>
         </div>
       </div>
 
       {/* Latest Posts */}
       {latestPosts && latestPosts.length > 0 && (
-        <div className="void-card p-6 tech-corner">
-          <h3 className="text-yellow-400 font-bold mb-4 tech-text text-sm">
-            // RECENT_POSTS
+        <div className="void-frame p-6">
+          <h3 className="text-[var(--void-accent-yellow)] font-bold mb-4 tech-text text-xs tracking-wider flex items-center gap-2">
+             <div className="w-2 h-2 bg-[var(--void-accent-yellow)]" />
+             // RECENT_LOGS
           </h3>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {latestPosts.slice(0, 5).map((post, index) => (
               <SmartLink
                 key={post.id}
                 href={`/${post.slug}`}
                 className="block group"
               >
-                <div className="flex items-start gap-2">
-                  <span className="text-cyan-400 text-xs tech-text mt-1 flex-shrink-0">
-                    [{String(index + 1).padStart(2, '0')}]
+                <div className="flex items-start gap-3">
+                  <span className="text-[var(--void-text-muted)] font-mono text-xs mt-0.5">
+                    {String(index + 1).padStart(2, '0')}
                   </span>
                   <div className="flex-1 min-w-0">
-                    <h4 className="text-sm text-white group-hover:text-yellow-400 transition-colors line-clamp-2">
+                    <h4 className="text-sm text-[var(--void-text-primary)] group-hover:text-[var(--void-accent-cyan)] transition-colors line-clamp-2">
                       {post.title}
                     </h4>
-                    <div className="text-xs text-gray-600 tech-text mt-1">
+                    <div className="text-[10px] text-[var(--void-text-muted)] font-mono mt-1">
                       {post.publishDay}
                     </div>
                   </div>
@@ -67,23 +73,24 @@ export const SideBar = (props) => {
 
       {/* Categories */}
       {categories && categories.length > 0 && (
-        <div className="void-card p-6 tech-corner">
-          <h3 className="text-yellow-400 font-bold mb-4 tech-text text-sm">
-            // CATEGORIES
+        <div className="void-frame p-6">
+          <h3 className="text-[var(--void-accent-yellow)] font-bold mb-4 tech-text text-xs tracking-wider flex items-center gap-2">
+            <div className="w-2 h-2 bg-[var(--void-accent-yellow)]" />
+            // DATA_TYPES
           </h3>
           <div className="space-y-2">
             {categories.map((category) => (
               <SmartLink
                 key={category.name}
                 href={`/category/${category.name}`}
-                className="flex items-center justify-between text-sm text-gray-400 hover:text-yellow-400 transition-colors group"
+                className="flex items-center justify-between text-xs group py-1 border-b border-transparent hover:border-[var(--void-border-active)] transition-all"
               >
-                <span className="flex items-center gap-2">
-                  <i className="fas fa-folder text-xs" />
+                <span className="text-[var(--void-text-secondary)] group-hover:text-[var(--void-accent-yellow)] transition-colors flex items-center gap-2">
+                  <span className="opacity-50">&gt;</span>
                   <span>{category.name}</span>
                 </span>
-                <span className="tech-text text-xs text-cyan-400">
-                  [{category.count}]
+                <span className="text-[var(--void-accent-cyan)] font-mono opacity-60">
+                  {String(category.count).padStart(2, '0')}
                 </span>
               </SmartLink>
             ))}
@@ -93,16 +100,17 @@ export const SideBar = (props) => {
 
       {/* Tags Cloud */}
       {tags && tags.length > 0 && (
-        <div className="void-card p-6 tech-corner">
-          <h3 className="text-yellow-400 font-bold mb-4 tech-text text-sm">
-            // TAGS
+        <div className="void-frame p-6">
+          <h3 className="text-[var(--void-accent-yellow)] font-bold mb-4 tech-text text-xs tracking-wider flex items-center gap-2">
+            <div className="w-2 h-2 bg-[var(--void-accent-yellow)]" />
+            // KEYWORDS
           </h3>
           <div className="flex flex-wrap gap-2">
             {tags.slice(0, 20).map((tag) => (
               <SmartLink
                 key={tag.name}
                 href={`/tag/${encodeURIComponent(tag.name)}`}
-                className="px-2 py-1 text-xs bg-cyan-400/10 text-cyan-400 border border-cyan-400/30 tech-text hover:bg-cyan-400/20 hover:border-cyan-400/50 transition-all"
+                className="px-2 py-1 text-[10px] uppercase bg-[var(--void-bg-secondary)] text-[var(--void-text-secondary)] border border-[var(--void-border-base)] hover:border-[var(--void-accent-cyan)] hover:text-[var(--void-accent-cyan)] transition-colors"
               >
                 #{tag.name}
               </SmartLink>
