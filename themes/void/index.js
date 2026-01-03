@@ -212,8 +212,8 @@ const LayoutSlug = (props) => {
              {/* Article Content Frame */}
             <div id="article-wrapper" className="void-frame p-8 md:p-12 mb-12">
                {/* Content Watermark/Background decoration */}
-               <div className="absolute top-4 right-4 text-[var(--void-text-muted)] opacity-10 text-6xl font-black pointer-events-none select-none z-0">
-                 VOID
+               <div className="absolute top-4 right-4 text-[var(--void-text-muted)] opacity-10 text-8xl font-black pointer-events-none select-none z-0">
+                 CLOUD09
                </div>
                
               <div className="relative z-10">

@@ -27,9 +27,9 @@ export const SideNav = () => {
     { name: 'Category', icon: 'fas fa-folder', path: '/category', show: siteConfig('VOID_MENU_CATEGORY', null, CONFIG) },
     { name: 'Tag', icon: 'fas fa-tag', path: '/tag', show: siteConfig('VOID_MENU_TAG', null, CONFIG) },
     { name: 'Archive', icon: 'fas fa-archive', path: '/archive', show: siteConfig('VOID_MENU_ARCHIVE', null, CONFIG) },
-    { name: 'Search', icon: 'fas fa-search', path: '/search', show: siteConfig('VOID_MENU_SEARCH', null, CONFIG) },
+    { name: 'Portfolio', icon: 'fas fa-briefcase', path: '/portfolio' },
     { name: 'Friends', icon: 'fas fa-users', path: '/friend' },
-    { name: 'Portfolio', icon: 'fas fa-briefcase', path: '/portfolio' }
+    { name: 'Search', icon: 'fas fa-search', path: '/search', show: siteConfig('VOID_MENU_SEARCH', null, CONFIG) }
   ].filter(item => item.show !== false)
 
   // 社交图标配置 - 使用 contact.config.js 的配置
@@ -203,40 +203,44 @@ export const SideNav = () => {
         </div>
       </div>
 
-      {/* Bottom Toggle Button - Animated Hamburger Style */}
+      {/* Bottom Toggle Button - Double Arrow Style */}
       <div className="py-4">
         <div className="flex justify-center">
           <div 
             className="group relative w-10 h-10 flex items-center justify-center cursor-pointer transition-all duration-300"
             title={isHovered ? 'Collapse' : 'Expand'}
           >
-            {/* Background circle with gradient on hover */}
-            <div className="absolute inset-0 rounded-full bg-gray-100 group-hover:bg-gradient-to-br group-hover:from-blue-400 group-hover:to-blue-600 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-blue-500/30" />
+            {/* Background - hexagonal/tech style border */}
+            <div className="absolute inset-0 border-2 border-gray-300 group-hover:border-[var(--void-accent-yellow)] transition-all duration-300 rotate-45" />
+            <div className="absolute inset-1 bg-[var(--void-bg-base)] group-hover:bg-[var(--void-bg-secondary)] transition-all duration-300 rotate-45" />
             
-            {/* Animated bars that transform */}
-            <div className="relative z-10 w-5 h-4 flex flex-col justify-between">
-              {/* Top bar */}
-              <span 
-                className={`block h-0.5 bg-gray-400 group-hover:bg-white rounded-full transition-all duration-300 origin-center
-                  ${isHovered ? 'rotate-45 translate-y-[7px]' : ''}
-                `}
-              />
-              {/* Middle bar */}
-              <span 
-                className={`block h-0.5 bg-gray-400 group-hover:bg-white rounded-full transition-all duration-300
-                  ${isHovered ? 'opacity-0 scale-0' : 'opacity-100'}
-                `}
-              />
-              {/* Bottom bar */}
-              <span 
-                className={`block h-0.5 bg-gray-400 group-hover:bg-white rounded-full transition-all duration-300 origin-center
-                  ${isHovered ? '-rotate-45 -translate-y-[7px]' : ''}
-                `}
-              />
+            {/* Double Chevron Arrows */}
+            <div className={`relative z-10 flex items-center gap-0.5 transition-transform duration-300 ${isHovered ? 'rotate-180' : ''}`}>
+              {/* First Arrow */}
+              <svg 
+                className="w-3 h-3 text-gray-400 group-hover:text-[var(--void-accent-yellow)] transition-colors duration-300" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+                strokeWidth="3"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+              {/* Second Arrow - slightly offset for double chevron effect */}
+              <svg 
+                className="w-3 h-3 -ml-2 text-gray-300 group-hover:text-[var(--void-accent-yellow)] opacity-60 group-hover:opacity-100 transition-all duration-300" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+                strokeWidth="3"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
             </div>
             
-            {/* Pulse ring animation on hover */}
-            <div className="absolute inset-0 rounded-full border-2 border-blue-400 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
+            {/* Corner accent dots */}
+            <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-gray-300 group-hover:bg-[var(--void-accent-yellow)] transition-colors duration-300" />
+            <div className="absolute -bottom-0.5 -left-0.5 w-1.5 h-1.5 bg-gray-300 group-hover:bg-[var(--void-accent-yellow)] transition-colors duration-300" />
           </div>
         </div>
       </div>

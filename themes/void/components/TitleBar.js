@@ -9,7 +9,20 @@ export const TitleBar = ({ post }) => {
 
   return (
     <div className="relative py-20 md:py-28 border-b-2 border-[var(--void-border-base)] overflow-hidden bg-[var(--void-bg-base)]">
-      {/* Background Pattern */}
+      {/* Post Cover Image Background - shown on article pages */}
+      {post && post.pageCoverThumbnail && (
+        <div className="absolute inset-0">
+          <img 
+            src={post.pageCoverThumbnail}
+            alt={post.title || 'Cover'}
+            className="w-full h-full object-cover"
+          />
+          {/* Dark overlay for better contrast */}
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+      )}
+
+      {/* Background Pattern - Grid overlay effect */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div
           className="absolute inset-0"
@@ -23,7 +36,7 @@ export const TitleBar = ({ post }) => {
         />
       </div>
 
-      {/* Large Background Scrolling Watermark - CLOUD09_SPACE */}
+      {/* Large Background Scrolling Watermark - CLOUD09_SPACE (only on non-article pages) */}
       {!post && (
         <div className="absolute inset-0 flex items-center opacity-[0.04] pointer-events-none overflow-hidden">
           <div className="bg-watermark-scroll whitespace-nowrap">
