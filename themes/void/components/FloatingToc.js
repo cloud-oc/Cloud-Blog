@@ -71,10 +71,10 @@ const FloatingToc = ({ toc }) => {
   }
 
   return (
-    <div className="fixed right-4 top-1/2 -translate-y-1/2 z-40 hidden lg:block">
+    <div className="fixed left-4 top-1/2 -translate-y-1/2 z-40 hidden lg:block">
       {/* Toggle Button */}
       <div 
-        className={`absolute right-0 top-1/2 -translate-y-1/2 transition-all duration-300 ${isExpanded ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
+        className={`absolute left-0 top-1/2 -translate-y-1/2 transition-all duration-300 ${isExpanded ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
       >
         <button
           onClick={() => setIsExpanded(true)}
@@ -100,10 +100,10 @@ const FloatingToc = ({ toc }) => {
 
       {/* TOC Panel */}
       <div 
-        className={`bg-[var(--void-bg-base)] border border-[var(--void-border-base)] shadow-xl transition-all duration-300 origin-right ${
+        className={`bg-[var(--void-bg-base)] border border-[var(--void-border-base)] shadow-xl transition-all duration-300 origin-left ${
           isExpanded 
             ? 'opacity-100 scale-100 translate-x-0' 
-            : 'opacity-0 scale-95 translate-x-4 pointer-events-none'
+            : 'opacity-0 scale-95 -translate-x-4 pointer-events-none'
         }`}
         style={{ maxWidth: '280px', minWidth: '220px' }}
       >
