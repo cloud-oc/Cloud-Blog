@@ -127,29 +127,8 @@ export const MobileNav = () => {
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        {/* User Info Section */}
-        <div className="p-5 border-b border-[var(--void-border-base)]">
-          <SmartLink href="/cloud09" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--void-accent-yellow)] group-hover:border-blue-500 transition-colors">
-              <img 
-                src={AVATAR_URL}
-                alt="Avatar"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div>
-              <div className="text-sm font-bold text-[var(--void-text-primary)] group-hover:text-blue-500 transition-colors">
-                {siteConfig('AUTHOR') || 'Cloud'}
-              </div>
-              <div className="text-xs text-[var(--void-text-muted)] line-clamp-1">
-                {siteConfig('BIO') || ''}
-              </div>
-            </div>
-          </SmartLink>
-        </div>
-
         {/* Navigation Items */}
-        <div className="py-3">
+        <div className="py-3 pt-5">
           <p className="px-5 text-xs font-mono text-[var(--void-text-muted)] mb-2 uppercase tracking-wider">Navigation</p>
           {menuItems.map(item => (
             <SmartLink
