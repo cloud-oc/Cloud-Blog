@@ -16,6 +16,7 @@ const CONFIG = {
   VOID_SHOW_TIMESTAMP: true, // 显示技术时间戳
   VOID_SHOW_GRID_OVERLAY: true, // 显示网格覆盖层
   VOID_SHOW_SPECTRUM_BAR: true, // 显示光谱条
+  VOID_LOADING_COVER: true, // 显示加载动画
 
   // 文章页面布局
   VOID_ARTICLE_LAYOUT_VERTICAL: false, // 文章详情，左右布局改为上下布局

@@ -48,7 +48,7 @@ export const BlogListArchive = ({ archiveTitle, archivePosts }) => {
 
                 {/* Title */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-sm md:text-base font-medium text-[var(--void-text-primary)] group-hover:text-white truncate transition-colors">
+                  <h3 className="text-sm md:text-base font-medium text-[var(--void-text-primary)] group-hover:text-blue-400 truncate transition-colors">
                     {post.title}
                   </h3>
                   {/* Tags as tiny indicators */}

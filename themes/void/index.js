@@ -21,6 +21,8 @@ import SearchInput from './components/SearchInput'
 import { SideBar } from './components/SideBar'
 import { SideNav } from './components/SideNav'
 import TitleBar from './components/TitleBar'
+import FloatingToc from './components/FloatingToc'
+import LoadingCover from './components/LoadingCover'
 import CONFIG from './config'
 import { Style } from './style'
 
@@ -41,12 +43,18 @@ const LayoutBase = (props) => {
   // 网站左右布局颠倒
   const LAYOUT_SIDEBAR_REVERSE = siteConfig('LAYOUT_SIDEBAR_REVERSE', false)
 
+  // 加载动画
+  const LOADING_COVER = siteConfig('VOID_LOADING_COVER', true, CONFIG)
+
   return (
     <div
       id="theme-void"
       className={`${siteConfig('FONT_STYLE')} min-h-screen relative`}
     >
       <Style />
+
+      {/* 加载动画 */}
+      {LOADING_COVER && <LoadingCover />}
 
       {/* 左侧垂直导航 */}
       <SideNav {...props} />
@@ -228,6 +236,11 @@ const LayoutSlug = (props) => {
             </div>
 
             <Comment frontMatter={post} />
+
+            {/* Floating Table of Contents */}
+            {post.toc && post.toc.length > 0 && (
+              <FloatingToc toc={post.toc} />
+            )}
           </div>
         )
       )}
