@@ -22,10 +22,10 @@ export const Style = () => {
         --void-text-secondary: #52525b;/* 次要文字 (中深灰) */
         --void-text-muted: #a1a1aa;    /* 装饰性文字 (浅灰) */
         
-        /* Accents - Pink Theme */
-        --void-accent-yellow: #ec4899; /* Pink accent color */
-        --void-accent-yellow-dim: rgba(236, 72, 153, 0.1);
-        --void-accent-cyan: #06b6d4;   /* Deep Tech Cyan (Darker than neon cyan) */
+        /* Accents - Tech Blue Theme */
+        --void-accent-yellow: #3b82f6; /* Tech Blue accent color */
+        --void-accent-yellow-dim: rgba(59, 130, 246, 0.1);
+        --void-accent-cyan: #06b6d4;   /* Deep Tech Cyan */
         --void-accent-cyan-dim: rgba(6, 182, 212, 0.1);
         
         /* Borders & Lines - Heavy Structure */

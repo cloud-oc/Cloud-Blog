@@ -9,6 +9,10 @@ import CONFIG from '../config'
  * 智能侧边栏：默认收起，悬停展开
  * Light Industrial Aesthetic
  */
+
+// Avatar image URL
+const AVATAR_URL = 'https://github.com/cloud-oc/picx-images-hosting/blob/master/Origin/Cloud_icon.pfpafpaii.png?raw=true'
+
 export const SideNav = () => {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState('Home')
@@ -85,8 +89,25 @@ export const SideNav = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Avatar Section - Top of sidebar */}
+      <div className="flex-shrink-0 py-6 flex flex-col items-center border-b border-[var(--void-border-base)]">
+        <div className={`transition-all duration-300 ${isHovered ? 'w-20 h-20' : 'w-12 h-12'}`}>
+          <img 
+            src={AVATAR_URL}
+            alt="Avatar"
+            className="w-full h-full rounded-full object-cover border-2 border-[var(--void-accent-yellow)] shadow-lg"
+          />
+        </div>
+        {/* Name shown when expanded */}
+        <div className={`mt-3 text-center transition-all duration-300 overflow-hidden ${isHovered ? 'opacity-100 max-h-10' : 'opacity-0 max-h-0'}`}>
+          <span className="text-sm font-bold text-[var(--void-text-primary)] uppercase tracking-wider">
+            {siteConfig('AUTHOR') || 'Cloud'}
+          </span>
+        </div>
+      </div>
+
       {/* Navigation Items */}
-      <div ref={navRef} className="flex-1 py-8 flex flex-col gap-2 overflow-y-auto overflow-x-hidden relative">
+      <div ref={navRef} className="flex-1 py-4 flex flex-col gap-2 overflow-y-auto overflow-x-hidden relative">
         {/* Animated Active Indicator Bar - Higher z-index */}
         <div 
           className="absolute left-0 w-1 h-12 bg-[var(--void-accent-yellow)] transition-all duration-300 ease-out z-10"
@@ -102,7 +123,7 @@ export const SideNav = () => {
                 className={`relative h-12 flex items-center cursor-pointer transition-all duration-300 group
                   ${isActive 
                     ? 'bg-[var(--void-bg-secondary)] text-[var(--void-accent-yellow)]' 
-                    : 'text-[var(--void-text-secondary)] hover:text-[var(--void-text-primary)] hover:bg-[var(--void-bg-secondary)]'
+                    : 'text-gray-300 hover:text-[var(--void-text-primary)] hover:bg-[var(--void-bg-secondary)]'
                   }
                 `}
               >
@@ -121,26 +142,26 @@ export const SideNav = () => {
         })}
       </div>
 
-      {/* Footer / Contact Links */}
-      <div className="py-4 transition-all duration-300">
+      {/* Contact Links Section - Above arrow */}
+      <div className="py-3 transition-all duration-300">
         
-        {/* Collapsed State: Contact Button with gray background */}
+        {/* Collapsed State: Contact Button with light gray background */}
         <div className={`flex justify-center transition-all duration-300 ${isHovered ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'}`}>
-          <div className="w-10 h-10 flex items-center justify-center bg-gray-400 text-gray-700 rounded cursor-pointer hover:text-white hover:bg-pink-500 transition-colors">
+          <div className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-500 rounded cursor-pointer hover:text-white hover:bg-blue-500 transition-colors">
             <i className="fas fa-address-book text-base" />
           </div>
         </div>
 
         {/* Expanded State: Horizontal Icon Row - Single line */}
         <div className={`px-3 transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
-           {/* Social Icons - Horizontal Layout, single row with gray background */}
+           {/* Social Icons - Horizontal Layout, single row with light gray background */}
            <div className="flex items-center justify-center gap-1.5 flex-nowrap">
              {/* Email Icon */}
              {email && (
                <a 
                  href={`mailto:${email}`}
                  title={email}
-                 className="w-7 h-7 flex items-center justify-center bg-gray-400 text-gray-700 rounded hover:text-white hover:bg-pink-500 transition-colors flex-shrink-0"
+                 className="w-7 h-7 flex items-center justify-center bg-gray-200 text-gray-500 rounded hover:text-white hover:bg-blue-500 transition-colors flex-shrink-0"
                >
                  <i className="fas fa-envelope text-xs" />
                </a>
@@ -157,10 +178,10 @@ export const SideNav = () => {
                    target="_blank" 
                    rel="noreferrer"
                    title={label}
-                   className="w-7 h-7 flex items-center justify-center bg-gray-400 text-gray-700 rounded hover:text-white hover:bg-pink-500 transition-colors flex-shrink-0"
+                   className="w-7 h-7 flex items-center justify-center bg-gray-200 text-gray-500 rounded hover:text-white hover:bg-blue-500 transition-colors flex-shrink-0"
                  >
                    {svg ? (
-                     <img src={svg} alt={label} className="w-3 h-3 opacity-70 hover:opacity-100" />
+                     <img src={svg} alt={label} className="w-3 h-3 opacity-60 hover:opacity-100" />
                    ) : (
                      <i className={`${icon} text-xs`} />
                    )}
@@ -170,9 +191,22 @@ export const SideNav = () => {
            </div>
         </div>
       </div>
+
+      {/* Bottom Arrow Toggle - Minimalist style */}
+      <div className="py-4 border-t border-[var(--void-border-base)]">
+        <div className="flex justify-center">
+          <div 
+            className="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-[var(--void-accent-yellow)] transition-all duration-300 cursor-pointer"
+            title={isHovered ? 'Collapse' : 'Expand'}
+          >
+            <i className={`fas ${isHovered ? 'fa-chevron-left' : 'fa-chevron-right'} text-sm transition-transform duration-300`} />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
+
 
 
 

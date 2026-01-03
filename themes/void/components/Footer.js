@@ -9,7 +9,7 @@ export const Footer = ({ title }) => {
   const y = d.getFullYear()
 
   return (
-    <footer className="relative mt-20 bg-[#0d0d0d] text-gray-400">
+    <footer className="relative mt-20 bg-[#0d0d0d] text-gray-300">
       {/* Spectrum Bar Top */}
       <div className="spectrum-bar opacity-30" />
       
@@ -24,7 +24,7 @@ export const Footer = ({ title }) => {
                  {siteConfig('TITLE')}
                </span>
              </div>
-             <p className="text-sm leading-relaxed max-w-sm text-gray-500 font-medium">
+             <p className="text-sm leading-relaxed max-w-sm text-gray-400 font-medium">
                 Running Void Theme v4.5 // Dark Industrial Edition. <br/>
                 All systems nominal. Connection stable.
              </p>
@@ -32,7 +32,7 @@ export const Footer = ({ title }) => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-gray-600">
+        <div className="mt-16 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-gray-500">
             <div>
                © {y} {siteConfig('AUTHOR')}. All Rights Reserved.
             </div>
