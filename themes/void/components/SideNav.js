@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import SmartLink from '@/components/SmartLink'
 import { siteConfig } from '@/lib/config'
@@ -13,6 +13,9 @@ export const SideNav = () => {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState('Home')
   const [isHovered, setIsHovered] = useState(false)
+  const [indicatorStyle, setIndicatorStyle] = useState({ top: 0, opacity: 0 })
+  const navRef = useRef(null)
+  const itemRefs = useRef({})
 
   // Configure menu items
   const menuItems = [
@@ -41,15 +44,40 @@ export const SideNav = () => {
   // 获取邮箱
   const email = siteConfig('CONTACT_EMAIL')
 
+  // Update active indicator position with smooth animation
+  const updateIndicatorPosition = (tabName) => {
+    const itemEl = itemRefs.current[tabName]
+    if (itemEl && navRef.current) {
+      const navRect = navRef.current.getBoundingClientRect()
+      const itemRect = itemEl.getBoundingClientRect()
+      setIndicatorStyle({
+        top: itemRect.top - navRect.top,
+        opacity: 1
+      })
+    }
+  }
+
   useEffect(() => {
     // Set active tab based on path
     const path = router.asPath
-    if (path === '/') setActiveTab('Home')
-    else if (path.includes('/category')) setActiveTab('Category')
-    else if (path.includes('/tag')) setActiveTab('Tag')
-    else if (path.includes('/archive')) setActiveTab('Archive')
-    else if (path.includes('/search')) setActiveTab('Search')
+    let newTab = 'Home'
+    if (path === '/') newTab = 'Home'
+    else if (path.includes('/category')) newTab = 'Category'
+    else if (path.includes('/tag')) newTab = 'Tag'
+    else if (path.includes('/archive')) newTab = 'Archive'
+    else if (path.includes('/search')) newTab = 'Search'
+    
+    setActiveTab(newTab)
   }, [router.asPath])
+
+  // Update indicator position when activeTab changes
+  useEffect(() => {
+    // Small delay to ensure refs are set
+    const timer = setTimeout(() => {
+      updateIndicatorPosition(activeTab)
+    }, 50)
+    return () => clearTimeout(timer)
+  }, [activeTab])
 
   return (
     <div 
@@ -58,27 +86,29 @@ export const SideNav = () => {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Navigation Items */}
-      <div className="flex-1 py-8 flex flex-col gap-2 overflow-y-auto overflow-x-hidden">
+      <div ref={navRef} className="flex-1 py-8 flex flex-col gap-2 overflow-y-auto overflow-x-hidden relative">
+        {/* Animated Active Indicator Bar */}
+        <div 
+          className="absolute left-0 w-1 h-12 bg-[var(--void-accent-yellow)] transition-all duration-300 ease-out"
+          style={{ top: indicatorStyle.top, opacity: indicatorStyle.opacity }}
+        />
+        
         {menuItems.map((item) => {
           const isActive = activeTab === item.name
           return (
             <SmartLink key={item.name} href={item.path}>
               <div 
-                className={`relative h-12 flex items-center cursor-pointer transition-all duration-200 group
+                ref={el => itemRefs.current[item.name] = el}
+                className={`relative h-12 flex items-center cursor-pointer transition-all duration-300 group
                   ${isActive 
                     ? 'bg-[var(--void-bg-secondary)] text-[var(--void-accent-yellow)]' 
                     : 'text-[var(--void-text-secondary)] hover:text-[var(--void-text-primary)] hover:bg-[var(--void-bg-secondary)]'
                   }
                 `}
               >
-                {/* Active Indicator Bar */}
-                {isActive && (
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--void-accent-yellow)]" />
-                )}
-
                 {/* Icon Container */}
                 <div className="w-20 flex-shrink-0 flex items-center justify-center">
-                  <i className={`${item.icon} text-lg transition-transform duration-300 ${isActive ? 'scale-110' : ''}`} />
+                  <i className={`${item.icon} text-lg transition-all duration-300 ${isActive ? 'scale-110' : ''}`} />
                 </div>
 
                 {/* Text Label (Reveal on Hover) */}
@@ -96,35 +126,34 @@ export const SideNav = () => {
         })}
       </div>
 
-      {/* Footer / Contact Links */}
-      <div className={`border-t border-[var(--void-border-base)] bg-[var(--void-bg-secondary)] transition-all duration-300 overflow-hidden ${isHovered ? 'h-auto py-6' : 'h-auto py-4 flex flex-col items-center justify-center gap-2'}`}>
+      {/* Footer / Contact Links - No gray background */}
+      <div className={`border-t border-[var(--void-border-base)] transition-all duration-300 overflow-hidden py-4`}>
         
-        {/* Collapsed State: Simple Status Icon */}
+        {/* Collapsed State: Contact Button */}
         {!isHovered && (
-          <div className="w-10 h-10 rounded bg-[var(--void-bg-tertiary)] flex items-center justify-center text-[var(--void-accent-cyan)] cursor-pointer hover:bg-[var(--void-accent-cyan)] hover:text-white transition-colors">
-            <i className="fas fa-link" />
+          <div className="flex justify-center">
+            <div className="w-10 h-10 flex items-center justify-center text-[var(--void-text-secondary)] cursor-pointer hover:text-[var(--void-accent-yellow)] transition-colors">
+              <i className="fas fa-address-book text-lg" />
+            </div>
           </div>
         )}
 
-        {/* Expanded State: Full Contact Links */}
-        <div className={`px-6 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 hidden'}`}>
-           <h4 className="text-[var(--void-text-primary)] font-bold text-xs uppercase tracking-widest mb-4 border-b border-[var(--void-border-base)] pb-2 inline-block">
-             Contact
-           </h4>
-           
-           {/* Email Button */}
-           {email && (
-             <a 
-               href={`mailto:${email}`}
-               className="flex items-center gap-3 h-10 px-3 mb-2 bg-[var(--void-bg-tertiary)] border border-[var(--void-border-base)] hover:border-[var(--void-accent-yellow)] hover:text-[var(--void-accent-yellow)] text-[var(--void-text-secondary)] transition-all rounded-sm"
-             >
-               <i className="fas fa-envelope text-sm" />
-               <span className="text-xs font-mono truncate">{email}</span>
-             </a>
-           )}
-           
-           {/* Social Links */}
-           <div className="flex flex-col gap-2">
+        {/* Expanded State: Horizontal Icon Row */}
+        <div className={`px-4 transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 hidden'}`}>
+           {/* Social Icons - Horizontal Layout */}
+           <div className="flex flex-wrap items-center justify-center gap-3">
+             {/* Email Icon */}
+             {email && (
+               <a 
+                 href={`mailto:${email}`}
+                 title={email}
+                 className="w-9 h-9 flex items-center justify-center text-[var(--void-text-secondary)] hover:text-[var(--void-accent-yellow)] transition-colors"
+               >
+                 <i className="fas fa-envelope text-base" />
+               </a>
+             )}
+             
+             {/* Social Links */}
              {socialLinks.map(({ key, icon, label }) => {
                const url = siteConfig(key)
                if (!url) return null
@@ -133,11 +162,11 @@ export const SideNav = () => {
                    key={key}
                    href={url} 
                    target="_blank" 
-                   rel="noreferrer" 
-                   className="flex items-center gap-3 h-10 px-3 bg-[var(--void-bg-tertiary)] border border-[var(--void-border-base)] hover:border-[var(--void-accent-yellow)] hover:text-[var(--void-accent-yellow)] text-[var(--void-text-secondary)] transition-all rounded-sm"
+                   rel="noreferrer"
+                   title={label}
+                   className="w-9 h-9 flex items-center justify-center text-[var(--void-text-secondary)] hover:text-[var(--void-accent-yellow)] transition-colors"
                  >
-                   <i className={`${icon} text-sm`} />
-                   <span className="text-xs font-mono">{label}</span>
+                   <i className={`${icon} text-base`} />
                  </a>
                )
              })}
@@ -147,3 +176,4 @@ export const SideNav = () => {
     </div>
   )
 }
+

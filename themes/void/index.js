@@ -150,18 +150,18 @@ const LayoutPostList = (props) => {
       {/* 显示分类 */}
       {category && (
         <div className="void-card p-6 mb-8">
-          <div className="flex items-center gap-2 text-yellow-400">
-            <i className="fas fa-folder" />
-            <h2 className="text-2xl font-bold">{category}</h2>
+          <div className="flex items-center gap-3">
+            <i className="fas fa-folder text-[var(--void-text-muted)]" />
+            <h2 className="text-3xl font-black text-[var(--void-text-primary)] uppercase tracking-wide">{category}</h2>
           </div>
         </div>
       )}
       {/* 显示标签 */}
       {tag && (
         <div className="void-card p-6 mb-8">
-          <div className="flex items-center gap-2 text-cyan-400">
-            <i className="fas fa-tag" />
-            <h2 className="text-2xl font-bold">#{tag}</h2>
+          <div className="flex items-center gap-3">
+            <i className="fas fa-tag text-[var(--void-text-muted)]" />
+            <h2 className="text-3xl font-black text-[var(--void-text-primary)] uppercase tracking-wide">#{tag}</h2>
           </div>
         </div>
       )}
@@ -368,8 +368,8 @@ const LayoutCategoryIndex = (props) => {
   return (
     <>
       <div className="void-card p-8">
-        <h2 className="text-2xl font-bold text-yellow-400 mb-6 tech-text">
-          // ALL_CATEGORIES
+        <h2 className="text-3xl font-black text-[var(--void-text-primary)] mb-8 uppercase tracking-wide">
+          ALL_CATEGORIES
         </h2>
         <div
           id="category-list"
@@ -382,15 +382,15 @@ const LayoutCategoryIndex = (props) => {
               passHref
               legacyBehavior
             >
-              <div className="tech-corner p-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 hover:border-yellow-400 transition-all cursor-pointer group">
+              <div className="tech-corner p-4 bg-[var(--void-bg-secondary)] hover:bg-[var(--void-bg-tertiary)] border border-[var(--void-border-base)] hover:border-[var(--void-accent-yellow)] transition-all cursor-pointer group">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <i className="fas fa-folder text-cyan-400 group-hover:text-yellow-400 transition-colors" />
-                    <span className="text-white group-hover:text-yellow-400 transition-colors">
+                    <i className="fas fa-folder text-[var(--void-accent-cyan)] group-hover:text-[var(--void-accent-yellow)] transition-colors" />
+                    <span className="text-[var(--void-text-primary)] group-hover:text-[var(--void-accent-yellow)] transition-colors">
                       {category.name}
                     </span>
                   </div>
-                  <span className="tech-text text-xs text-gray-500">
+                  <span className="tech-text text-xs text-[var(--void-text-muted)]">
                     [{category.count}]
                   </span>
                 </div>
@@ -413,8 +413,8 @@ const LayoutTagIndex = (props) => {
   return (
     <>
       <div className="void-frame p-8">
-        <h2 className="text-2xl font-bold text-[var(--void-accent-yellow)] mb-6 tech-text">
-          // ALL_TAGS
+        <h2 className="text-3xl font-black text-[var(--void-text-primary)] mb-8 uppercase tracking-wide">
+          ALL_TAGS
         </h2>
         <div id="tags-list" className="flex flex-wrap gap-3">
           {tagOptions.map((tag) => (

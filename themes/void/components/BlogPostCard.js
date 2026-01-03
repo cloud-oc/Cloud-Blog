@@ -9,26 +9,14 @@ import CONFIG from '../config'
 export const BlogPostCard = ({ post, showSummary = true }) => {
   const showPreview = siteConfig('VOID_POST_LIST_PREVIEW', true, CONFIG)
   const showCover = siteConfig('VOID_POST_LIST_COVER', true, CONFIG)
+  const hasCover = showCover && post.pageCoverThumbnail
 
   return (
     <SmartLink href={`/${post.slug}`}>
-      <article className="void-frame group mb-6 p-6 md:p-8 flex flex-col md:flex-row gap-8 hover:border-[var(--void-border-active)] transition-all duration-300">
+      <article className={`void-frame group mb-6 flex flex-col md:flex-row overflow-hidden hover:border-[var(--void-border-active)] transition-all duration-300 ${hasCover ? '' : 'p-6 md:p-8'}`}>
         
-        {/* Cover Image - Floating & Clean */}
-        {showCover && post.pageCoverThumbnail && (
-          <div className="md:w-72 h-48 md:h-auto flex-shrink-0 relative overflow-hidden rounded-sm order-first md:order-last">
-            <img
-              src={post.pageCoverThumbnail}
-              alt={post.title}
-              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 grayscale hover:grayscale-0"
-            />
-            {/* Minimalist marker overlay */}
-            <div className="absolute top-2 right-2 w-2 h-2 bg-[var(--void-accent-yellow)] opacity-0 group-hover:opacity-100 transition-opacity" />
-          </div>
-        )}
-
-        {/* Content */}
-        <div className="flex-1 flex flex-col justify-center">
+        {/* Content - Left side with padding */}
+        <div className={`flex-1 flex flex-col justify-center ${hasCover ? 'p-6 md:p-8' : ''}`}>
           
           {/* Top Meta */}
           <div className="flex items-center gap-3 text-xs font-mono text-[var(--void-text-muted)] mb-3">
@@ -69,7 +57,21 @@ export const BlogPostCard = ({ post, showSummary = true }) => {
             </div>
           </div>
         </div>
+
+        {/* Cover Image - Fixed size, flush right, no frame */}
+        {hasCover && (
+          <div className="md:w-64 lg:w-80 h-48 md:h-auto flex-shrink-0 relative overflow-hidden order-first md:order-last">
+            <img
+              src={post.pageCoverThumbnail}
+              alt={post.title}
+              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+            />
+            {/* Minimalist marker overlay */}
+            <div className="absolute top-3 right-3 w-2 h-2 bg-[var(--void-accent-yellow)] opacity-0 group-hover:opacity-100 transition-opacity" />
+          </div>
+        )}
       </article>
     </SmartLink>
   )
 }
+
