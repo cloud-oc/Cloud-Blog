@@ -87,9 +87,9 @@ export const SideNav = () => {
     >
       {/* Navigation Items */}
       <div ref={navRef} className="flex-1 py-8 flex flex-col gap-2 overflow-y-auto overflow-x-hidden relative">
-        {/* Animated Active Indicator Bar */}
+        {/* Animated Active Indicator Bar - Higher z-index */}
         <div 
-          className="absolute left-0 w-1 h-12 bg-[var(--void-accent-yellow)] transition-all duration-300 ease-out"
+          className="absolute left-0 w-1 h-12 bg-[var(--void-accent-yellow)] transition-all duration-300 ease-out z-10"
           style={{ top: indicatorStyle.top, opacity: indicatorStyle.opacity }}
         />
         
@@ -126,30 +126,28 @@ export const SideNav = () => {
         })}
       </div>
 
-      {/* Footer / Contact Links - No gray background */}
-      <div className={`border-t border-[var(--void-border-base)] transition-all duration-300 overflow-hidden py-4`}>
+      {/* Footer / Contact Links - No divider, no gray background */}
+      <div className="py-4 transition-all duration-300">
         
         {/* Collapsed State: Contact Button */}
-        {!isHovered && (
-          <div className="flex justify-center">
-            <div className="w-10 h-10 flex items-center justify-center text-[var(--void-text-secondary)] cursor-pointer hover:text-[var(--void-accent-yellow)] transition-colors">
-              <i className="fas fa-address-book text-lg" />
-            </div>
+        <div className={`flex justify-center transition-all duration-300 ${isHovered ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'}`}>
+          <div className="w-10 h-10 flex items-center justify-center text-[var(--void-text-secondary)] cursor-pointer hover:text-[var(--void-accent-yellow)] transition-colors">
+            <i className="fas fa-address-book text-lg" />
           </div>
-        )}
+        </div>
 
-        {/* Expanded State: Horizontal Icon Row */}
-        <div className={`px-4 transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 hidden'}`}>
-           {/* Social Icons - Horizontal Layout */}
-           <div className="flex flex-wrap items-center justify-center gap-3">
+        {/* Expanded State: Horizontal Icon Row - Single line, no wrap */}
+        <div className={`px-4 transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+           {/* Social Icons - Horizontal Layout, single row */}
+           <div className="flex items-center justify-center gap-2 flex-nowrap">
              {/* Email Icon */}
              {email && (
                <a 
                  href={`mailto:${email}`}
                  title={email}
-                 className="w-9 h-9 flex items-center justify-center text-[var(--void-text-secondary)] hover:text-[var(--void-accent-yellow)] transition-colors"
+                 className="w-8 h-8 flex items-center justify-center text-[var(--void-text-secondary)] hover:text-[var(--void-accent-yellow)] transition-colors flex-shrink-0"
                >
-                 <i className="fas fa-envelope text-base" />
+                 <i className="fas fa-envelope text-sm" />
                </a>
              )}
              
@@ -164,9 +162,9 @@ export const SideNav = () => {
                    target="_blank" 
                    rel="noreferrer"
                    title={label}
-                   className="w-9 h-9 flex items-center justify-center text-[var(--void-text-secondary)] hover:text-[var(--void-accent-yellow)] transition-colors"
+                   className="w-8 h-8 flex items-center justify-center text-[var(--void-text-secondary)] hover:text-[var(--void-accent-yellow)] transition-colors flex-shrink-0"
                  >
-                   <i className={`${icon} text-base`} />
+                   <i className={`${icon} text-sm`} />
                  </a>
                )
              })}
@@ -176,4 +174,5 @@ export const SideNav = () => {
     </div>
   )
 }
+
 
