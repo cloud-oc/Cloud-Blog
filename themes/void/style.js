@@ -1,42 +1,43 @@
 import React from 'react'
 
 /**
- * Void Theme Styles - Endfield Industrial Design Refined
- * 终末地工业风格样式 - 视觉优化版
+ * Void Theme Styles - Light Industrial Refined
+ * Phase 3: "White Endfield" / Laboratory Aesthetic
  */
 export const Style = () => {
   return (
     <style jsx global>{`
       /* ============================================
-         Endfield Color Scheme & Variables (Refined)
+         Light Industrial Color Scheme
          ============================================ */
       :root {
-        /* Backgrounds - Layered Dark Grey */
-        --void-bg-base: #09090b;       /* 基础背景 (极深灰) */
-        --void-bg-primary: #121214;    /* 主要容器背景 */
-        --void-bg-secondary: #1c1c1f;  /* 次要/悬停背景 */
-        --void-bg-tertiary: #27272a;   /* 装饰性背景 */
+        /* Backgrounds - Laboratory / Clean Room */
+        --void-bg-base: #F7F7F9;       /* 整体背景 (冷灰白) */
+        --void-bg-primary: #FFFFFF;    /* 容器背景 (纯白) */
+        --void-bg-secondary: #F0F0F2;  /* 次要/悬停背景 (浅灰) */
+        --void-bg-tertiary: #E4E4E7;   /* 装饰性背景 (中灰) */
         
-        /* Typography */
-        --void-text-primary: #e4e4e7;  /* 主要文字 (灰白) */
-        --void-text-secondary: #a1a1aa;/* 次要文字 (中灰) */
-        --void-text-muted: #52525b;    /* 装饰性文字 (深灰) */
+        /* Typography - High Contrast Gunmetal */
+        --void-text-primary: #18181b;  /* 主要文字 (深炭灰) */
+        --void-text-secondary: #52525b;/* 次要文字 (中深灰) */
+        --void-text-muted: #a1a1aa;    /* 装饰性文字 (浅灰) */
         
-        /* Accents - Precise Endfield Colors */
-        --void-accent-yellow: #FFD700; /* Endfield Yellow */
-        --void-accent-yellow-dim: rgba(255, 215, 0, 0.15);
-        --void-accent-cyan: #00E5FF;   /* Endfield High-Tech Cyan */
-        --void-accent-cyan-dim: rgba(0, 229, 255, 0.15);
+        /* Accents - Adjusted for Light Mode */
+        --void-accent-yellow: #f59e0b; /* Deep Industrial Amber (Darker than neon yellow) */
+        --void-accent-yellow-dim: rgba(245, 158, 11, 0.1);
+        --void-accent-cyan: #06b6d4;   /* Deep Tech Cyan (Darker than neon cyan) */
+        --void-accent-cyan-dim: rgba(6, 182, 212, 0.1);
         
-        /* Borders & Lines */
-        --void-border-base: #27272a;
-        --void-border-active: #3f3f46;
+        /* Borders & Lines - Heavy Structure */
+        --void-border-base: #e4e4e7;
+        --void-border-active: #27272a; /* Active borders are dark/heavy */
         
         /* Technical Grid */
-        --void-grid-color: rgba(255, 255, 255, 0.03);
+        --void-grid-color: rgba(0, 0, 0, 0.03); /* Subtle dark grid */
         
-        /* Layout */
-        --void-frame-padding: 1.5rem;
+        /* Shadow / Glass */
+        --void-shadow-base: 0 1px 3px rgba(0,0,0,0.05);
+        --void-shadow-hover: 0 10px 30px rgba(0,0,0,0.08);
       }
 
       /* ============================================
@@ -49,7 +50,7 @@ export const Style = () => {
         overflow-x: hidden;
       }
 
-      /* Technical Grid Background - Subtle */
+      /* Technical Grid Background */
       #theme-void::before {
         content: '';
         position: fixed;
@@ -62,16 +63,6 @@ export const Style = () => {
         pointer-events: none;
       }
 
-      /* Vignette Effect */
-      #theme-void::after {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background: radial-gradient(circle at center, transparent 0%, rgba(9, 9, 11, 0.8) 100%);
-        z-index: -1;
-        pointer-events: none;
-      }
-
       /* ============================================
          Typography & Technical Text
          ============================================ */
@@ -79,6 +70,7 @@ export const Style = () => {
         font-family: 'JetBrains Mono', 'Courier New', monospace;
         letter-spacing: 0.5px;
         text-transform: uppercase;
+        font-weight: 500;
       }
       
       .tech-num {
@@ -87,39 +79,44 @@ export const Style = () => {
       }
 
       /* ============================================
-         "Endfield Frame" Container Styes
-         统一的容器风格：极简边框 + 角落装饰
+         "Float" Container Styles (Glassmorphism)
          ============================================ */
       .void-frame {
-        background: var(--void-bg-primary);
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
         border: 1px solid var(--void-border-base);
         position: relative;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--void-shadow-base);
       }
 
-      /* Corner Markers (Top-Left & Bottom-Right) */
+      /* Corner Markers (Minimalist L-shape) */
       .void-frame::before {
         content: '';
         position: absolute;
         top: -1px; left: -1px;
-        width: 8px; height: 8px;
-        border-top: 2px solid var(--void-accent-yellow);
-        border-left: 2px solid var(--void-accent-yellow);
-        opacity: 0.6;
+        width: 0; height: 0;
+        border-top: 2px solid var(--void-text-primary);
+        border-left: 2px solid var(--void-text-primary);
+        transition: all 0.3s ease;
+        opacity: 0;
       }
       .void-frame::after {
         content: '';
         position: absolute;
         bottom: -1px; right: -1px;
-        width: 8px; height: 8px;
-        border-bottom: 2px solid var(--void-accent-yellow);
-        border-right: 2px solid var(--void-accent-yellow);
-        opacity: 0.6;
+        width: 0; height: 0;
+        border-bottom: 2px solid var(--void-text-primary);
+        border-right: 2px solid var(--void-text-primary);
+        transition: all 0.3s ease;
+        opacity: 0;
       }
 
+      /* Active State: Heavy Corners appear */
       .void-frame:hover {
         border-color: var(--void-border-active);
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        box-shadow: var(--void-shadow-hover);
+        transform: translateY(-2px);
       }
       .void-frame:hover::before, .void-frame:hover::after {
         opacity: 1;
@@ -127,21 +124,23 @@ export const Style = () => {
       }
 
       /* ============================================
-         Notion Content Overrides
-         让文章内容看起来像"系统日志"
+         Notion Content Overrides (Light Mode)
          ============================================ */
       #notion-article {
         color: var(--void-text-primary);
+        font-size: 1.05rem;
+        line-height: 1.75;
       }
 
       /* Headers */
       #notion-article h1, #notion-article h2, #notion-article h3 {
-        color: white;
-        font-weight: 700;
-        margin-top: 2em;
-        margin-bottom: 0.8em;
+        color: var(--void-text-primary);
+        font-weight: 800;
+        margin-top: 2.5em;
+        margin-bottom: 1em;
         position: relative;
         padding-left: 1rem;
+        letter-spacing: -0.02em;
       }
       
       #notion-article h1::before, 
@@ -149,20 +148,19 @@ export const Style = () => {
       #notion-article h3::before {
         content: '';
         position: absolute;
-        left: 0; top: 0.2em; bottom: 0.2em;
+        left: 0; top: 0.3em; bottom: 0.3em;
         width: 4px;
         background: var(--void-accent-yellow);
       }
 
-      /* Quotes / Blockquotes */
+      /* Quotes */
       #notion-article blockquote {
         background: var(--void-bg-secondary);
-        border-left: 2px solid var(--void-accent-cyan);
+        border-left: 3px solid var(--void-text-primary);
         color: var(--void-text-secondary);
-        padding: 1rem 1.5rem;
-        margin: 1.5rem 0;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9em;
+        padding: 1.2rem 1.5rem;
+        margin: 2rem 0;
+        font-style: italic;
       }
 
       /* Lists */
@@ -172,26 +170,28 @@ export const Style = () => {
       }
       #notion-article ul li::marker {
         color: var(--void-accent-cyan);
+        font-weight: bold;
       }
 
       /* Links in Content */
       #notion-article a {
-        color: var(--void-accent-cyan);
+        color: var(--void-text-primary);
         text-decoration: none;
-        border-bottom: 1px dotted var(--void-accent-cyan);
+        border-bottom: 2px solid var(--void-accent-cyan-dim);
         transition: all 0.2s;
+        font-weight: 600;
       }
       #notion-article a:hover {
-        color: var(--void-accent-yellow);
-        border-bottom-color: var(--void-accent-yellow);
         background: var(--void-accent-cyan-dim);
+        border-bottom-color: var(--void-accent-cyan);
       }
 
       /* Code Blocks */
       #notion-article pre {
-        background: #000 !important;
-        border: 1px solid var(--void-border-base);
-        border-radius: 0 !important;
+        background: #18181b !important; /* Keep code blocks dark for contrast */
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 4px !important;
+        box-shadow: var(--void-shadow-base);
       }
 
       /* ============================================
@@ -199,12 +199,13 @@ export const Style = () => {
          ============================================ */
       .void-btn {
         background: transparent;
-        border: 1px solid var(--void-accent-yellow);
-        color: var(--void-accent-yellow);
-        padding: 0.5rem 1.5rem;
+        border: 2px solid var(--void-border-active);
+        color: var(--void-text-primary);
+        padding: 0.6rem 1.5rem;
         font-family: 'JetBrains Mono', monospace;
+        font-weight: 700;
         text-transform: uppercase;
-        font-size: 0.8em;
+        font-size: 0.85em;
         cursor: pointer;
         position: relative;
         overflow: hidden;
@@ -212,42 +213,30 @@ export const Style = () => {
       }
       
       .void-btn:hover {
-        background: var(--void-accent-yellow);
-        color: black;
-        box-shadow: 0 0 10px var(--void-accent-yellow-dim);
-      }
-      
-      /* Cut Corner using Clip Path */
-      .void-btn-cut {
-        clip-path: polygon(
-          10px 0, 100% 0, 
-          100% calc(100% - 10px), 
-          calc(100% - 10px) 100%, 
-          0 100%, 0 10px
-        );
+        background: var(--void-border-active);
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       }
 
       /* ============================================
-         Tech Decorations Utilities
+         Tech Decorations Utilities (Minimalist)
          ============================================ */
       .scan-line {
         width: 100%;
         height: 1px;
-        background: linear-gradient(90deg, transparent, var(--void-accent-cyan), transparent);
-        opacity: 0.3;
+        background: var(--void-border-base);
+        margin: 1rem 0;
       }
 
-      /* Loading Animation (Radar Spin) */
-      @keyframes radar-spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-      }
+      /* Loading Animation (Spinner) */
+      @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
       .loading-radar {
-        width: 40px; height: 40px;
+        width: 24px; height: 24px;
         border: 2px solid var(--void-border-base);
-        border-top-color: var(--void-accent-yellow);
+        border-top-color: var(--void-text-primary);
         border-radius: 50%;
-        animation: radar-spin 1s linear infinite;
+        animation: spin 0.8s linear infinite;
       }
     `}</style>
   )

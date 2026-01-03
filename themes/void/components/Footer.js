@@ -1,118 +1,75 @@
 import { siteConfig } from '@/lib/config'
-import CONFIG from '../config'
+import Social from '@/components/Social'
 
 /**
- * Footer Component - Endfield Style
+ * Footer Component - Light Industrial / Endfield Style
  * 页脚组件
  */
-export const Footer = (props) => {
+const Footer = ({ title }) => {
   const d = new Date()
-  const currentYear = d.getFullYear()
-  const since = siteConfig('SINCE')
-  const copyrightDate = parseInt(since) < currentYear ? `${since}-${currentYear}` : currentYear
+  const y = d.getFullYear()
 
   return (
-    <footer className="relative mt-20 border-t border-gray-800 bg-black/50 backdrop-blur-sm">
-      {/* Spectrum Bar */}
-      {siteConfig('VOID_SHOW_SPECTRUM_BAR', true, CONFIG) && (
-        <div className="spectrum-bar" />
-      )}
+    <footer className="relative mt-20 border-t-2 border-[var(--void-border-base)] bg-[var(--void-bg-secondary)] text-[var(--void-text-secondary)]">
+      {/* Spectrum Bar Top */}
+      <div className="spectrum-bar opacity-50" />
       
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* System Info */}
-          <div className="tech-corner p-4">
-            <h3 className="text-yellow-400 font-bold mb-4 tech-text text-sm">
-              // SYSTEM_INFO
-            </h3>
-            <div className="space-y-2 text-xs text-gray-400">
-              <div className="flex justify-between">
-                <span>STATUS:</span>
-                <span className="text-cyan-400">OPERATIONAL</span>
-              </div>
-              <div className="flex justify-between">
-                <span>VERSION:</span>
-                <span className="text-cyan-400">v2.0.26</span>
-              </div>
-              <div className="flex justify-between">
-                <span>UPTIME:</span>
-                <span className="text-cyan-400">99.9%</span>
-              </div>
-            </div>
+      <div className="container mx-auto px-6 py-12 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          
+          {/* Col 1: System Info */}
+          <div className="md:col-span-2 space-y-4">
+             <div className="flex items-center gap-2 mb-2">
+               <i className="fas fa-cube text-xl text-[var(--void-accent-yellow)]" />
+               <span className="text-xl font-bold tracking-wider text-[var(--void-text-primary)] uppercase">
+                 {siteConfig('TITLE')}
+               </span>
+             </div>
+             <p className="text-sm leading-relaxed max-w-sm text-[var(--void-text-secondary)] font-medium">
+                Running Void Theme v4.5 // Light Industrial Edition. <br/>
+                All systems nominal. Connection stable.
+             </p>
           </div>
 
-          {/* Site Info */}
-          <div className="tech-corner p-4">
-            <h3 className="text-yellow-400 font-bold mb-4 tech-text text-sm">
-              // SITE_INFO
-            </h3>
-            <div className="space-y-2 text-xs text-gray-400">
-              <div className="flex justify-between">
-                <span>OPERATOR:</span>
-                <span className="text-cyan-400">{siteConfig('AUTHOR')}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>POWERED_BY:</span>
-                <span className="text-cyan-400">NotionNext</span>
-              </div>
-              <div className="flex justify-between">
-                <span>THEME:</span>
-                <span className="text-cyan-400">VOID</span>
-              </div>
-            </div>
+          {/* Col 2: Links */}
+          <div className="space-y-4">
+             <h4 className="text-[var(--void-text-primary)] font-bold text-xs uppercase tracking-widest mb-4 border-b border-[var(--void-border-base)] pb-2 inline-block">
+               Navigation
+             </h4>
+             <ul className="space-y-2 text-sm font-mono">
+                <li><a href="/" className="hover:text-[var(--void-text-primary)] transition-colors">&gt; HOME</a></li>
+                <li><a href="/archive" className="hover:text-[var(--void-text-primary)] transition-colors">&gt; DATABASE</a></li>
+                <li><a href="/about" className="hover:text-[var(--void-text-primary)] transition-colors">&gt; PROTOCOLS</a></li>
+             </ul>
           </div>
 
-          {/* Contact */}
-          <div className="tech-corner p-4">
-            <h3 className="text-yellow-400 font-bold mb-4 tech-text text-sm">
-              // CONTACT_INFO
-            </h3>
-            <div className="space-y-2 text-xs text-gray-400">
-              {siteConfig('CONTACT_GITHUB') && (
-                <a
-                  href={siteConfig('CONTACT_GITHUB')}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center space-x-2 hover:text-yellow-400 transition"
-                >
-                  <i className="fab fa-github" />
-                  <span>GITHUB</span>
-                </a>
-              )}
-              {siteConfig('CONTACT_TWITTER') && (
-                <a
-                  href={siteConfig('CONTACT_TWITTER')}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center space-x-2 hover:text-yellow-400 transition"
-                >
-                  <i className="fab fa-twitter" />
-                  <span>TWITTER</span>
-                </a>
-              )}
-              {siteConfig('CONTACT_EMAIL') && (
-                <a
-                  href={`mailto:${siteConfig('CONTACT_EMAIL')}`}
-                  className="flex items-center space-x-2 hover:text-yellow-400 transition"
-                >
-                  <i className="fas fa-envelope" />
-                  <span>EMAIL</span>
-                </a>
-              )}
+          {/* Col 3: Contact */}
+          <div className="space-y-4">
+            <h4 className="text-[var(--void-text-primary)] font-bold text-xs uppercase tracking-widest mb-4 border-b border-[var(--void-border-base)] pb-2 inline-block">
+               Contact
+            </h4>
+            <div className="flex gap-4">
+               <Social />
             </div>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="text-center text-xs text-gray-500 pt-8 border-t border-gray-800">
-          <div className="tech-text mb-2">
-            © {copyrightDate} {siteConfig('AUTHOR')}. ALL RIGHTS RESERVED.
-          </div>
-          <div className="text-gray-600">
-            <span className="text-yellow-400">&gt;&gt;</span> BEYOND THE FRONTIER <span className="text-yellow-400">&lt;&lt;</span>
-          </div>
+        {/* Bottom Bar */}
+        <div className="mt-16 pt-8 border-t border-[var(--void-border-base)] flex flex-col md:flex-row justify-between items-center text-xs font-mono text-[var(--void-text-muted)]">
+            <div>
+               © {y} {siteConfig('AUTHOR')}. All Rights Reserved.
+            </div>
+            <div className="flex items-center gap-4 mt-4 md:mt-0">
+               <span>PRIVACY_PROTOCOL</span>
+               <span>SYSTEM_STATUS</span>
+            </div>
         </div>
       </div>
+      
+      {/* Corner Decoration */}
+      <div className="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-[var(--void-border-base)] opacity-50" />
     </footer>
   )
 }
+
+export default Footer

@@ -1,67 +1,64 @@
 import { siteConfig } from '@/lib/config'
 
 /**
- * PostMeta Component - Mission Briefing Style
- * 文章元数据 - 任务简报风格
+ * PostMeta Component - Minimalist Light Industrial
+ * 极简主义/未来感元数据展示
+ * No redundant labels ("DATE:", etc.), just pure data and icons.
  */
 export const PostMeta = ({ post }) => {
   if (!post) return null
 
   return (
-    <div className="mb-8 w-full">
-      {/* Header Title Block */}
-      <div className="mb-6 border-b border-[var(--void-border-base)] pb-6 relative">
-        <div className="flex items-center gap-2 mb-4">
-           <span className="px-2 py-0.5 bg-[var(--void-accent-yellow)] text-black text-xs font-bold font-mono">
-             DOC_ID_{post.id?.slice(0,6) || 'UNKNOWN'}
-           </span>
-           <span className="text-xs text-[var(--void-text-muted)] font-mono">
-             // SECURITY_LEVEL: PUBLIC
-           </span>
+    <div className="mb-10 w-full">
+      {/* Header Block */}
+      <div className="mb-6 relative">
+        {/* Top Identification Line */}
+        <div className="flex items-center gap-3 mb-6 text-xs font-mono text-[var(--void-text-muted)] border-b border-[var(--void-border-base)] pb-2">
+            <span className="font-bold text-[var(--void-text-primary)]">DOC_ID // {post.id?.slice(0,6) || 'UNKNOWN'}</span>
+            <span className="flex-1" />
+            <span className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                ONLINE
+            </span>
         </div>
 
-        <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight tracking-tight">
+        <h1 className="text-4xl md:text-6xl font-black text-[var(--void-text-primary)] mb-6 leading-tight tracking-tight">
           {post.title}
         </h1>
 
-        {/* Decorative scan line */}
-        <div className="scan-line absolute bottom-0" />
-      </div>
+        {/* Data Grid - Borderless, clean negative space */}
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-4 text-sm font-mono text-[var(--void-text-secondary)]">
+            
+            {/* Date */}
+            <div className="flex items-center gap-2">
+                <i className="far fa-clock text-[var(--void-text-muted)]" />
+                <span>{post.publishDay}</span>
+            </div>
 
-      {/* Info Grid / Mission Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--void-border-base)] border border-[var(--void-border-base)]">
-        
-        {/* Cell 1: Date */}
-        <div className="bg-[var(--void-bg-primary)] p-4 flex flex-col justify-between group hover:bg-[var(--void-bg-secondary)] transition-colors relative">
-           <span className="text-[10px] text-[var(--void-text-muted)] uppercase tracking-wider mb-1">Date_Created</span>
-           <span className="text-sm font-mono text-[var(--void-accent-cyan)]">{post.publishDay}</span>
-           <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-[var(--void-accent-cyan)] opacity-0 group-hover:opacity-100" />
-        </div>
+            {/* Category */}
+            {post.category && (
+                <div className="flex items-center gap-2">
+                    <i className="far fa-folder text-[var(--void-text-muted)]" />
+                    <span className="font-bold text-[var(--void-text-primary)]">{post.category.toUpperCase()}</span>
+                </div>
+            )}
 
-        {/* Cell 2: Category */}
-        <div className="bg-[var(--void-bg-primary)] p-4 flex flex-col justify-between group hover:bg-[var(--void-bg-secondary)] transition-colors">
-           <span className="text-[10px] text-[var(--void-text-muted)] uppercase tracking-wider mb-1">Category</span>
-           <span className="text-sm font-bold text-[var(--void-accent-yellow)]">
-             {post.category || 'UNCLASSIFIED'}
-           </span>
-        </div>
+            {/* Reading Time / Count */}
+            <div className="flex items-center gap-2">
+                <i className="far fa-file-alt text-[var(--void-text-muted)]" />
+                <span>{post.wordCount || '-'} CHARS</span>
+            </div>
 
-        {/* Cell 3: Views/Words (Simulated or Real) */}
-        <div className="bg-[var(--void-bg-primary)] p-4 flex flex-col justify-between group hover:bg-[var(--void-bg-secondary)] transition-colors">
-           <span className="text-[10px] text-[var(--void-text-muted)] uppercase tracking-wider mb-1">Data_Size</span>
-           <span className="text-sm font-mono text-white">
-             {post.wordCount || '-'} CHARS
-           </span>
-        </div>
-
-         {/* Cell 4: Tags */}
-        <div className="bg-[var(--void-bg-primary)] p-4 flex flex-col justify-between group hover:bg-[var(--void-bg-secondary)] transition-colors">
-           <span className="text-[10px] text-[var(--void-text-muted)] uppercase tracking-wider mb-1">Keywords</span>
-           <div className="flex flex-wrap gap-1">
-             {post.tags && post.tags.slice(0,2).map(tag => (
-               <span key={tag} className="text-xs text-[var(--void-text-secondary)]">#{tag}</span>
-             ))}
-           </div>
+            {/* Tags - Minimalist Pills */}
+            {post.tags && post.tags.length > 0 && (
+                <div className="flex items-center gap-2 ml-auto">
+                    {post.tags.map(tag => (
+                        <span key={tag} className="px-2 py-1 bg-[var(--void-bg-secondary)] text-[var(--void-text-secondary)] text-xs rounded hover:bg-[var(--void-text-primary)] hover:text-white transition-colors cursor-pointer">
+                            #{tag.toUpperCase()}
+                        </span>
+                    ))}
+                </div>
+            )}
         </div>
       </div>
     </div>

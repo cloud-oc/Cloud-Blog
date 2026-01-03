@@ -264,11 +264,11 @@ const Layout404 = (props) => {
     <div className="flex items-center justify-center min-h-[60vh]">
       <div className="void-card p-12 text-center tech-corner max-w-2xl mx-auto">
         <div className="mb-8">
-          <div className="text-8xl font-bold text-yellow-400 tech-text mb-4">
+          <div className="text-8xl font-black text-[var(--void-border-active)] mb-4">
             404
           </div>
-          <div className="text-2xl text-white mb-2">PAGE_NOT_FOUND</div>
-          <div className="text-gray-500 tech-text text-sm">
+          <div className="text-2xl font-bold text-[var(--void-text-primary)] mb-2">PAGE_NOT_FOUND</div>
+          <div className="text-[var(--void-text-muted)] text-sm font-mono">
             The requested resource could not be located
           </div>
         </div>

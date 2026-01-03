@@ -2,8 +2,8 @@ import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
 
 /**
- * Header Component - Endfield Style
- * 顶部导航栏
+ * Header Component - Light Industrial / Endfield Style
+ * 顶部导航栏 - 适配亮色工业风
  */
 export const Header = (props) => {
   const { locale } = props
@@ -18,7 +18,7 @@ export const Header = (props) => {
   }).replace(/\//g, '.').replace(',', '')
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-gray-800">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--void-bg-base)]/90 backdrop-blur-sm border-b border-[var(--void-border-base)] transition-colors duration-300">
       {/* Spectrum Bar */}
       {siteConfig('VOID_SHOW_SPECTRUM_BAR', true, CONFIG) && (
         <div className="spectrum-bar" />
@@ -28,13 +28,13 @@ export const Header = (props) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo / Site Title */}
           <div className="flex items-center space-x-4">
-            <div className="text-2xl font-bold">
-              <span className="text-yellow-400">[ </span>
-              <span className="text-white">{siteConfig('TITLE')}</span>
-              <span className="text-yellow-400"> ]</span>
+            <div className="text-2xl font-black tracking-tight">
+              <span className="text-[var(--void-accent-yellow)] font-mono mr-1">[</span>
+              <span className="text-[var(--void-text-primary)]">{siteConfig('TITLE')}</span>
+              <span className="text-[var(--void-accent-yellow)] font-mono ml-1">]</span>
             </div>
             {siteConfig('VOID_SHOW_TIMESTAMP', true, CONFIG) && (
-              <div className="hidden md:block tech-timestamp">
+              <div className="hidden md:block tech-text text-xs text-[var(--void-text-muted)] mt-1">
                 {currentTime}
               </div>
             )}
@@ -43,8 +43,8 @@ export const Header = (props) => {
           {/* Right Side - Status Indicator */}
           <div className="flex items-center space-x-4">
             <div className="hidden md:flex items-center space-x-2 text-xs">
-              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
-              <span className="text-gray-400 tech-text">ONLINE</span>
+              <div className="w-2 h-2 bg-[var(--void-accent-cyan)] rounded-full animate-pulse" />
+              <span className="text-[var(--void-text-secondary)] tech-text">ONLINE</span>
             </div>
           </div>
         </div>
