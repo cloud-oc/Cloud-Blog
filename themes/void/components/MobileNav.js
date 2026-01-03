@@ -83,11 +83,6 @@ export const MobileNav = () => {
             </div>
           </SmartLink>
 
-          {/* Center: Site Title (Optional) */}
-          <SmartLink href="/" className="text-sm font-bold text-[var(--void-text-primary)] uppercase tracking-wider">
-            {siteConfig('AUTHOR') || 'Cloud'}
-          </SmartLink>
-
           {/* Right: Hamburger Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
