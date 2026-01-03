@@ -98,11 +98,14 @@ export const SideNav = () => {
             className="w-full h-full rounded-full object-cover border-2 border-[var(--void-accent-yellow)] shadow-lg"
           />
         </div>
-        {/* Name shown when expanded */}
-        <div className={`mt-3 text-center transition-all duration-300 overflow-hidden ${isHovered ? 'opacity-100 max-h-10' : 'opacity-0 max-h-0'}`}>
-          <span className="text-sm font-bold text-[var(--void-text-primary)] uppercase tracking-wider">
+        {/* Author Info - shown when expanded */}
+        <div className={`mt-3 text-center transition-all duration-300 overflow-hidden ${isHovered ? 'opacity-100 max-h-24' : 'opacity-0 max-h-0'}`}>
+          <div className="text-sm font-bold text-[var(--void-text-primary)] uppercase tracking-wider">
             {siteConfig('AUTHOR') || 'Cloud'}
-          </span>
+          </div>
+          <div className="text-xs text-[var(--void-text-muted)] mt-1 px-4 line-clamp-2">
+            {siteConfig('BIO') || ''}
+          </div>
         </div>
       </div>
 

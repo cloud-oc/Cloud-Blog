@@ -2,11 +2,10 @@ import { siteConfig } from '@/lib/config'
 
 /**
  * TitleBar Component - Endfield Style (Light Industrial)
- * 标题栏组件 - 适配亮色工业风
+ * 标题栏组件 - 仅显示循环滚动的 CLOUD09_SPACE 文字动画
  */
-export const TitleBar = ({ post, title, description }) => {
-  const displayTitle = post?.title || title || siteConfig('TITLE')
-  const displayDesc = post?.summary || description || siteConfig('DESCRIPTION')
+export const TitleBar = ({ post }) => {
+  const marqueeText = 'CLOUD09_SPACE'
 
   return (
     <div className="relative py-16 md:py-24 border-b-2 border-[var(--void-border-base)] overflow-hidden bg-[var(--void-bg-base)]">
@@ -33,41 +32,48 @@ export const TitleBar = ({ post, title, description }) => {
         </div>
       )}
 
-      {/* Content */}
+      {/* Scrolling Marquee Title */}
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          {/* Technical Header */}
-          <div className="flex items-center gap-2 mb-4 text-xs font-mono text-[var(--void-accent-cyan)] tech-text tracking-wider">
-            <div className="w-2 h-2 bg-[var(--void-accent-cyan)] rounded-full animate-pulse" />
-            <span>SYSTEM_TERMINAL</span>
-            <span className="text-[var(--void-text-muted)]">//</span>
-            <span className="text-[var(--void-text-secondary)]">
-              {new Date().toISOString().split('T')[0]}
-            </span>
-          </div>
-
-          {/* Title */}
-          <h1 className="text-4xl md:text-6xl font-black text-[var(--void-text-primary)] mb-6 leading-tight tracking-tight">
-            <span className="text-[var(--void-accent-yellow)] tech-text font-normal mr-2">&gt;</span>
-            {displayTitle}
-          </h1>
-
-          {/* Description */}
-          {displayDesc && (
-            <p className="text-lg md:text-xl text-[var(--void-text-secondary)] max-w-2xl font-medium leading-relaxed">
-              {displayDesc}
-            </p>
-          )}
-
-          {/* Decorative Line */}
-          <div className="mt-8 flex items-center gap-2">
-            <div className="h-0.5 bg-gradient-to-r from-[var(--void-accent-yellow)] via-[var(--void-accent-cyan)] to-transparent flex-1 opacity-50" />
-            <div className="text-xs text-[var(--void-text-muted)] tech-text font-bold">EOF</div>
+        <div className="overflow-hidden">
+          <div className="marquee-container">
+            <h1 className="marquee-text text-4xl md:text-6xl lg:text-7xl font-black text-[var(--void-text-primary)] leading-tight tracking-tight whitespace-nowrap">
+              <span className="text-[var(--void-accent-yellow)] mr-4">&gt;</span>
+              {marqueeText}
+              <span className="mx-8 text-[var(--void-text-muted)]">•</span>
+              {marqueeText}
+              <span className="mx-8 text-[var(--void-text-muted)]">•</span>
+              {marqueeText}
+              <span className="mx-8 text-[var(--void-text-muted)]">•</span>
+              {marqueeText}
+              <span className="mx-8 text-[var(--void-text-muted)]">•</span>
+            </h1>
           </div>
         </div>
       </div>
+
+      {/* Marquee Animation Styles */}
+      <style jsx>{`
+        .marquee-container {
+          display: flex;
+          width: 100%;
+        }
+        .marquee-text {
+          display: inline-block;
+          animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-25%);
+          }
+        }
+      `}</style>
     </div>
   )
 }
 
 export default TitleBar
+
+
