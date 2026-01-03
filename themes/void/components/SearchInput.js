@@ -1,104 +1,84 @@
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useImperativeHandle, useRef, useState } from 'react'
-import { useGlobal } from '@/lib/global'
-let lock = false
 
-const SearchInput = props => {
-  const { currentSearch, cRef, className } = props
-  const [onLoading, setLoadingState] = useState(false)
+/**
+ * SearchInput Component - Technical Search Interface
+ * 搜索输入组件
+ */
+export const SearchInput = ({ keyword = '', locale }) => {
   const router = useRouter()
-  const searchInputRef = useRef()
-  const { locale } = useGlobal()
-  useImperativeHandle(cRef, () => {
-    return {
-      focus: () => {
-        searchInputRef?.current?.focus()
-      }
-    }
-  })
+  const [searchTerm, setSearchTerm] = useState(keyword || '')
 
-  const handleSearch = () => {
-    const key = searchInputRef.current.value
-    if (key && key !== '') {
-      setLoadingState(true)
-      router.push({ pathname: '/search/' + key }).then(r => {
-        setLoadingState(false)
-      })
-      // location.href = '/search/' + key
-    } else {
-      router.push({ pathname: '/' }).then(r => {})
+  useEffect(() => {
+    setSearchTerm(keyword || '')
+  }, [keyword])
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    if (searchTerm.trim()) {
+      router.push(`/search/${encodeURIComponent(searchTerm)}`)
     }
-  }
-  const handleKeyUp = e => {
-    if (e.keyCode === 13) {
-      // 回车
-      handleSearch(searchInputRef.current.value)
-    } else if (e.keyCode === 27) {
-      // ESC
-      cleanSearch()
-    }
-  }
-  const cleanSearch = () => {
-    searchInputRef.current.value = ''
   }
 
-  const [showClean, setShowClean] = useState(false)
-  const updateSearchKey = val => {
-    if (lock) {
-      return
-    }
-    searchInputRef.current.value = val
-
-    if (val) {
-      setShowClean(true)
-    } else {
-      setShowClean(false)
-    }
-  }
-  function lockSearchInput () {
-    lock = true
-  }
-
-  function unLockSearchInput () {
-    lock = false
+  const handleClear = () => {
+    setSearchTerm('')
   }
 
   return (
-    <div className={'flex w-full rounded-lg ' + className}>
-      <input
-        ref={searchInputRef}
-        type="text"
-        className={
-          'outline-none w-full text-sm pl-5 rounded-lg transition focus:shadow-lg dark:text-gray-300 font-light leading-10 text-black bg-gray-100 dark:bg-gray-500'
-        }
-        onKeyUp={handleKeyUp}
-        onCompositionStart={lockSearchInput}
-        onCompositionUpdate={lockSearchInput}
-        onCompositionEnd={unLockSearchInput}
-        placeholder={locale.SEARCH.ARTICLES}
-        onChange={e => updateSearchKey(e.target.value)}
-        defaultValue={currentSearch || ''}
-      />
-
-      <div
-        className="-ml-8 cursor-pointer  float-right items-center justify-center py-2"
-        onClick={handleSearch}
-      >
-        <i
-          className={`hover:text-black transform duration-200 text-gray-500 dark:text-gray-200 cursor-pointer fas ${
-            onLoading ? 'fa-spinner animate-spin' : 'fa-search'
-          }`}
-        />
-      </div>
-
-      {showClean && (
-        <div className="-ml-12 cursor-pointer float-right items-center justify-center py-2">
-          <i
-            className="hover:text-black transform duration-200 text-gray-400 dark:text-gray-300 cursor-pointer fas fa-times"
-            onClick={cleanSearch}
-          />
+    <div className="void-card p-6">
+      <form onSubmit={handleSearch} className="space-y-4">
+        {/* Search Label */}
+        <div className="flex items-center gap-2 text-yellow-400 tech-text">
+          <i className="fas fa-search" />
+          <span className="text-sm">SEARCH_DATABASE</span>
         </div>
-      )}
+
+        {/* Search Input */}
+        <div className="relative">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder={locale?.SEARCH?.ARTICLES || '搜索文章...'}
+            className="w-full px-4 py-4 bg-black border border-gray-700 text-white focus:border-yellow-400 focus:outline-none transition-colors pr-24 tech-text"
+          />
+          
+          {/* Clear Button */}
+          {searchTerm && (
+            <button
+              type="button"
+              onClick={handleClear}
+              className="absolute right-20 top-1/2 -translate-y-1/2 text-gray-500 hover:text-red-500 transition-colors"
+              title="Clear"
+            >
+              <i className="fas fa-times" />
+            </button>
+          )}
+
+          {/* Search Button */}
+          <button
+            type="submit"
+            className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-2 bg-yellow-400 text-black hover:bg-cyan-400 transition-colors font-bold text-sm"
+          >
+            <i className="fas fa-arrow-right" />
+          </button>
+        </div>
+
+        {/* Search Stats */}
+        <div className="flex items-center justify-between text-xs text-gray-500 tech-text">
+          <div>
+            {keyword && (
+              <span>
+                QUERY: <span className="text-cyan-400">{keyword}</span>
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-1">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            <span>READY</span>
+          </div>
+        </div>
+      </form>
     </div>
   )
 }
