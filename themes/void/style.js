@@ -238,6 +238,94 @@ export const Style = () => {
         border-radius: 50%;
         animation: spin 0.8s linear infinite;
       }
+
+      /* ============================================
+         Mobile Responsive Styles
+         ============================================ */
+      
+      /* Safe area support for notched devices */
+      .safe-area-bottom {
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+
+      /* Mobile-specific adjustments */
+      @media (max-width: 767px) {
+        /* Smaller grid on mobile */
+        #theme-void::before {
+          background-size: 30px 30px;
+        }
+
+        /* Reduce padding on mobile */
+        .void-frame {
+          padding: 1rem !important;
+        }
+
+        /* Smaller technical text */
+        .tech-text {
+          font-size: 0.75rem;
+          letter-spacing: 0.3px;
+        }
+
+        /* Ensure minimum touch targets */
+        button, a, [role="button"] {
+          min-height: 44px;
+        }
+
+        /* Notion content adjustments */
+        #notion-article {
+          font-size: 1rem;
+          line-height: 1.7;
+        }
+
+        #notion-article h1 { font-size: 1.75rem; }
+        #notion-article h2 { font-size: 1.5rem; }
+        #notion-article h3 { font-size: 1.25rem; }
+
+        #notion-article h1, 
+        #notion-article h2, 
+        #notion-article h3 {
+          margin-top: 1.5em;
+          padding-left: 0.75rem;
+        }
+
+        #notion-article h1::before, 
+        #notion-article h2::before,
+        #notion-article h3::before {
+          width: 3px;
+        }
+
+        /* Code blocks scroll horizontally */
+        #notion-article pre {
+          max-width: 100%;
+          overflow-x: auto;
+        }
+
+        /* Blockquotes */
+        #notion-article blockquote {
+          padding: 0.8rem 1rem;
+          margin: 1.5rem 0;
+        }
+      }
+
+      /* Tablet adjustments */
+      @media (min-width: 768px) and (max-width: 1023px) {
+        #theme-void::before {
+          background-size: 35px 35px;
+        }
+
+        .void-frame {
+          padding: 1.5rem !important;
+        }
+      }
+
+      /* Hide scrollbar on webkit for mobile nav */
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
     `}</style>
   )
 }

@@ -2,27 +2,27 @@ import { siteConfig } from '@/lib/config'
 
 /**
  * Footer Component - Dark Industrial / Endfield Style
- * 页脚组件 - 深色工业风格
+ * 页脚组件 - 深色工业风格 + 响应式设计
  */
 export const Footer = ({ title }) => {
   const d = new Date()
   const y = d.getFullYear()
 
   return (
-    <footer className="relative mt-20 bg-[#0d0d0d] text-gray-300">
+    <footer className="relative mt-20 bg-[#0d0d0d] text-gray-300 overflow-hidden">
       {/* Spectrum Bar Top */}
       <div className="spectrum-bar opacity-30" />
       
-      {/* Use negative margin to offset the sidebar and center content relative to viewport */}
-      <div className="py-8 space-y-4 md:-ml-20">
+      {/* Content - centered relative to viewport */}
+      <div className="py-6 md:py-8 space-y-3 md:space-y-4 px-4">
         {/* Row 1: RSS and Sitemap Links */}
-        <div className="flex justify-center items-center gap-6 text-xs font-mono">
+        <div className="flex justify-center items-center gap-4 md:gap-6 text-xs font-mono md:-ml-10">
           {siteConfig('ENABLE_RSS') && (
             <a 
               href="/rss/feed.xml" 
               target="_blank" 
               rel="noreferrer"
-              className="flex items-center gap-2 text-gray-400 hover:text-[var(--void-accent-yellow)] transition-colors"
+              className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors py-2"
             >
               <i className="fas fa-rss" />
               <span>RSS</span>
@@ -32,7 +32,7 @@ export const Footer = ({ title }) => {
             href="/sitemap.xml" 
             target="_blank" 
             rel="noreferrer"
-            className="flex items-center gap-2 text-gray-400 hover:text-[var(--void-accent-yellow)] transition-colors"
+            className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors py-2"
           >
             <i className="fas fa-sitemap" />
             <span>SITEMAP</span>
@@ -41,13 +41,13 @@ export const Footer = ({ title }) => {
 
         {/* Row 2: ICP 备案 */}
         {siteConfig('BEI_AN') && (
-          <div className="flex justify-center items-center text-xs font-mono text-gray-500">
+          <div className="flex justify-center items-center text-xs font-mono text-gray-500 md:-ml-10">
             {siteConfig('BEI_AN_LINK') ? (
               <a 
                 href={siteConfig('BEI_AN_LINK')} 
                 target="_blank" 
                 rel="noreferrer"
-                className="hover:text-gray-300 transition-colors"
+                className="hover:text-gray-300 transition-colors py-1"
               >
                 {siteConfig('BEI_AN')}
               </a>
@@ -58,18 +58,18 @@ export const Footer = ({ title }) => {
         )}
 
         {/* Row 3: Copyright */}
-        <div className="flex justify-center items-center text-xs font-mono text-gray-500">
-          <div>
-            © {siteConfig('SINCE') && siteConfig('SINCE') !== y ? `${siteConfig('SINCE')}-${y}` : y} {siteConfig('AUTHOR')}. All Rights Reserved.
+        <div className="flex justify-center items-center text-xs font-mono text-gray-500 md:-ml-10">
+          <div className="text-center">
+            © {siteConfig('SINCE') && siteConfig('SINCE') !== y ? `${siteConfig('SINCE')}-${y}` : y} {siteConfig('AUTHOR')}
+            <span className="hidden sm:inline">. All Rights Reserved.</span>
           </div>
         </div>
       </div>
       
-      {/* Corner Decoration */}
-      <div className="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-gray-800 opacity-50" />
+      {/* Corner Decoration - hidden on mobile */}
+      <div className="absolute bottom-0 right-0 w-12 h-12 md:w-16 md:h-16 border-b-4 border-r-4 border-gray-800 opacity-50 hidden md:block" />
     </footer>
   )
 }
 
 export default Footer
-

@@ -23,6 +23,7 @@ import { SideNav } from './components/SideNav'
 import TitleBar from './components/TitleBar'
 import FloatingToc from './components/FloatingToc'
 import LoadingCover from './components/LoadingCover'
+import MobileNav from './components/MobileNav'
 import CONFIG from './config'
 import { Style } from './style'
 
@@ -56,11 +57,14 @@ const LayoutBase = (props) => {
       {/* 加载动画 */}
       {LOADING_COVER && <LoadingCover />}
 
-      {/* 左侧垂直导航 */}
+      {/* 左侧垂直导航 (桌面端) */}
       <SideNav {...props} />
 
-      {/* 主体内容区 - 无顶栏 */}
-      <div className="md:ml-20">
+      {/* 移动端底部导航 */}
+      <MobileNav />
+
+      {/* 主体内容区 */}
+      <div className="md:ml-20 pb-16 md:pb-0">
         {/* 标题栏 */}
         {!fullWidth && <TitleBar {...props} />}
 
