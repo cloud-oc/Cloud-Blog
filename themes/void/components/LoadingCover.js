@@ -44,6 +44,9 @@ const LoadingCover = () => {
   }, [onLoading])
 
   useEffect(() => {
+    // Prevent scrollbar on body during loading
+    document.body.style.overflow = 'hidden'
+    
     const initTimer = setTimeout(() => setPhase('loading'), 200)
 
     const progressInterval = setInterval(() => {
@@ -69,6 +72,7 @@ const LoadingCover = () => {
       clearTimeout(initTimer)
       clearInterval(progressInterval)
       window.removeEventListener('load', handleLoad)
+      document.body.style.overflow = ''
     }
   }, [updateProgress])
 
@@ -142,7 +146,7 @@ const LoadingCover = () => {
           left: 0;
           width: 100vw;
           height: 100vh;
-          background: #0a0a0a;
+          background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
           z-index: 99999;
           overflow: hidden;
         }
@@ -152,9 +156,9 @@ const LoadingCover = () => {
           position: absolute;
           left: 0;
           top: 0;
-          width: 4px;
+          width: 6px;
           height: 100%;
-          background: rgba(59, 130, 246, 0.1);
+          background: rgba(96, 165, 250, 0.15);
         }
 
         .progress-track {
@@ -170,17 +174,18 @@ const LoadingCover = () => {
           top: 0;
           left: 0;
           width: 100%;
-          background: linear-gradient(180deg, #3b82f6 0%, #60a5fa 100%);
+          background: linear-gradient(180deg, #60a5fa 0%, #93c5fd 100%);
           transition: height 0.15s ease-out;
+          box-shadow: 0 0 15px #60a5fa;
         }
 
         .progress-glow {
           position: absolute;
           left: 0;
-          width: 60px;
-          height: 2px;
-          background: linear-gradient(90deg, #60a5fa 0%, transparent 100%);
-          box-shadow: 0 0 20px #3b82f6, 0 0 40px #3b82f6;
+          width: 80px;
+          height: 3px;
+          background: linear-gradient(90deg, #93c5fd 0%, transparent 100%);
+          box-shadow: 0 0 30px #60a5fa, 0 0 60px #60a5fa;
           transition: top 0.15s ease-out;
           transform: translateY(-1px);
         }
@@ -194,60 +199,66 @@ const LoadingCover = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding-right: 40px;
+          padding-right: 50px;
         }
 
         .site-name {
-          font-size: clamp(1.5rem, 3vw, 2.5rem);
-          font-weight: 900;
+          font-family: 'Orbitron', 'Rajdhani', 'Share Tech Mono', 'Consolas', monospace;
+          font-size: clamp(2rem, 4vw, 3.5rem);
+          font-weight: 700;
           color: transparent;
-          letter-spacing: 0.3em;
+          letter-spacing: 0.4em;
           writing-mode: vertical-rl;
           text-orientation: mixed;
           transform: rotate(180deg);
-          background: linear-gradient(to left, rgba(59, 130, 246, 0.6) 0%, rgba(59, 130, 246, 0.1) 50%, transparent 100%);
+          background: linear-gradient(to left, rgba(147, 197, 253, 0.9) 0%, rgba(96, 165, 250, 0.5) 40%, rgba(59, 130, 246, 0.15) 80%, transparent 100%);
           -webkit-background-clip: text;
           background-clip: text;
           user-select: none;
+          text-shadow: 0 0 40px rgba(96, 165, 250, 0.3);
         }
 
         /* Bottom Info */
         .bottom-info {
           position: absolute;
-          bottom: 40px;
-          left: 40px;
+          bottom: 50px;
+          left: 50px;
           display: flex;
           align-items: center;
-          gap: 40px;
+          gap: 50px;
         }
 
         .status-line {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 16px;
         }
 
         .status-dot {
-          width: 8px;
-          height: 8px;
-          background: #3b82f6;
+          width: 10px;
+          height: 10px;
+          background: #60a5fa;
           border-radius: 50%;
           animation: pulse 1s ease-in-out infinite;
+          box-shadow: 0 0 10px #60a5fa;
         }
 
         .status-text {
-          font-family: monospace;
-          font-size: 12px;
-          color: #3b82f6;
-          letter-spacing: 3px;
+          font-family: 'Orbitron', 'Rajdhani', 'Share Tech Mono', 'Consolas', monospace;
+          font-size: 16px;
+          font-weight: 600;
+          color: #93c5fd;
+          letter-spacing: 4px;
           text-transform: uppercase;
+          text-shadow: 0 0 10px rgba(147, 197, 253, 0.5);
         }
 
         .progress-text {
-          font-family: monospace;
-          font-size: 14px;
-          color: rgba(255, 255, 255, 0.6);
-          letter-spacing: 2px;
+          font-family: 'Orbitron', 'Rajdhani', 'Share Tech Mono', 'Consolas', monospace;
+          font-size: 18px;
+          font-weight: 600;
+          color: rgba(147, 197, 253, 0.8);
+          letter-spacing: 3px;
         }
 
         /* Sweep Overlay - Full screen cover */
@@ -257,7 +268,7 @@ const LoadingCover = () => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: #3b82f6;
+          background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
           transform: scaleX(0);
           transform-origin: left;
           pointer-events: none;
@@ -282,9 +293,9 @@ const LoadingCover = () => {
           position: absolute;
           inset: 0;
           background-image: 
-            linear-gradient(rgba(59, 130, 246, 0.02) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(59, 130, 246, 0.02) 1px, transparent 1px);
-          background-size: 80px 80px;
+            linear-gradient(rgba(96, 165, 250, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(96, 165, 250, 0.03) 1px, transparent 1px);
+          background-size: 60px 60px;
           pointer-events: none;
         }
 
@@ -292,23 +303,23 @@ const LoadingCover = () => {
         .loading-cover::after {
           content: '';
           position: absolute;
-          bottom: 40px;
-          right: 40px;
-          width: 60px;
-          height: 60px;
-          border-right: 2px solid rgba(59, 130, 246, 0.3);
-          border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+          bottom: 50px;
+          right: 50px;
+          width: 80px;
+          height: 80px;
+          border-right: 2px solid rgba(96, 165, 250, 0.4);
+          border-bottom: 2px solid rgba(96, 165, 250, 0.4);
           pointer-events: none;
         }
 
         @keyframes pulse {
           0%, 100% { 
             opacity: 1; 
-            box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+            box-shadow: 0 0 10px #60a5fa, 0 0 20px rgba(96, 165, 250, 0.4);
           }
           50% { 
-            opacity: 0.5; 
-            box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+            opacity: 0.6; 
+            box-shadow: 0 0 15px #60a5fa, 0 0 30px rgba(96, 165, 250, 0.2);
           }
         }
 
@@ -326,18 +337,27 @@ const LoadingCover = () => {
         /* Mobile responsive */
         @media (max-width: 768px) {
           .site-name-container {
-            padding-right: 20px;
+            padding-right: 25px;
           }
 
           .site-name {
-            font-size: 1.2rem;
-            letter-spacing: 0.2em;
+            font-size: 1.5rem;
+            letter-spacing: 0.3em;
           }
 
           .bottom-info {
-            left: 20px;
-            bottom: 20px;
-            gap: 20px;
+            left: 25px;
+            bottom: 25px;
+            gap: 30px;
+          }
+
+          .status-text {
+            font-size: 14px;
+            letter-spacing: 3px;
+          }
+
+          .progress-text {
+            font-size: 16px;
           }
         }
       `}</style>

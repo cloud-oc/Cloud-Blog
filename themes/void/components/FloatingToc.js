@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
  * 悬浮目录导航组件 - 工业风格设计
  */
 const FloatingToc = ({ toc }) => {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(true)
   const [activeSection, setActiveSection] = useState(null)
   const [progress, setProgress] = useState(0)
   const tRef = useRef(null)
