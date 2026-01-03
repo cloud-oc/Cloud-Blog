@@ -32,6 +32,7 @@ import TagItemMini from './components/TagItemMini'
 import TocDrawer from './components/TocDrawer'
 import TocDrawerButton from './components/TocDrawerButton'
 import CONFIG from './config'
+import LoadingCover from './components/LoadingCover'
 import { Style } from './style'
 
 const AlgoliaSearchModal = dynamic(
@@ -91,6 +92,19 @@ const LayoutBase = props => {
         id='theme-hexo'
         className={`${siteConfig('FONT_STYLE')} dark:bg-black scroll-smooth`}>
         <Style />
+
+        {/* Loading Cover */}
+        <Transition
+          show={onLoading}
+          enter='transition-opacity duration-200'
+          enterFrom='opacity-0'
+          enterTo='opacity-100'
+          leave='transition-opacity duration-500'
+          leaveFrom='opacity-100'
+          leaveTo='opacity-0'
+          unmount={true}>
+            <LoadingCover />
+        </Transition>
 
         {/* 顶部导航 */}
         <Header {...props} />

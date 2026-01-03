@@ -231,6 +231,35 @@ const Style = () => {
         scrollbar-width: thin;
         scrollbar-color: var(--theme-color) transparent;
       }
+
+      /* Tech Style Overrides */
+      .rounded-xl, .rounded-t-xl, .rounded-lg, .rounded-md, .rounded-sm, .rounded {
+        border-radius: 0 !important;
+      }
+      
+      /* Force sharp corners */
+      #theme-hexo .card {
+        border-radius: 0 !important;
+        border: 1px solid #333;
+        box-shadow: none;
+      }
+
+      /* Cyberpunk/Tech Button Hover */
+      .cursor-pointer:hover {
+        background-color: var(--theme-color);
+        color: #000 !important;
+        transition: all 0.2s;
+      }
+
+      /* Dark Mode Tech Background */
+      .dark #theme-hexo body {
+        background-color: #050505;
+        background-image: 
+          linear-gradient(rgba(20, 20, 20, 0.8) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(20, 20, 20, 0.8) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+
     `}</style>
   )
 }
