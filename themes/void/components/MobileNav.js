@@ -28,12 +28,19 @@ export const MobileNav = () => {
     { name: 'Search', icon: 'fas fa-search', path: '/search', show: siteConfig('VOID_MENU_SEARCH', null, CONFIG) }
   ].filter(item => item.show !== false)
 
-  // Social links
+  // 社交图标配置 - 使用 contact.config.js 的配置
   const socialLinks = [
     { key: 'CONTACT_GITHUB', icon: 'fab fa-github', label: 'GitHub' },
     { key: 'CONTACT_TWITTER', icon: 'fab fa-twitter', label: 'Twitter' },
+    { key: 'CONTACT_WEIBO', icon: 'fab fa-weibo', label: '微博' },
     { key: 'CONTACT_BILIBILI', icon: 'fab fa-bilibili', label: 'Bilibili' },
     { key: 'CONTACT_TELEGRAM', icon: 'fab fa-telegram', label: 'Telegram' },
+    { key: 'CONTACT_INSTAGRAM', icon: 'fab fa-instagram', label: 'Instagram' },
+    { key: 'CONTACT_YOUTUBE', icon: 'fab fa-youtube', label: 'YouTube' },
+    { key: 'CONTACT_XIAOHONGSHU', icon: null, svg: '/svg/xiaohongshu.svg', label: '小红书' },
+    { key: 'CONTACT_LINKEDIN', icon: 'fab fa-linkedin', label: 'LinkedIn' },
+    { key: 'CONTACT_ZHISHIXINGQIU', icon: 'fas fa-planet-ringed', label: '知识星球' },
+    { key: 'CONTACT_WEHCHAT_PUBLIC', icon: 'fab fa-weixin', label: '微信公众号' },
   ]
 
   // Email
@@ -143,7 +150,7 @@ export const MobileNav = () => {
 
         {/* Social Links */}
         <div className="p-5 border-t border-[var(--void-border-base)]">
-          <p className="text-xs font-mono text-[var(--void-text-muted)] mb-3 uppercase tracking-wider">Connect</p>
+          <p className="text-xs font-mono text-[var(--void-text-muted)] mb-3 uppercase tracking-wider">Contact</p>
           <div className="flex items-center gap-3 flex-wrap">
             {/* Email */}
             {email && (
@@ -167,7 +174,11 @@ export const MobileNav = () => {
                   title={social.label}
                   className="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--void-bg-secondary)] text-[var(--void-text-muted)] hover:text-blue-500 hover:bg-blue-500/10 transition-colors"
                 >
-                  <i className={`${social.icon} text-sm`} />
+                  {social.svg ? (
+                    <img src={social.svg} alt={social.label} className="w-4 h-4 opacity-60" />
+                  ) : (
+                    <i className={`${social.icon} text-sm`} />
+                  )}
                 </a>
               )
             })}
