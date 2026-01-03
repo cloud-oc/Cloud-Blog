@@ -64,7 +64,7 @@ const LayoutBase = (props) => {
       <MobileNav />
 
       {/* 主体内容区 */}
-      <div className="md:ml-20 pb-16 md:pb-0">
+      <div className="md:ml-20">
         {/* 标题栏 */}
         {!fullWidth && <TitleBar {...props} />}
 

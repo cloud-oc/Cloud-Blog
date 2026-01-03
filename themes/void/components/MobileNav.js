@@ -5,27 +5,27 @@ import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
 
 /**
- * MobileNav Component - Bottom Navigation for Mobile
- * 移动端底部导航栏
+ * MobileNav Component - Top Navigation for Mobile
+ * 移动端顶部导航：左上角头像，右上角汉堡菜单
  */
+
+// Avatar image URL
+const AVATAR_URL = 'https://github.com/cloud-oc/picx-images-hosting/blob/master/Origin/Cloud_icon.pfpafpaii.png?raw=true'
+
 export const MobileNav = () => {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState('Home')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  // Main navigation items (shown in bottom bar)
-  const mainItems = [
+  // All navigation items
+  const menuItems = [
     { name: 'Home', icon: 'fas fa-home', path: '/' },
-    { name: 'Category', icon: 'fas fa-folder', path: '/category' },
-    { name: 'Search', icon: 'fas fa-search', path: '/search' },
-    { name: 'Archive', icon: 'fas fa-archive', path: '/archive' },
-  ]
-
-  // Extra menu items (shown in slide-up panel)
-  const extraItems = [
+    { name: 'Category', icon: 'fas fa-folder', path: '/category', show: siteConfig('VOID_MENU_CATEGORY', null, CONFIG) },
     { name: 'Tag', icon: 'fas fa-tag', path: '/tag', show: siteConfig('VOID_MENU_TAG', null, CONFIG) },
+    { name: 'Archive', icon: 'fas fa-archive', path: '/archive', show: siteConfig('VOID_MENU_ARCHIVE', null, CONFIG) },
     { name: 'Portfolio', icon: 'fas fa-briefcase', path: '/portfolio' },
     { name: 'Friends', icon: 'fas fa-users', path: '/friend' },
+    { name: 'Search', icon: 'fas fa-search', path: '/search', show: siteConfig('VOID_MENU_SEARCH', null, CONFIG) }
   ].filter(item => item.show !== false)
 
   // Social links
@@ -33,7 +33,11 @@ export const MobileNav = () => {
     { key: 'CONTACT_GITHUB', icon: 'fab fa-github', label: 'GitHub' },
     { key: 'CONTACT_TWITTER', icon: 'fab fa-twitter', label: 'Twitter' },
     { key: 'CONTACT_BILIBILI', icon: 'fab fa-bilibili', label: 'Bilibili' },
+    { key: 'CONTACT_TELEGRAM', icon: 'fab fa-telegram', label: 'Telegram' },
   ]
+
+  // Email
+  const email = siteConfig('CONTACT_EMAIL')
 
   useEffect(() => {
     const path = router.asPath
@@ -51,79 +55,132 @@ export const MobileNav = () => {
     setIsMenuOpen(false)
   }, [router.asPath])
 
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMenuOpen])
+
   return (
     <>
-      {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-[var(--void-bg-primary)] border-t border-[var(--void-border-base)] safe-area-bottom">
-        <div className="flex items-center justify-around h-16">
-          {mainItems.map(item => (
-            <SmartLink
-              key={item.name}
-              href={item.path}
-              className={`flex flex-col items-center justify-center flex-1 h-full py-2 transition-colors ${
-                activeTab === item.name
-                  ? 'text-blue-500'
-                  : 'text-[var(--void-text-muted)]'
-              }`}
-            >
-              <i className={`${item.icon} text-lg`} />
-              <span className="text-[10px] mt-1 font-medium">{item.name}</span>
-            </SmartLink>
-          ))}
-          
-          {/* Menu Button */}
+      {/* Top Navigation Bar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 md:hidden bg-[var(--void-bg-primary)]/95 backdrop-blur-sm border-b border-[var(--void-border-base)] safe-area-top">
+        <div className="flex items-center justify-between h-14 px-4">
+          {/* Left: Avatar */}
+          <SmartLink href="/cloud09" title="个人页" className="flex-shrink-0">
+            <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-[var(--void-accent-yellow)] hover:border-blue-500 transition-colors">
+              <img 
+                src={AVATAR_URL}
+                alt="Avatar"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </SmartLink>
+
+          {/* Center: Site Title (Optional) */}
+          <SmartLink href="/" className="text-sm font-bold text-[var(--void-text-primary)] uppercase tracking-wider">
+            {siteConfig('AUTHOR') || 'Cloud'}
+          </SmartLink>
+
+          {/* Right: Hamburger Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`flex flex-col items-center justify-center flex-1 h-full py-2 transition-colors ${
-              isMenuOpen ? 'text-blue-500' : 'text-[var(--void-text-muted)]'
-            }`}
+            className="w-9 h-9 flex flex-col items-center justify-center gap-1.5 transition-all"
+            aria-label="Toggle Menu"
           >
-            <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'} text-lg`} />
-            <span className="text-[10px] mt-1 font-medium">Menu</span>
+            <span 
+              className={`w-5 h-0.5 bg-[var(--void-text-primary)] transition-all duration-300 ${
+                isMenuOpen ? 'rotate-45 translate-y-2' : ''
+              }`}
+            />
+            <span 
+              className={`w-5 h-0.5 bg-[var(--void-text-primary)] transition-all duration-300 ${
+                isMenuOpen ? 'opacity-0' : ''
+              }`}
+            />
+            <span 
+              className={`w-5 h-0.5 bg-[var(--void-text-primary)] transition-all duration-300 ${
+                isMenuOpen ? '-rotate-45 -translate-y-2' : ''
+              }`}
+            />
           </button>
         </div>
       </nav>
 
-      {/* Menu Overlay */}
-      {isMenuOpen && (
-        <div 
-          className="fixed inset-0 bg-black/50 z-40 md:hidden"
-          onClick={() => setIsMenuOpen(false)}
-        />
-      )}
-
-      {/* Slide-up Menu Panel */}
+      {/* Full Screen Menu Overlay */}
       <div 
-        className={`fixed bottom-16 left-0 right-0 z-40 md:hidden bg-[var(--void-bg-primary)] border-t border-[var(--void-border-base)] rounded-t-2xl transition-transform duration-300 ${
-          isMenuOpen ? 'translate-y-0' : 'translate-y-full'
+        className={`fixed inset-0 z-40 md:hidden bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+          isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
-        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+        onClick={() => setIsMenuOpen(false)}
+      />
+
+      {/* Slide-in Menu Panel */}
+      <div 
+        className={`fixed top-14 right-0 bottom-0 w-72 max-w-[80vw] z-40 md:hidden bg-[var(--void-bg-primary)] border-l border-[var(--void-border-base)] transition-transform duration-300 ease-out overflow-y-auto ${
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
       >
-        {/* Extra Navigation */}
-        <div className="p-4 border-b border-[var(--void-border-base)]">
-          <p className="text-xs font-mono text-[var(--void-text-muted)] mb-3 uppercase">Navigation</p>
-          <div className="grid grid-cols-3 gap-3">
-            {extraItems.map(item => (
-              <SmartLink
-                key={item.name}
-                href={item.path}
-                className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-all ${
-                  activeTab === item.name
-                    ? 'border-blue-500 bg-blue-50 text-blue-500'
-                    : 'border-[var(--void-border-base)] text-[var(--void-text-secondary)] hover:border-blue-400'
-                }`}
-              >
-                <i className={`${item.icon} text-lg mb-1`} />
-                <span className="text-xs">{item.name}</span>
-              </SmartLink>
-            ))}
-          </div>
+        {/* User Info Section */}
+        <div className="p-5 border-b border-[var(--void-border-base)]">
+          <SmartLink href="/cloud09" className="flex items-center gap-3 group">
+            <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--void-accent-yellow)] group-hover:border-blue-500 transition-colors">
+              <img 
+                src={AVATAR_URL}
+                alt="Avatar"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <div className="text-sm font-bold text-[var(--void-text-primary)] group-hover:text-blue-500 transition-colors">
+                {siteConfig('AUTHOR') || 'Cloud'}
+              </div>
+              <div className="text-xs text-[var(--void-text-muted)] line-clamp-1">
+                {siteConfig('BIO') || ''}
+              </div>
+            </div>
+          </SmartLink>
+        </div>
+
+        {/* Navigation Items */}
+        <div className="py-3">
+          <p className="px-5 text-xs font-mono text-[var(--void-text-muted)] mb-2 uppercase tracking-wider">Navigation</p>
+          {menuItems.map(item => (
+            <SmartLink
+              key={item.name}
+              href={item.path}
+              className={`flex items-center gap-4 px-5 py-3 transition-all ${
+                activeTab === item.name
+                  ? 'bg-blue-500/10 text-blue-500 border-r-2 border-blue-500'
+                  : 'text-[var(--void-text-secondary)] hover:bg-[var(--void-bg-secondary)] hover:text-[var(--void-text-primary)]'
+              }`}
+            >
+              <i className={`${item.icon} w-5 text-center`} />
+              <span className="text-sm font-medium">{item.name}</span>
+            </SmartLink>
+          ))}
         </div>
 
         {/* Social Links */}
-        <div className="p-4">
-          <p className="text-xs font-mono text-[var(--void-text-muted)] mb-3 uppercase">Connect</p>
-          <div className="flex items-center gap-4">
+        <div className="p-5 border-t border-[var(--void-border-base)]">
+          <p className="text-xs font-mono text-[var(--void-text-muted)] mb-3 uppercase tracking-wider">Connect</p>
+          <div className="flex items-center gap-3 flex-wrap">
+            {/* Email */}
+            {email && (
+              <a
+                href={`mailto:${email}`}
+                title={email}
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--void-bg-secondary)] text-[var(--void-text-muted)] hover:text-blue-500 hover:bg-blue-500/10 transition-colors"
+              >
+                <i className="fas fa-envelope text-sm" />
+              </a>
+            )}
             {socialLinks.map(social => {
               const url = siteConfig(social.key)
               if (!url) return null
@@ -133,18 +190,26 @@ export const MobileNav = () => {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full border border-[var(--void-border-base)] text-[var(--void-text-muted)] hover:text-blue-500 hover:border-blue-400 transition-colors"
+                  title={social.label}
+                  className="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--void-bg-secondary)] text-[var(--void-text-muted)] hover:text-blue-500 hover:bg-blue-500/10 transition-colors"
                 >
-                  <i className={`${social.icon} text-lg`} />
+                  <i className={`${social.icon} text-sm`} />
                 </a>
               )
             })}
           </div>
         </div>
+
+        {/* Theme Toggle or other utilities could go here */}
+        <div className="p-5 border-t border-[var(--void-border-base)] mt-auto">
+          <div className="text-xs text-[var(--void-text-muted)] font-mono">
+            © {new Date().getFullYear()} {siteConfig('AUTHOR') || 'Cloud'}
+          </div>
+        </div>
       </div>
 
-      {/* Safe area spacer for content */}
-      <div className="h-16 md:hidden" />
+      {/* Top spacer for content */}
+      <div className="h-14 md:hidden" />
     </>
   )
 }
