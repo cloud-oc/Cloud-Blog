@@ -229,8 +229,7 @@ const LayoutSlug = (props) => {
               </div>
 
               {/* Footer of the card */}
-              <div className="mt-12 pt-8 border-t border-[var(--void-border-base)] flex justify-between items-center">
-                 <div className="text-xs text-[var(--void-text-muted)] font-mono">END_OF_RECORD</div>
+              <div className="mt-12 pt-8 border-t border-[var(--void-border-base)] flex justify-end items-center">
                  <ShareBar post={post} />
               </div>
             </div>

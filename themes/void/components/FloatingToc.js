@@ -71,7 +71,7 @@ const FloatingToc = ({ toc }) => {
   }
 
   return (
-    <div className="fixed left-4 top-1/2 -translate-y-1/2 z-40 hidden lg:block">
+    <div className="fixed left-24 top-1/2 -translate-y-1/2 z-40 hidden lg:block">
       {/* Toggle Button */}
       <div 
         className={`absolute left-0 top-1/2 -translate-y-1/2 transition-all duration-300 ${isExpanded ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}

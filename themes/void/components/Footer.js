@@ -13,7 +13,8 @@ export const Footer = ({ title }) => {
       {/* Spectrum Bar Top */}
       <div className="spectrum-bar opacity-30" />
       
-      <div className="container mx-auto px-6 py-8 space-y-4">
+      {/* Use negative margin to offset the sidebar and center content relative to viewport */}
+      <div className="py-8 space-y-4 md:-ml-20">
         {/* Row 1: RSS and Sitemap Links */}
         <div className="flex justify-center items-center gap-6 text-xs font-mono">
           {siteConfig('ENABLE_RSS') && (

@@ -5,7 +5,7 @@ import { useEffect, useState, useCallback } from 'react'
 /**
  * LoadingCover Component - Void Theme Endfield Style
  * 加载动画组件 - 终末地科技风格
- * 左侧垂直进度条，右侧文字显示
+ * 左侧垂直进度条，右侧竖排文字
  */
 const LoadingCover = () => {
   const [isVisible, setIsVisible] = useState(true)
@@ -84,9 +84,9 @@ const LoadingCover = () => {
           setPhase('sweeping')
           setTimeout(() => {
             setPhase('fadeout')
-            setTimeout(() => setIsVisible(false), 500)
-          }, 600)
-        }, 300)
+            setTimeout(() => setIsVisible(false), 400)
+          }, 500)
+        }, 200)
       }, 200)
 
       return () => clearTimeout(completeTimer)
@@ -108,42 +108,31 @@ const LoadingCover = () => {
         <div className="progress-glow" style={{ top: `${progress}%` }} />
       </div>
 
-      {/* Center/Right side - Content */}
-      <div className="content-container">
-        {/* Site Name - Large vertical text */}
-        <div className="site-name-container">
-          <div className="site-name">
-            {siteName.split('').map((char, i) => (
-              <span 
-                key={i} 
-                className="char"
-                style={{ animationDelay: `${i * 0.03}s` }}
-              >
-                {char === '_' ? '_' : char}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom Info */}
-        <div className="bottom-info">
-          <div className="status-line">
-            <span className="status-dot" />
-            <span className="status-text">
-              {phase === 'init' && 'INITIALIZING'}
-              {phase === 'loading' && 'LOADING'}
-              {phase === 'complete' && 'READY'}
-              {phase === 'sweeping' && 'LAUNCHING'}
-              {phase === 'fadeout' && 'WELCOME'}
-            </span>
-          </div>
-          <div className="progress-text">
-            {progress.toString().padStart(3, '0')}%
-          </div>
+      {/* Right side - Vertical Text (rotated 90 degrees) */}
+      <div className="site-name-container">
+        <div className="site-name">
+          {siteName}
         </div>
       </div>
 
-      {/* Sweep overlay - appears after completion */}
+      {/* Bottom Info */}
+      <div className="bottom-info">
+        <div className="status-line">
+          <span className="status-dot" />
+          <span className="status-text">
+            {phase === 'init' && 'INITIALIZING'}
+            {phase === 'loading' && 'LOADING'}
+            {phase === 'complete' && 'READY'}
+            {phase === 'sweeping' && 'LAUNCHING'}
+            {phase === 'fadeout' && 'WELCOME'}
+          </span>
+        </div>
+        <div className="progress-text">
+          {progress.toString().padStart(3, '0')}%
+        </div>
+      </div>
+
+      {/* Sweep overlay - full screen cover from left to right */}
       <div className="sweep-overlay" />
 
       <style jsx>{`
@@ -155,7 +144,6 @@ const LoadingCover = () => {
           height: 100vh;
           background: #0a0a0a;
           z-index: 99999;
-          display: flex;
           overflow: hidden;
         }
 
@@ -189,7 +177,7 @@ const LoadingCover = () => {
         .progress-glow {
           position: absolute;
           left: 0;
-          width: 40px;
+          width: 60px;
           height: 2px;
           background: linear-gradient(90deg, #60a5fa 0%, transparent 100%);
           box-shadow: 0 0 20px #3b82f6, 0 0 40px #3b82f6;
@@ -197,49 +185,39 @@ const LoadingCover = () => {
           transform: translateY(-1px);
         }
 
-        /* Content Container - Right Side */
-        .content-container {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: flex-end;
-          padding: 60px;
-          padding-left: 100px;
-        }
-
+        /* Right side - Vertical Text */
         .site-name-container {
-          flex: 1;
+          position: absolute;
+          right: 0;
+          top: 0;
+          height: 100%;
           display: flex;
           align-items: center;
-          justify-content: flex-end;
+          justify-content: center;
+          padding-right: 40px;
         }
 
         .site-name {
-          font-size: clamp(3rem, 10vw, 8rem);
+          font-size: clamp(1.5rem, 3vw, 2.5rem);
           font-weight: 900;
-          color: #ffffff;
-          letter-spacing: 0.1em;
-          line-height: 1;
-          text-align: right;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: flex-end;
-        }
-
-        .char {
-          opacity: 0;
-          animation: charReveal 0.4s ease forwards;
-          display: inline-block;
+          color: transparent;
+          letter-spacing: 0.3em;
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
+          transform: rotate(180deg);
+          background: linear-gradient(to left, rgba(59, 130, 246, 0.6) 0%, rgba(59, 130, 246, 0.1) 50%, transparent 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          user-select: none;
         }
 
         /* Bottom Info */
         .bottom-info {
+          position: absolute;
+          bottom: 40px;
+          left: 40px;
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          width: 100%;
-          max-width: 400px;
           gap: 40px;
         }
 
@@ -272,7 +250,7 @@ const LoadingCover = () => {
           letter-spacing: 2px;
         }
 
-        /* Sweep Overlay */
+        /* Sweep Overlay - Full screen cover */
         .sweep-overlay {
           position: absolute;
           top: 0;
@@ -280,21 +258,22 @@ const LoadingCover = () => {
           width: 100%;
           height: 100%;
           background: #3b82f6;
-          transform: translateX(-100%);
+          transform: scaleX(0);
+          transform-origin: left;
           pointer-events: none;
         }
 
         .loading-cover.sweeping .sweep-overlay {
-          animation: sweepRight 0.6s ease-in-out forwards;
+          animation: sweepCover 0.5s ease-in-out forwards;
         }
 
         .loading-cover.fadeout {
           opacity: 0;
-          transition: opacity 0.5s ease;
+          transition: opacity 0.4s ease;
         }
 
         .loading-cover.fadeout .sweep-overlay {
-          transform: translateX(100%);
+          transform: scaleX(1);
         }
 
         /* Grid background pattern */
@@ -314,23 +293,12 @@ const LoadingCover = () => {
           content: '';
           position: absolute;
           bottom: 40px;
-          left: 40px;
+          right: 40px;
           width: 60px;
           height: 60px;
-          border-left: 2px solid rgba(59, 130, 246, 0.3);
+          border-right: 2px solid rgba(59, 130, 246, 0.3);
           border-bottom: 2px solid rgba(59, 130, 246, 0.3);
           pointer-events: none;
-        }
-
-        @keyframes charReveal {
-          0% { 
-            opacity: 0; 
-            transform: translateY(30px);
-          }
-          100% { 
-            opacity: 1; 
-            transform: translateY(0);
-          }
         }
 
         @keyframes pulse {
@@ -344,36 +312,31 @@ const LoadingCover = () => {
           }
         }
 
-        @keyframes sweepRight {
+        @keyframes sweepCover {
           0% {
-            transform: translateX(-100%);
+            transform: scaleX(0);
+            transform-origin: left;
           }
           100% {
-            transform: translateX(100%);
+            transform: scaleX(1);
+            transform-origin: left;
           }
         }
 
         /* Mobile responsive */
         @media (max-width: 768px) {
-          .content-container {
-            padding: 40px;
-            padding-left: 40px;
-            align-items: center;
-          }
-
           .site-name-container {
-            justify-content: center;
+            padding-right: 20px;
           }
 
           .site-name {
-            font-size: clamp(2rem, 12vw, 4rem);
-            text-align: center;
-            justify-content: center;
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
           }
 
           .bottom-info {
-            justify-content: center;
-            flex-direction: column;
+            left: 20px;
+            bottom: 20px;
             gap: 20px;
           }
         }
