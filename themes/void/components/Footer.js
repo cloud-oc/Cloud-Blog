@@ -5,7 +5,7 @@ import Social from '@/components/Social'
  * Footer Component - Light Industrial / Endfield Style
  * 页脚组件
  */
-const Footer = ({ title }) => {
+export const Footer = ({ title }) => {
   const d = new Date()
   const y = d.getFullYear()
 
