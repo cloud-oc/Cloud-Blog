@@ -90,7 +90,7 @@ export const SideNav = () => {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Avatar Section - Top of sidebar */}
-      <div className="flex-shrink-0 py-6 flex flex-col items-center border-b border-[var(--void-border-base)]">
+      <div className="flex-shrink-0 py-6 flex flex-col items-center">
         <div className={`transition-all duration-300 ${isHovered ? 'w-20 h-20' : 'w-12 h-12'}`}>
           <img 
             src={AVATAR_URL}
@@ -195,14 +195,40 @@ export const SideNav = () => {
         </div>
       </div>
 
-      {/* Bottom Arrow Toggle - Minimalist style */}
-      <div className="py-4 border-t border-[var(--void-border-base)]">
+      {/* Bottom Toggle Button - Animated Hamburger Style */}
+      <div className="py-4">
         <div className="flex justify-center">
           <div 
-            className="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-[var(--void-accent-yellow)] transition-all duration-300 cursor-pointer"
+            className="group relative w-10 h-10 flex items-center justify-center cursor-pointer transition-all duration-300"
             title={isHovered ? 'Collapse' : 'Expand'}
           >
-            <i className={`fas ${isHovered ? 'fa-chevron-left' : 'fa-chevron-right'} text-sm transition-transform duration-300`} />
+            {/* Background circle with gradient on hover */}
+            <div className="absolute inset-0 rounded-full bg-gray-100 group-hover:bg-gradient-to-br group-hover:from-blue-400 group-hover:to-blue-600 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-blue-500/30" />
+            
+            {/* Animated bars that transform */}
+            <div className="relative z-10 w-5 h-4 flex flex-col justify-between">
+              {/* Top bar */}
+              <span 
+                className={`block h-0.5 bg-gray-400 group-hover:bg-white rounded-full transition-all duration-300 origin-center
+                  ${isHovered ? 'rotate-45 translate-y-[7px]' : ''}
+                `}
+              />
+              {/* Middle bar */}
+              <span 
+                className={`block h-0.5 bg-gray-400 group-hover:bg-white rounded-full transition-all duration-300
+                  ${isHovered ? 'opacity-0 scale-0' : 'opacity-100'}
+                `}
+              />
+              {/* Bottom bar */}
+              <span 
+                className={`block h-0.5 bg-gray-400 group-hover:bg-white rounded-full transition-all duration-300 origin-center
+                  ${isHovered ? '-rotate-45 -translate-y-[7px]' : ''}
+                `}
+              />
+            </div>
+            
+            {/* Pulse ring animation on hover */}
+            <div className="absolute inset-0 rounded-full border-2 border-blue-400 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
           </div>
         </div>
       </div>
