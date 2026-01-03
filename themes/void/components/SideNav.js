@@ -23,6 +23,24 @@ export const SideNav = () => {
     { name: 'Search', icon: 'fas fa-search', path: '/search', show: siteConfig('VOID_MENU_SEARCH', null, CONFIG) }
   ].filter(item => item.show !== false)
 
+  // 社交图标配置 (从 contact.config.js 获取)
+  const socialLinks = [
+    { key: 'CONTACT_GITHUB', icon: 'fab fa-github', label: 'GitHub' },
+    { key: 'CONTACT_TWITTER', icon: 'fab fa-twitter', label: 'Twitter' },
+    { key: 'CONTACT_WEIBO', icon: 'fab fa-weibo', label: '微博' },
+    { key: 'CONTACT_BILIBILI', icon: 'fab fa-bilibili', label: 'Bilibili' },
+    { key: 'CONTACT_TELEGRAM', icon: 'fab fa-telegram', label: 'Telegram' },
+    { key: 'CONTACT_INSTAGRAM', icon: 'fab fa-instagram', label: 'Instagram' },
+    { key: 'CONTACT_YOUTUBE', icon: 'fab fa-youtube', label: 'YouTube' },
+    { key: 'CONTACT_XIAOHONGSHU', icon: 'fas fa-leaf', label: '小红书' },
+    { key: 'CONTACT_LINKEDIN', icon: 'fab fa-linkedin', label: 'LinkedIn' },
+    { key: 'CONTACT_ZHISHIXINGQIU', icon: 'fas fa-star', label: '知识星球' },
+    { key: 'CONTACT_WEHCHAT_PUBLIC', icon: 'fab fa-weixin', label: '微信公众号' },
+  ]
+
+  // 获取邮箱
+  const email = siteConfig('CONTACT_EMAIL')
+
   useEffect(() => {
     // Set active tab based on path
     const path = router.asPath
@@ -35,24 +53,11 @@ export const SideNav = () => {
 
   return (
     <div 
-      className={`fixed left-0 top-0 bottom-0 h-full z-40 hidden md:flex flex-col bg-[var(--void-bg-base)] border-r border-[var(--void-border-base)] transition-all duration-300 ease-in-out ${isHovered ? 'w-64 shadow-2xl' : 'w-20'}`}
+      className={`fixed left-0 top-16 bottom-0 z-40 hidden md:flex flex-col bg-[var(--void-bg-base)] border-r border-[var(--void-border-base)] transition-all duration-300 ease-in-out ${isHovered ? 'w-64 shadow-2xl' : 'w-20'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* 1. Header / Logo Area */}
-      <div className="h-20 flex items-center justify-center relative border-b border-[var(--void-border-base)] bg-[var(--void-bg-primary)]">
-        <div className="w-10 h-10 flex items-center justify-center bg-[var(--void-accent-yellow)] text-black">
-           <i className="fas fa-cube text-xl" />
-        </div>
-        
-        {/* Expanded Title */}
-        <div className={`absolute left-20 top-0 bottom-0 flex flex-col justify-center pl-4 transition-opacity duration-300 whitespace-nowrap overflow-hidden ${isHovered ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-           <h1 className="font-bold text-[var(--void-text-primary)] text-lg uppercase tracking-wider">{siteConfig('TITLE')}</h1>
-           <span className="text-[10px] text-[var(--void-text-muted)] tracking-widest">SYSTEM_V4.0</span>
-        </div>
-      </div>
-
-      {/* 2. Navigation Items */}
+      {/* Navigation Items */}
       <div className="flex-1 py-8 flex flex-col gap-2 overflow-y-auto overflow-x-hidden">
         {menuItems.map((item) => {
           const isActive = activeTab === item.name
@@ -91,37 +96,51 @@ export const SideNav = () => {
         })}
       </div>
 
-      {/* 3. Footer / Author Info (Reveal on Hover) */}
-      <div className={`border-t border-[var(--void-border-base)] bg-[var(--void-bg-secondary)] transition-all duration-300 overflow-hidden ${isHovered ? 'h-auto py-6' : 'h-20 py-0 flex items-center justify-center'}`}>
+      {/* Footer / Contact Links */}
+      <div className={`border-t border-[var(--void-border-base)] bg-[var(--void-bg-secondary)] transition-all duration-300 overflow-hidden ${isHovered ? 'h-auto py-6' : 'h-auto py-4 flex flex-col items-center justify-center gap-2'}`}>
         
         {/* Collapsed State: Simple Status Icon */}
         {!isHovered && (
           <div className="w-10 h-10 rounded bg-[var(--void-bg-tertiary)] flex items-center justify-center text-[var(--void-accent-cyan)] cursor-pointer hover:bg-[var(--void-accent-cyan)] hover:text-white transition-colors">
-            <i className="fas fa-user-astronaut" />
+            <i className="fas fa-link" />
           </div>
         )}
 
-        {/* Expanded State: Full Author Info */}
+        {/* Expanded State: Full Contact Links */}
         <div className={`px-6 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 hidden'}`}>
-           <div className="flex items-center gap-4 mb-4">
-              {siteConfig('AVATAR') && (
-                <img src={siteConfig('AVATAR')} alt="Avatar" className="w-12 h-12 object-cover border border-[var(--void-border-active)]" />
-              )}
-              <div>
-                <div className="text-sm font-bold text-[var(--void-text-primary)]">{siteConfig('AUTHOR')}</div>
-                <div className="text-[10px] text-[var(--void-text-muted)]">OPERATOR_ID: 001</div>
-              </div>
-           </div>
+           <h4 className="text-[var(--void-text-primary)] font-bold text-xs uppercase tracking-widest mb-4 border-b border-[var(--void-border-base)] pb-2 inline-block">
+             Contact
+           </h4>
            
-           <p className="text-xs text-[var(--void-text-secondary)] mb-4 leading-relaxed line-clamp-2">
-             {siteConfig('BIO')}
-           </p>
-
-           {/* Contact / Social Icons */}
-           <div className="flex gap-3 text-[var(--void-text-muted)]">
-              <i className="fab fa-github hover:text-[var(--void-text-primary)] cursor-pointer transition-colors" />
-              <i className="fab fa-twitter hover:text-[var(--void-text-primary)] cursor-pointer transition-colors" />
-              <i className="fas fa-envelope hover:text-[var(--void-text-primary)] cursor-pointer transition-colors" />
+           {/* Email Button */}
+           {email && (
+             <a 
+               href={`mailto:${email}`}
+               className="flex items-center gap-3 h-10 px-3 mb-2 bg-[var(--void-bg-tertiary)] border border-[var(--void-border-base)] hover:border-[var(--void-accent-yellow)] hover:text-[var(--void-accent-yellow)] text-[var(--void-text-secondary)] transition-all rounded-sm"
+             >
+               <i className="fas fa-envelope text-sm" />
+               <span className="text-xs font-mono truncate">{email}</span>
+             </a>
+           )}
+           
+           {/* Social Links */}
+           <div className="flex flex-col gap-2">
+             {socialLinks.map(({ key, icon, label }) => {
+               const url = siteConfig(key)
+               if (!url) return null
+               return (
+                 <a 
+                   key={key}
+                   href={url} 
+                   target="_blank" 
+                   rel="noreferrer" 
+                   className="flex items-center gap-3 h-10 px-3 bg-[var(--void-bg-tertiary)] border border-[var(--void-border-base)] hover:border-[var(--void-accent-yellow)] hover:text-[var(--void-accent-yellow)] text-[var(--void-text-secondary)] transition-all rounded-sm"
+                 >
+                   <i className={`${icon} text-sm`} />
+                   <span className="text-xs font-mono">{label}</span>
+                 </a>
+               )
+             })}
            </div>
         </div>
       </div>
