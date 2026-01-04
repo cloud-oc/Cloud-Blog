@@ -109,7 +109,6 @@ const LoadingCover = () => {
             style={{ height: `${progress}%` }}
           />
         </div>
-        <div className="progress-glow" style={{ top: `${progress}%` }} />
       </div>
 
       {/* Right side - Vertical Text (rotated 90 degrees) */}
@@ -119,8 +118,14 @@ const LoadingCover = () => {
         </div>
       </div>
 
-      {/* Bottom Info */}
-      <div className="bottom-info">
+      {/* Progress Info - 跟随进度条从上往下移动 */}
+      <div 
+        className="progress-info"
+        style={{ top: `${progress}%` }}
+      >
+        <div className="progress-percent">
+          {progress.toString().padStart(3, '0')}%
+        </div>
         <div className="status-line">
           <span className="status-dot" />
           <span className="status-text">
@@ -130,9 +135,6 @@ const LoadingCover = () => {
             {phase === 'sweeping' && 'LAUNCHING'}
             {phase === 'fadeout' && 'WELCOME'}
           </span>
-        </div>
-        <div className="progress-text">
-          {progress.toString().padStart(3, '0')}%
         </div>
       </div>
 
@@ -179,17 +181,6 @@ const LoadingCover = () => {
           box-shadow: 0 0 15px #60a5fa;
         }
 
-        .progress-glow {
-          position: absolute;
-          left: 0;
-          width: 80px;
-          height: 3px;
-          background: linear-gradient(90deg, #93c5fd 0%, transparent 100%);
-          box-shadow: 0 0 30px #60a5fa, 0 0 60px #60a5fa;
-          transition: top 0.15s ease-out;
-          transform: translateY(-1px);
-        }
-
         /* Right side - Vertical Text */
         .site-name-container {
           position: absolute;
@@ -218,25 +209,38 @@ const LoadingCover = () => {
           text-shadow: 0 0 40px rgba(96, 165, 250, 0.3);
         }
 
-        /* Bottom Info */
-        .bottom-info {
+        /* Progress Info - 跟随进度条移动 */
+        .progress-info {
           position: absolute;
-          bottom: 50px;
-          left: 50px;
+          left: 20px;
+          transform: translateY(-100%);
           display: flex;
-          align-items: center;
-          gap: 50px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+          transition: top 0.15s ease-out;
+          padding-bottom: 10px;
+        }
+
+        .progress-percent {
+          font-family: 'Orbitron', 'Rajdhani', 'Share Tech Mono', 'Consolas', monospace;
+          font-size: clamp(36px, 6vw, 56px);
+          font-weight: 700;
+          color: #93c5fd;
+          letter-spacing: 2px;
+          line-height: 1;
+          text-shadow: 0 0 30px rgba(96, 165, 250, 0.5);
         }
 
         .status-line {
           display: flex;
           align-items: center;
-          gap: 16px;
+          gap: 10px;
         }
 
         .status-dot {
-          width: 10px;
-          height: 10px;
+          width: 6px;
+          height: 6px;
           background: #60a5fa;
           border-radius: 50%;
           animation: pulse 1s ease-in-out infinite;
@@ -245,20 +249,11 @@ const LoadingCover = () => {
 
         .status-text {
           font-family: 'Orbitron', 'Rajdhani', 'Share Tech Mono', 'Consolas', monospace;
-          font-size: 16px;
-          font-weight: 600;
-          color: #93c5fd;
-          letter-spacing: 4px;
+          font-size: 11px;
+          font-weight: 500;
+          color: rgba(147, 197, 253, 0.7);
+          letter-spacing: 2px;
           text-transform: uppercase;
-          text-shadow: 0 0 10px rgba(147, 197, 253, 0.5);
-        }
-
-        .progress-text {
-          font-family: 'Orbitron', 'Rajdhani', 'Share Tech Mono', 'Consolas', monospace;
-          font-size: 18px;
-          font-weight: 600;
-          color: rgba(147, 197, 253, 0.8);
-          letter-spacing: 3px;
         }
 
         /* Sweep Overlay - Full screen cover */
@@ -345,19 +340,18 @@ const LoadingCover = () => {
             letter-spacing: 0.3em;
           }
 
-          .bottom-info {
-            left: 25px;
-            bottom: 25px;
-            gap: 30px;
+          .progress-info {
+            left: 15px;
+            gap: 6px;
+          }
+
+          .progress-percent {
+            font-size: 28px;
           }
 
           .status-text {
-            font-size: 14px;
-            letter-spacing: 3px;
-          }
-
-          .progress-text {
-            font-size: 16px;
+            font-size: 9px;
+            letter-spacing: 1px;
           }
         }
       `}</style>
