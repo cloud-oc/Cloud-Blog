@@ -376,13 +376,11 @@ export const Style = () => {
       
       /* Player container styling */
       .void-player-full {
-        background: linear-gradient(135deg, var(--void-bg-secondary) 0%, var(--void-bg-base) 100%);
-        border-top: 1px solid var(--void-border-base);
-        border-bottom: 1px solid var(--void-border-base);
+        background: transparent;
       }
       
       .void-player-mini {
-        border-top: 1px solid var(--void-border-base);
+        /* No borders - clean sidebar design */
       }
     `}</style>
   )

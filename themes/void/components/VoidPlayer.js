@@ -2,9 +2,9 @@ import { useState, useEffect, useRef } from 'react'
 import { siteConfig } from '@/lib/config'
 
 /**
- * VoidPlayer Component - Sci-Fi Music Player for Void Theme
+ * VoidPlayer Component - Compact Sci-Fi Music Player for Void Theme
  * Integrates with widget.config.js settings
- * Has two states: expanded (full info) and collapsed (mini cover)
+ * Has two states: expanded (full info) and collapsed (music icon)
  */
 export const VoidPlayer = ({ isExpanded }) => {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -12,13 +12,13 @@ export const VoidPlayer = ({ isExpanded }) => {
   const [progress, setProgress] = useState(0)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
+  const [showPlaylist, setShowPlaylist] = useState(false)
   const audioRef = useRef(null)
   const progressIntervalRef = useRef(null)
 
   // Get configuration from widget.config.js
   const musicPlayerEnabled = siteConfig('MUSIC_PLAYER')
   const musicPlayerVisible = siteConfig('MUSIC_PLAYER_VISIBLE')
-  const autoPlay = siteConfig('MUSIC_PLAYER_AUTO_PLAY')
   const playOrder = siteConfig('MUSIC_PLAYER_ORDER')
   const audioList = siteConfig('MUSIC_PLAYER_AUDIO_LIST') || []
 
@@ -92,6 +92,13 @@ export const VoidPlayer = ({ isExpanded }) => {
     }
   }, [isPlaying])
 
+  // Close playlist when sidebar collapses
+  useEffect(() => {
+    if (!isExpanded) {
+      setShowPlaylist(false)
+    }
+  }, [isExpanded])
+
   const handleTrackEnd = () => {
     if (playOrder === 'random') {
       const randomIndex = Math.floor(Math.random() * audioList.length)
@@ -101,7 +108,8 @@ export const VoidPlayer = ({ isExpanded }) => {
     }
   }
 
-  const togglePlay = () => {
+  const togglePlay = (e) => {
+    e.stopPropagation()
     if (!audioRef.current) return
     
     if (isPlaying) {
@@ -112,17 +120,15 @@ export const VoidPlayer = ({ isExpanded }) => {
     setIsPlaying(!isPlaying)
   }
 
-  const playNext = () => {
-    if (playOrder === 'random') {
-      const randomIndex = Math.floor(Math.random() * audioList.length)
-      setCurrentTrack(randomIndex)
-    } else {
-      setCurrentTrack((prev) => (prev + 1) % audioList.length)
+  const selectTrack = (index) => {
+    setCurrentTrack(index)
+    setShowPlaylist(false)
+    if (!isPlaying) {
+      setTimeout(() => {
+        audioRef.current?.play().catch(e => console.log('Play prevented:', e))
+        setIsPlaying(true)
+      }, 100)
     }
-  }
-
-  const playPrev = () => {
-    setCurrentTrack((prev) => (prev - 1 + audioList.length) % audioList.length)
   }
 
   const handleProgressClick = (e) => {
@@ -141,55 +147,46 @@ export const VoidPlayer = ({ isExpanded }) => {
     return `${mins}:${secs.toString().padStart(2, '0')}`
   }
 
-  // Collapsed State: Mini circular cover with play button
+  // Collapsed State: Music icon with play indicator
   if (!isExpanded) {
     return (
-      <div className="void-player-mini flex justify-center py-3">
+      <div className="void-player-mini flex justify-center py-2">
         <div 
-          className={`relative w-12 h-12 cursor-pointer group ${isPlaying ? 'void-player-rotating' : ''}`}
+          className={`relative w-10 h-10 cursor-pointer group flex items-center justify-center`}
           onClick={togglePlay}
         >
-          {/* Album Cover */}
-          <div className="w-full h-full rounded-full overflow-hidden border-2 border-[var(--void-accent-yellow)] shadow-lg void-player-glow">
-            <img 
-              src={currentAudio.cover || '/default-cover.jpg'} 
-              alt="Cover"
-              className="w-full h-full object-cover"
-            />
+          {/* Music Icon */}
+          <div className={`w-full h-full rounded-lg flex items-center justify-center bg-[var(--void-bg-secondary)] transition-all ${isPlaying ? 'text-[var(--void-accent-yellow)]' : 'text-[var(--void-text-muted)]'} hover:text-[var(--void-accent-yellow)] hover:bg-[var(--void-accent-yellow-dim)]`}>
+            <i className={`fas ${isPlaying ? 'fa-pause' : 'fa-music'} text-base`} />
           </div>
-          {/* Play/Pause Overlay */}
-          <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-            <i className={`fas ${isPlaying ? 'fa-pause' : 'fa-play'} text-white text-sm`} />
-          </div>
-          {/* Playing Indicator Ring */}
+          {/* Playing Indicator - subtle pulse */}
           {isPlaying && (
-            <div className="absolute -inset-1 rounded-full border border-[var(--void-accent-yellow)] opacity-50 void-player-pulse" />
+            <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-[var(--void-accent-yellow)] rounded-full void-player-pulse" />
           )}
         </div>
       </div>
     )
   }
 
-  // Expanded State: Full player with all controls
+  // Expanded State: Compact player with album cover as play button
   return (
-    <div className="void-player-full px-3 py-4">
-      {/* Header */}
-      <div className="flex items-center gap-1 mb-3">
-        <i className="fas fa-music text-[var(--void-accent-yellow)] text-xs" />
-        <span className="text-[var(--void-text-muted)] font-mono text-[10px] tracking-widest uppercase">
-          NOW PLAYING
-        </span>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex gap-3">
-        {/* Album Cover */}
-        <div className={`flex-shrink-0 w-14 h-14 rounded overflow-hidden border border-[var(--void-border-base)] void-player-glow ${isPlaying ? 'void-player-rotating-slow' : ''}`}>
+    <div className="void-player-full px-3 py-3 relative">
+      {/* Main Content Row */}
+      <div className="flex gap-3 items-center">
+        {/* Album Cover with integrated play button */}
+        <div 
+          className={`relative flex-shrink-0 w-12 h-12 rounded cursor-pointer overflow-hidden group ${isPlaying ? 'void-player-glow' : ''}`}
+          onClick={togglePlay}
+        >
           <img 
             src={currentAudio.cover || '/default-cover.jpg'} 
             alt="Album Cover"
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover transition-transform duration-300 ${isPlaying ? 'scale-105' : ''}`}
           />
+          {/* Play/Pause Overlay */}
+          <div className={`absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+            <i className={`fas ${isPlaying ? 'fa-pause' : 'fa-play'} text-white text-sm ${!isPlaying ? 'ml-0.5' : ''}`} />
+          </div>
         </div>
 
         {/* Track Info */}
@@ -200,63 +197,61 @@ export const VoidPlayer = ({ isExpanded }) => {
           <div className="text-xs text-[var(--void-text-muted)] truncate mt-0.5">
             {currentAudio.artist || 'Unknown Artist'}
           </div>
-        </div>
-      </div>
-
-      {/* Progress Bar */}
-      <div className="mt-3">
-        <div 
-          className="h-1 bg-[var(--void-bg-tertiary)] rounded-full cursor-pointer overflow-hidden group"
-          onClick={handleProgressClick}
-        >
-          <div 
-            className="h-full bg-gradient-to-r from-[var(--void-accent-yellow)] to-[var(--void-accent-cyan)] transition-all duration-200 relative"
-            style={{ width: `${progress}%` }}
-          >
-            {/* Glowing tip */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-[var(--void-accent-yellow)] rounded-full shadow-[0_0_8px_var(--void-accent-yellow)] opacity-0 group-hover:opacity-100 transition-opacity" />
+          {/* Progress Bar */}
+          <div className="mt-1.5 flex items-center gap-2">
+            <div 
+              className="flex-1 h-1 bg-[var(--void-bg-tertiary)] rounded-full cursor-pointer overflow-hidden"
+              onClick={handleProgressClick}
+            >
+              <div 
+                className="h-full bg-[var(--void-accent-yellow)] transition-all duration-200"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <span className="text-[9px] font-mono text-[var(--void-text-muted)] w-8 text-right">
+              {formatTime(currentTime)}
+            </span>
           </div>
         </div>
-        <div className="flex justify-between mt-1">
-          <span className="text-[10px] font-mono text-[var(--void-text-muted)]">
-            {formatTime(currentTime)}
-          </span>
-          <span className="text-[10px] font-mono text-[var(--void-text-muted)]">
-            {formatTime(duration)}
-          </span>
+
+        {/* Playlist Toggle Button */}
+        <button 
+          onClick={(e) => { e.stopPropagation(); setShowPlaylist(!showPlaylist) }}
+          className={`w-7 h-7 flex items-center justify-center rounded transition-colors ${showPlaylist ? 'bg-[var(--void-accent-yellow)] text-white' : 'text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] hover:bg-[var(--void-accent-yellow-dim)]'}`}
+          title="Playlist"
+        >
+          <i className="fas fa-list text-xs" />
+        </button>
+      </div>
+
+      {/* Playlist Dropdown */}
+      {showPlaylist && (
+        <div className="mt-2 max-h-40 overflow-y-auto bg-[var(--void-bg-secondary)] rounded">
+          {audioList.map((audio, index) => (
+            <div 
+              key={index}
+              onClick={() => selectTrack(index)}
+              className={`px-3 py-2 cursor-pointer flex items-center gap-2 text-xs transition-colors ${
+                index === currentTrack 
+                  ? 'bg-[var(--void-accent-yellow-dim)] text-[var(--void-accent-yellow)]' 
+                  : 'text-[var(--void-text-secondary)] hover:bg-[var(--void-bg-tertiary)]'
+              }`}
+            >
+              {index === currentTrack && isPlaying && (
+                <i className="fas fa-volume-up text-[10px]" />
+              )}
+              {index === currentTrack && !isPlaying && (
+                <i className="fas fa-pause text-[10px]" />
+              )}
+              {index !== currentTrack && (
+                <span className="w-3 text-center font-mono text-[10px] text-[var(--void-text-muted)]">{index + 1}</span>
+              )}
+              <span className="truncate flex-1">{audio.name}</span>
+              <span className="text-[var(--void-text-muted)]">{audio.artist}</span>
+            </div>
+          ))}
         </div>
-      </div>
-
-      {/* Controls */}
-      <div className="flex items-center justify-center gap-4 mt-3">
-        <button 
-          onClick={playPrev}
-          className="w-8 h-8 flex items-center justify-center text-[var(--void-text-secondary)] hover:text-[var(--void-accent-yellow)] transition-colors"
-        >
-          <i className="fas fa-step-backward text-sm" />
-        </button>
-        
-        <button 
-          onClick={togglePlay}
-          className="w-10 h-10 flex items-center justify-center bg-[var(--void-accent-yellow)] text-white rounded-full hover:scale-105 transition-transform shadow-lg void-player-btn-glow"
-        >
-          <i className={`fas ${isPlaying ? 'fa-pause' : 'fa-play'} text-sm ${!isPlaying ? 'ml-0.5' : ''}`} />
-        </button>
-        
-        <button 
-          onClick={playNext}
-          className="w-8 h-8 flex items-center justify-center text-[var(--void-text-secondary)] hover:text-[var(--void-accent-yellow)] transition-colors"
-        >
-          <i className="fas fa-step-forward text-sm" />
-        </button>
-      </div>
-
-      {/* Track Counter */}
-      <div className="text-center mt-2">
-        <span className="text-[10px] font-mono text-[var(--void-text-muted)]">
-          {currentTrack + 1} / {audioList.length}
-        </span>
-      </div>
+      )}
     </div>
   )
 }
