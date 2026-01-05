@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import SmartLink from '@/components/SmartLink'
 import { siteConfig } from '@/lib/config'
+import VoidPlayer from './VoidPlayer'
 import CONFIG from '../config'
 
 /**
@@ -80,7 +81,7 @@ export const MobileNav = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 md:hidden bg-[var(--void-bg-primary)]/95 backdrop-blur-sm border-b border-[var(--void-border-base)] safe-area-top">
         <div className="flex items-center justify-between h-14 px-4">
           {/* Left: Avatar */}
-          <SmartLink href="/cloud09" title="个人页" className="flex-shrink-0">
+          <SmartLink href="/cloud09" title="个人页" className="flex-shrink-0 flex items-center">
             <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-[var(--void-accent-yellow)] hover:border-blue-500 transition-colors">
               <img 
                 src={AVATAR_URL}
@@ -146,6 +147,12 @@ export const MobileNav = () => {
               <span className="text-sm font-medium">{item.name}</span>
             </SmartLink>
           ))}
+        </div>
+
+        {/* Music Player */}
+        <div className="p-5 border-t border-[var(--void-border-base)]">
+          <p className="text-xs font-mono text-[var(--void-text-muted)] mb-3 uppercase tracking-wider">Music</p>
+          <VoidPlayer isExpanded={true} />
         </div>
 
         {/* Social Links */}
