@@ -1,6 +1,6 @@
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 
 /**
  * LoadingCover Component - Void Theme Endfield Style
@@ -11,9 +11,10 @@ const LoadingCover = () => {
   const [isVisible, setIsVisible] = useState(true)
   const [progress, setProgress] = useState(0)
   const [phase, setPhase] = useState('init') // init, loading, complete, sweeping, fadeout
-  const [resourcesLoaded, setResourcesLoaded] = useState(false)
   const siteName = 'CLOUD09_SPACE'
   const { onLoading } = useGlobal()
+  const startTimeRef = useRef(Date.now())
+  const hasCompletedRef = useRef(false)
 
   // Track real page loading progress
   const updateProgress = useCallback(() => {
@@ -28,16 +29,19 @@ const LoadingCover = () => {
     
     let calculatedProgress = 0
     
-    if (readyState === 'loading') calculatedProgress += 20
+    // Document ready state (0-50%)
+    if (readyState === 'loading') calculatedProgress += 15
     else if (readyState === 'interactive') calculatedProgress += 35
-    else if (readyState === 'complete') calculatedProgress += 40
+    else if (readyState === 'complete') calculatedProgress += 50
     
+    // Image loading (0-30%)
     if (totalImages > 0) {
-      calculatedProgress += (loadedImages / totalImages) * 40
+      calculatedProgress += (loadedImages / totalImages) * 30
     } else {
-      calculatedProgress += 40
+      calculatedProgress += 30
     }
     
+    // Global loading state from app (0-20%)
     if (!onLoading) calculatedProgress += 20
     
     return Math.min(Math.round(calculatedProgress), 100)
@@ -47,39 +51,59 @@ const LoadingCover = () => {
     // Prevent scrollbar on body during loading
     document.body.style.overflow = 'hidden'
     
-    const initTimer = setTimeout(() => setPhase('loading'), 200)
+    const initTimer = setTimeout(() => setPhase('loading'), 150)
 
     const progressInterval = setInterval(() => {
+      if (hasCompletedRef.current) return
+      
       const newProgress = updateProgress()
+      const elapsed = Date.now() - startTimeRef.current
+      
       setProgress(prev => {
-        const smoothProgress = Math.max(prev, newProgress)
-        if (smoothProgress < 95 && smoothProgress === prev) {
-          return Math.min(prev + 1, 95)
+        // Always allow progress to increase based on real calculation
+        if (newProgress > prev) {
+          return newProgress
         }
-        return smoothProgress
+        
+        // If stuck, slowly increment based on time elapsed
+        // But only if we haven't reached the target yet
+        if (prev < newProgress) {
+          return Math.min(prev + 2, newProgress)
+        }
+        
+        // If document is complete and no loading, allow reaching 100
+        if (document.readyState === 'complete' && !onLoading && prev < 100) {
+          return Math.min(prev + 3, 100)
+        }
+        
+        // Slow increment if truly stuck (safety net)
+        if (elapsed > 2000 && prev < 100) {
+          return Math.min(prev + 1, 100)
+        }
+        
+        return prev
       })
-    }, 100)
+    }, 80)
 
-    const handleLoad = () => setResourcesLoaded(true)
-
-    if (document.readyState === 'complete') {
-      setResourcesLoaded(true)
-    } else {
-      window.addEventListener('load', handleLoad)
-    }
+    // Fallback: force complete after max wait time (3.5 seconds)
+    const maxWaitTimer = setTimeout(() => {
+      if (!hasCompletedRef.current) {
+        setProgress(100)
+      }
+    }, 3500)
 
     return () => {
       clearTimeout(initTimer)
+      clearTimeout(maxWaitTimer)
       clearInterval(progressInterval)
-      window.removeEventListener('load', handleLoad)
       document.body.style.overflow = ''
     }
-  }, [updateProgress])
+  }, [updateProgress, onLoading])
 
-  // Complete loading sequence
+  // Complete loading sequence when progress reaches 100
   useEffect(() => {
-    if (resourcesLoaded && !onLoading && progress >= 80) {
-      setProgress(100)
+    if (progress >= 100 && !hasCompletedRef.current) {
+      hasCompletedRef.current = true
       
       const completeTimer = setTimeout(() => {
         setPhase('complete')
@@ -90,12 +114,12 @@ const LoadingCover = () => {
             setPhase('fadeout')
             setTimeout(() => setIsVisible(false), 400)
           }, 500)
-        }, 200)
-      }, 200)
+        }, 150)
+      }, 100)
 
       return () => clearTimeout(completeTimer)
     }
-  }, [resourcesLoaded, onLoading, progress])
+  }, [progress])
 
   if (!isVisible) return null
 
