@@ -18,8 +18,10 @@ export const VoidPlayer = ({ isExpanded }) => {
 
   // Get configuration from widget.config.js
   const musicPlayerEnabled = siteConfig('MUSIC_PLAYER')
+  const autoPlay = JSON.parse(siteConfig('MUSIC_PLAYER_AUTO_PLAY') || 'false')
   const playOrder = siteConfig('MUSIC_PLAYER_ORDER')
   const audioList = siteConfig('MUSIC_PLAYER_AUDIO_LIST') || []
+  const hasInitializedRef = useRef(false)
 
   // Don't render if disabled or no audio
   if (!musicPlayerEnabled || audioList.length === 0) {
@@ -54,19 +56,36 @@ export const VoidPlayer = ({ isExpanded }) => {
     }
   }, [])
 
-  // Load track when currentTrack changes
+  // Load track when currentTrack changes - always auto-play when switching
   useEffect(() => {
     if (audioRef.current && currentAudio.url) {
-      const wasPlaying = isPlaying
       audioRef.current.src = currentAudio.url
       audioRef.current.load()
       setProgress(0)
       setCurrentTime(0)
-      if (wasPlaying) {
+      
+      // Auto-play when switching tracks (if already initialized)
+      if (hasInitializedRef.current) {
         audioRef.current.play().catch(e => console.log('Autoplay prevented:', e))
+        setIsPlaying(true)
       }
     }
   }, [currentTrack, currentAudio.url])
+
+  // Auto-play on initial load based on config
+  useEffect(() => {
+    if (!hasInitializedRef.current && audioRef.current && currentAudio.url && autoPlay) {
+      hasInitializedRef.current = true
+      // Small delay to ensure audio is ready
+      const timer = setTimeout(() => {
+        audioRef.current?.play().catch(e => console.log('Initial autoplay prevented:', e))
+        setIsPlaying(true)
+      }, 500)
+      return () => clearTimeout(timer)
+    } else if (!hasInitializedRef.current && audioRef.current && currentAudio.url) {
+      hasInitializedRef.current = true
+    }
+  }, [currentAudio.url, autoPlay])
 
   // Progress update
   useEffect(() => {
