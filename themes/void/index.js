@@ -24,6 +24,7 @@ import TitleBar from './components/TitleBar'
 import FloatingToc from './components/FloatingToc'
 import LoadingCover from './components/LoadingCover'
 import MobileNav from './components/MobileNav'
+import useViewportScale from './components/useViewportScale'
 import CONFIG from './config'
 import { Style } from './style'
 
@@ -46,6 +47,15 @@ const LayoutBase = (props) => {
 
   // 加载动画
   const LOADING_COVER = siteConfig('VOID_LOADING_COVER', true, CONFIG)
+
+  // 视口等比缩放 - Endfield风格
+  useViewportScale({
+    desktopBase: { width: 1920, height: 1080 },
+    mobileBase: { width: 750 },
+    baseFontSize: 16,
+    minScale: 0.5,
+    maxScale: 1.5
+  })
 
   return (
     <div

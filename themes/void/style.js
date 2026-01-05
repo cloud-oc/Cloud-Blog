@@ -38,6 +38,26 @@ export const Style = () => {
         /* Shadow / Glass */
         --void-shadow-base: 0 1px 3px rgba(0,0,0,0.05);
         --void-shadow-hover: 0 10px 30px rgba(0,0,0,0.08);
+        
+        /* Viewport Scaling - Set dynamically by useViewportScale hook */
+        --void-viewport-scale: 1;
+        --void-base-font-size: 16px;
+      }
+
+      /* ============================================
+         Viewport Scaling Base
+         ============================================ */
+      html {
+        /* CSS fallback for viewport scaling when JS not loaded */
+        /* Desktop: scale based on viewport width relative to 1920px base */
+        font-size: clamp(10px, calc(16px * (100vw / 1920)), 24px);
+      }
+      
+      /* Portrait/Mobile orientation: different scaling base */
+      @media (orientation: portrait), (max-width: 767px) {
+        html {
+          font-size: clamp(10px, calc(16px * (100vw / 750)), 24px);
+        }
       }
 
       /* ============================================
