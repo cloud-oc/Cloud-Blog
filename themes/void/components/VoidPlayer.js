@@ -199,7 +199,7 @@ export const VoidPlayer = ({ isExpanded }) => {
   return (
     <div className="void-player-full px-3 py-3 relative">
       {/* Main Content Row */}
-      <div className="flex gap-3 items-center">
+      <div className="flex gap-3 items-start">
         {/* Album Cover with integrated play button */}
         <div 
           className={`relative flex-shrink-0 w-12 h-12 rounded cursor-pointer overflow-hidden group ${isPlaying ? 'void-player-glow' : ''}`}
@@ -241,73 +241,71 @@ export const VoidPlayer = ({ isExpanded }) => {
           </div>
         </div>
 
-        {/* Playlist Toggle Button */}
-        <button 
-          onClick={(e) => { e.stopPropagation(); setShowPlaylist(!showPlaylist) }}
-          className={`w-7 h-7 flex items-center justify-center rounded transition-colors ${showPlaylist ? 'bg-[var(--void-accent-yellow)] text-white' : 'text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] hover:bg-[var(--void-accent-yellow-dim)]'}`}
-          title="Playlist"
-        >
-          <i className="fas fa-list text-xs" />
-        </button>
+        {/* Right side: Playlist button + Prev/Next buttons */}
+        <div className="flex flex-col items-center gap-1">
+          {/* Playlist Toggle Button */}
+          <button 
+            onClick={(e) => { e.stopPropagation(); setShowPlaylist(!showPlaylist) }}
+            className={`w-6 h-6 flex items-center justify-center rounded transition-colors ${showPlaylist ? 'bg-[var(--void-accent-yellow)] text-white' : 'text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)]'}`}
+            title="Playlist"
+          >
+            <i className="fas fa-list text-[10px]" />
+          </button>
+          
+          {/* Prev/Next Buttons (horizontal) */}
+          <div className="flex items-center gap-0.5">
+            <button 
+              onClick={playPrev}
+              className="w-5 h-5 flex items-center justify-center text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] transition-colors"
+              title="Previous"
+            >
+              <i className="fas fa-step-backward text-[9px]" />
+            </button>
+            <button 
+              onClick={playNext}
+              className="w-5 h-5 flex items-center justify-center text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] transition-colors"
+              title="Next"
+            >
+              <i className="fas fa-step-forward text-[9px]" />
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Playlist Dropdown */}
       {showPlaylist && (
-        <div className="mt-2">
-          <div className="max-h-36 overflow-y-auto bg-[var(--void-bg-secondary)] rounded">
-            {audioList.map((audio, index) => (
-              <div 
-                key={index}
-                onClick={() => selectTrack(index)}
-                className={`px-3 py-1.5 cursor-pointer transition-colors ${
-                  index === currentTrack 
-                    ? 'bg-[var(--void-accent-yellow-dim)]' 
-                    : 'hover:bg-[var(--void-bg-tertiary)]'
-                }`}
-              >
-                {/* Song name line */}
-                <div className={`text-xs truncate flex items-center gap-1.5 ${
-                  index === currentTrack ? 'text-[var(--void-accent-yellow)] font-medium' : 'text-[var(--void-text-secondary)]'
-                }`}>
-                  {index === currentTrack && isPlaying && (
-                    <i className="fas fa-volume-up text-[9px] flex-shrink-0" />
-                  )}
-                  {index === currentTrack && !isPlaying && (
-                    <i className="fas fa-pause text-[9px] flex-shrink-0" />
-                  )}
-                  {index !== currentTrack && (
-                    <span className="w-3 text-center font-mono text-[9px] text-[var(--void-text-muted)] flex-shrink-0">{index + 1}</span>
-                  )}
-                  <span className="truncate">{audio.name}</span>
-                </div>
-                {/* Artist name line (smaller) */}
-                <div className="text-[10px] text-[var(--void-text-muted)] truncate pl-4 mt-0.5">
-                  {audio.artist}
-                </div>
+        <div className="mt-2 max-h-36 overflow-y-auto bg-[var(--void-bg-secondary)] rounded">
+          {audioList.map((audio, index) => (
+            <div 
+              key={index}
+              onClick={() => selectTrack(index)}
+              className={`px-3 py-1.5 cursor-pointer transition-colors ${
+                index === currentTrack 
+                  ? 'bg-[var(--void-accent-yellow-dim)]' 
+                  : 'hover:bg-[var(--void-bg-tertiary)]'
+              }`}
+            >
+              {/* Song name line */}
+              <div className={`text-xs truncate flex items-center gap-1.5 ${
+                index === currentTrack ? 'text-[var(--void-accent-yellow)] font-medium' : 'text-[var(--void-text-secondary)]'
+              }`}>
+                {index === currentTrack && isPlaying && (
+                  <i className="fas fa-volume-up text-[9px] flex-shrink-0" />
+                )}
+                {index === currentTrack && !isPlaying && (
+                  <i className="fas fa-pause text-[9px] flex-shrink-0" />
+                )}
+                {index !== currentTrack && (
+                  <span className="w-3 text-center font-mono text-[9px] text-[var(--void-text-muted)] flex-shrink-0">{index + 1}</span>
+                )}
+                <span className="truncate">{audio.name}</span>
               </div>
-            ))}
-          </div>
-          
-          {/* Prev/Next buttons below playlist */}
-          <div className="flex items-center justify-center gap-3 mt-2 pt-2 border-t border-[var(--void-border-base)]">
-            <button 
-              onClick={playPrev}
-              className="w-7 h-7 flex items-center justify-center text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] transition-colors"
-              title="Previous"
-            >
-              <i className="fas fa-step-backward text-xs" />
-            </button>
-            <span className="text-[10px] font-mono text-[var(--void-text-muted)]">
-              {currentTrack + 1} / {audioList.length}
-            </span>
-            <button 
-              onClick={playNext}
-              className="w-7 h-7 flex items-center justify-center text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] transition-colors"
-              title="Next"
-            >
-              <i className="fas fa-step-forward text-xs" />
-            </button>
-          </div>
+              {/* Artist name line (smaller) */}
+              <div className="text-[10px] text-[var(--void-text-muted)] truncate pl-4 mt-0.5">
+                {audio.artist}
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
