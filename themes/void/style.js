@@ -326,6 +326,64 @@ export const Style = () => {
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
+
+      /* ============================================
+         VoidPlayer Styles - Sci-Fi Music Player
+         ============================================ */
+      
+      /* Rotating album cover animation */
+      @keyframes void-rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      
+      .void-player-rotating {
+        animation: void-rotate 8s linear infinite;
+      }
+      
+      .void-player-rotating-slow {
+        animation: void-rotate 20s linear infinite;
+      }
+      
+      /* Pulse animation for playing indicator */
+      @keyframes void-pulse {
+        0%, 100% { opacity: 0.3; transform: scale(1); }
+        50% { opacity: 0.6; transform: scale(1.05); }
+      }
+      
+      .void-player-pulse {
+        animation: void-pulse 2s ease-in-out infinite;
+      }
+      
+      /* Glow effect for album cover */
+      .void-player-glow {
+        box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        transition: box-shadow 0.3s ease;
+      }
+      
+      .void-player-glow:hover {
+        box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
+      }
+      
+      /* Play button glow */
+      .void-player-btn-glow {
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+      }
+      
+      .void-player-btn-glow:hover {
+        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+      }
+      
+      /* Player container styling */
+      .void-player-full {
+        background: linear-gradient(135deg, var(--void-bg-secondary) 0%, var(--void-bg-base) 100%);
+        border-top: 1px solid var(--void-border-base);
+        border-bottom: 1px solid var(--void-border-base);
+      }
+      
+      .void-player-mini {
+        border-top: 1px solid var(--void-border-base);
+      }
     `}</style>
   )
 }

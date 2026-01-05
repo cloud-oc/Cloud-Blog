@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import SmartLink from '@/components/SmartLink'
 import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
+import { VoidPlayer } from './VoidPlayer'
 
 /**
  * SideNav Component - Endfield Intelligent Sidebar
@@ -152,6 +153,9 @@ export const SideNav = () => {
           )
         })}
       </div>
+
+      {/* Music Player Section - Above Contact Links */}
+      <VoidPlayer isExpanded={isHovered} />
 
       {/* Contact Links Section - Above arrow */}
       <div className="py-3 transition-all duration-300">

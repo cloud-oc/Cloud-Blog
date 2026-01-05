@@ -124,7 +124,7 @@ const LoadingCover = () => {
         style={{ top: `${progress}%` }}
       >
         <div className="progress-percent">
-          {progress.toString().padStart(3, '0')}%
+          {progress}%
         </div>
         <div className="status-line">
           <span className="status-dot" />
