@@ -18,12 +18,11 @@ export const VoidPlayer = ({ isExpanded }) => {
 
   // Get configuration from widget.config.js
   const musicPlayerEnabled = siteConfig('MUSIC_PLAYER')
-  const musicPlayerVisible = siteConfig('MUSIC_PLAYER_VISIBLE')
   const playOrder = siteConfig('MUSIC_PLAYER_ORDER')
   const audioList = siteConfig('MUSIC_PLAYER_AUDIO_LIST') || []
 
-  // Don't render if disabled
-  if (!musicPlayerEnabled || !musicPlayerVisible || audioList.length === 0) {
+  // Don't render if disabled or no audio
+  if (!musicPlayerEnabled || audioList.length === 0) {
     return null
   }
 
