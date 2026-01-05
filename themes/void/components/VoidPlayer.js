@@ -4,7 +4,7 @@ import { siteConfig } from '@/lib/config'
 /**
  * VoidPlayer Component - Compact Sci-Fi Music Player for Void Theme
  * Integrates with widget.config.js settings
- * Has two states: expanded (full info) and collapsed (music icon)
+ * Has two states: expanded (full info) and collapsed (rotating cover when playing)
  */
 export const VoidPlayer = ({ isExpanded }) => {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -119,6 +119,21 @@ export const VoidPlayer = ({ isExpanded }) => {
     setIsPlaying(!isPlaying)
   }
 
+  const playNext = (e) => {
+    e?.stopPropagation()
+    if (playOrder === 'random') {
+      const randomIndex = Math.floor(Math.random() * audioList.length)
+      setCurrentTrack(randomIndex)
+    } else {
+      setCurrentTrack((prev) => (prev + 1) % audioList.length)
+    }
+  }
+
+  const playPrev = (e) => {
+    e?.stopPropagation()
+    setCurrentTrack((prev) => (prev - 1 + audioList.length) % audioList.length)
+  }
+
   const selectTrack = (index) => {
     setCurrentTrack(index)
     setShowPlaylist(false)
@@ -146,7 +161,7 @@ export const VoidPlayer = ({ isExpanded }) => {
     return `${mins}:${secs.toString().padStart(2, '0')}`
   }
 
-  // Collapsed State: Music icon with play indicator
+  // Collapsed State: Rotating cover when playing, music icon when not
   if (!isExpanded) {
     return (
       <div className="void-player-mini flex justify-center py-2">
@@ -154,13 +169,26 @@ export const VoidPlayer = ({ isExpanded }) => {
           className={`relative w-10 h-10 cursor-pointer group flex items-center justify-center`}
           onClick={togglePlay}
         >
-          {/* Music Icon */}
-          <div className={`w-full h-full rounded-lg flex items-center justify-center bg-[var(--void-bg-secondary)] transition-all ${isPlaying ? 'text-[var(--void-accent-yellow)]' : 'text-[var(--void-text-muted)]'} hover:text-[var(--void-accent-yellow)] hover:bg-[var(--void-accent-yellow-dim)]`}>
-            <i className={`fas ${isPlaying ? 'fa-pause' : 'fa-music'} text-base`} />
-          </div>
-          {/* Playing Indicator - subtle pulse */}
-          {isPlaying && (
-            <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-[var(--void-accent-yellow)] rounded-full void-player-pulse" />
+          {isPlaying ? (
+            // Playing: Show rotating album cover
+            <>
+              <div className="w-full h-full rounded-full overflow-hidden border-2 border-[var(--void-accent-yellow)] void-player-glow void-player-rotating">
+                <img 
+                  src={currentAudio.cover || '/default-cover.jpg'} 
+                  alt="Cover"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {/* Pause overlay on hover */}
+              <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                <i className="fas fa-pause text-white text-xs" />
+              </div>
+            </>
+          ) : (
+            // Not playing: Show music icon
+            <div className="w-full h-full rounded-lg flex items-center justify-center bg-[var(--void-bg-secondary)] text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] hover:bg-[var(--void-accent-yellow-dim)] transition-all">
+              <i className="fas fa-music text-base" />
+            </div>
           )}
         </div>
       </div>
@@ -225,30 +253,61 @@ export const VoidPlayer = ({ isExpanded }) => {
 
       {/* Playlist Dropdown */}
       {showPlaylist && (
-        <div className="mt-2 max-h-40 overflow-y-auto bg-[var(--void-bg-secondary)] rounded">
-          {audioList.map((audio, index) => (
-            <div 
-              key={index}
-              onClick={() => selectTrack(index)}
-              className={`px-3 py-2 cursor-pointer flex items-center gap-2 text-xs transition-colors ${
-                index === currentTrack 
-                  ? 'bg-[var(--void-accent-yellow-dim)] text-[var(--void-accent-yellow)]' 
-                  : 'text-[var(--void-text-secondary)] hover:bg-[var(--void-bg-tertiary)]'
-              }`}
+        <div className="mt-2">
+          <div className="max-h-36 overflow-y-auto bg-[var(--void-bg-secondary)] rounded">
+            {audioList.map((audio, index) => (
+              <div 
+                key={index}
+                onClick={() => selectTrack(index)}
+                className={`px-3 py-1.5 cursor-pointer transition-colors ${
+                  index === currentTrack 
+                    ? 'bg-[var(--void-accent-yellow-dim)]' 
+                    : 'hover:bg-[var(--void-bg-tertiary)]'
+                }`}
+              >
+                {/* Song name line */}
+                <div className={`text-xs truncate flex items-center gap-1.5 ${
+                  index === currentTrack ? 'text-[var(--void-accent-yellow)] font-medium' : 'text-[var(--void-text-secondary)]'
+                }`}>
+                  {index === currentTrack && isPlaying && (
+                    <i className="fas fa-volume-up text-[9px] flex-shrink-0" />
+                  )}
+                  {index === currentTrack && !isPlaying && (
+                    <i className="fas fa-pause text-[9px] flex-shrink-0" />
+                  )}
+                  {index !== currentTrack && (
+                    <span className="w-3 text-center font-mono text-[9px] text-[var(--void-text-muted)] flex-shrink-0">{index + 1}</span>
+                  )}
+                  <span className="truncate">{audio.name}</span>
+                </div>
+                {/* Artist name line (smaller) */}
+                <div className="text-[10px] text-[var(--void-text-muted)] truncate pl-4 mt-0.5">
+                  {audio.artist}
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Prev/Next buttons below playlist */}
+          <div className="flex items-center justify-center gap-3 mt-2 pt-2 border-t border-[var(--void-border-base)]">
+            <button 
+              onClick={playPrev}
+              className="w-7 h-7 flex items-center justify-center text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] transition-colors"
+              title="Previous"
             >
-              {index === currentTrack && isPlaying && (
-                <i className="fas fa-volume-up text-[10px]" />
-              )}
-              {index === currentTrack && !isPlaying && (
-                <i className="fas fa-pause text-[10px]" />
-              )}
-              {index !== currentTrack && (
-                <span className="w-3 text-center font-mono text-[10px] text-[var(--void-text-muted)]">{index + 1}</span>
-              )}
-              <span className="truncate flex-1">{audio.name}</span>
-              <span className="text-[var(--void-text-muted)]">{audio.artist}</span>
-            </div>
-          ))}
+              <i className="fas fa-step-backward text-xs" />
+            </button>
+            <span className="text-[10px] font-mono text-[var(--void-text-muted)]">
+              {currentTrack + 1} / {audioList.length}
+            </span>
+            <button 
+              onClick={playNext}
+              className="w-7 h-7 flex items-center justify-center text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] transition-colors"
+              title="Next"
+            >
+              <i className="fas fa-step-forward text-xs" />
+            </button>
+          </div>
         </div>
       )}
     </div>
