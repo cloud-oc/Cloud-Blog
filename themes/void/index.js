@@ -25,6 +25,7 @@ import TitleBar from './components/TitleBar'
 import FloatingToc from './components/FloatingToc'
 import LoadingCover from './components/LoadingCover'
 import MobileNav from './components/MobileNav'
+import ArticleAdjacent from './components/ArticleAdjacent'
 import useViewportScale from './components/useViewportScale'
 import CONFIG from './config'
 import { Style } from './style'
@@ -77,7 +78,7 @@ const LayoutBase = (props) => {
         <div id="container-inner" className="w-full relative z-10 flex-grow">
           <div
             id="container-wrapper"
-            className={`relative mx-auto justify-center md:flex py-8 px-4 md:px-8 max-w-7xl
+            className={`relative mx-auto justify-center md:flex py-8 px-4 md:px-8 lg:px-12 max-w-screen-xl xl:max-w-screen-2xl
             ${LAYOUT_SIDEBAR_REVERSE ? 'flex-row-reverse' : ''} 
             ${LAYOUT_VERTICAL ? 'items-center flex-col' : 'items-start'} 
             `}
@@ -88,8 +89,8 @@ const LayoutBase = (props) => {
                 fullWidth
                   ? 'w-full'
                   : LAYOUT_VERTICAL
-                  ? 'max-w-4xl w-full mx-auto'
-                  : 'max-w-3xl w-full mx-auto md:mx-0 md:pr-8 flex-1'
+                  ? 'max-w-5xl w-full mx-auto'
+                  : 'max-w-4xl lg:max-w-5xl w-full mx-auto md:mx-0 md:pr-8 lg:pr-12 flex-1'
               }`}
             >
               <Transition
@@ -113,8 +114,8 @@ const LayoutBase = (props) => {
               <div
                 className={`${
                   LAYOUT_VERTICAL
-                    ? 'flex space-x-0 md:space-x-4 md:flex-row flex-col w-full max-w-4xl justify-center mt-8 mx-auto'
-                    : 'md:w-72 w-full mt-8 md:mt-0 md:sticky md:top-24 flex-shrink-0'
+                    ? 'flex space-x-0 md:space-x-4 md:flex-row flex-col w-full max-w-5xl justify-center mt-8 mx-auto'
+                    : 'lg:w-80 xl:w-96 w-full mt-8 md:mt-0 md:sticky md:top-24 flex-shrink-0'
                 }`}
               >
                 <SideBar {...props} />
@@ -244,6 +245,9 @@ const LayoutSlug = (props) => {
                 </div>
               )}
             </div>
+
+            {/* Previous / Next Article Navigation */}
+            <ArticleAdjacent prev={props.prev} next={props.next} />
 
             <Comment frontMatter={post} />
 

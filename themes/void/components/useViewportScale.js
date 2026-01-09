@@ -16,13 +16,13 @@ import { isBrowser } from '@/lib/utils'
  */
 const useViewportScale = (options = {}) => {
   const {
-    // 1920x1080 作为横屏基准，内容在常规屏幕上显示更大
-    landscapeBase = { width: 1920, height: 1080 },
+    // 1440x900 作为横屏基准，使内容在常规屏幕上显示更大（类似 Notion 风格）
+    landscapeBase = { width: 1440, height: 900 },
     // 390x844 作为竖屏基准 (iPhone 14尺寸)
     portraitBase = { width: 390, height: 844 },
     baseFontSize = 16,
-    minFontSize = 12,
-    maxFontSize = 20
+    minFontSize = 14,
+    maxFontSize = 24
   } = options
 
   // Cache previous dimensions to avoid unnecessary updates

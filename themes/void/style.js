@@ -49,8 +49,8 @@ export const Style = () => {
          ============================================ */
       html {
         /* CSS fallback for viewport scaling when JS not loaded */
-        /* Desktop: scale based on viewport width relative to 1920px base (larger content) */
-        font-size: clamp(12px, calc(16px * (100vw / 1920)), 20px);
+        /* Desktop: scale based on viewport width relative to 1440px base (larger content) */
+        font-size: clamp(14px, calc(16px * (100vw / 1440)), 24px);
       }
       
       /* Portrait/Mobile orientation: different scaling base */
@@ -340,6 +340,42 @@ export const Style = () => {
 
         .void-frame {
           padding: 1.5rem !important;
+        }
+      }
+
+      /* Large desktop (1440px+) - Notion-style larger content */
+      @media (min-width: 1440px) {
+        #notion-article {
+          font-size: 1.1rem;
+          line-height: 1.8;
+        }
+
+        #notion-article p {
+          margin-bottom: 1.4em;
+        }
+
+        .void-frame {
+          padding: 2.5rem !important;
+        }
+
+        #theme-void::before {
+          background-size: 45px 45px;
+        }
+      }
+
+      /* Ultra-wide / 4K displays (1920px+) */
+      @media (min-width: 1920px) {
+        #notion-article {
+          font-size: 1.15rem;
+          line-height: 1.85;
+        }
+
+        #theme-void::before {
+          background-size: 50px 50px;
+        }
+
+        .void-frame {
+          padding: 3rem !important;
         }
       }
 

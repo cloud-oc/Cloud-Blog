@@ -20,6 +20,7 @@ const CONFIG = {
 
   // 文章页面布局
   VOID_ARTICLE_LAYOUT_VERTICAL: false, // 文章详情，左右布局改为上下布局
-  VOID_ARTICLE_HIDDEN_NOTIFICATION: false // 文章详情隐藏公告
+  VOID_ARTICLE_HIDDEN_NOTIFICATION: false, // 文章详情隐藏公告
+  VOID_ARTICLE_ADJACENT: true // 显示上一篇/下一篇文章导航
 }
 export default CONFIG
