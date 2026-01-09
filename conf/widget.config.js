@@ -37,6 +37,330 @@ module.exports = {
   MUSIC_PLAYER_AUDIO_LIST: [
     // 示例音乐列表。除了以下配置外，还可配置歌词，具体配置项看此文档 https://aplayer.js.org/#/zh-Hans/
     {
+      name: '夏ノ雪',
+      artist: 'MONACA / 西村隆文',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645767.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '光ノ風吹ク丘',
+      artist: 'MONACA / 西村隆文 / Oliver Good',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647643.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'イニシエノウタ/ポポル',
+      artist: 'MONACA / 西村隆文 / 瀬尾祥太郎',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647645.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'オバアチャン',
+      artist: 'MONACA / 西村隆文 / 帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647647.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '愚カシイ機械',
+      artist: 'MONACA / 西村隆文 / 高橋邦幸',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645769.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'ヨナ/Ver.弦',
+      artist: 'MONACA / 西村隆文 / 帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645770.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '仮面ノ誉',
+      artist: 'MONACA / 西村隆文 / 高橋邦幸',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645772.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '喪失/Ver.ピアノ',
+      artist: 'MONACA / 西村隆文 / 高橋邦幸',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645774.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'Ashes of Dreams/English Version',
+      artist: 'MONACA / 西村隆文',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647649.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'カイネ/予感',
+      artist: 'MONACA / 西村隆文 / 帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'イニシエノウタ/デボル',
+      artist: 'MONACA / 西村隆文 / 瀬尾祥太郎',  
+      url: 'http://music.163.com/song/media/outer/url?id=2002647650.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '最終兵器',
+      artist: 'MONACA / 西村隆文 / 帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645776.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'ハルア',
+      artist: 'MONACA / 西村隆文 / 帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647651.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '失ワレタ森',
+      artist: 'MONACA / 西村隆文 / 瀬尾祥太郎',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647652.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '彼ノ夢',
+      artist: 'MONACA / 西村隆文 / 瀬尾祥太郎',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645778.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '此ノ夢',
+      artist: 'MONACA / 西村隆文 / 瀬尾祥太郎',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647653.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '喪失/Ver.重奏',
+      artist: 'MONACA / 西村隆文 / 高橋邦幸',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645779.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'カイネ/救済',
+      artist: 'MONACA / 西村隆文 / 帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647654.mp3',  
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'ヨナ/Ver.ピアノ',
+      artist: 'MONACA / 西村隆文 / 帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647655.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'Ashes of Dreams/Nouveau-FR Version',
+      artist: 'MONACA / 西村隆文',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645781.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'Ashes of Dreams/Nuadhaich-GER Version',
+      artist: 'MONACA / 西村隆文',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647656.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'Ashes of Dreams/Lost Music Box Version',
+      artist: 'MONACA / 西村隆文',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645782.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '休息',
+      artist: 'MONACA / 西村隆文 / 瀬尾祥太郎',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647659.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'イニシエノウタ/虚ロナ夢',
+      artist: 'MONACA / 西村隆文 / 帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647660.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '喪失/Ver.オルゴール',
+      artist: 'MONACA / 西村隆文 / 瀬尾祥太郎',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645783.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '魔王ノ城',
+      artist: 'MONACA / 西村隆文 / 高橋邦幸',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645784.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '儚キ者達ノ舞踏',
+      artist: 'MONACA / 西村隆文 / 高橋邦幸',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645785.mp3',  
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'イニシエノウタ/運命',
+      artist: 'MONACA / 西村隆文 / 高橋邦幸',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645786.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'エミール/犠牲',
+      artist: 'MONACA / 西村隆文 / 高橋邦幸',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647662.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '魔王',
+      artist: 'MONACA / 西村隆文 / 高橋邦幸',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647663.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'カイネ/逃避',  
+      artist: 'MONACA / 西村隆文 / 帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=2002647666.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: 'Ashes of Dreams/Aratanaru-JP Version',
+      artist: 'MONACA / 西村隆文',
+      url: 'http://music.163.com/song/media/outer/url?id=2002645787.mp3',
+      cover: 'http://p2.music.126.net/ZMqz5sL4U1G4Uiec0bqlrA==/109951168101799354.jpg'
+    },
+    {
+      name: '穏ヤカナ眠リ',
+      artist: '岡部啓一',
+      url: 'http://music.163.com/song/media/outer/url?id=468490565.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '砂塵ノ記憶',
+      artist: '高橋邦幸',
+      url: 'http://music.163.com/song/media/outer/url?id=468490566.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '遊園施設',
+      artist: '帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=468490569.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '還ラナイ声/ギター',
+      artist: '岡部啓一',
+      url: 'http://music.163.com/song/media/outer/url?id=468490571.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '澱ンダ祈リ/暁風',
+      artist: '帆足圭吾 / 岡部啓一',
+      url: 'http://music.163.com/song/media/outer/url?id=468490573.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: 'エミール/ショップ',
+      artist: '高橋邦幸 / 石濱翔 / 門脇舞以',
+      url: 'http://music.163.com/song/media/outer/url?id=468490574.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '大切ナ時間',
+      artist: '帆足圭吾 / 石井咲希',
+      url: 'http://music.163.com/song/media/outer/url?id=468490575.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '曖昧ナ希望/氷雨',
+      artist: '帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=468490576.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '遺サレタ場所/遮光',
+      artist: '岡部啓一',
+      url: 'http://music.163.com/song/media/outer/url?id=468490579.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: 'パスカル',
+      artist: '岡部啓一 / 石井咲希',
+      url: 'http://music.163.com/song/media/outer/url?id=468490582.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '森ノ王国',
+      artist: '帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=468490583.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '愚カシイ兵器:乙:甲',
+      artist: '岡部啓一',
+      url: 'http://music.163.com/song/media/outer/url?id=468490586.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '愚カシイ兵器:丙',
+      artist: '岡部啓一',
+      url: 'http://music.163.com/song/media/outer/url?id=468490589.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '曖昧ナ希望/翠雨',
+      artist: '帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=468490598.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: 'イニシエノウタ/贖罪',
+      artist: '岡部啓一',
+      url: 'http://music.163.com/song/media/outer/url?id=468490599.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '澱ンダ祈リ/星空',
+      artist: '帆足圭吾 / 岡部啓一',
+      url: 'http://music.163.com/song/media/outer/url?id=468490602.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '顕現シタ異物',
+      artist: '岡部啓一 / 帆足圭吾',
+      url: 'http://music.163.com/song/media/outer/url?id=468490603.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: '「塔」',
+      artist: '岡部啓一',
+      url: 'http://music.163.com/song/media/outer/url?id=468490604.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: 'カイネ／救済',
+      artist: 'MONACA / 岡部啓一',
+      url: 'http://music.163.com/song/media/outer/url?id=4937739.mp3',
+      cover: 'https://p1.music.126.net/tet1byB8_pPwwoedxzFKhg==/2356253418376742.jpg'
+    },
+    {
+      name: 'Weight of the World/壊レタ世界ノ歌',
+      artist: '河野マリナ',
+      url: 'http://music.163.com/song/media/outer/url?id=468490592.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: 'Weight of the World (Nouveau-FR Version)',
+      artist: 'Emi Evans / 岡部啓一',
+      url: 'http://music.163.com/song/media/outer/url?id=468490607.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
+      name: 'Weight of the World/the End of YoRHa',
+      artist: 'YoRHa',
+      url: 'http://music.163.com/song/media/outer/url?id=468490608.mp3',
+      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
+    },
+    {
       name: '鳥の詩',
       artist: 'Lia',
       url: 'https://music.163.com/song/media/outer/url?id=761594.mp3',
@@ -233,138 +557,6 @@ module.exports = {
       artist: '三Z-STUDIO,HOYO-MiX',
       url: 'http://music.163.com/song/media/outer/url?id=2658093531.mp3',
       cover: 'https://p1.music.126.net/1q8Nsdd7TIp_KG5_mVg4aw==/109951170280932175.jpg'
-    },
-    {
-      name: '穏ヤカナ眠リ',
-      artist: '岡部啓一',
-      url: 'http://music.163.com/song/media/outer/url?id=468490565.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '砂塵ノ記憶',
-      artist: '高橋邦幸',
-      url: 'http://music.163.com/song/media/outer/url?id=468490566.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '遊園施設',
-      artist: '帆足圭吾',
-      url: 'http://music.163.com/song/media/outer/url?id=468490569.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '還ラナイ声/ギター',
-      artist: '岡部啓一',
-      url: 'http://music.163.com/song/media/outer/url?id=468490571.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '澱ンダ祈リ/暁風',
-      artist: '帆足圭吾 / 岡部啓一',
-      url: 'http://music.163.com/song/media/outer/url?id=468490573.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: 'エミール/ショップ',
-      artist: '高橋邦幸 / 石濱翔 / 門脇舞以',
-      url: 'http://music.163.com/song/media/outer/url?id=468490574.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '大切ナ時間',
-      artist: '帆足圭吾 / 石井咲希',
-      url: 'http://music.163.com/song/media/outer/url?id=468490575.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '曖昧ナ希望/氷雨',
-      artist: '帆足圭吾',
-      url: 'http://music.163.com/song/media/outer/url?id=468490576.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '遺サレタ場所/遮光',
-      artist: '岡部啓一',
-      url: 'http://music.163.com/song/media/outer/url?id=468490579.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: 'パスカル',
-      artist: '岡部啓一 / 石井咲希',
-      url: 'http://music.163.com/song/media/outer/url?id=468490582.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '森ノ王国',
-      artist: '帆足圭吾',
-      url: 'http://music.163.com/song/media/outer/url?id=468490583.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '愚カシイ兵器:乙:甲',
-      artist: '岡部啓一',
-      url: 'http://music.163.com/song/media/outer/url?id=468490586.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '愚カシイ兵器:丙',
-      artist: '岡部啓一',
-      url: 'http://music.163.com/song/media/outer/url?id=468490589.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '曖昧ナ希望/翠雨',
-      artist: '帆足圭吾',
-      url: 'http://music.163.com/song/media/outer/url?id=468490598.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: 'イニシエノウタ/贖罪',
-      artist: '岡部啓一',
-      url: 'http://music.163.com/song/media/outer/url?id=468490599.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '澱ンダ祈リ/星空',
-      artist: '帆足圭吾 / 岡部啓一',
-      url: 'http://music.163.com/song/media/outer/url?id=468490602.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '顕現シタ異物',
-      artist: '岡部啓一 / 帆足圭吾',
-      url: 'http://music.163.com/song/media/outer/url?id=468490603.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: '「塔」',
-      artist: '岡部啓一',
-      url: 'http://music.163.com/song/media/outer/url?id=468490604.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: 'カイネ／救済',
-      artist: 'MONACA / 岡部啓一',
-      url: 'http://music.163.com/song/media/outer/url?id=4937739.mp3',
-      cover: 'https://p1.music.126.net/tet1byB8_pPwwoedxzFKhg==/2356253418376742.jpg'
-    },
-    {
-      name: 'Weight of the World/壊レタ世界ノ歌',
-      artist: '河野マリナ',
-      url: 'http://music.163.com/song/media/outer/url?id=468490592.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: 'Weight of the World (Nouveau-FR Version)',
-      artist: 'Emi Evans / 岡部啓一',
-      url: 'http://music.163.com/song/media/outer/url?id=468490607.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
-    },
-    {
-      name: 'Weight of the World/the End of YoRHa',
-      artist: 'YoRHa',
-      url: 'http://music.163.com/song/media/outer/url?id=468490608.mp3',
-      cover: 'https://p2.music.126.net/2mq_C15bHzYnbPX4fZHomw==/109951165543440452.jpg'
     },
     {
       name: 'Wake Up, Get Up, Get Out There',
