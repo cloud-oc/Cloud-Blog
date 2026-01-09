@@ -10,17 +10,19 @@ import { isBrowser } from '@/lib/utils'
  * allowing all rem-based measurements to scale proportionally.
  * 
  * Algorithm based on Endfield website:
- * - Landscape: design base 2560 x 1440
- * - Portrait: design base 1080 x 1920
+ * - Landscape: design base 1920 x 1080 (standard HD for larger content)
+ * - Portrait: design base 390 x 844 (iPhone 14 size for mobile)
  * - Scales by whichever dimension maintains aspect ratio
  */
 const useViewportScale = (options = {}) => {
   const {
-    landscapeBase = { width: 2560, height: 1440 },
-    portraitBase = { width: 1080, height: 1920 },
+    // 1920x1080 作为横屏基准，内容在常规屏幕上显示更大
+    landscapeBase = { width: 1920, height: 1080 },
+    // 390x844 作为竖屏基准 (iPhone 14尺寸)
+    portraitBase = { width: 390, height: 844 },
     baseFontSize = 16,
-    minFontSize = 10,
-    maxFontSize = 24
+    minFontSize = 12,
+    maxFontSize = 20
   } = options
 
   // Cache previous dimensions to avoid unnecessary updates

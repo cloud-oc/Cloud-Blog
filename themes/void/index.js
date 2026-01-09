@@ -49,14 +49,8 @@ const LayoutBase = (props) => {
   // 加载动画
   const LOADING_COVER = siteConfig('VOID_LOADING_COVER', true, CONFIG)
 
-  // 视口等比缩放 - Endfield风格
-  useViewportScale({
-    landscapeBase: { width: 2560, height: 1440 },
-    portraitBase: { width: 1080, height: 1920 },
-    baseFontSize: 16,
-    minFontSize: 10,
-    maxFontSize: 24
-  })
+  // 视口等比缩放 - Endfield风格 (使用hook默认参数：1920x1080 横屏 / 390x844 竖屏)
+  useViewportScale()
 
   return (
     <div
@@ -243,10 +237,12 @@ const LayoutSlug = (props) => {
                 <NotionPage post={post} />
               </div>
 
-              {/* Footer of the card */}
-              <div className="mt-12 pt-8 border-t border-[var(--void-border-base)] flex justify-end items-center">
-                 <ShareBar post={post} />
-              </div>
+              {/* Footer of the card - Share Bar */}
+              {siteConfig('POST_SHARE_BAR_ENABLE') === 'true' && (
+                <div className="mt-12 pt-8 border-t border-[var(--void-border-base)] flex justify-end items-center">
+                   <ShareBar post={post} />
+                </div>
+              )}
             </div>
 
             <Comment frontMatter={post} />
