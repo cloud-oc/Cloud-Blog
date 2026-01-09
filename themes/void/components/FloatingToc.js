@@ -7,7 +7,6 @@ import { useCallback, useEffect, useRef, useState } from 'react'
  * 悬浮目录导航组件 - 工业风格设计
  */
 const FloatingToc = ({ toc }) => {
-  const [isExpanded, setIsExpanded] = useState(true)
   const [activeSection, setActiveSection] = useState(null)
   const [progress, setProgress] = useState(0)
   const tRef = useRef(null)
@@ -71,105 +70,62 @@ const FloatingToc = ({ toc }) => {
   }
 
   return (
-    <div className="fixed left-24 top-1/2 -translate-y-1/2 z-40 hidden lg:block">
-      {/* Toggle Button */}
-      <div 
-        className={`absolute left-0 top-1/2 -translate-y-1/2 transition-all duration-300 ${isExpanded ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
-      >
-        <button
-          onClick={() => setIsExpanded(true)}
-          className="w-10 h-10 bg-[var(--void-bg-base)] border border-[var(--void-border-base)] hover:border-blue-400 flex items-center justify-center text-[var(--void-text-muted)] hover:text-blue-400 transition-all group"
-          title="目录"
-        >
-          <i className="fas fa-list-ul text-sm" />
-          {/* Progress indicator ring */}
-          <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 40 40">
-            <circle
-              cx="20"
-              cy="20"
-              r="18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeDasharray={`${progress * 1.13} 113`}
-              className="text-blue-400 opacity-60"
-            />
-          </svg>
-        </button>
+    <div className="p-2">
+      {/* Header - matches other sidebar sections */}
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-[var(--void-text-muted)] font-mono text-xs font-bold tracking-widest uppercase flex items-center gap-2">
+          <i className="fas fa-list-tree text-blue-400" />
+          <span>TOC Index</span>
+        </h3>
+        <span className="text-[10px] font-mono text-blue-400">{Math.round(progress)}%</span>
       </div>
 
-      {/* TOC Panel */}
-      <div 
-        className={`bg-[var(--void-bg-base)] border border-[var(--void-border-base)] shadow-xl transition-all duration-300 origin-left ${
-          isExpanded 
-            ? 'opacity-100 scale-100 translate-x-0' 
-            : 'opacity-0 scale-95 -translate-x-4 pointer-events-none'
-        }`}
-        style={{ maxWidth: '280px', minWidth: '220px' }}
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--void-border-base)] bg-[var(--void-bg-secondary)]">
-          <div className="flex items-center gap-2">
-            <i className="fas fa-sitemap text-xs text-blue-400" />
-            <span className="text-xs font-mono font-bold text-[var(--void-text-primary)] uppercase">TOC_INDEX</span>
-          </div>
-          <button
-            onClick={() => setIsExpanded(false)}
-            className="w-6 h-6 flex items-center justify-center text-[var(--void-text-muted)] hover:text-[var(--void-text-primary)] transition-colors"
-          >
-            <i className="fas fa-times text-xs" />
-          </button>
-        </div>
-
-        {/* Progress Bar */}
-        <div className="h-0.5 bg-[var(--void-bg-secondary)]">
-          <div 
-            className="h-full bg-blue-400 transition-all duration-150"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-
-        {/* TOC Items */}
+      {/* Progress Bar */}
+      <div className="h-0.5 bg-[var(--void-bg-secondary)] mb-4">
         <div 
-          ref={tRef}
-          className="overflow-y-auto max-h-80 py-2 scroll-smooth"
-          style={{ scrollbarWidth: 'thin' }}
-        >
-          <nav className="px-2">
-            {toc.map((tocItem, index) => {
-              const id = uuidToId(tocItem.id)
-              tocIds.push(id)
-              const isActive = activeSection === id
-              
-              return (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  onClick={() => setIsExpanded(false)}
-                  className={`block py-1.5 px-2 text-xs font-mono transition-all duration-200 border-l-2 hover:bg-[var(--void-bg-secondary)] ${
-                    isActive 
-                      ? 'border-blue-400 text-blue-400 bg-[var(--void-bg-secondary)]' 
-                      : 'border-transparent text-[var(--void-text-secondary)] hover:text-[var(--void-text-primary)] hover:border-[var(--void-border-active)]'
-                  }`}
-                  style={{ 
-                    paddingLeft: `${8 + tocItem.indentLevel * 12}px`
-                  }}
-                >
-                  <span className="line-clamp-2 leading-relaxed">
-                    {tocItem.text}
-                  </span>
-                </a>
-              )
-            })}
-          </nav>
-        </div>
+          className="h-full bg-blue-400 transition-all duration-150"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
 
-        {/* Footer */}
-        <div className="px-4 py-2 border-t border-[var(--void-border-base)] bg-[var(--void-bg-secondary)]">
-          <div className="flex items-center justify-between text-[10px] font-mono text-[var(--void-text-muted)]">
-            <span>{toc.length} SECTIONS</span>
-            <span>{Math.round(progress)}% READ</span>
-          </div>
+      {/* TOC Items */}
+      <div 
+        ref={tRef}
+        className="overflow-y-auto max-h-64 scroll-smooth border-l border-[var(--void-border-base)] pl-4"
+        style={{ scrollbarWidth: 'thin' }}
+      >
+        <nav className="space-y-2">
+          {toc.map((tocItem, index) => {
+            const id = uuidToId(tocItem.id)
+            tocIds.push(id)
+            const isActive = activeSection === id
+            
+            return (
+              <a
+                key={id}
+                href={`#${id}`}
+                className={`block py-1 text-xs transition-all duration-200 hover:translate-x-1 ${
+                  isActive 
+                    ? 'text-blue-400 font-medium' 
+                    : 'text-[var(--void-text-secondary)] hover:text-[var(--void-text-primary)]'
+                }`}
+                style={{ 
+                  paddingLeft: `${tocItem.indentLevel * 12}px`
+                }}
+              >
+                <span className="line-clamp-2 leading-relaxed">
+                  {tocItem.text}
+                </span>
+              </a>
+            )
+          })}
+        </nav>
+      </div>
+
+      {/* Footer */}
+      <div className="mt-4 pt-2 border-t border-[var(--void-border-base)]">
+        <div className="text-[10px] font-mono text-[var(--void-text-muted)]">
+          {toc.length} SECTIONS
         </div>
       </div>
     </div>

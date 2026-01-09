@@ -22,7 +22,6 @@ import SearchInput from './components/SearchInput'
 import { SideBar } from './components/SideBar'
 import { SideNav } from './components/SideNav'
 import TitleBar from './components/TitleBar'
-import FloatingToc from './components/FloatingToc'
 import LoadingCover from './components/LoadingCover'
 import MobileNav from './components/MobileNav'
 import ArticleAdjacent from './components/ArticleAdjacent'
@@ -118,7 +117,7 @@ const LayoutBase = (props) => {
                     : 'lg:w-80 xl:w-96 w-full mt-8 md:mt-0 md:sticky md:top-24 flex-shrink-0'
                 }`}
               >
-                <SideBar {...props} />
+                <SideBar {...props} toc={props?.post?.toc} />
               </div>
             )}
           </div>
@@ -250,11 +249,6 @@ const LayoutSlug = (props) => {
             <ArticleAdjacent prev={props.prev} next={props.next} />
 
             <Comment frontMatter={post} />
-
-            {/* Floating Table of Contents */}
-            {post.toc && post.toc.length > 0 && (
-              <FloatingToc toc={post.toc} />
-            )}
           </div>
         )
       )}

@@ -1,5 +1,6 @@
 // import { siteConfig } from '@/lib/config'
 import SmartLink from '@/components/SmartLink'
+import FloatingToc from './FloatingToc'
 // import CONFIG from '../config'
 
 /**
@@ -8,7 +9,7 @@ import SmartLink from '@/components/SmartLink'
  * Removed redundant "Operator Info" headers, focused on content.
  */
 export const SideBar = (props) => {
-  const { tags, categories, latestPosts, locale } = props
+  const { tags, categories, latestPosts, locale, toc } = props
 
   return (
     <aside className="space-y-8">
@@ -37,6 +38,11 @@ export const SideBar = (props) => {
             ))}
           </div>
         </div>
+      )}
+
+      {/* Table of Contents - only on article pages */}
+      {toc && toc.length > 0 && (
+        <FloatingToc toc={toc} />
       )}
 
       {/* Categories (Clean List) */}
