@@ -74,13 +74,13 @@ const LayoutBase = (props) => {
       {/* 移动端底部导航 */}
       <MobileNav />
 
-      {/* 主体内容区 */}
-      <div className="md:ml-[5rem]">
+      {/* 主体内容区 - 使用flex布局实现sticky footer */}
+      <div className="md:ml-[5rem] flex flex-col min-h-screen">
         {/* 标题栏 */}
         {!fullWidth && <TitleBar {...props} />}
 
-        {/* 内容容器 */}
-        <div id="container-inner" className="w-full relative z-10">
+        {/* 内容容器 - flex-grow让内容区填满剩余空间 */}
+        <div id="container-inner" className="w-full relative z-10 flex-grow">
           <div
             id="container-wrapper"
             className={`relative mx-auto justify-center md:flex py-8 px-4 md:px-8 max-w-7xl
