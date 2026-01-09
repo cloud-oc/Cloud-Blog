@@ -26,6 +26,7 @@ import LoadingCover from './components/LoadingCover'
 import MobileNav from './components/MobileNav'
 import MobileToc from './components/MobileToc'
 import ArticleAdjacent from './components/ArticleAdjacent'
+import FloatingToc from './components/FloatingToc'
 import useViewportScale from './components/useViewportScale'
 import CONFIG from './config'
 import { Style } from './style'
@@ -254,6 +255,11 @@ const LayoutSlug = (props) => {
             {/* Mobile Table of Contents */}
             {post.toc && post.toc.length > 0 && (
               <MobileToc toc={post.toc} />
+            )}
+
+            {/* Desktop Floating TOC */}
+            {post.toc && post.toc.length > 0 && (
+              <FloatingToc toc={post.toc} />
             )}
           </div>
         )

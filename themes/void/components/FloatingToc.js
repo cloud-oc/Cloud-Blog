@@ -4,13 +4,15 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 /**
  * FloatingToc Component - Void Theme Industrial Style
- * 悬浮目录导航组件 - 工业风格设计
+ * 悬浮目录导航组件 - 右侧悬浮面板设计
+ * Floating panel on the right side of the article
  */
 const FloatingToc = ({ toc }) => {
   const [activeSection, setActiveSection] = useState(null)
   const [progress, setProgress] = useState(0)
+  const [isExpanded, setIsExpanded] = useState(true) // 默认展开
   const tRef = useRef(null)
-  const tocIds = []
+  const tocIds = useRef([])
 
   // 监听滚动事件
   useEffect(() => {
@@ -57,8 +59,9 @@ const FloatingToc = ({ toc }) => {
       }
       setActiveSection(currentSectionId)
       // 自动滚动目录
-      if (tRef.current && tocIds.length > 0) {
-        const index = tocIds.indexOf(currentSectionId) || 0
+      const ids = tocIds.current
+      if (tRef.current && ids.length > 0) {
+        const index = ids.indexOf(currentSectionId) || 0
         tRef.current.scrollTo({ top: 32 * index - 60, behavior: 'smooth' })
       }
     }, throttleMs)
@@ -69,64 +72,115 @@ const FloatingToc = ({ toc }) => {
     return null
   }
 
+  // 构建 tocIds
+  const ids = toc.map(item => uuidToId(item.id))
+  tocIds.current = ids
+
   return (
-    <div className="p-2 overflow-hidden">
-      {/* Header - matches other sidebar sections */}
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-[var(--void-text-muted)] font-mono text-xs font-bold tracking-widest uppercase flex items-center gap-2">
-          <i className="fas fa-list-tree text-blue-400" />
-          <span>TOC Index</span>
-        </h3>
-        <span className="text-[10px] font-mono text-blue-400">{Math.round(progress)}%</span>
-      </div>
-
-      {/* Progress Bar */}
-      <div className="h-0.5 bg-[var(--void-bg-secondary)] mb-4">
-        <div 
-          className="h-full bg-blue-400 transition-all duration-150"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
-
-      {/* TOC Items */}
+    <div 
+      className="fixed z-50 hidden lg:block"
+      style={{
+        right: '2rem',
+        top: '50%',
+        transform: 'translateY(-50%)'
+      }}
+    >
+      {/* Floating Container */}
       <div 
-        ref={tRef}
-        className="overflow-y-auto overflow-x-hidden max-h-64 scroll-smooth border-l border-[var(--void-border-base)] pl-4"
-        style={{ scrollbarWidth: 'thin' }}
+        className={`transition-all duration-300 ease-out ${
+          isExpanded 
+            ? 'w-64 bg-[var(--void-bg-primary)]/95 backdrop-blur-sm border border-[var(--void-border-base)] shadow-lg' 
+            : 'w-11'
+        }`}
+        style={{
+          maxHeight: '70vh'
+        }}
       >
-        <nav className="space-y-2">
-          {toc.map((tocItem, index) => {
-            const id = uuidToId(tocItem.id)
-            tocIds.push(id)
-            const isActive = activeSection === id
-            
-            return (
-              <a
-                key={id}
-                href={`#${id}`}
-                className={`block py-1 text-xs transition-all duration-200 hover:translate-x-1 ${
-                  isActive 
-                    ? 'text-blue-400 font-medium' 
-                    : 'text-[var(--void-text-secondary)] hover:text-[var(--void-text-primary)]'
-                }`}
-                style={{ 
-                  paddingLeft: `${tocItem.indentLevel * 12}px`
-                }}
-              >
-                <span className="line-clamp-2 leading-relaxed break-words">
-                  {tocItem.text}
-                </span>
-              </a>
-            )
-          })}
-        </nav>
-      </div>
+        {/* Toggle Button */}
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className={`flex items-center justify-center transition-all duration-200 hover:bg-[var(--void-bg-secondary)] ${
+            isExpanded 
+              ? 'absolute -left-11 top-0 w-10 h-10 bg-[var(--void-bg-primary)]/95 backdrop-blur-sm border border-[var(--void-border-base)] border-r-0' 
+              : 'w-11 h-11 bg-[var(--void-bg-primary)]/95 backdrop-blur-sm border border-[var(--void-border-base)]'
+          }`}
+          title={isExpanded ? 'Collapse TOC' : 'Expand TOC'}
+        >
+          <i className={`fas ${isExpanded ? 'fa-chevron-right' : 'fa-list-tree'} text-blue-400 text-sm`} />
+        </button>
 
-      {/* Footer */}
-      <div className="mt-4 pt-2 border-t border-[var(--void-border-base)]">
-        <div className="text-[10px] font-mono text-[var(--void-text-muted)]">
-          {toc.length} SECTIONS
-        </div>
+        {/* Expanded Content */}
+        {isExpanded && (
+          <div className="p-4 overflow-hidden">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-[var(--void-text-muted)] font-mono text-xs font-bold tracking-widest uppercase flex items-center gap-2">
+                <i className="fas fa-list-tree text-blue-400" />
+                <span>TOC Index</span>
+              </h3>
+              <span className="text-[10px] font-mono text-blue-400">{Math.round(progress)}%</span>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="h-0.5 bg-[var(--void-bg-secondary)] mb-4">
+              <div 
+                className="h-full bg-blue-400 transition-all duration-150"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
+            {/* TOC Items */}
+            <div 
+              ref={tRef}
+              className="overflow-y-auto overflow-x-hidden max-h-[50vh] scroll-smooth border-l border-[var(--void-border-base)] pl-4"
+              style={{ scrollbarWidth: 'thin' }}
+            >
+              <nav className="space-y-2">
+                {toc.map((tocItem) => {
+                  const id = uuidToId(tocItem.id)
+                  const isActive = activeSection === id
+                  
+                  return (
+                    <a
+                      key={id}
+                      href={`#${id}`}
+                      className={`block py-1 text-xs transition-all duration-200 hover:translate-x-1 ${
+                        isActive 
+                          ? 'text-blue-400 font-medium' 
+                          : 'text-[var(--void-text-secondary)] hover:text-[var(--void-text-primary)]'
+                      }`}
+                      style={{ 
+                        paddingLeft: `${tocItem.indentLevel * 12}px`
+                      }}
+                    >
+                      <span className="line-clamp-2 leading-relaxed break-words">
+                        {tocItem.text}
+                      </span>
+                    </a>
+                  )
+                })}
+              </nav>
+            </div>
+
+            {/* Footer */}
+            <div className="mt-4 pt-2 border-t border-[var(--void-border-base)]">
+              <div className="text-[10px] font-mono text-[var(--void-text-muted)]">
+                {toc.length} SECTIONS
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Collapsed Progress Indicator */}
+        {!isExpanded && (
+          <div 
+            className="absolute left-0 bottom-0 w-full bg-blue-400/30"
+            style={{ 
+              height: `${progress}%`,
+              transition: 'height 0.15s ease-out'
+            }}
+          />
+        )}
       </div>
     </div>
   )
