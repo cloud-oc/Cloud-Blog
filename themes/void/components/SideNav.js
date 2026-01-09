@@ -90,14 +90,14 @@ export const SideNav = () => {
 
   return (
     <div 
-      className={`fixed left-0 top-0 bottom-0 z-40 hidden md:flex flex-col bg-[var(--void-bg-base)] border-r border-[var(--void-border-base)] transition-all duration-300 ease-in-out ${isHovered ? 'w-64 shadow-2xl' : 'w-20'}`}
+      className={`fixed left-0 top-0 bottom-0 z-40 hidden md:flex flex-col bg-[var(--void-bg-base)] border-r border-[var(--void-border-base)] transition-all duration-300 ease-in-out ${isHovered ? 'w-[16rem] shadow-2xl' : 'w-[5rem]'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Avatar Section - Top of sidebar, clickable to personal page */}
       <div className="flex-shrink-0 py-6 flex flex-col items-center">
         <SmartLink href="/cloud09" title="个人页">
-          <div className={`transition-all duration-300 cursor-pointer hover:scale-105 ${isHovered ? 'w-20 h-20' : 'w-12 h-12'}`}>
+          <div className={`transition-all duration-300 cursor-pointer hover:scale-105 ${isHovered ? 'w-[5rem] h-[5rem]' : 'w-[3rem] h-[3rem]'}`}>
             <img 
               src={AVATAR_URL}
               alt="Avatar"
@@ -122,7 +122,7 @@ export const SideNav = () => {
       <div ref={navRef} className="flex-1 py-4 flex flex-col gap-2 overflow-y-auto overflow-x-hidden relative">
         {/* Animated Active Indicator Bar - Higher z-index */}
         <div 
-          className="absolute left-0 w-1 h-12 bg-[var(--void-accent-yellow)] transition-all duration-300 ease-out z-10"
+          className="absolute left-0 w-[0.25rem] h-[3rem] bg-[var(--void-accent-yellow)] transition-all duration-300 ease-out z-10"
           style={{ top: indicatorStyle.top, opacity: indicatorStyle.opacity }}
         />
         
@@ -132,7 +132,7 @@ export const SideNav = () => {
             <SmartLink key={item.name} href={item.path}>
               <div 
                 ref={el => itemRefs.current[item.name] = el}
-                className={`relative h-12 flex items-center cursor-pointer transition-all duration-300 group
+                className={`relative h-[3rem] flex items-center cursor-pointer transition-all duration-300 group
                   ${isActive 
                     ? 'bg-[var(--void-bg-secondary)] text-[var(--void-accent-yellow)]' 
                     : 'text-gray-300 hover:text-[var(--void-text-primary)] hover:bg-[var(--void-bg-secondary)]'
@@ -140,7 +140,7 @@ export const SideNav = () => {
                 `}
               >
                 {/* Icon Container */}
-                <div className="w-20 flex-shrink-0 flex items-center justify-center">
+                <div className="w-[5rem] flex-shrink-0 flex items-center justify-center">
                   <i className={`${item.icon} text-lg transition-all duration-300 ${isActive ? 'scale-110' : ''}`} />
                 </div>
 
@@ -162,7 +162,7 @@ export const SideNav = () => {
         
         {/* Collapsed State: Contact Button with light gray background */}
         <div className={`flex justify-center transition-all duration-300 ${isHovered ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'}`}>
-          <div className="w-10 h-10 flex items-center justify-center bg-gray-200 text-gray-500 rounded cursor-pointer hover:text-white hover:bg-blue-500 transition-colors">
+          <div className="w-[2.5rem] h-[2.5rem] flex items-center justify-center bg-gray-200 text-gray-500 rounded cursor-pointer hover:text-white hover:bg-blue-500 transition-colors">
             <i className="fas fa-address-book text-base" />
           </div>
         </div>
@@ -173,10 +173,10 @@ export const SideNav = () => {
            <div className="flex items-center justify-center gap-1.5 flex-nowrap">
              {/* Email Icon */}
              {email && (
-               <a 
+                 <a 
                  href={`mailto:${email}`}
                  title={email}
-                 className="w-7 h-7 flex items-center justify-center bg-gray-200 text-gray-500 rounded hover:text-white hover:bg-blue-500 transition-colors flex-shrink-0"
+                 className="w-[1.75rem] h-[1.75rem] flex items-center justify-center bg-gray-200 text-gray-500 rounded hover:text-white hover:bg-blue-500 transition-colors flex-shrink-0"
                >
                  <i className="fas fa-envelope text-xs" />
                </a>
@@ -193,7 +193,7 @@ export const SideNav = () => {
                    target="_blank" 
                    rel="noreferrer"
                    title={label}
-                   className="w-7 h-7 flex items-center justify-center bg-gray-200 text-gray-500 rounded hover:text-white hover:bg-blue-500 transition-colors flex-shrink-0"
+                   className="w-[1.75rem] h-[1.75rem] flex items-center justify-center bg-gray-200 text-gray-500 rounded hover:text-white hover:bg-blue-500 transition-colors flex-shrink-0"
                  >
                    {svg ? (
                      <img src={svg} alt={label} className="w-3 h-3 opacity-60 hover:opacity-100" />
@@ -211,7 +211,7 @@ export const SideNav = () => {
       <div className="py-4">
         <div className="flex justify-center">
           <div 
-            className="w-8 h-8 flex items-center justify-center cursor-pointer"
+            className="w-[2rem] h-[2rem] flex items-center justify-center cursor-pointer"
             title={isHovered ? 'Collapse' : 'Expand'}
           >
             {/* Simple Black Triangle */}

@@ -9,78 +9,90 @@ import { isBrowser } from '@/lib/utils'
  * This hook dynamically adjusts the html element's font-size based on viewport dimensions,
  * allowing all rem-based measurements to scale proportionally.
  * 
- * Design bases:
- * - Desktop: 1920 x 1080 (16:9 landscape)
- * - Mobile: 750 width (portrait mode)
+ * Algorithm based on Endfield website:
+ * - Landscape: design base 2560 x 1440
+ * - Portrait: design base 1080 x 1920
+ * - Scales by whichever dimension maintains aspect ratio
  */
 const useViewportScale = (options = {}) => {
   const {
-    desktopBase = { width: 1920, height: 1080 },
-    mobileBase = { width: 750 },
+    landscapeBase = { width: 2560, height: 1440 },
+    portraitBase = { width: 1080, height: 1920 },
     baseFontSize = 16,
-    minScale = 0.5,
-    maxScale = 1.5,
-    mobileBreakpoint = 768
+    minFontSize = 10,
+    maxFontSize = 24
   } = options
 
-  const calculateScale = useCallback(() => {
-    if (!isBrowser) return 1
-
-    const vw = window.innerWidth
-    const vh = window.innerHeight
-    const isLandscape = vw > vh
-    const isMobile = vw < mobileBreakpoint
-
-    let scale
-
-    if (isMobile || !isLandscape) {
-      // Portrait/Mobile: scale based on width only
-      scale = vw / mobileBase.width
-    } else {
-      // Landscape/Desktop: scale based on both width and height, use the smaller one
-      const scaleByWidth = vw / desktopBase.width
-      const scaleByHeight = vh / desktopBase.height
-      scale = Math.min(scaleByWidth, scaleByHeight)
-    }
-
-    // Clamp the scale to reasonable bounds
-    scale = Math.max(minScale, Math.min(maxScale, scale))
-
-    return scale
-  }, [desktopBase, mobileBase, baseFontSize, minScale, maxScale, mobileBreakpoint])
+  // Cache previous dimensions to avoid unnecessary updates
+  let _innerWidth = 0
+  let _innerHeight = 0
 
   const applyScale = useCallback(() => {
     if (!isBrowser) return
 
-    const scale = calculateScale()
-    const fontSize = baseFontSize * scale
-    
+    const innerWidth = window.innerWidth
+    const innerHeight = window.innerHeight
+
+    // Skip if dimensions haven't changed
+    if (innerWidth === _innerWidth && innerHeight === _innerHeight) {
+      return
+    }
+    _innerWidth = innerWidth
+    _innerHeight = innerHeight
+
+    let fontSize = baseFontSize
+
+    if (innerHeight >= innerWidth) {
+      // Portrait mode: use portrait design base (1080 x 1920)
+      const designWidth = portraitBase.width
+      const designHeight = portraitBase.height
+      
+      if (innerWidth / innerHeight > designWidth / designHeight) {
+        // Viewport is wider than design ratio, scale by height
+        fontSize = baseFontSize * (innerHeight / designHeight)
+      } else {
+        // Viewport is taller than design ratio, scale by width
+        fontSize = baseFontSize * (innerWidth / designWidth)
+      }
+    } else {
+      // Landscape mode: use landscape design base (2560 x 1440)
+      const designWidth = landscapeBase.width
+      const designHeight = landscapeBase.height
+      
+      if (innerWidth / innerHeight > designWidth / designHeight) {
+        // Viewport is wider than design ratio, scale by height
+        fontSize = baseFontSize * (innerHeight / designHeight)
+      } else {
+        // Viewport is narrower than design ratio, scale by width
+        fontSize = baseFontSize * (innerWidth / designWidth)
+      }
+    }
+
+    // Clamp font size to reasonable bounds
+    fontSize = Math.max(minFontSize, Math.min(maxFontSize, fontSize))
+
     // Apply to html element
-    document.documentElement.style.fontSize = `${fontSize}px`
+    const html = document.documentElement
+    html.style.fontSize = `${fontSize}px`
     
-    // Also set a CSS custom property for additional flexibility
-    document.documentElement.style.setProperty('--void-viewport-scale', scale.toString())
-    document.documentElement.style.setProperty('--void-base-font-size', `${fontSize}px`)
-  }, [calculateScale, baseFontSize])
+    // Also set CSS custom properties for additional flexibility
+    html.style.setProperty('--void-viewport-scale', (fontSize / baseFontSize).toString())
+    html.style.setProperty('--void-base-font-size', `${fontSize}px`)
+  }, [landscapeBase, portraitBase, baseFontSize, minFontSize, maxFontSize])
 
   useEffect(() => {
     if (!isBrowser) return
 
-    // Apply initial scale
+    // Apply initial scale immediately
     applyScale()
 
-    // Handle resize events with debounce
-    let resizeTimeout
+    // Handle resize events
     const handleResize = () => {
-      if (resizeTimeout) {
-        clearTimeout(resizeTimeout)
-      }
-      resizeTimeout = setTimeout(applyScale, 50)
+      applyScale()
     }
 
-    // Handle orientation change immediately
+    // Handle orientation change with small delay for browser to settle
     const handleOrientationChange = () => {
-      // Small delay to let the browser settle
       setTimeout(applyScale, 100)
     }
 
@@ -91,9 +103,6 @@ const useViewportScale = (options = {}) => {
     return () => {
       window.removeEventListener('resize', handleResize)
       window.removeEventListener('orientationchange', handleOrientationChange)
-      if (resizeTimeout) {
-        clearTimeout(resizeTimeout)
-      }
       // Reset font-size on unmount
       document.documentElement.style.fontSize = ''
       document.documentElement.style.removeProperty('--void-viewport-scale')
@@ -101,7 +110,7 @@ const useViewportScale = (options = {}) => {
     }
   }, [applyScale])
 
-  return { calculateScale, applyScale }
+  return { applyScale }
 }
 
 export default useViewportScale

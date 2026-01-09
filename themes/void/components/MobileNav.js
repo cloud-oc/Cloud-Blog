@@ -79,10 +79,10 @@ export const MobileNav = () => {
     <>
       {/* Top Navigation Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 md:hidden bg-[var(--void-bg-primary)]/95 backdrop-blur-sm border-b border-[var(--void-border-base)] safe-area-top">
-        <div className="flex items-center justify-between h-14 px-4">
+        <div className="flex items-center justify-between h-16 px-4">
           {/* Left: Avatar */}
           <SmartLink href="/cloud09" title="个人页" className="flex-shrink-0 flex items-center">
-            <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-[var(--void-accent-yellow)] hover:border-blue-500 transition-colors">
+            <div className="w-11 h-11 rounded-full overflow-hidden border-2 border-[var(--void-accent-yellow)] hover:border-blue-500 transition-colors">
               <img 
                 src={AVATAR_URL}
                 alt="Avatar"
@@ -94,22 +94,22 @@ export const MobileNav = () => {
           {/* Right: Hamburger Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="w-9 h-9 flex flex-col items-center justify-center gap-1.5 transition-all"
+            className="w-11 h-11 flex flex-col items-center justify-center gap-[6px] transition-all"
             aria-label="Toggle Menu"
           >
             <span 
-              className={`w-5 h-0.5 bg-[var(--void-text-primary)] transition-all duration-300 ${
-                isMenuOpen ? 'rotate-45 translate-y-2' : ''
+              className={`w-6 h-[2.5px] bg-[var(--void-text-primary)] transition-all duration-300 ${
+                isMenuOpen ? 'rotate-45 translate-y-[8.5px]' : ''
               }`}
             />
             <span 
-              className={`w-5 h-0.5 bg-[var(--void-text-primary)] transition-all duration-300 ${
+              className={`w-6 h-[2.5px] bg-[var(--void-text-primary)] transition-all duration-300 ${
                 isMenuOpen ? 'opacity-0' : ''
               }`}
             />
             <span 
-              className={`w-5 h-0.5 bg-[var(--void-text-primary)] transition-all duration-300 ${
-                isMenuOpen ? '-rotate-45 -translate-y-2' : ''
+              className={`w-6 h-[2.5px] bg-[var(--void-text-primary)] transition-all duration-300 ${
+                isMenuOpen ? '-rotate-45 -translate-y-[8.5px]' : ''
               }`}
             />
           </button>
@@ -126,7 +126,7 @@ export const MobileNav = () => {
 
       {/* Slide-in Menu Panel */}
       <div 
-        className={`fixed top-14 right-0 bottom-0 w-72 max-w-[80vw] z-40 md:hidden bg-[var(--void-bg-primary)] border-l border-[var(--void-border-base)] transition-transform duration-300 ease-out overflow-y-auto ${
+        className={`fixed top-16 right-0 bottom-0 w-72 max-w-[80vw] z-40 md:hidden bg-[var(--void-bg-primary)] border-l border-[var(--void-border-base)] transition-transform duration-300 ease-out overflow-y-auto ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -137,14 +137,14 @@ export const MobileNav = () => {
             <SmartLink
               key={item.name}
               href={item.path}
-              className={`flex items-center gap-4 px-5 py-3 transition-all ${
+              className={`flex items-center gap-4 px-6 py-4 transition-all ${
                 activeTab === item.name
                   ? 'bg-blue-500/10 text-blue-500 border-r-2 border-blue-500'
                   : 'text-[var(--void-text-secondary)] hover:bg-[var(--void-bg-secondary)] hover:text-[var(--void-text-primary)]'
               }`}
             >
-              <i className={`${item.icon} w-5 text-center`} />
-              <span className="text-sm font-medium">{item.name}</span>
+              <i className={`${item.icon} w-6 text-center text-lg`} />
+              <span className="text-base font-medium">{item.name}</span>
             </SmartLink>
           ))}
         </div>
@@ -201,7 +201,7 @@ export const MobileNav = () => {
       </div>
 
       {/* Top spacer for content */}
-      <div className="h-14 md:hidden" />
+      <div className="h-16 md:hidden" />
     </>
   )
 }

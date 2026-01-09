@@ -12,6 +12,7 @@ import { Transition } from '@headlessui/react'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import BlogListArchive from './components/BlogListArchive'
+import { BlogPostCard } from './components/BlogPostCard'
 import { BlogListPage } from './components/BlogListPage'
 import { BlogListScroll } from './components/BlogListScroll'
 import { Footer } from './components/Footer'
@@ -50,11 +51,11 @@ const LayoutBase = (props) => {
 
   // 视口等比缩放 - Endfield风格
   useViewportScale({
-    desktopBase: { width: 1920, height: 1080 },
-    mobileBase: { width: 750 },
+    landscapeBase: { width: 2560, height: 1440 },
+    portraitBase: { width: 1080, height: 1920 },
     baseFontSize: 16,
-    minScale: 0.5,
-    maxScale: 1.5
+    minFontSize: 10,
+    maxFontSize: 24
   })
 
   return (
@@ -74,7 +75,7 @@ const LayoutBase = (props) => {
       <MobileNav />
 
       {/* 主体内容区 */}
-      <div className="md:ml-20">
+      <div className="md:ml-[5rem]">
         {/* 标题栏 */}
         {!fullWidth && <TitleBar {...props} />}
 
@@ -328,7 +329,7 @@ const Layout404 = (props) => {
  * @returns
  */
 const LayoutSearch = (props) => {
-  const { keyword } = props
+  const { keyword, posts = [] } = props
   const router = useRouter()
 
   useEffect(() => {
@@ -353,7 +354,14 @@ const LayoutSearch = (props) => {
       <div className="mb-8">
         <SearchInput {...props} />
       </div>
-      <LayoutPostList {...props} />
+      {/* 搜索结果列表 - 不使用分页 */}
+      <div className="w-full">
+        <div id="posts-wrapper">
+          {posts?.map((post) => (
+            <BlogPostCard key={post.id} post={post} showSummary={true} />
+          ))}
+        </div>
+      </div>
     </>
   )
 }

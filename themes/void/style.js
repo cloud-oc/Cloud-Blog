@@ -49,14 +49,14 @@ export const Style = () => {
          ============================================ */
       html {
         /* CSS fallback for viewport scaling when JS not loaded */
-        /* Desktop: scale based on viewport width relative to 1920px base */
-        font-size: clamp(10px, calc(16px * (100vw / 1920)), 24px);
+        /* Desktop: scale based on viewport width relative to 2560px base (Endfield style) */
+        font-size: clamp(10px, calc(16px * (100vw / 2560)), 24px);
       }
       
       /* Portrait/Mobile orientation: different scaling base */
       @media (orientation: portrait), (max-width: 767px) {
         html {
-          font-size: clamp(10px, calc(16px * (100vw / 750)), 24px);
+          font-size: clamp(14px, calc(18px * (100vw / 375)), 22px);
         }
       }
 
@@ -293,8 +293,13 @@ export const Style = () => {
 
         /* Notion content adjustments */
         #notion-article {
-          font-size: 1rem;
-          line-height: 1.7;
+          font-size: 1.1rem;
+          line-height: 1.75;
+        }
+
+        #notion-article p {
+          font-size: 1.1rem;
+          margin-bottom: 1.2em;
         }
 
         #notion-article h1 { font-size: 1.75rem; }
