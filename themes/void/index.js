@@ -24,6 +24,7 @@ import { SideNav } from './components/SideNav'
 import TitleBar from './components/TitleBar'
 import LoadingCover from './components/LoadingCover'
 import MobileNav from './components/MobileNav'
+import MobileToc from './components/MobileToc'
 import ArticleAdjacent from './components/ArticleAdjacent'
 import useViewportScale from './components/useViewportScale'
 import CONFIG from './config'
@@ -229,7 +230,7 @@ const LayoutSlug = (props) => {
              {/* Article Content Frame */}
             <div id="article-wrapper" className="void-frame p-8 md:p-12 mb-12">
                {/* Content Watermark/Background decoration */}
-               <div className="absolute top-4 right-4 text-[var(--void-text-muted)] opacity-10 text-8xl font-black pointer-events-none select-none z-0">
+               <div className="absolute top-4 right-4 text-[var(--void-text-muted)] opacity-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black pointer-events-none select-none z-0">
                  CLOUD09
                </div>
                
@@ -249,6 +250,11 @@ const LayoutSlug = (props) => {
             <ArticleAdjacent prev={props.prev} next={props.next} />
 
             <Comment frontMatter={post} />
+
+            {/* Mobile Table of Contents */}
+            {post.toc && post.toc.length > 0 && (
+              <MobileToc toc={post.toc} />
+            )}
           </div>
         )
       )}
