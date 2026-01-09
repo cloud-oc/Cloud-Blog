@@ -70,7 +70,7 @@ const FloatingToc = ({ toc }) => {
   }
 
   return (
-    <div className="p-2">
+    <div className="p-2 overflow-hidden">
       {/* Header - matches other sidebar sections */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-[var(--void-text-muted)] font-mono text-xs font-bold tracking-widest uppercase flex items-center gap-2">
@@ -91,7 +91,7 @@ const FloatingToc = ({ toc }) => {
       {/* TOC Items */}
       <div 
         ref={tRef}
-        className="overflow-y-auto max-h-64 scroll-smooth border-l border-[var(--void-border-base)] pl-4"
+        className="overflow-y-auto overflow-x-hidden max-h-64 scroll-smooth border-l border-[var(--void-border-base)] pl-4"
         style={{ scrollbarWidth: 'thin' }}
       >
         <nav className="space-y-2">
@@ -113,7 +113,7 @@ const FloatingToc = ({ toc }) => {
                   paddingLeft: `${tocItem.indentLevel * 12}px`
                 }}
               >
-                <span className="line-clamp-2 leading-relaxed">
+                <span className="line-clamp-2 leading-relaxed break-words">
                   {tocItem.text}
                 </span>
               </a>

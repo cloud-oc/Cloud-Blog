@@ -12,7 +12,7 @@ export const SideBar = (props) => {
   const { tags, categories, latestPosts, locale, toc } = props
 
   return (
-    <aside className="space-y-8">
+    <aside className="space-y-8 max-h-[calc(100vh-8rem)] overflow-y-auto overflow-x-hidden" style={{ scrollbarWidth: 'thin' }}>
       {/* Latest Posts (Minimalist List) */}
       {latestPosts && latestPosts.length > 0 && (
         <div className="p-2">
