@@ -14,7 +14,7 @@ export const BlogPostCard = ({ post, showSummary = true }) => {
 
   return (
     <SmartLink href={`/${post.slug}`}>
-      <article className={`void-frame ef-corner-marks group mb-6 flex flex-col md:flex-row overflow-hidden hover:border-[var(--void-border-active)] transition-all duration-300 ${hasCover ? '' : 'p-6 md:p-8'}`}>
+      <article className={`void-frame group mb-6 flex flex-col md:flex-row overflow-hidden hover:border-[var(--void-border-active)] transition-all duration-300 ${hasCover ? '' : 'p-6 md:p-8'}`}>
         
         {/* Content - Left side with padding */}
         <div className={`flex-1 flex flex-col justify-center ${hasCover ? 'p-6 md:p-8' : ''}`}>

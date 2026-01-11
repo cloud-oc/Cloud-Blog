@@ -161,12 +161,10 @@ export const SideNav = () => {
 
   return (
     <div 
-      className={`fixed left-0 top-0 bottom-0 z-40 hidden md:flex flex-col bg-[var(--void-bg-base)] border-r border-[var(--void-border-base)] transition-all duration-300 ease-in-out ef-diagonal-stripe ${isHovered ? 'w-[16rem] shadow-2xl' : 'w-[5rem]'}`}
+      className={`fixed left-0 top-0 bottom-0 z-40 hidden md:flex flex-col bg-[var(--void-bg-base)] border-r border-[var(--void-border-base)] transition-all duration-300 ease-in-out ${isHovered ? 'w-[16rem] shadow-2xl' : 'w-[5rem]'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Sidebar Edge Glow Effect */}
-      <div className="absolute right-0 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[var(--void-accent-cyan)] to-transparent opacity-20" />
       {/* Avatar Section - Top of sidebar, clickable to personal page */}
       <div className="flex-shrink-0 py-6 flex flex-col items-center">
         <SmartLink href="/cloud09" title="个人页">
