@@ -1,10 +1,20 @@
 import { useState, useEffect, useRef } from 'react'
 import { siteConfig } from '@/lib/config'
+import {
+  IconPlayerPlay,
+  IconPlayerPause,
+  IconPlayerTrackPrev,
+  IconPlayerTrackNext,
+  IconMusic,
+  IconList,
+  IconVolume,
+} from '@tabler/icons-react'
 
 /**
  * VoidPlayer Component - Compact Sci-Fi Music Player for Void Theme
  * Integrates with widget.config.js settings
  * Has two states: expanded (full info) and collapsed (rotating cover when playing)
+ * Tabler Icons for Futuristic Feel
  */
 export const VoidPlayer = ({ isExpanded }) => {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -200,13 +210,13 @@ export const VoidPlayer = ({ isExpanded }) => {
               </div>
               {/* Pause overlay on hover */}
               <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                <i className="fas fa-pause text-white text-xs" />
+                <IconPlayerPause size={14} stroke={2} className="text-white" />
               </div>
             </>
           ) : (
             // Not playing: Show music icon
             <div className="w-full h-full rounded-lg flex items-center justify-center bg-[var(--void-bg-secondary)] text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] hover:bg-[var(--void-accent-yellow-dim)] transition-all">
-              <i className="fas fa-music text-base" />
+              <IconMusic size={18} stroke={1.5} />
             </div>
           )}
         </div>
@@ -231,7 +241,11 @@ export const VoidPlayer = ({ isExpanded }) => {
           />
           {/* Play/Pause Overlay */}
           <div className={`absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity ${isPlaying ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
-            <i className={`fas ${isPlaying ? 'fa-pause' : 'fa-play'} text-white text-sm ${!isPlaying ? 'ml-0.5' : ''}`} />
+            {isPlaying ? (
+              <IconPlayerPause size={16} stroke={2} className="text-white" />
+            ) : (
+              <IconPlayerPlay size={16} stroke={2} className="text-white ml-0.5" />
+            )}
           </div>
         </div>
 
@@ -268,7 +282,7 @@ export const VoidPlayer = ({ isExpanded }) => {
             className={`w-6 h-6 flex items-center justify-center rounded transition-colors ${showPlaylist ? 'bg-[var(--void-accent-yellow)] text-white' : 'text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)]'}`}
             title="Playlist"
           >
-            <i className="fas fa-list text-[10px]" />
+            <IconList size={12} stroke={1.5} />
           </button>
           
           {/* Prev/Next Buttons (horizontal) */}
@@ -278,14 +292,14 @@ export const VoidPlayer = ({ isExpanded }) => {
               className="w-5 h-5 flex items-center justify-center text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] transition-colors"
               title="Previous"
             >
-              <i className="fas fa-step-backward text-[9px]" />
+              <IconPlayerTrackPrev size={11} stroke={1.5} />
             </button>
             <button 
               onClick={playNext}
               className="w-5 h-5 flex items-center justify-center text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] transition-colors"
               title="Next"
             >
-              <i className="fas fa-step-forward text-[9px]" />
+              <IconPlayerTrackNext size={11} stroke={1.5} />
             </button>
           </div>
         </div>
@@ -309,10 +323,10 @@ export const VoidPlayer = ({ isExpanded }) => {
                 index === currentTrack ? 'text-[var(--void-accent-yellow)] font-medium' : 'text-[var(--void-text-secondary)]'
               }`}>
                 {index === currentTrack && isPlaying && (
-                  <i className="fas fa-volume-up text-[9px] flex-shrink-0" />
+                  <IconVolume size={11} stroke={1.5} className="flex-shrink-0" />
                 )}
                 {index === currentTrack && !isPlaying && (
-                  <i className="fas fa-pause text-[9px] flex-shrink-0" />
+                  <IconPlayerPause size={11} stroke={1.5} className="flex-shrink-0" />
                 )}
                 {index !== currentTrack && (
                   <span className="w-3 text-center font-mono text-[9px] text-[var(--void-text-muted)] flex-shrink-0">{index + 1}</span>

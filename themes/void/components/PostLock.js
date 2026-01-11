@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { IconLock, IconAlertTriangle } from '@tabler/icons-react'
 
 /**
  * PostLock Component - Password Protection
@@ -24,7 +25,7 @@ export const PostLock = ({ validPassword }) => {
         {/* Lock Icon */}
         <div className="text-center mb-6">
           <div className="inline-block p-6 bg-yellow-400/10 border border-yellow-400/30 mb-4">
-            <i className="fas fa-lock text-5xl text-yellow-400" />
+            <IconLock size={48} stroke={1.5} className="text-yellow-400" />
           </div>
           <h2 className="text-2xl font-bold text-white mb-2 tech-text">
             RESTRICTED ACCESS
@@ -55,7 +56,7 @@ export const PostLock = ({ validPassword }) => {
             />
             {error && (
               <p className="text-red-500 text-xs mt-2 tech-text">
-                <i className="fas fa-exclamation-triangle mr-1" />
+                <IconAlertTriangle size={12} stroke={1.5} className="inline mr-1" />
                 INVALID_PASSWORD
               </p>
             )}

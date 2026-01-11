@@ -1,9 +1,11 @@
 // import { siteConfig } from '@/lib/config'
+import { IconClock, IconRefresh, IconFolder, IconFileText } from '@tabler/icons-react'
 
 /**
  * PostMeta Component - Minimalist Light Industrial
  * 极简主义/未来感元数据展示
  * No redundant labels ("DATE:", etc.), just pure data and icons.
+ * Tabler Icons for Futuristic Feel
  */
 export const PostMeta = ({ post }) => {
   if (!post) return null
@@ -31,14 +33,14 @@ export const PostMeta = ({ post }) => {
             
             {/* Date */}
             <div className="flex items-center gap-2">
-                <i className="far fa-clock text-[var(--void-text-muted)]" />
+                <IconClock size={14} stroke={1.5} className="text-[var(--void-text-muted)]" />
                 <span>{post.publishDay}</span>
             </div>
 
             {/* Last Update Time */}
             {post.lastEditedDay && post.lastEditedDay !== post.publishDay && (
                 <div className="flex items-center gap-2">
-                    <i className="fas fa-sync-alt text-[var(--void-text-muted)]" />
+                    <IconRefresh size={14} stroke={1.5} className="text-[var(--void-text-muted)]" />
                     <span>UPDATED: {post.lastEditedDay}</span>
                 </div>
             )}
@@ -46,14 +48,14 @@ export const PostMeta = ({ post }) => {
             {/* Category */}
             {post.category && (
                 <div className="flex items-center gap-2">
-                    <i className="far fa-folder text-[var(--void-text-muted)]" />
+                    <IconFolder size={14} stroke={1.5} className="text-[var(--void-text-muted)]" />
                     <span className="font-bold text-[var(--void-text-primary)]">{post.category.toUpperCase()}</span>
                 </div>
             )}
 
             {/* Reading Time / Count */}
             <div className="flex items-center gap-2">
-                <i className="far fa-file-alt text-[var(--void-text-muted)]" />
+                <IconFileText size={14} stroke={1.5} className="text-[var(--void-text-muted)]" />
                 <span>{post.wordCount || '-'} CHARS</span>
             </div>
 

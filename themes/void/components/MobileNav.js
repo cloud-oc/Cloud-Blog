@@ -4,14 +4,60 @@ import SmartLink from '@/components/SmartLink'
 import { siteConfig } from '@/lib/config'
 import VoidPlayer from './VoidPlayer'
 import CONFIG from '../config'
+import {
+  IconHome2,
+  IconFolder,
+  IconTag,
+  IconArchive,
+  IconBriefcase,
+  IconUsers,
+  IconSearch,
+  IconMenu2,
+  IconX,
+  IconMail,
+  IconBrandGithub,
+  IconBrandTwitter,
+  IconBrandBilibili,
+  IconBrandTelegram,
+  IconBrandInstagram,
+  IconBrandYoutube,
+  IconBrandLinkedin,
+  IconBrandWechat,
+  IconPlanet
+} from '@tabler/icons-react'
 
 /**
  * MobileNav Component - Top Navigation for Mobile
  * 移动端顶部导航：左上角头像，右上角汉堡菜单
+ * Tabler Icons for Futuristic Feel
  */
 
 // Avatar image URL
 const AVATAR_URL = 'https://github.com/cloud-oc/picx-images-hosting/blob/master/Origin/Cloud_icon.pfpafpaii.png?raw=true'
+
+// Icon components mapping
+const IconComponents = {
+  Home: IconHome2,
+  Category: IconFolder,
+  Tag: IconTag,
+  Archive: IconArchive,
+  Portfolio: IconBriefcase,
+  Friends: IconUsers,
+  Search: IconSearch
+}
+
+// Social icon components mapping
+const SocialIconComponents = {
+  'CONTACT_GITHUB': IconBrandGithub,
+  'CONTACT_TWITTER': IconBrandTwitter,
+  'CONTACT_BILIBILI': IconBrandBilibili,
+  'CONTACT_TELEGRAM': IconBrandTelegram,
+  'CONTACT_INSTAGRAM': IconBrandInstagram,
+  'CONTACT_YOUTUBE': IconBrandYoutube,
+  'CONTACT_LINKEDIN': IconBrandLinkedin,
+  'CONTACT_WEHCHAT_PUBLIC': IconBrandWechat,
+  'CONTACT_ZHISHIXINGQIU': IconPlanet
+}
 
 export const MobileNav = () => {
   const router = useRouter()
@@ -20,28 +66,28 @@ export const MobileNav = () => {
 
   // All navigation items
   const menuItems = [
-    { name: 'Home', icon: 'fas fa-home', path: '/' },
-    { name: 'Category', icon: 'fas fa-folder', path: '/category', show: siteConfig('VOID_MENU_CATEGORY', null, CONFIG) },
-    { name: 'Tag', icon: 'fas fa-tag', path: '/tag', show: siteConfig('VOID_MENU_TAG', null, CONFIG) },
-    { name: 'Archive', icon: 'fas fa-archive', path: '/archive', show: siteConfig('VOID_MENU_ARCHIVE', null, CONFIG) },
-    { name: 'Portfolio', icon: 'fas fa-briefcase', path: '/portfolio' },
-    { name: 'Friends', icon: 'fas fa-users', path: '/friend' },
-    { name: 'Search', icon: 'fas fa-search', path: '/search', show: siteConfig('VOID_MENU_SEARCH', null, CONFIG) }
+    { name: 'Home', path: '/' },
+    { name: 'Category', path: '/category', show: siteConfig('VOID_MENU_CATEGORY', null, CONFIG) },
+    { name: 'Tag', path: '/tag', show: siteConfig('VOID_MENU_TAG', null, CONFIG) },
+    { name: 'Archive', path: '/archive', show: siteConfig('VOID_MENU_ARCHIVE', null, CONFIG) },
+    { name: 'Portfolio', path: '/portfolio' },
+    { name: 'Friends', path: '/friend' },
+    { name: 'Search', path: '/search', show: siteConfig('VOID_MENU_SEARCH', null, CONFIG) }
   ].filter(item => item.show !== false)
 
   // 社交图标配置 - 使用 contact.config.js 的配置
   const socialLinks = [
-    { key: 'CONTACT_GITHUB', icon: 'fab fa-github', label: 'GitHub' },
-    { key: 'CONTACT_TWITTER', icon: 'fab fa-twitter', label: 'Twitter' },
-    { key: 'CONTACT_WEIBO', icon: 'fab fa-weibo', label: '微博' },
-    { key: 'CONTACT_BILIBILI', icon: 'fab fa-bilibili', label: 'Bilibili' },
-    { key: 'CONTACT_TELEGRAM', icon: 'fab fa-telegram', label: 'Telegram' },
-    { key: 'CONTACT_INSTAGRAM', icon: 'fab fa-instagram', label: 'Instagram' },
-    { key: 'CONTACT_YOUTUBE', icon: 'fab fa-youtube', label: 'YouTube' },
-    { key: 'CONTACT_XIAOHONGSHU', icon: null, svg: '/svg/xiaohongshu.svg', label: '小红书' },
-    { key: 'CONTACT_LINKEDIN', icon: 'fab fa-linkedin', label: 'LinkedIn' },
-    { key: 'CONTACT_ZHISHIXINGQIU', icon: 'fas fa-planet-ringed', label: '知识星球' },
-    { key: 'CONTACT_WEHCHAT_PUBLIC', icon: 'fab fa-weixin', label: '微信公众号' },
+    { key: 'CONTACT_GITHUB', label: 'GitHub' },
+    { key: 'CONTACT_TWITTER', label: 'Twitter' },
+    { key: 'CONTACT_WEIBO', svg: '/svg/weibo.svg', label: '微博' },
+    { key: 'CONTACT_BILIBILI', label: 'Bilibili' },
+    { key: 'CONTACT_TELEGRAM', label: 'Telegram' },
+    { key: 'CONTACT_INSTAGRAM', label: 'Instagram' },
+    { key: 'CONTACT_YOUTUBE', label: 'YouTube' },
+    { key: 'CONTACT_XIAOHONGSHU', svg: '/svg/xiaohongshu.svg', label: '小红书' },
+    { key: 'CONTACT_LINKEDIN', label: 'LinkedIn' },
+    { key: 'CONTACT_ZHISHIXINGQIU', label: '知识星球' },
+    { key: 'CONTACT_WEHCHAT_PUBLIC', label: '微信公众号' },
   ]
 
   // Email
@@ -75,6 +121,25 @@ export const MobileNav = () => {
     }
   }, [isMenuOpen])
 
+  // Render icon component
+  const renderIcon = (name) => {
+    const IconComponent = IconComponents[name]
+    if (!IconComponent) return null
+    return <IconComponent size={20} stroke={1.5} className="w-6 text-center" />
+  }
+
+  // Render social icon
+  const renderSocialIcon = (key, svg, label) => {
+    if (svg) {
+      return <img src={svg} alt={label} className="w-4 h-4 opacity-60" />
+    }
+    const IconComponent = SocialIconComponents[key]
+    if (IconComponent) {
+      return <IconComponent size={16} stroke={1.5} />
+    }
+    return null
+  }
+
   return (
     <>
       {/* Top Navigation Bar */}
@@ -97,7 +162,11 @@ export const MobileNav = () => {
             className="w-14 h-14 flex items-center justify-center text-[var(--void-text-primary)] hover:text-blue-500 transition-colors"
             aria-label="Toggle Menu"
           >
-            <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'} text-2xl`} />
+            {isMenuOpen ? (
+              <IconX size={28} stroke={1.5} />
+            ) : (
+              <IconMenu2 size={28} stroke={1.5} />
+            )}
           </button>
         </div>
       </nav>
@@ -129,7 +198,7 @@ export const MobileNav = () => {
                   : 'text-[var(--void-text-secondary)] hover:bg-[var(--void-bg-secondary)] hover:text-[var(--void-text-primary)]'
               }`}
             >
-              <i className={`${item.icon} w-6 text-center text-lg`} />
+              {renderIcon(item.name)}
               <span className="text-base font-medium">{item.name}</span>
             </SmartLink>
           ))}
@@ -152,7 +221,7 @@ export const MobileNav = () => {
                 title={email}
                 className="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--void-bg-secondary)] text-[var(--void-text-muted)] hover:text-blue-500 hover:bg-blue-500/10 transition-colors"
               >
-                <i className="fas fa-envelope text-sm" />
+                <IconMail size={16} stroke={1.5} />
               </a>
             )}
             {socialLinks.map(social => {
@@ -167,11 +236,7 @@ export const MobileNav = () => {
                   title={social.label}
                   className="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--void-bg-secondary)] text-[var(--void-text-muted)] hover:text-blue-500 hover:bg-blue-500/10 transition-colors"
                 >
-                  {social.svg ? (
-                    <img src={social.svg} alt={social.label} className="w-4 h-4 opacity-60" />
-                  ) : (
-                    <i className={`${social.icon} text-sm`} />
-                  )}
+                  {renderSocialIcon(social.key, social.svg, social.label)}
                 </a>
               )
             })}

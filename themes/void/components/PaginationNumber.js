@@ -1,5 +1,6 @@
 import SmartLink from '@/components/SmartLink'
 import { useRouter } from 'next/router'
+import { IconChevronsLeft, IconChevronLeft, IconChevronRight, IconChevronsRight } from '@tabler/icons-react'
 
 /**
  * PaginationNumber Component - Void Theme Industrial Style
@@ -43,7 +44,7 @@ const PaginationNumber = ({ page, totalPage }) => {
             }`}
             disabled={currentPage === 1}
           >
-            <i className="fas fa-angle-double-left text-xs" />
+            <IconChevronsLeft size={14} stroke={1.5} />
           </button>
         </SmartLink>
 
@@ -66,7 +67,7 @@ const PaginationNumber = ({ page, totalPage }) => {
             }`}
             disabled={!showPrev}
           >
-            <i className="fas fa-angle-left text-xs" />
+            <IconChevronLeft size={14} stroke={1.5} />
           </button>
         </SmartLink>
 
@@ -91,7 +92,7 @@ const PaginationNumber = ({ page, totalPage }) => {
             }`}
             disabled={!showNext}
           >
-            <i className="fas fa-angle-right text-xs" />
+            <IconChevronRight size={14} stroke={1.5} />
           </button>
         </SmartLink>
 
@@ -111,7 +112,7 @@ const PaginationNumber = ({ page, totalPage }) => {
             }`}
             disabled={currentPage === totalPage}
           >
-            <i className="fas fa-angle-double-right text-xs" />
+            <IconChevronsRight size={14} stroke={1.5} />
           </button>
         </SmartLink>
       </div>

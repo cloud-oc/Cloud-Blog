@@ -4,15 +4,59 @@ import SmartLink from '@/components/SmartLink'
 import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
 import { VoidPlayer } from './VoidPlayer'
+import {
+  IconHome2,
+  IconFolder,
+  IconTag,
+  IconArchive,
+  IconBriefcase,
+  IconUsers,
+  IconSearch,
+  IconAddressBook,
+  IconMail,
+  IconBrandGithub,
+  IconBrandTwitter,
+  IconBrandBilibili,
+  IconBrandTelegram,
+  IconBrandInstagram,
+  IconBrandYoutube,
+  IconBrandLinkedin,
+  IconBrandWechat,
+  IconPlanet
+} from '@tabler/icons-react'
 
 /**
  * SideNav Component - Endfield Intelligent Sidebar
  * 智能侧边栏：默认收起，悬停展开
- * Light Industrial Aesthetic
+ * Light Industrial Aesthetic - Tabler Icons for Futuristic Feel
  */
 
 // Avatar image URL
 const AVATAR_URL = 'https://github.com/cloud-oc/picx-images-hosting/blob/master/Origin/Cloud_icon.pfpafpaii.png?raw=true'
+
+// Icon components mapping
+const IconComponents = {
+  Home: IconHome2,
+  Category: IconFolder,
+  Tag: IconTag,
+  Archive: IconArchive,
+  Portfolio: IconBriefcase,
+  Friends: IconUsers,
+  Search: IconSearch
+}
+
+// Social icon components mapping
+const SocialIconComponents = {
+  'CONTACT_GITHUB': IconBrandGithub,
+  'CONTACT_TWITTER': IconBrandTwitter,
+  'CONTACT_BILIBILI': IconBrandBilibili,
+  'CONTACT_TELEGRAM': IconBrandTelegram,
+  'CONTACT_INSTAGRAM': IconBrandInstagram,
+  'CONTACT_YOUTUBE': IconBrandYoutube,
+  'CONTACT_LINKEDIN': IconBrandLinkedin,
+  'CONTACT_WEHCHAT_PUBLIC': IconBrandWechat,
+  'CONTACT_ZHISHIXINGQIU': IconPlanet
+}
 
 export const SideNav = () => {
   const router = useRouter()
@@ -24,28 +68,28 @@ export const SideNav = () => {
 
   // Configure menu items
   const menuItems = [
-    { name: 'Home', icon: 'fas fa-home', path: '/' },
-    { name: 'Category', icon: 'fas fa-folder', path: '/category', show: siteConfig('VOID_MENU_CATEGORY', null, CONFIG) },
-    { name: 'Tag', icon: 'fas fa-tag', path: '/tag', show: siteConfig('VOID_MENU_TAG', null, CONFIG) },
-    { name: 'Archive', icon: 'fas fa-archive', path: '/archive', show: siteConfig('VOID_MENU_ARCHIVE', null, CONFIG) },
-    { name: 'Portfolio', icon: 'fas fa-briefcase', path: '/portfolio' },
-    { name: 'Friends', icon: 'fas fa-users', path: '/friend' },
-    { name: 'Search', icon: 'fas fa-search', path: '/search', show: siteConfig('VOID_MENU_SEARCH', null, CONFIG) }
+    { name: 'Home', path: '/' },
+    { name: 'Category', path: '/category', show: siteConfig('VOID_MENU_CATEGORY', null, CONFIG) },
+    { name: 'Tag', path: '/tag', show: siteConfig('VOID_MENU_TAG', null, CONFIG) },
+    { name: 'Archive', path: '/archive', show: siteConfig('VOID_MENU_ARCHIVE', null, CONFIG) },
+    { name: 'Portfolio', path: '/portfolio' },
+    { name: 'Friends', path: '/friend' },
+    { name: 'Search', path: '/search', show: siteConfig('VOID_MENU_SEARCH', null, CONFIG) }
   ].filter(item => item.show !== false)
 
   // 社交图标配置 - 使用 contact.config.js 的配置
   const socialLinks = [
-    { key: 'CONTACT_GITHUB', icon: 'fab fa-github', label: 'GitHub' },
-    { key: 'CONTACT_TWITTER', icon: 'fab fa-twitter', label: 'Twitter' },
-    { key: 'CONTACT_WEIBO', icon: 'fab fa-weibo', label: '微博' },
-    { key: 'CONTACT_BILIBILI', icon: 'fab fa-bilibili', label: 'Bilibili' },
-    { key: 'CONTACT_TELEGRAM', icon: 'fab fa-telegram', label: 'Telegram' },
-    { key: 'CONTACT_INSTAGRAM', icon: 'fab fa-instagram', label: 'Instagram' },
-    { key: 'CONTACT_YOUTUBE', icon: 'fab fa-youtube', label: 'YouTube' },
-    { key: 'CONTACT_XIAOHONGSHU', icon: null, svg: '/svg/xiaohongshu.svg', label: '小红书' },
-    { key: 'CONTACT_LINKEDIN', icon: 'fab fa-linkedin', label: 'LinkedIn' },
-    { key: 'CONTACT_ZHISHIXINGQIU', icon: 'fas fa-planet-ringed', label: '知识星球' },
-    { key: 'CONTACT_WEHCHAT_PUBLIC', icon: 'fab fa-weixin', label: '微信公众号' },
+    { key: 'CONTACT_GITHUB', label: 'GitHub' },
+    { key: 'CONTACT_TWITTER', label: 'Twitter' },
+    { key: 'CONTACT_WEIBO', svg: '/svg/weibo.svg', label: '微博' },
+    { key: 'CONTACT_BILIBILI', label: 'Bilibili' },
+    { key: 'CONTACT_TELEGRAM', label: 'Telegram' },
+    { key: 'CONTACT_INSTAGRAM', label: 'Instagram' },
+    { key: 'CONTACT_YOUTUBE', label: 'YouTube' },
+    { key: 'CONTACT_XIAOHONGSHU', svg: '/svg/xiaohongshu.svg', label: '小红书' },
+    { key: 'CONTACT_LINKEDIN', label: 'LinkedIn' },
+    { key: 'CONTACT_ZHISHIXINGQIU', label: '知识星球' },
+    { key: 'CONTACT_WEHCHAT_PUBLIC', label: '微信公众号' },
   ]
 
   // 获取邮箱
@@ -87,6 +131,31 @@ export const SideNav = () => {
     }, 50)
     return () => clearTimeout(timer)
   }, [activeTab])
+
+  // Render icon component
+  const renderIcon = (name, isActive) => {
+    const IconComponent = IconComponents[name]
+    if (!IconComponent) return null
+    return (
+      <IconComponent 
+        size={20} 
+        stroke={1.5}
+        className={`transition-all duration-300 ${isActive ? 'scale-110' : ''}`}
+      />
+    )
+  }
+
+  // Render social icon
+  const renderSocialIcon = (key, svg, label) => {
+    if (svg) {
+      return <img src={svg} alt={label} className="w-3 h-3 opacity-60 hover:opacity-100" />
+    }
+    const IconComponent = SocialIconComponents[key]
+    if (IconComponent) {
+      return <IconComponent size={14} stroke={1.5} />
+    }
+    return null
+  }
 
   return (
     <div 
@@ -141,7 +210,7 @@ export const SideNav = () => {
               >
                 {/* Icon Container */}
                 <div className="w-[5rem] flex-shrink-0 flex items-center justify-center">
-                  <i className={`${item.icon} text-lg transition-all duration-300 ${isActive ? 'scale-110' : ''}`} />
+                  {renderIcon(item.name, isActive)}
                 </div>
 
                 {/* Text Label (Reveal on Hover) */}
@@ -163,7 +232,7 @@ export const SideNav = () => {
         {/* Collapsed State: Contact Button with light gray background */}
         <div className={`flex justify-center transition-all duration-300 ${isHovered ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'}`}>
           <div className="w-[2.5rem] h-[2.5rem] flex items-center justify-center bg-gray-200 text-gray-500 rounded cursor-pointer hover:text-white hover:bg-blue-500 transition-colors">
-            <i className="fas fa-address-book text-base" />
+            <IconAddressBook size={18} stroke={1.5} />
           </div>
         </div>
 
@@ -178,12 +247,12 @@ export const SideNav = () => {
                  title={email}
                  className="w-[1.75rem] h-[1.75rem] flex items-center justify-center bg-gray-200 text-gray-500 rounded hover:text-white hover:bg-blue-500 transition-colors flex-shrink-0"
                >
-                 <i className="fas fa-envelope text-xs" />
+                 <IconMail size={14} stroke={1.5} />
                </a>
              )}
              
              {/* Social Links */}
-             {socialLinks.map(({ key, icon, svg, label }) => {
+             {socialLinks.map(({ key, svg, label }) => {
                const url = siteConfig(key)
                if (!url) return null
                return (
@@ -195,11 +264,7 @@ export const SideNav = () => {
                    title={label}
                    className="w-[1.75rem] h-[1.75rem] flex items-center justify-center bg-gray-200 text-gray-500 rounded hover:text-white hover:bg-blue-500 transition-colors flex-shrink-0"
                  >
-                   {svg ? (
-                     <img src={svg} alt={label} className="w-3 h-3 opacity-60 hover:opacity-100" />
-                   ) : (
-                     <i className={`${icon} text-xs`} />
-                   )}
+                   {renderSocialIcon(key, svg, label)}
                  </a>
                )
              })}

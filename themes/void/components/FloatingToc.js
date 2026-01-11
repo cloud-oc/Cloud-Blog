@@ -1,11 +1,13 @@
 import throttle from 'lodash.throttle'
 import { uuidToId } from 'notion-utils'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { IconListTree, IconChevronRight } from '@tabler/icons-react'
 
 /**
  * FloatingToc Component - Void Theme Industrial Style
  * 悬浮目录导航组件 - 右侧悬浮面板设计
  * Floating panel on the right side of the article
+ * Tabler Icons for Futuristic Feel
  */
 const FloatingToc = ({ toc }) => {
   const [activeSection, setActiveSection] = useState(null)
@@ -106,7 +108,11 @@ const FloatingToc = ({ toc }) => {
           }`}
           title={isExpanded ? 'Collapse TOC' : 'Expand TOC'}
         >
-          <i className={`fas ${isExpanded ? 'fa-chevron-right' : 'fa-list-tree'} text-blue-400 text-sm`} />
+          {isExpanded ? (
+            <IconChevronRight size={16} stroke={1.5} className="text-blue-400" />
+          ) : (
+            <IconListTree size={16} stroke={1.5} className="text-blue-400" />
+          )}
         </button>
 
         {/* Expanded Content */}
@@ -115,7 +121,7 @@ const FloatingToc = ({ toc }) => {
             {/* Header */}
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-[var(--void-text-muted)] font-mono text-xs font-bold tracking-widest uppercase flex items-center gap-2">
-                <i className="fas fa-list-tree text-blue-400" />
+                <IconListTree size={14} stroke={1.5} className="text-blue-400" />
                 <span>TOC Index</span>
               </h3>
               <span className="text-[10px] font-mono text-blue-400">{Math.round(progress)}%</span>

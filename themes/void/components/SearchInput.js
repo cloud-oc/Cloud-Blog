@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { IconSearch, IconX } from '@tabler/icons-react'
 
 /**
  * SearchInput Component - Refined Tech Interface
@@ -30,7 +31,7 @@ export const SearchInput = ({ keyword = '', locale }) => {
       <form onSubmit={handleSearch} className="space-y-4">
         {/* Search Label */}
         <div className="flex items-center gap-2 text-[var(--void-accent-yellow)] tech-text text-xs tracking-wider">
-          <i className="fas fa-search" />
+          <IconSearch size={14} stroke={1.5} />
           <span>SEARCH_DATABASE</span>
         </div>
 
@@ -57,7 +58,7 @@ export const SearchInput = ({ keyword = '', locale }) => {
               onClick={handleClear}
               className="absolute right-16 top-1/2 -translate-y-1/2 text-[var(--void-text-muted)] hover:text-red-500 transition-colors px-2"
             >
-              <i className="fas fa-times" />
+              <IconX size={14} stroke={1.5} />
             </button>
           )}
 

@@ -30,6 +30,7 @@ import FloatingToc from './components/FloatingToc'
 import useViewportScale from './components/useViewportScale'
 import CONFIG from './config'
 import { Style } from './style'
+import { IconChevronUp, IconFolder, IconTag, IconLoader2 } from '@tabler/icons-react'
 
 /**
  * Void Theme - Endfield Style
@@ -136,7 +137,7 @@ const LayoutBase = (props) => {
           className="void-button w-12 h-12 flex items-center justify-center hover:scale-110 transition-transform"
           title={locale?.POST?.TOP || '回到顶部'}
         >
-          <i className="fas fa-angle-up text-xl" />
+          <IconChevronUp size={20} stroke={1.5} />
         </button>
       </div>
     </div>
@@ -166,7 +167,7 @@ const LayoutPostList = (props) => {
       {category && (
         <div className="void-card p-6 mb-8">
           <div className="flex items-center gap-3">
-            <i className="fas fa-folder text-[var(--void-text-muted)]" />
+            <IconFolder size={20} stroke={1.5} className="text-[var(--void-text-muted)]" />
             <h2 className="text-3xl font-black text-[var(--void-text-primary)] uppercase tracking-wide">{category}</h2>
           </div>
         </div>
@@ -175,7 +176,7 @@ const LayoutPostList = (props) => {
       {tag && (
         <div className="void-card p-6 mb-8">
           <div className="flex items-center gap-3">
-            <i className="fas fa-tag text-[var(--void-text-muted)]" />
+            <IconTag size={20} stroke={1.5} className="text-[var(--void-text-muted)]" />
             <h2 className="text-3xl font-black text-[var(--void-text-primary)] uppercase tracking-wide">#{tag}</h2>
           </div>
         </div>
@@ -303,7 +304,7 @@ const Layout404 = (props) => {
         </div>
 
         <div className="flex items-center justify-center gap-1 text-cyan-400 mb-8">
-          <i className="fas fa-spinner animate-spin" />
+          <IconLoader2 size={16} stroke={1.5} className="animate-spin" />
           <span className="tech-text text-sm">Redirecting to home...</span>
         </div>
 
@@ -421,7 +422,7 @@ const LayoutCategoryIndex = (props) => {
               <div className="tech-corner p-4 bg-[var(--void-bg-secondary)] hover:bg-[var(--void-bg-tertiary)] border border-[var(--void-border-base)] hover:border-[var(--void-accent-yellow)] transition-all cursor-pointer group">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <i className="fas fa-folder text-[var(--void-accent-cyan)] group-hover:text-[var(--void-accent-yellow)] transition-colors" />
+                    <IconFolder size={16} stroke={1.5} className="text-[var(--void-accent-cyan)] group-hover:text-[var(--void-accent-yellow)] transition-colors" />
                     <span className="text-[var(--void-text-primary)] group-hover:text-[var(--void-accent-yellow)] transition-colors">
                       {category.name}
                     </span>

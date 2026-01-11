@@ -3,6 +3,7 @@
 import throttle from 'lodash.throttle'
 import { uuidToId } from 'notion-utils'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { IconListTree, IconX } from '@tabler/icons-react'
 
 /**
  * MobileToc Component - Mobile Table of Contents
@@ -98,7 +99,7 @@ const MobileToc = ({ toc }) => {
         className="fixed bottom-20 right-4 z-40 md:hidden w-12 h-12 bg-[var(--void-bg-primary)] border border-[var(--void-border-base)] shadow-lg flex items-center justify-center text-[var(--void-text-muted)] hover:text-blue-400 hover:border-blue-400 transition-all"
         title="目录"
       >
-        <i className="fas fa-list-tree text-lg" />
+        <IconListTree size={20} stroke={1.5} />
         {/* Progress indicator ring */}
         <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 48 48">
           <circle
@@ -132,7 +133,7 @@ const MobileToc = ({ toc }) => {
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--void-border-base)] bg-[var(--void-bg-secondary)]">
           <div className="flex items-center gap-3">
-            <i className="fas fa-list-tree text-blue-400" />
+            <IconListTree size={16} stroke={1.5} className="text-blue-400" />
             <span className="text-sm font-mono font-bold text-[var(--void-text-primary)] uppercase">TOC INDEX</span>
             <span className="text-xs font-mono text-[var(--void-text-muted)]">{toc.length} sections</span>
           </div>
@@ -140,7 +141,7 @@ const MobileToc = ({ toc }) => {
             onClick={() => setIsOpen(false)}
             className="w-8 h-8 flex items-center justify-center text-[var(--void-text-muted)] hover:text-[var(--void-text-primary)] transition-colors"
           >
-            <i className="fas fa-times text-lg" />
+            <IconX size={20} stroke={1.5} />
           </button>
         </div>
 
