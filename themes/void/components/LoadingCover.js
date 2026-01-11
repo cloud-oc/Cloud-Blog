@@ -165,6 +165,21 @@ const LoadingCover = () => {
       {/* Sweep overlay - full screen cover from left to right */}
       <div className="sweep-overlay" />
 
+      {/* Additional HUD Decorations */}
+      <div className="hud-corner hud-tl" />
+      <div className="hud-corner hud-tr" />
+      <div className="hud-corner hud-bl" />
+      <div className="hud-corner hud-br" />
+      
+      {/* Scan Line Effect */}
+      <div className="scan-line-h" />
+      
+      {/* Version/System Info */}
+      <div className="system-info">
+        <span className="info-label">SYS.VER</span>
+        <span className="info-value">2.0.26</span>
+      </div>
+
       <style jsx>{`
         .loading-cover {
           position: fixed;
@@ -376,6 +391,104 @@ const LoadingCover = () => {
           .status-text {
             font-size: 9px;
             letter-spacing: 1px;
+          }
+        }
+
+        /* HUD Corner Decorations */
+        .hud-corner {
+          position: absolute;
+          width: 40px;
+          height: 40px;
+          pointer-events: none;
+          z-index: 10;
+        }
+        .hud-tl {
+          top: 30px;
+          left: 30px;
+          border-top: 2px solid rgba(96, 165, 250, 0.5);
+          border-left: 2px solid rgba(96, 165, 250, 0.5);
+        }
+        .hud-tr {
+          top: 30px;
+          right: 30px;
+          border-top: 2px solid rgba(96, 165, 250, 0.5);
+          border-right: 2px solid rgba(96, 165, 250, 0.5);
+        }
+        .hud-bl {
+          bottom: 30px;
+          left: 30px;
+          border-bottom: 2px solid rgba(96, 165, 250, 0.5);
+          border-left: 2px solid rgba(96, 165, 250, 0.5);
+        }
+        .hud-br {
+          bottom: 30px;
+          right: 30px;
+          border-bottom: 2px solid rgba(96, 165, 250, 0.5);
+          border-right: 2px solid rgba(96, 165, 250, 0.5);
+        }
+
+        /* Horizontal Scan Line */
+        .scan-line-h {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background: linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(96, 165, 250, 0.6) 20%, 
+            rgba(96, 165, 250, 0.8) 50%,
+            rgba(96, 165, 250, 0.6) 80%, 
+            transparent 100%
+          );
+          animation: scanLineMove 3s linear infinite;
+          pointer-events: none;
+          box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+        }
+
+        @keyframes scanLineMove {
+          0% { top: 0; opacity: 0; }
+          10% { opacity: 0.8; }
+          90% { opacity: 0.8; }
+          100% { top: 100%; opacity: 0; }
+        }
+
+        /* System Info Display */
+        .system-info {
+          position: absolute;
+          bottom: 30px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          font-family: 'Orbitron', 'Share Tech Mono', monospace;
+          z-index: 10;
+        }
+
+        .info-label {
+          font-size: 10px;
+          color: rgba(147, 197, 253, 0.5);
+          letter-spacing: 2px;
+        }
+
+        .info-value {
+          font-size: 12px;
+          color: rgba(147, 197, 253, 0.8);
+          letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+          .hud-corner {
+            width: 25px;
+            height: 25px;
+          }
+          .hud-tl, .hud-tr { top: 15px; }
+          .hud-bl, .hud-br { bottom: 15px; }
+          .hud-tl, .hud-bl { left: 15px; }
+          .hud-tr, .hud-br { right: 15px; }
+          
+          .system-info {
+            bottom: 15px;
           }
         }
       `}</style>

@@ -23,6 +23,7 @@ import {
   IconBrandYoutube,
   IconBrandLinkedin,
   IconBrandWechat,
+  IconBrandWeibo,
   IconPlanet
 } from '@tabler/icons-react'
 
@@ -50,6 +51,7 @@ const IconComponents = {
 const SocialIconComponents = {
   'CONTACT_GITHUB': IconBrandGithub,
   'CONTACT_TWITTER': IconBrandTwitter,
+  'CONTACT_WEIBO': IconBrandWeibo,
   'CONTACT_BILIBILI': IconBrandBilibili,
   'CONTACT_TELEGRAM': IconBrandTelegram,
   'CONTACT_INSTAGRAM': IconBrandInstagram,
@@ -79,7 +81,7 @@ export const MobileNav = () => {
   const socialLinks = [
     { key: 'CONTACT_GITHUB', label: 'GitHub' },
     { key: 'CONTACT_TWITTER', label: 'Twitter' },
-    { key: 'CONTACT_WEIBO', svg: '/svg/weibo.svg', label: '微博' },
+    { key: 'CONTACT_WEIBO', label: '微博' },
     { key: 'CONTACT_BILIBILI', label: 'Bilibili' },
     { key: 'CONTACT_TELEGRAM', label: 'Telegram' },
     { key: 'CONTACT_INSTAGRAM', label: 'Instagram' },

@@ -27,6 +27,7 @@ import MobileNav from './components/MobileNav'
 import MobileToc from './components/MobileToc'
 import ArticleAdjacent from './components/ArticleAdjacent'
 import FloatingToc from './components/FloatingToc'
+import BackgroundEffects from './components/BackgroundEffects'
 import useViewportScale from './components/useViewportScale'
 import CONFIG from './config'
 import { Style } from './style'
@@ -64,6 +65,9 @@ const LayoutBase = (props) => {
 
       {/* 加载动画 */}
       {LOADING_COVER && <LoadingCover />}
+
+      {/* Endfield-style Background Effects */}
+      <BackgroundEffects />
 
       {/* 左侧垂直导航 (桌面端) */}
       <SideNav {...props} />

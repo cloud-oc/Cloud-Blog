@@ -1,6 +1,7 @@
 import SmartLink from '@/components/SmartLink'
 import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
+import { IconArrowRight } from '@tabler/icons-react'
 
 /**
  * BlogPostCard Component - Minimalist Light Industrial
@@ -13,7 +14,7 @@ export const BlogPostCard = ({ post, showSummary = true }) => {
 
   return (
     <SmartLink href={`/${post.slug}`}>
-      <article className={`void-frame group mb-6 flex flex-col md:flex-row overflow-hidden hover:border-[var(--void-border-active)] transition-all duration-300 ${hasCover ? '' : 'p-6 md:p-8'}`}>
+      <article className={`void-frame ef-corner-marks group mb-6 flex flex-col md:flex-row overflow-hidden hover:border-[var(--void-border-active)] transition-all duration-300 ${hasCover ? '' : 'p-6 md:p-8'}`}>
         
         {/* Content - Left side with padding */}
         <div className={`flex-1 flex flex-col justify-center ${hasCover ? 'p-6 md:p-8' : ''}`}>
@@ -53,7 +54,7 @@ export const BlogPostCard = ({ post, showSummary = true }) => {
             
             <div className="flex items-center gap-2 text-[var(--void-text-primary)] text-xs font-bold uppercase tracking-wider group-hover:gap-3 transition-all">
                 <span>Access</span>
-                <i className="fas fa-arrow-right" />
+                <IconArrowRight size={12} stroke={2} className="group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
         </div>
@@ -68,6 +69,8 @@ export const BlogPostCard = ({ post, showSummary = true }) => {
             />
             {/* Minimalist marker overlay */}
             <div className="absolute top-3 right-3 w-2 h-2 bg-[var(--void-accent-yellow)] opacity-0 group-hover:opacity-100 transition-opacity" />
+            {/* Corner decoration on hover */}
+            <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-[var(--void-accent-cyan)] opacity-0 group-hover:opacity-60 transition-opacity" />
           </div>
         )}
       </article>
