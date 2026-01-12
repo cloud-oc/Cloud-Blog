@@ -1,5 +1,8 @@
 // import { siteConfig } from '@/lib/config'
 import SmartLink from '@/components/SmartLink'
+import TimeFillIcon from 'remixicon-react/TimeFillIcon'
+import FolderFillIcon from 'remixicon-react/FolderFillIcon'
+import PriceTag3FillIcon from 'remixicon-react/PriceTag3FillIcon'
 // import CONFIG from '../config'
 
 /**
@@ -15,7 +18,8 @@ export const SideBar = (props) => {
       {/* Latest Posts (Minimalist List) */}
       {latestPosts && latestPosts.length > 0 && (
         <div className="p-2">
-          <h3 className="text-[var(--void-text-muted)] font-mono text-xs font-bold mb-6 tracking-widest uppercase">
+          <h3 className="text-[var(--void-text-muted)] font-mono text-xs font-bold mb-6 tracking-widest uppercase flex items-center gap-2">
+            <TimeFillIcon size={14} className="text-[var(--void-accent-yellow)]" />
             Recent Logs
           </h3>
           <div className="space-y-5 border-l border-[var(--void-border-base)] pl-4">
@@ -42,7 +46,8 @@ export const SideBar = (props) => {
       {/* Categories (Clean List) */}
       {categories && categories.length > 0 && (
         <div className="p-2">
-           <h3 className="text-[var(--void-text-muted)] font-mono text-xs font-bold mb-6 tracking-widest uppercase">
+           <h3 className="text-[var(--void-text-muted)] font-mono text-xs font-bold mb-6 tracking-widest uppercase flex items-center gap-2">
+            <FolderFillIcon size={14} className="text-[var(--void-accent-yellow)]" />
             Data Types
           </h3>
           <div className="flex flex-col gap-2">
@@ -67,7 +72,8 @@ export const SideBar = (props) => {
       {/* Tags Cloud (Clean Pills) */}
       {tags && tags.length > 0 && (
         <div className="p-2">
-          <h3 className="text-[var(--void-text-muted)] font-mono text-xs font-bold mb-6 tracking-widest uppercase">
+          <h3 className="text-[var(--void-text-muted)] font-mono text-xs font-bold mb-6 tracking-widest uppercase flex items-center gap-2">
+            <PriceTag3FillIcon size={14} className="text-[var(--void-accent-yellow)]" />
             Keywords
           </h3>
           <div className="flex flex-wrap gap-2">

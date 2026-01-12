@@ -4,27 +4,25 @@ import SmartLink from '@/components/SmartLink'
 import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
 import { VoidPlayer } from './VoidPlayer'
-import {
-  IconHome2,
-  IconFolder,
-  IconTag,
-  IconArchive,
-  IconBriefcase,
-  IconUsers,
-  IconSearch,
-  IconAddressBook,
-  IconMail,
-  IconBrandGithub,
-  IconBrandTwitter,
-  IconBrandBilibili,
-  IconBrandTelegram,
-  IconBrandInstagram,
-  IconBrandYoutube,
-  IconBrandLinkedin,
-  IconBrandWechat,
-  IconBrandWeibo,
-  IconPlanet
-} from '@tabler/icons-react'
+import Home4FillIcon from 'remixicon-react/Home4FillIcon'
+import Folder2FillIcon from 'remixicon-react/Folder2FillIcon'
+import PriceTag3FillIcon from 'remixicon-react/PriceTag3FillIcon'
+import ArchiveDrawerFillIcon from 'remixicon-react/ArchiveDrawerFillIcon'
+import Briefcase4FillIcon from 'remixicon-react/Briefcase4FillIcon'
+import GroupFillIcon from 'remixicon-react/GroupFillIcon'
+import Search2FillIcon from 'remixicon-react/Search2FillIcon'
+import ContactsBook2FillIcon from 'remixicon-react/ContactsBook2FillIcon'
+import MailSendFillIcon from 'remixicon-react/MailSendFillIcon'
+import GithubFillIcon from 'remixicon-react/GithubFillIcon'
+import TwitterFillIcon from 'remixicon-react/TwitterFillIcon'
+import BilibiliFillIcon from 'remixicon-react/BilibiliFillIcon'
+import TelegramFillIcon from 'remixicon-react/TelegramFillIcon'
+import InstagramFillIcon from 'remixicon-react/InstagramFillIcon'
+import YoutubeFillIcon from 'remixicon-react/YoutubeFillIcon'
+import LinkedinFillIcon from 'remixicon-react/LinkedinFillIcon'
+import WechatFillIcon from 'remixicon-react/WechatFillIcon'
+import WeiboFillIcon from 'remixicon-react/WeiboFillIcon'
+import EarthFillIcon from 'remixicon-react/EarthFillIcon'
 
 /**
  * SideNav Component - Endfield Intelligent Sidebar
@@ -37,27 +35,27 @@ const AVATAR_URL = 'https://github.com/cloud-oc/picx-images-hosting/blob/master/
 
 // Icon components mapping
 const IconComponents = {
-  Home: IconHome2,
-  Category: IconFolder,
-  Tag: IconTag,
-  Archive: IconArchive,
-  Portfolio: IconBriefcase,
-  Friends: IconUsers,
-  Search: IconSearch
+  Home: Home4FillIcon,
+  Category: Folder2FillIcon,
+  Tag: PriceTag3FillIcon,
+  Archive: ArchiveDrawerFillIcon,
+  Portfolio: Briefcase4FillIcon,
+  Friends: GroupFillIcon,
+  Search: Search2FillIcon
 }
 
 // Social icon components mapping
 const SocialIconComponents = {
-  'CONTACT_GITHUB': IconBrandGithub,
-  'CONTACT_TWITTER': IconBrandTwitter,
-  'CONTACT_WEIBO': IconBrandWeibo,
-  'CONTACT_BILIBILI': IconBrandBilibili,
-  'CONTACT_TELEGRAM': IconBrandTelegram,
-  'CONTACT_INSTAGRAM': IconBrandInstagram,
-  'CONTACT_YOUTUBE': IconBrandYoutube,
-  'CONTACT_LINKEDIN': IconBrandLinkedin,
-  'CONTACT_WEHCHAT_PUBLIC': IconBrandWechat,
-  'CONTACT_ZHISHIXINGQIU': IconPlanet
+  'CONTACT_GITHUB': GithubFillIcon,
+  'CONTACT_TWITTER': TwitterFillIcon,
+  'CONTACT_WEIBO': WeiboFillIcon,
+  'CONTACT_BILIBILI': BilibiliFillIcon,
+  'CONTACT_TELEGRAM': TelegramFillIcon,
+  'CONTACT_INSTAGRAM': InstagramFillIcon,
+  'CONTACT_YOUTUBE': YoutubeFillIcon,
+  'CONTACT_LINKEDIN': LinkedinFillIcon,
+  'CONTACT_WEHCHAT_PUBLIC': WechatFillIcon,
+  'CONTACT_ZHISHIXINGQIU': EarthFillIcon
 }
 
 export const SideNav = () => {
@@ -234,22 +232,22 @@ export const SideNav = () => {
         {/* Collapsed State: Contact Button with light gray background */}
         <div className={`flex justify-center transition-all duration-300 ${isHovered ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'}`}>
           <div className="w-[2.5rem] h-[2.5rem] flex items-center justify-center bg-gray-200 text-gray-500 rounded cursor-pointer hover:text-white hover:bg-blue-500 transition-colors">
-            <IconAddressBook size={18} stroke={1.5} />
-          </div>
-        </div>
+             <ContactsBook2FillIcon size={18} />
+           </div>
+         </div>
 
-        {/* Expanded State: Horizontal Icon Row - Single line */}
-        <div className={`px-3 transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
-           {/* Social Icons - Horizontal Layout, single row with light gray background */}
-           <div className="flex items-center justify-center gap-1.5 flex-nowrap">
-             {/* Email Icon */}
-             {email && (
-                 <a 
-                 href={`mailto:${email}`}
-                 title={email}
-                 className="w-[1.75rem] h-[1.75rem] flex items-center justify-center bg-gray-200 text-gray-500 rounded hover:text-white hover:bg-blue-500 transition-colors flex-shrink-0"
-               >
-                 <IconMail size={14} stroke={1.5} />
+         {/* Expanded State: Horizontal Icon Row - Single line */}
+         <div className={`px-3 transition-all duration-300 ${isHovered ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+            {/* Social Icons - Horizontal Layout, single row with light gray background */}
+            <div className="flex items-center justify-center gap-1.5 flex-nowrap">
+              {/* Email Icon */}
+              {email && (
+                  <a 
+                  href={`mailto:${email}`}
+                  title={email}
+                  className="w-[1.75rem] h-[1.75rem] flex items-center justify-center bg-gray-200 text-gray-500 rounded hover:text-white hover:bg-blue-500 transition-colors flex-shrink-0"
+                >
+                  <MailSendFillIcon size={14} />
                </a>
              )}
              
