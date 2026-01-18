@@ -168,7 +168,7 @@ export const SideNav = (props) => {
         <SmartLink href="/cloud09" title="Profile">
           <div className={`transition-all duration-300 cursor-pointer hover:scale-105 ${isHovered ? 'w-[5rem] h-[5rem]' : 'w-[3rem] h-[3rem]'}`}>
             <img 
-              src={AVATAR_URL}
+              src={avatarUrl}
               alt="Avatar"
               className="w-full h-full rounded-full object-cover border-2 border-[var(--endspace-accent-yellow)] shadow-lg hover:border-[var(--endspace-text-primary)] transition-colors"
             />

@@ -148,7 +148,7 @@ export const MobileNav = (props) => {
           <SmartLink href="/cloud09" title="Profile" className="flex-shrink-0 flex items-center">
             <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[var(--endspace-accent-yellow)] hover:border-blue-500 transition-colors">
               <img 
-                src={AVATAR_URL}
+                src={avatarUrl}
                 alt="Avatar"
                 className="w-full h-full object-cover"
               />
