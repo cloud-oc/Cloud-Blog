@@ -26,12 +26,14 @@ export const LoadingCover = () => {
 
   // Smooth progress simulation
   const updateProgress = useCallback((currentProgress) => {
-    if (currentProgress >= 100) return 100
+    if (currentProgress >= 99) return currentProgress
     
-    // Slow down as we approach 100%
-    const remaining = 100 - currentProgress
-    const increment = Math.max(0.5, remaining * 0.15)
-    return Math.min(100, currentProgress + increment)
+    // Slow down as we approach 90%
+    if (currentProgress > 90) return currentProgress // Wait for real load
+    
+    const remaining = 90 - currentProgress
+    const increment = Math.max(0.1, remaining * 0.05)
+    return Math.min(90, currentProgress + increment)
   }, [])
 
   useEffect(() => {
@@ -49,12 +51,12 @@ export const LoadingCover = () => {
     const progressInterval = setInterval(() => {
       setProgress(prev => {
         // If page has loaded, accelerate to 100%
-        if (!onLoading && prev >= 60) {
-          return Math.min(100, prev + 10)
+        if (!onLoading) {
+           return Math.min(100, prev + 5)
         }
         return updateProgress(prev)
       })
-    }, 80)
+    }, 50)
 
     // Fallback: force complete after max wait time (3.5 seconds)
     const maxWaitTimer = setTimeout(() => {
@@ -119,7 +121,7 @@ export const LoadingCover = () => {
         style={{ top: `${progress}%` }}
       >
         <div className="progress-percent">
-          {progress}%
+          {progress.toFixed(1)}%
         </div>
         <div className="status-line">
           <span className="status-dot" />

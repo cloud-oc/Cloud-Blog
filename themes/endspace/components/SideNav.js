@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { useState, useEffect, useRef } from 'react'
 import { siteConfig } from '@/lib/config'
+import { useGlobal } from '@/lib/global'
 import CONFIG from '../config'
 import SmartLink from '@/components/SmartLink'
 import { EndspacePlayer } from './EndspacePlayer'
@@ -26,8 +27,6 @@ import StackFillIcon from 'remixicon-react/StackFillIcon'
 import Compass3FillIcon from 'remixicon-react/Compass3FillIcon'
 import EarthFillIcon from 'remixicon-react/EarthFillIcon'
 import ProfileFillIcon from 'remixicon-react/ProfileFillIcon'
-
-const AVATAR_URL = siteConfig('AVATAR')
 
 // Icon mapping (Conceptual Remix Icons)
 const IconComponents = {
@@ -56,11 +55,15 @@ const SocialIconComponents = {
 
 export const SideNav = () => {
   const router = useRouter()
+  const { siteInfo } = useGlobal()
   const [isHovered, setIsHovered] = useState(false)
   const [activeTab, setActiveTab] = useState('Home')
   const [indicatorStyle, setIndicatorStyle] = useState({ top: 0, opacity: 0 })
   const navRef = useRef(null)
   const itemRefs = useRef({})
+  
+  // Get avatar from Notion siteInfo (same as other themes)
+  const avatarUrl = siteInfo?.icon || siteConfig('AVATAR')
 
   // All navigation items
   const menuItems = [
