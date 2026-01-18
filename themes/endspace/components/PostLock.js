@@ -3,7 +3,6 @@ import { IconLock, IconAlertTriangle } from '@tabler/icons-react'
 
 /**
  * PostLock Component - Password Protection
- * 文章密码保护组件
  */
 export const PostLock = ({ validPassword }) => {
   const [password, setPassword] = useState('')
@@ -51,7 +50,7 @@ export const PostLock = ({ validPassword }) => {
                 text-white focus:border-yellow-400 focus:outline-none
                 transition-colors
               `}
-              placeholder="•••••••�?
+              placeholder="Enter password..."
               autoFocus
             />
             {error && (
