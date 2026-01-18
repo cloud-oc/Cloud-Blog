@@ -34,7 +34,7 @@ import { IconChevronUp, IconFolder, IconTag, IconLoader2 } from '@tabler/icons-r
 
 /**
  * Endspace Theme - Endfield Style
- * 基础布局框架
+ * Base layout framework
  * @returns {JSX.Element}
  * @constructor
  */
@@ -42,17 +42,17 @@ const LayoutBase = (props) => {
   const { children, post } = props
   const { onLoading, fullWidth, locale } = useGlobal()
 
-  // 文章详情页左右布局改为上下布局
+  // Article detail page vertical layout
   const LAYOUT_VERTICAL =
     post && siteConfig('ENDSPACE_ARTICLE_LAYOUT_VERTICAL', false, CONFIG)
 
-  // 网站左右布局颠�?
+  // Website sidebar reverse layout
   const LAYOUT_SIDEBAR_REVERSE = siteConfig('LAYOUT_SIDEBAR_REVERSE', false)
 
-  // 加载动画
+  // Loading animation
   const LOADING_COVER = siteConfig('ENDSPACE_LOADING_COVER', true, CONFIG)
 
-  // 视口等比缩放 - Endfield风格 (使用hook默认参数�?920x1080 横屏 / 390x844 竖屏)
+  // Viewport scale - Endfield style (using hook default params: 1920x1080 landscape / 390x844 portrait)
   useViewportScale()
 
   return (
@@ -62,21 +62,21 @@ const LayoutBase = (props) => {
     >
       <Style />
 
-      {/* 加载动画 */}
+      {/* Loading animation */}
       {LOADING_COVER && <LoadingCover />}
 
-      {/* 左侧垂直导航 (桌面�? */}
+      {/* Left vertical navigation (desktop) */}
       <SideNav {...props} />
 
-      {/* 移动端底部导�?*/}
+      {/* Mobile bottom navigation */}
       <MobileNav />
 
-      {/* 主体内容�?- 使用flex布局实现sticky footer */}
+      {/* Main content area - using flex layout for sticky footer */}
       <div className="md:ml-[5rem] flex flex-col min-h-screen">
-        {/* 标题�?*/}
+        {/* Title bar */}
         {!fullWidth && <TitleBar {...props} />}
 
-        {/* 内容容器 - flex-grow让内容区填满剩余空间 */}
+        {/* Content container - flex-grow to fill remaining space */}
         <div id="container-inner" className="w-full relative z-10 flex-grow">
           <div
             id="container-wrapper"
@@ -85,7 +85,7 @@ const LayoutBase = (props) => {
             ${LAYOUT_VERTICAL ? 'items-center flex-col' : 'items-start'} 
             `}
           >
-            {/* 主要内容 */}
+            {/* Main content */}
             <div
               className={`${
                 fullWidth
@@ -111,7 +111,7 @@ const LayoutBase = (props) => {
               </Transition>
             </div>
 
-            {/* 右侧边栏 */}
+            {/* Right sidebar */}
             {!fullWidth && (
               <div
                 className={`${
@@ -120,68 +120,49 @@ const LayoutBase = (props) => {
                     : 'lg:w-80 xl:w-96 w-full mt-8 md:mt-0 md:sticky md:top-24 flex-shrink-0'
                 }`}
               >
-                <SideBar {...props} toc={props?.post?.toc} />
+                <SideBar {...props} />
               </div>
             )}
           </div>
         </div>
 
-        {/* 页脚 */}
-        <Footer {...props} />
+        {/* Footer */}
+        {!fullWidth && <Footer />}
       </div>
 
-      {/* 回顶按钮 */}
-      <div className="fixed right-4 bottom-4 z-50">
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="endspace-button w-12 h-12 flex items-center justify-center hover:scale-110 transition-transform"
-          title={locale?.POST?.TOP || '回到顶部'}
-        >
-          <IconChevronUp size={20} stroke={1.5} />
-        </button>
+      {/* Scroll to top button */}
+      <div
+        className="fixed right-4 bottom-20 md:bottom-8 z-40 cursor-pointer 
+                   w-10 h-10 flex items-center justify-center 
+                   bg-[var(--endspace-bg-secondary)] hover:bg-[var(--endspace-bg-tertiary)]
+                   border border-[var(--endspace-border-base)] hover:border-[var(--endspace-accent-yellow)]
+                   text-[var(--endspace-text-muted)] hover:text-[var(--endspace-accent-yellow)]
+                   transition-all duration-300"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        <IconChevronUp size={18} stroke={1.5} />
       </div>
     </div>
   )
 }
 
 /**
- * 首页
+ * Homepage Layout
  * @param {*} props
- * @returns 此主题首页就是列�?
+ * @returns
  */
 const LayoutIndex = (props) => {
   return <LayoutPostList {...props} />
 }
 
 /**
- * 文章列表
+ * Article List Layout
  * @param {*} props
  * @returns
  */
 const LayoutPostList = (props) => {
-  const { category, tag } = props
-
   return (
     <>
-      {/* 显示分类 */}
-      {category && (
-        <div className="endspace-card p-6 mb-8">
-          <div className="flex items-center gap-3">
-            <IconFolder size={20} stroke={1.5} className="text-[var(--endspace-text-muted)]" />
-            <h2 className="text-3xl font-black text-[var(--endspace-text-primary)] uppercase tracking-wide">{category}</h2>
-          </div>
-        </div>
-      )}
-      {/* 显示标签 */}
-      {tag && (
-        <div className="endspace-card p-6 mb-8">
-          <div className="flex items-center gap-3">
-            <IconTag size={20} stroke={1.5} className="text-[var(--endspace-text-muted)]" />
-            <h2 className="text-3xl font-black text-[var(--endspace-text-primary)] uppercase tracking-wide">#{tag}</h2>
-          </div>
-        </div>
-      )}
-
       {siteConfig('POST_LIST_STYLE') === 'page' ? (
         <BlogListPage {...props} />
       ) : (
@@ -192,32 +173,25 @@ const LayoutPostList = (props) => {
 }
 
 /**
- * 文章详情�?
+ * Article Detail Layout
  * @param {*} props
  * @returns
  */
 const LayoutSlug = (props) => {
   const { post, lock, validPassword } = props
   const router = useRouter()
-  const waiting404 = siteConfig('POST_WAITING_TIME_FOR_404') * 1000
 
   useEffect(() => {
-    // 404
-    if (!post) {
-      setTimeout(() => {
-        if (isBrowser) {
-          const article = document.querySelector(
-            '#article-wrapper #notion-article'
-          )
-          if (!article) {
-            router.push('/404').then(() => {
-              console.warn('找不到页�?, router.asPath)
-            })
-          }
-        }
-      }, waiting404)
-    }
-  }, [post])
+    // Delay 3 seconds, if loading fails redirect to home
+    setTimeout(() => {
+      const article = isBrowser && document.getElementById('article-wrapper')
+      if (!article) {
+        router.push('/404').then(() => {
+          console.warn('Page not found:', router.asPath)
+        })
+      }
+    }, 3000)
+  }, [router])
 
   return (
     <>
@@ -270,7 +244,7 @@ const LayoutSlug = (props) => {
 }
 
 /**
- * 404�?
+ * 404 Page
  * @param {*} props
  * @returns
  */
@@ -279,12 +253,12 @@ const Layout404 = (props) => {
   const { locale } = useGlobal()
 
   useEffect(() => {
-    // 延时3秒如果加载失败就返回首页
+    // Delay 3 seconds, if loading fails redirect to home
     setTimeout(() => {
       const article = isBrowser && document.getElementById('article-wrapper')
       if (!article) {
         router.push('/').then(() => {
-          // console.log('找不到页�?, router.asPath)
+          // console.log('Page not found:', router.asPath)
         })
       }
     }, 3000)
@@ -331,7 +305,7 @@ const Layout404 = (props) => {
 }
 
 /**
- * 搜索�?
+ * Search Page
  * @param {*} props
  * @returns
  */
@@ -341,7 +315,7 @@ const LayoutSearch = (props) => {
 
   useEffect(() => {
     if (isBrowser) {
-      // 高亮搜索到的结果
+      // Highlight search results
       const container = document.getElementById('posts-wrapper')
       if (keyword && container) {
         replaceSearchResult({
@@ -361,7 +335,7 @@ const LayoutSearch = (props) => {
       <div className="mb-8">
         <SearchInput {...props} />
       </div>
-      {/* 搜索结果列表 - 不使用分�?*/}
+      {/* Search results list - no pagination */}
       <div className="w-full">
         <div id="posts-wrapper">
           {posts?.map((post) => (
@@ -374,9 +348,9 @@ const LayoutSearch = (props) => {
 }
 
 /**
- * 归档列表
+ * Archive List
  * @param {*} props
- * @returns 按照日期将文章分组排�?
+ * @returns Articles grouped by date
  */
 const LayoutArchive = (props) => {
   const { archivePosts } = props
@@ -396,7 +370,7 @@ const LayoutArchive = (props) => {
 }
 
 /**
- * 分类列表
+ * Category Index
  * @param {*} props
  * @returns
  */
@@ -441,7 +415,7 @@ const LayoutCategoryIndex = (props) => {
 }
 
 /**
- * 标签列表
+ * Tag Index
  * @param {*} props
  * @returns
  */

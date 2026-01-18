@@ -4,7 +4,7 @@ import { IconChevronsLeft, IconChevronLeft, IconChevronRight, IconChevronsRight 
 
 /**
  * PaginationNumber Component - Endspace Theme Industrial Style
- * 分页导航组件 - 工业科技风格
+ * Pagination navigation component
  */
 const PaginationNumber = ({ page, totalPage }) => {
   const router = useRouter()
@@ -129,11 +129,11 @@ const PaginationNumber = ({ page, totalPage }) => {
 }
 
 /**
- * 生成分页按钮�?
+ * Generate page buttons
  */
 function generatePages(pagePrefix, page, currentPage, totalPage) {
   const pages = []
-  const groupCount = 5 // 最多显示页签数
+  const groupCount = 5 // Max visible page buttons
 
   if (totalPage <= groupCount) {
     for (let i = 1; i <= totalPage; i++) {
@@ -180,7 +180,7 @@ function generatePages(pagePrefix, page, currentPage, totalPage) {
 }
 
 /**
- * 生成分页按钮对象
+ * Generate page button element
  */
 function getPageElement(pagePrefix, pageNum, currentPage) {
   const isActive = pageNum + '' === currentPage + ''

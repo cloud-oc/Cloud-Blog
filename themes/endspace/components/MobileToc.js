@@ -8,7 +8,7 @@ import CloseFillIcon from 'remixicon-react/CloseFillIcon'
 
 /**
  * MobileToc Component - Mobile Table of Contents
- * 移动端目录组�?- 浮动按钮 + 弹出面板
+ * Floating button + popup panel
  */
 const MobileToc = ({ toc }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -17,7 +17,7 @@ const MobileToc = ({ toc }) => {
   const tRef = useRef(null)
   const tocIds = []
 
-  // 监听滚动事件
+  // Listen to scroll events
   useEffect(() => {
     window.addEventListener('scroll', actionSectionScrollSpy)
     window.addEventListener('scroll', updateProgress)
@@ -29,7 +29,7 @@ const MobileToc = ({ toc }) => {
     }
   }, [])
 
-  // 更新阅读进度
+  // Update reading progress
   const updateProgress = () => {
     const scrollTop = window.scrollY
     const docHeight = document.documentElement.scrollHeight - window.innerHeight
@@ -37,7 +37,7 @@ const MobileToc = ({ toc }) => {
     setProgress(progress)
   }
 
-  // 同步选中目录事件
+  // Sync selected TOC item
   const throttleMs = 200
   const actionSectionScrollSpy = useCallback(
     throttle(() => {
@@ -64,7 +64,7 @@ const MobileToc = ({ toc }) => {
     }, throttleMs)
   )
 
-  // 防止滚动穿�?
+  // Prevent scroll through
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -76,14 +76,14 @@ const MobileToc = ({ toc }) => {
     }
   }, [isOpen])
 
-  // 无目录就直接返回�?
+  // Return null if no TOC
   if (!toc || toc.length < 1) {
     return null
   }
 
   const handleItemClick = (id) => {
     setIsOpen(false)
-    // 延迟滚动以确保面板关�?
+    // Delay scroll to ensure panel closes
     setTimeout(() => {
       const element = document.getElementById(id)
       if (element) {
@@ -98,7 +98,7 @@ const MobileToc = ({ toc }) => {
       <button
         onClick={() => setIsOpen(true)}
         className="fixed bottom-20 right-4 z-40 md:hidden w-12 h-12 bg-[var(--endspace-bg-primary)] border border-[var(--endspace-border-base)] shadow-lg flex items-center justify-center text-[var(--endspace-text-muted)] hover:text-blue-400 hover:border-blue-400 transition-all"
-        title="目录"
+        title="Table of Contents"
       >
         <ListCheck2Icon size={20} />
         {/* Progress indicator ring */}

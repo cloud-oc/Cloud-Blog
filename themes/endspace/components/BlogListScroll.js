@@ -2,7 +2,6 @@ import { BlogPostCard } from './BlogPostCard'
 
 /**
  * BlogListScroll Component - Infinite Scroll List
- * 无限滚动列表组件
  */
 export const BlogListScroll = ({ posts = [] }) => {
   return (

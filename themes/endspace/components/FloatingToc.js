@@ -5,18 +5,17 @@ import { IconListTree, IconChevronRight } from '@tabler/icons-react'
 
 /**
  * FloatingToc Component - Endspace Theme Industrial Style
- * 悬浮目录导航组件 - 右侧悬浮面板设计
- * Floating panel on the right side of the article
+ * Floating TOC navigation component - right side floating panel
  * Tabler Icons for Futuristic Feel
  */
 const FloatingToc = ({ toc }) => {
   const [activeSection, setActiveSection] = useState(null)
   const [progress, setProgress] = useState(0)
-  const [isExpanded, setIsExpanded] = useState(true) // 默认展开
+  const [isExpanded, setIsExpanded] = useState(true) // Default expanded
   const tRef = useRef(null)
   const tocIds = useRef([])
 
-  // 监听滚动事件
+  // Listen to scroll events
   useEffect(() => {
     window.addEventListener('scroll', actionSectionScrollSpy)
     window.addEventListener('scroll', updateProgress)
@@ -28,7 +27,7 @@ const FloatingToc = ({ toc }) => {
     }
   }, [])
 
-  // 更新阅读进度
+  // Update reading progress
   const updateProgress = () => {
     const scrollTop = window.scrollY
     const docHeight = document.documentElement.scrollHeight - window.innerHeight
@@ -36,7 +35,7 @@ const FloatingToc = ({ toc }) => {
     setProgress(progress)
   }
 
-  // 同步选中目录事件
+  // Sync selected TOC item
   const throttleMs = 200
   const actionSectionScrollSpy = useCallback(
     throttle(() => {
@@ -60,7 +59,7 @@ const FloatingToc = ({ toc }) => {
         break
       }
       setActiveSection(currentSectionId)
-      // 自动滚动目录
+      // Auto scroll TOC
       const ids = tocIds.current
       if (tRef.current && ids.length > 0) {
         const index = ids.indexOf(currentSectionId) || 0
@@ -69,12 +68,12 @@ const FloatingToc = ({ toc }) => {
     }, throttleMs)
   )
 
-  // 无目录就直接返回�?
+  // Return null if no TOC
   if (!toc || toc.length < 1) {
     return null
   }
 
-  // 构建 tocIds
+  // Build tocIds
   const ids = toc.map(item => uuidToId(item.id))
   tocIds.current = ids
 

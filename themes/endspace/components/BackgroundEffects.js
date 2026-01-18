@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 
 /**
  * BackgroundEffects Component - Endfield-Inspired Visual Enhancements
- * 背景效果组件 - 终末地风格的视觉增强
  * Includes: HUD corners, scan lines, noise overlay
  */
 const BackgroundEffects = () => {

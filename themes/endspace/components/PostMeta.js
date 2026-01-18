@@ -3,7 +3,7 @@ import { IconClock, IconRefresh, IconFolder, IconFileText } from '@tabler/icons-
 
 /**
  * PostMeta Component - Minimalist Light Industrial
- * 极简主义/未来感元数据展示
+ * Minimalist/futuristic metadata display
  * No redundant labels ("DATE:", etc.), just pure data and icons.
  * Tabler Icons for Futuristic Feel
  */

@@ -7,7 +7,7 @@ import PriceTag3FillIcon from 'remixicon-react/PriceTag3FillIcon'
 
 /**
  * SideBar Component - Light Industrial Minimalist
- * 右侧边栏组件 - 极简白风�?
+ * Right sidebar component - minimalist white style
  * Removed redundant "Operator Info" headers, focused on content.
  */
 export const SideBar = (props) => {

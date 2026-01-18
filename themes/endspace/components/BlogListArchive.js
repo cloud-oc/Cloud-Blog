@@ -2,8 +2,7 @@ import SmartLink from '@/components/SmartLink'
 
 /**
  * BlogListArchive Component - System Log Style
- * 系统日志风格归档�?
- * Refined for strictly Endfield aesthetic
+ * Archive list with Endfield aesthetic
  */
 export const BlogListArchive = ({ archiveTitle, archivePosts }) => {
   return (

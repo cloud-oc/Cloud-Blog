@@ -4,7 +4,7 @@ import { IconSearch, IconX } from '@tabler/icons-react'
 
 /**
  * SearchInput Component - Refined Tech Interface
- * 搜索输入组件
+ * Search input component
  */
 export const SearchInput = ({ keyword = '', locale }) => {
   const router = useRouter()
@@ -67,7 +67,7 @@ export const SearchInput = ({ keyword = '', locale }) => {
             type="submit"
             className="absolute right-1 top-1 bottom-1 px-3 bg-[var(--endspace-bg-tertiary)] text-[var(--endspace-accent-yellow)] hover:bg-[var(--endspace-accent-yellow)] hover:text-black transition-colors font-bold text-xs border-l border-[var(--endspace-border-base)]"
           >
-            �?
+            GO
           </button>
         </div>
 

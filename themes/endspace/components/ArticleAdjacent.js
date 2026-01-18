@@ -5,7 +5,7 @@ import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
 
 /**
- * Endspace Theme - 上一�?下一篇文章导�?
+ * Endspace Theme - Previous/Next Article Navigation
  * Tech industrial style with sharp corners and scan lines
  * @param {prev, next} param0
  * @returns
@@ -15,7 +15,7 @@ export default function ArticleAdjacent({ prev, next }) {
     return null
   }
 
-  // 如果两者都没有，不显示
+  // If both are empty, don't show
   if (!prev && !next) {
     return null
   }
@@ -26,7 +26,7 @@ export default function ArticleAdjacent({ prev, next }) {
       <div className="flex items-center gap-2 mb-4">
         <div className="w-1 h-4 bg-[var(--endspace-accent-yellow)]" />
         <span className="tech-text text-xs text-[var(--endspace-text-muted)]">
-          NAVIGATION // 相关文章
+          NAVIGATION // Related Articles
         </span>
         <div className="flex-1 h-px bg-[var(--endspace-border-base)]" />
       </div>

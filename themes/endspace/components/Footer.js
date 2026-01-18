@@ -2,7 +2,7 @@ import { siteConfig } from '@/lib/config'
 
 /**
  * Footer Component - Dark Industrial / Endfield Style
- * 页脚组件 - 深色工业风格 + 响应式设�?
+ * Responsive footer design
  */
 export const Footer = ({ title }) => {
   const d = new Date()
@@ -39,7 +39,7 @@ export const Footer = ({ title }) => {
           </a>
         </div>
 
-        {/* Row 2: ICP 备案 */}
+        {/* Row 2: ICP Registration */}
         {siteConfig('BEI_AN') && (
           <div className="flex justify-center items-center text-xs font-mono text-gray-500 md:-ml-10">
             {siteConfig('BEI_AN_LINK') ? (

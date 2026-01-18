@@ -5,7 +5,6 @@ import PaginationNumber from './PaginationNumber'
 
 /**
  * BlogListPage Component - Paginated List
- * 分页列表组件
  */
 export const BlogListPage = ({ posts = [], page = 1, postCount }) => {
   const { NOTION_CONFIG } = useGlobal()

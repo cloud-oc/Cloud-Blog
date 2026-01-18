@@ -5,7 +5,7 @@ import { IconArrowRight } from '@tabler/icons-react'
 
 /**
  * BlogPostCard Component - Minimalist Light Industrial
- * 极简/光亮风格文章卡片
+ * Post card with clean design
  */
 export const BlogPostCard = ({ post, showSummary = true }) => {
   const showPreview = siteConfig('ENDSPACE_POST_LIST_PREVIEW', true, CONFIG)
@@ -77,4 +77,3 @@ export const BlogPostCard = ({ post, showSummary = true }) => {
     </SmartLink>
   )
 }
-

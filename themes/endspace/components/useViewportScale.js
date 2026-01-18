@@ -16,9 +16,9 @@ import { isBrowser } from '@/lib/utils'
  */
 const useViewportScale = (options = {}) => {
   const {
-    // 1440x900 作为横屏基准，使内容在常规屏幕上显示更大（类�?Notion 风格�?
+    // 1440x900 as landscape base for larger content on regular screens (similar to Notion style)
     landscapeBase = { width: 1440, height: 900 },
-    // 390x844 作为竖屏基准 (iPhone 14尺寸)
+    // 390x844 as portrait base (iPhone 14 size)
     portraitBase = { width: 390, height: 844 },
     baseFontSize = 16,
     minFontSize = 14,

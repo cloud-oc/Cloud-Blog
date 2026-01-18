@@ -1,87 +1,51 @@
+'use client'
+
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
-import { useEffect, useState, useCallback, useRef } from 'react'
 
 /**
- * LoadingCover Component - Endspace Theme Endfield Style
- * 加载动画组件 - 终末地科技风格
- * 左侧垂直进度条，右侧竖排文字
+ * LoadingCover Component - Endfield Style
+ * Full-screen loading animation with progress bar
  */
-const LoadingCover = () => {
+export const LoadingCover = () => {
   const [isVisible, setIsVisible] = useState(true)
   const [progress, setProgress] = useState(0)
-  const [phase, setPhase] = useState('init') // init, loading, complete, sweeping, fadeout
-  const siteName = 'CLOUD09_SPACE'
+  const [phase, setPhase] = useState('init') // init -> loading -> complete -> sweeping -> fadeout
   const { onLoading } = useGlobal()
-  const startTimeRef = useRef(Date.now())
   const hasCompletedRef = useRef(false)
 
-  // Track real page loading progress
-  const updateProgress = useCallback(() => {
-    const readyState = document.readyState
-    const images = document.images
-    const totalImages = images.length
-    let loadedImages = 0
+  const siteName = siteConfig('TITLE') || 'CLOUD09_SPACE'
+
+  // Smooth progress simulation
+  const updateProgress = useCallback((currentProgress) => {
+    if (currentProgress >= 100) return 100
     
-    for (let i = 0; i < totalImages; i++) {
-      if (images[i].complete) loadedImages++
-    }
-    
-    let calculatedProgress = 0
-    
-    // Document ready state (0-50%)
-    if (readyState === 'loading') calculatedProgress += 15
-    else if (readyState === 'interactive') calculatedProgress += 35
-    else if (readyState === 'complete') calculatedProgress += 50
-    
-    // Image loading (0-30%)
-    if (totalImages > 0) {
-      calculatedProgress += (loadedImages / totalImages) * 30
-    } else {
-      calculatedProgress += 30
-    }
-    
-    // Global loading state from app (0-20%)
-    if (!onLoading) calculatedProgress += 20
-    
-    return Math.min(Math.round(calculatedProgress), 100)
-  }, [onLoading])
+    // Slow down as we approach 100%
+    const remaining = 100 - currentProgress
+    const increment = Math.max(0.5, remaining * 0.15)
+    return Math.min(100, currentProgress + increment)
+  }, [])
 
   useEffect(() => {
-    // Prevent scrollbar on body during loading
-    document.body.style.overflow = 'hidden'
-    
-    const initTimer = setTimeout(() => setPhase('loading'), 150)
+    if (hasCompletedRef.current) return
 
+    // Prevent body scroll during loading
+    document.body.style.overflow = 'hidden'
+
+    // Start loading phase after brief init
+    const initTimer = setTimeout(() => {
+      setPhase('loading')
+    }, 100)
+
+    // Progress simulation
     const progressInterval = setInterval(() => {
-      if (hasCompletedRef.current) return
-      
-      const newProgress = updateProgress()
-      const elapsed = Date.now() - startTimeRef.current
-      
       setProgress(prev => {
-        // Always allow progress to increase based on real calculation
-        if (newProgress > prev) {
-          return newProgress
+        // If page has loaded, accelerate to 100%
+        if (!onLoading && prev >= 60) {
+          return Math.min(100, prev + 10)
         }
-        
-        // If stuck, slowly increment based on time elapsed
-        // But only if we haven't reached the target yet
-        if (prev < newProgress) {
-          return Math.min(prev + 2, newProgress)
-        }
-        
-        // If document is complete and no loading, allow reaching 100
-        if (document.readyState === 'complete' && !onLoading && prev < 100) {
-          return Math.min(prev + 3, 100)
-        }
-        
-        // Slow increment if truly stuck (safety net)
-        if (elapsed > 2000 && prev < 100) {
-          return Math.min(prev + 1, 100)
-        }
-        
-        return prev
+        return updateProgress(prev)
       })
     }, 80)
 
@@ -142,7 +106,7 @@ const LoadingCover = () => {
         </div>
       </div>
 
-      {/* Progress Info - 跟随进度条从上往下移�?*/}
+      {/* Progress Info - follows progress bar from top to bottom */}
       <div 
         className="progress-info"
         style={{ top: `${progress}%` }}
@@ -233,7 +197,7 @@ const LoadingCover = () => {
           text-shadow: 0 0 40px rgba(96, 165, 250, 0.3);
         }
 
-        /* Progress Info - 跟随进度条移�?*/
+        /* Progress Info - follows progress bar */
         .progress-info {
           position: absolute;
           left: 20px;
