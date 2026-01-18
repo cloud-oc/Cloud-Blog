@@ -69,7 +69,7 @@ const LayoutBase = (props) => {
       <SideNav {...props} />
 
       {/* Mobile bottom navigation */}
-      <MobileNav />
+      <MobileNav {...props} />
 
       {/* Main content area - using flex layout for sticky footer */}
       <div className="md:ml-[5rem] flex flex-col min-h-screen">

@@ -54,14 +54,14 @@ const SocialIconComponents = {
   'CONTACT_ZHISHIXINGQIU': IconPlanet
 }
 
-export const MobileNav = () => {
+export const MobileNav = (props) => {
   const router = useRouter()
   const { siteInfo } = useGlobal()
   const [activeTab, setActiveTab] = useState('Home')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   
-  // Get avatar from Notion siteInfo (same as other themes)
-  const avatarUrl = siteInfo?.icon || siteConfig('AVATAR')
+  // Get avatar from props or global context
+  const avatarUrl = props?.siteInfo?.icon || siteInfo?.icon || siteConfig('AVATAR')
 
   // All navigation items
   const menuItems = [

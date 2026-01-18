@@ -53,7 +53,7 @@ const SocialIconComponents = {
   'CONTACT_ZHISHIXINGQIU': IconPlanet
 }
 
-export const SideNav = () => {
+export const SideNav = (props) => {
   const router = useRouter()
   const { siteInfo } = useGlobal()
   const [isHovered, setIsHovered] = useState(false)
@@ -62,8 +62,8 @@ export const SideNav = () => {
   const navRef = useRef(null)
   const itemRefs = useRef({})
   
-  // Get avatar from Notion siteInfo (same as other themes)
-  const avatarUrl = siteInfo?.icon || siteConfig('AVATAR')
+  // Get avatar from props or global context (Hexo way uses props)
+  const avatarUrl = props?.siteInfo?.icon || siteInfo?.icon || siteConfig('AVATAR')
 
   // All navigation items
   const menuItems = [
