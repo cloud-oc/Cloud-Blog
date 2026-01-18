@@ -3,7 +3,7 @@ import CONFIG from '../config'
 
 /**
  * Header Component - DISABLED
- * 顶部导航栏 - 已禁用，返回空
+ * 顶部导航�?- 已禁用，返回�?
  */
 export const Header = (props) => {
   // Return null to completely hide the header

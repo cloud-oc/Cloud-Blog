@@ -3,7 +3,7 @@ import { useGlobal } from '@/lib/global'
 import { useEffect, useState, useCallback, useRef } from 'react'
 
 /**
- * LoadingCover Component - Void Theme Endfield Style
+ * LoadingCover Component - Endspace Theme Endfield Style
  * 加载动画组件 - 终末地科技风格
  * 左侧垂直进度条，右侧竖排文字
  */
@@ -142,7 +142,7 @@ const LoadingCover = () => {
         </div>
       </div>
 
-      {/* Progress Info - 跟随进度条从上往下移动 */}
+      {/* Progress Info - 跟随进度条从上往下移�?*/}
       <div 
         className="progress-info"
         style={{ top: `${progress}%` }}
@@ -233,7 +233,7 @@ const LoadingCover = () => {
           text-shadow: 0 0 40px rgba(96, 165, 250, 0.3);
         }
 
-        /* Progress Info - 跟随进度条移动 */
+        /* Progress Info - 跟随进度条移�?*/
         .progress-info {
           position: absolute;
           left: 20px;

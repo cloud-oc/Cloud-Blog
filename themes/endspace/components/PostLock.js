@@ -21,7 +21,7 @@ export const PostLock = ({ validPassword }) => {
 
   return (
     <div className="flex items-center justify-center min-h-[60vh]">
-      <div className="void-card p-8 max-w-md w-full tech-corner">
+      <div className="endspace-card p-8 max-w-md w-full tech-corner">
         {/* Lock Icon */}
         <div className="text-center mb-6">
           <div className="inline-block p-6 bg-yellow-400/10 border border-yellow-400/30 mb-4">
@@ -51,7 +51,7 @@ export const PostLock = ({ validPassword }) => {
                 text-white focus:border-yellow-400 focus:outline-none
                 transition-colors
               `}
-              placeholder="••••••••"
+              placeholder="•••••••�?
               autoFocus
             />
             {error && (
@@ -64,7 +64,7 @@ export const PostLock = ({ validPassword }) => {
 
           <button
             type="submit"
-            className="void-button-primary w-full py-3 text-center font-bold tech-text"
+            className="endspace-button-primary w-full py-3 text-center font-bold tech-text"
           >
             <span className="mr-2">&gt;&gt;</span>
             UNLOCK

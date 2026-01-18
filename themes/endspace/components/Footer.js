@@ -2,7 +2,7 @@ import { siteConfig } from '@/lib/config'
 
 /**
  * Footer Component - Dark Industrial / Endfield Style
- * 页脚组件 - 深色工业风格 + 响应式设计
+ * 页脚组件 - 深色工业风格 + 响应式设�?
  */
 export const Footer = ({ title }) => {
   const d = new Date()

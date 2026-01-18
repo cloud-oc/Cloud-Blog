@@ -16,7 +16,7 @@ import { isBrowser } from '@/lib/utils'
  */
 const useViewportScale = (options = {}) => {
   const {
-    // 1440x900 作为横屏基准，使内容在常规屏幕上显示更大（类似 Notion 风格）
+    // 1440x900 作为横屏基准，使内容在常规屏幕上显示更大（类�?Notion 风格�?
     landscapeBase = { width: 1440, height: 900 },
     // 390x844 作为竖屏基准 (iPhone 14尺寸)
     portraitBase = { width: 390, height: 844 },
@@ -78,8 +78,8 @@ const useViewportScale = (options = {}) => {
     html.style.fontSize = `${fontSize}px`
     
     // Also set CSS custom properties for additional flexibility
-    html.style.setProperty('--void-viewport-scale', (fontSize / baseFontSize).toString())
-    html.style.setProperty('--void-base-font-size', `${fontSize}px`)
+    html.style.setProperty('--endspace-viewport-scale', (fontSize / baseFontSize).toString())
+    html.style.setProperty('--endspace-base-font-size', `${fontSize}px`)
   }, [landscapeBase, portraitBase, baseFontSize, minFontSize, maxFontSize])
 
   useEffect(() => {
@@ -107,8 +107,8 @@ const useViewportScale = (options = {}) => {
       window.removeEventListener('orientationchange', handleOrientationChange)
       // Reset font-size on unmount
       document.documentElement.style.fontSize = ''
-      document.documentElement.style.removeProperty('--void-viewport-scale')
-      document.documentElement.style.removeProperty('--void-base-font-size')
+      document.documentElement.style.removeProperty('--endspace-viewport-scale')
+      document.documentElement.style.removeProperty('--endspace-base-font-size')
     }
   }, [applyScale])
 

@@ -11,12 +11,12 @@ import {
 } from '@tabler/icons-react'
 
 /**
- * VoidPlayer Component - Compact Sci-Fi Music Player for Void Theme
+ * EndspacePlayer Component - Compact Sci-Fi Music Player for Endspace Theme
  * Integrates with widget.config.js settings
  * Has two states: expanded (full info) and collapsed (rotating cover when playing)
  * Tabler Icons for Futuristic Feel
  */
-export const VoidPlayer = ({ isExpanded }) => {
+export const EndspacePlayer = ({ isExpanded }) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTrack, setCurrentTrack] = useState(0)
   const [progress, setProgress] = useState(0)
@@ -193,7 +193,7 @@ export const VoidPlayer = ({ isExpanded }) => {
   // Collapsed State: Rotating cover when playing, music icon when not
   if (!isExpanded) {
     return (
-      <div className="void-player-mini flex justify-center py-2">
+      <div className="endspace-player-mini flex justify-center py-2">
         <div 
           className={`relative w-10 h-10 cursor-pointer group flex items-center justify-center`}
           onClick={togglePlay}
@@ -201,7 +201,7 @@ export const VoidPlayer = ({ isExpanded }) => {
           {isPlaying ? (
             // Playing: Show rotating album cover
             <>
-              <div className="w-full h-full rounded-full overflow-hidden border-2 border-[var(--void-accent-yellow)] void-player-glow void-player-rotating">
+              <div className="w-full h-full rounded-full overflow-hidden border-2 border-[var(--endspace-accent-yellow)] endspace-player-glow endspace-player-rotating">
                 <img 
                   src={currentAudio.cover || '/default-cover.jpg'} 
                   alt="Cover"
@@ -215,7 +215,7 @@ export const VoidPlayer = ({ isExpanded }) => {
             </>
           ) : (
             // Not playing: Show music icon
-            <div className="w-full h-full rounded-lg flex items-center justify-center bg-[var(--void-bg-secondary)] text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] hover:bg-[var(--void-accent-yellow-dim)] transition-all">
+            <div className="w-full h-full rounded-lg flex items-center justify-center bg-[var(--endspace-bg-secondary)] text-[var(--endspace-text-muted)] hover:text-[var(--endspace-accent-yellow)] hover:bg-[var(--endspace-accent-yellow-dim)] transition-all">
               <IconMusic size={18} stroke={1.5} />
             </div>
           )}
@@ -226,12 +226,12 @@ export const VoidPlayer = ({ isExpanded }) => {
 
   // Expanded State: Compact player with album cover as play button
   return (
-    <div className="void-player-full px-3 py-3 relative">
+    <div className="endspace-player-full px-3 py-3 relative">
       {/* Main Content Row */}
       <div className="flex gap-3 items-start">
         {/* Album Cover with integrated play button */}
         <div 
-          className={`relative flex-shrink-0 w-12 h-12 rounded cursor-pointer overflow-hidden group ${isPlaying ? 'void-player-glow' : ''}`}
+          className={`relative flex-shrink-0 w-12 h-12 rounded cursor-pointer overflow-hidden group ${isPlaying ? 'endspace-player-glow' : ''}`}
           onClick={togglePlay}
         >
           <img 
@@ -251,24 +251,24 @@ export const VoidPlayer = ({ isExpanded }) => {
 
         {/* Track Info */}
         <div className="flex-1 min-w-0 flex flex-col justify-center">
-          <div className="text-sm font-bold text-[var(--void-text-primary)] truncate leading-tight">
+          <div className="text-sm font-bold text-[var(--endspace-text-primary)] truncate leading-tight">
             {currentAudio.name || 'Unknown Track'}
           </div>
-          <div className="text-xs text-[var(--void-text-muted)] truncate mt-0.5">
+          <div className="text-xs text-[var(--endspace-text-muted)] truncate mt-0.5">
             {currentAudio.artist || 'Unknown Artist'}
           </div>
           {/* Progress Bar */}
           <div className="mt-1.5 flex items-center gap-2">
             <div 
-              className="flex-1 h-1 bg-[var(--void-bg-tertiary)] rounded-full cursor-pointer overflow-hidden"
+              className="flex-1 h-1 bg-[var(--endspace-bg-tertiary)] rounded-full cursor-pointer overflow-hidden"
               onClick={handleProgressClick}
             >
               <div 
-                className="h-full bg-[var(--void-accent-yellow)] transition-all duration-200"
+                className="h-full bg-[var(--endspace-accent-yellow)] transition-all duration-200"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <span className="text-[9px] font-mono text-[var(--void-text-muted)] w-8 text-right">
+            <span className="text-[9px] font-mono text-[var(--endspace-text-muted)] w-8 text-right">
               {formatTime(currentTime)}
             </span>
           </div>
@@ -279,7 +279,7 @@ export const VoidPlayer = ({ isExpanded }) => {
           {/* Playlist Toggle Button */}
           <button 
             onClick={(e) => { e.stopPropagation(); setShowPlaylist(!showPlaylist) }}
-            className={`w-6 h-6 flex items-center justify-center rounded transition-colors ${showPlaylist ? 'bg-[var(--void-accent-yellow)] text-white' : 'text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)]'}`}
+            className={`w-6 h-6 flex items-center justify-center rounded transition-colors ${showPlaylist ? 'bg-[var(--endspace-accent-yellow)] text-white' : 'text-[var(--endspace-text-muted)] hover:text-[var(--endspace-accent-yellow)]'}`}
             title="Playlist"
           >
             <IconList size={12} stroke={1.5} />
@@ -289,14 +289,14 @@ export const VoidPlayer = ({ isExpanded }) => {
           <div className="flex items-center gap-0.5">
             <button 
               onClick={playPrev}
-              className="w-5 h-5 flex items-center justify-center text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] transition-colors"
+              className="w-5 h-5 flex items-center justify-center text-[var(--endspace-text-muted)] hover:text-[var(--endspace-accent-yellow)] transition-colors"
               title="Previous"
             >
               <IconPlayerTrackPrev size={11} stroke={1.5} />
             </button>
             <button 
               onClick={playNext}
-              className="w-5 h-5 flex items-center justify-center text-[var(--void-text-muted)] hover:text-[var(--void-accent-yellow)] transition-colors"
+              className="w-5 h-5 flex items-center justify-center text-[var(--endspace-text-muted)] hover:text-[var(--endspace-accent-yellow)] transition-colors"
               title="Next"
             >
               <IconPlayerTrackNext size={11} stroke={1.5} />
@@ -307,20 +307,20 @@ export const VoidPlayer = ({ isExpanded }) => {
 
       {/* Playlist Dropdown */}
       {showPlaylist && (
-        <div className="mt-2 max-h-36 overflow-y-auto bg-[var(--void-bg-secondary)] rounded">
+        <div className="mt-2 max-h-36 overflow-y-auto bg-[var(--endspace-bg-secondary)] rounded">
           {audioList.map((audio, index) => (
             <div 
               key={index}
               onClick={() => selectTrack(index)}
               className={`px-3 py-1.5 cursor-pointer transition-colors ${
                 index === currentTrack 
-                  ? 'bg-[var(--void-accent-yellow-dim)]' 
-                  : 'hover:bg-[var(--void-bg-tertiary)]'
+                  ? 'bg-[var(--endspace-accent-yellow-dim)]' 
+                  : 'hover:bg-[var(--endspace-bg-tertiary)]'
               }`}
             >
               {/* Song name line */}
               <div className={`text-xs truncate flex items-center gap-1.5 ${
-                index === currentTrack ? 'text-[var(--void-accent-yellow)] font-medium' : 'text-[var(--void-text-secondary)]'
+                index === currentTrack ? 'text-[var(--endspace-accent-yellow)] font-medium' : 'text-[var(--endspace-text-secondary)]'
               }`}>
                 {index === currentTrack && isPlaying && (
                   <IconVolume size={11} stroke={1.5} className="flex-shrink-0" />
@@ -329,12 +329,12 @@ export const VoidPlayer = ({ isExpanded }) => {
                   <IconPlayerPause size={11} stroke={1.5} className="flex-shrink-0" />
                 )}
                 {index !== currentTrack && (
-                  <span className="w-3 text-center font-mono text-[9px] text-[var(--void-text-muted)] flex-shrink-0">{index + 1}</span>
+                  <span className="w-3 text-center font-mono text-[9px] text-[var(--endspace-text-muted)] flex-shrink-0">{index + 1}</span>
                 )}
                 <span className="truncate">{audio.name}</span>
               </div>
               {/* Artist name line (smaller) */}
-              <div className="text-[10px] text-[var(--void-text-muted)] truncate pl-4 mt-0.5">
+              <div className="text-[10px] text-[var(--endspace-text-muted)] truncate pl-4 mt-0.5">
                 {audio.artist}
               </div>
             </div>
@@ -345,4 +345,4 @@ export const VoidPlayer = ({ isExpanded }) => {
   )
 }
 
-export default VoidPlayer
+export default EndspacePlayer

@@ -1,7 +1,7 @@
 import React from 'react'
 
 /**
- * Void Theme Styles - Light Industrial Refined
+ * Endspace Theme Styles - Light Industrial Refined
  * Phase 3: "White Endfield" / Laboratory Aesthetic
  */
 export const Style = () => {
@@ -12,36 +12,36 @@ export const Style = () => {
          ============================================ */
       :root {
         /* Backgrounds - Laboratory / Clean Room */
-        --void-bg-base: #F7F7F9;       /* 整体背景 (冷灰白) */
-        --void-bg-primary: #FFFFFF;    /* 容器背景 (纯白) */
-        --void-bg-secondary: #F0F0F2;  /* 次要/悬停背景 (浅灰) */
-        --void-bg-tertiary: #E4E4E7;   /* 装饰性背景 (中灰) */
+        --endspace-bg-base: #F7F7F9;       /* 整体背景 (冷灰�? */
+        --endspace-bg-primary: #FFFFFF;    /* 容器背景 (纯白) */
+        --endspace-bg-secondary: #F0F0F2;  /* 次要/悬停背景 (浅灰) */
+        --endspace-bg-tertiary: #E4E4E7;   /* 装饰性背�?(中灰) */
         
         /* Typography - High Contrast Gunmetal */
-        --void-text-primary: #18181b;  /* 主要文字 (深炭灰) */
-        --void-text-secondary: #52525b;/* 次要文字 (中深灰) */
-        --void-text-muted: #a1a1aa;    /* 装饰性文字 (浅灰) */
+        --endspace-text-primary: #18181b;  /* 主要文字 (深炭�? */
+        --endspace-text-secondary: #52525b;/* 次要文字 (中深�? */
+        --endspace-text-muted: #a1a1aa;    /* 装饰性文�?(浅灰) */
         
         /* Accents - Tech Blue Theme */
-        --void-accent-yellow: #3b82f6; /* Tech Blue accent color */
-        --void-accent-yellow-dim: rgba(59, 130, 246, 0.1);
-        --void-accent-cyan: #06b6d4;   /* Deep Tech Cyan */
-        --void-accent-cyan-dim: rgba(6, 182, 212, 0.1);
+        --endspace-accent-yellow: #3b82f6; /* Tech Blue accent color */
+        --endspace-accent-yellow-dim: rgba(59, 130, 246, 0.1);
+        --endspace-accent-cyan: #06b6d4;   /* Deep Tech Cyan */
+        --endspace-accent-cyan-dim: rgba(6, 182, 212, 0.1);
         
         /* Borders & Lines - Heavy Structure */
-        --void-border-base: #e4e4e7;
-        --void-border-active: #27272a; /* Active borders are dark/heavy */
+        --endspace-border-base: #e4e4e7;
+        --endspace-border-active: #27272a; /* Active borders are dark/heavy */
         
         /* Technical Grid */
-        --void-grid-color: rgba(0, 0, 0, 0.03); /* Subtle dark grid */
+        --endspace-grid-color: rgba(0, 0, 0, 0.03); /* Subtle dark grid */
         
         /* Shadow / Glass */
-        --void-shadow-base: 0 1px 3px rgba(0,0,0,0.05);
-        --void-shadow-hover: 0 10px 30px rgba(0,0,0,0.08);
+        --endspace-shadow-base: 0 1px 3px rgba(0,0,0,0.05);
+        --endspace-shadow-hover: 0 10px 30px rgba(0,0,0,0.08);
         
         /* Viewport Scaling - Set dynamically by useViewportScale hook */
-        --void-viewport-scale: 1;
-        --void-base-font-size: 16px;
+        --endspace-viewport-scale: 1;
+        --endspace-base-font-size: 16px;
       }
 
       /* ============================================
@@ -64,8 +64,8 @@ export const Style = () => {
          Global Base Styles
          ============================================ */
       #theme-void {
-        background-color: var(--void-bg-base);
-        color: var(--void-text-primary);
+        background-color: var(--endspace-bg-base);
+        color: var(--endspace-text-primary);
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         overflow-x: hidden;
       }
@@ -76,8 +76,8 @@ export const Style = () => {
         position: fixed;
         inset: 0;
         background-image: 
-          linear-gradient(var(--void-grid-color) 1px, transparent 1px),
-          linear-gradient(90deg, var(--void-grid-color) 1px, transparent 1px);
+          linear-gradient(var(--endspace-grid-color) 1px, transparent 1px),
+          linear-gradient(90deg, var(--endspace-grid-color) 1px, transparent 1px);
         background-size: 40px 40px;
         z-index: -1;
         pointer-events: none;
@@ -101,44 +101,44 @@ export const Style = () => {
       /* ============================================
          "Float" Container Styles (Glassmorphism)
          ============================================ */
-      .void-frame {
+      .endspace-frame {
         background: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(12px);
-        border: 1px solid var(--void-border-base);
+        border: 1px solid var(--endspace-border-base);
         position: relative;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: var(--void-shadow-base);
+        box-shadow: var(--endspace-shadow-base);
       }
 
       /* Corner Markers (Minimalist L-shape) */
-      .void-frame::before {
+      .endspace-frame::before {
         content: '';
         position: absolute;
         top: -1px; left: -1px;
         width: 0; height: 0;
-        border-top: 2px solid var(--void-text-primary);
-        border-left: 2px solid var(--void-text-primary);
+        border-top: 2px solid var(--endspace-text-primary);
+        border-left: 2px solid var(--endspace-text-primary);
         transition: all 0.3s ease;
         opacity: 0;
       }
-      .void-frame::after {
+      .endspace-frame::after {
         content: '';
         position: absolute;
         bottom: -1px; right: -1px;
         width: 0; height: 0;
-        border-bottom: 2px solid var(--void-text-primary);
-        border-right: 2px solid var(--void-text-primary);
+        border-bottom: 2px solid var(--endspace-text-primary);
+        border-right: 2px solid var(--endspace-text-primary);
         transition: all 0.3s ease;
         opacity: 0;
       }
 
       /* Active State: Heavy Corners appear */
-      .void-frame:hover {
-        border-color: var(--void-border-active);
-        box-shadow: var(--void-shadow-hover);
+      .endspace-frame:hover {
+        border-color: var(--endspace-border-active);
+        box-shadow: var(--endspace-shadow-hover);
         transform: translateY(-2px);
       }
-      .void-frame:hover::before, .void-frame:hover::after {
+      .endspace-frame:hover::before, .endspace-frame:hover::after {
         opacity: 1;
         width: 12px; height: 12px;
       }
@@ -147,14 +147,14 @@ export const Style = () => {
          Notion Content Overrides (Light Mode)
          ============================================ */
       #notion-article {
-        color: var(--void-text-primary);
+        color: var(--endspace-text-primary);
         font-size: 1.05rem;
         line-height: 1.75;
       }
 
       /* Headers */
       #notion-article h1, #notion-article h2, #notion-article h3 {
-        color: var(--void-text-primary);
+        color: var(--endspace-text-primary);
         font-weight: 800;
         margin-top: 2.5em;
         margin-bottom: 1em;
@@ -170,14 +170,14 @@ export const Style = () => {
         position: absolute;
         left: 0; top: 0.3em; bottom: 0.3em;
         width: 4px;
-        background: var(--void-accent-yellow);
+        background: var(--endspace-accent-yellow);
       }
 
       /* Quotes */
       #notion-article blockquote {
-        background: var(--void-bg-secondary);
-        border-left: 3px solid var(--void-text-primary);
-        color: var(--void-text-secondary);
+        background: var(--endspace-bg-secondary);
+        border-left: 3px solid var(--endspace-text-primary);
+        color: var(--endspace-text-secondary);
         padding: 1.2rem 1.5rem;
         margin: 2rem 0;
         font-style: italic;
@@ -186,24 +186,24 @@ export const Style = () => {
       /* Lists */
       #notion-article ul li, #notion-article ol li {
         margin-bottom: 0.5em;
-        color: var(--void-text-secondary);
+        color: var(--endspace-text-secondary);
       }
       #notion-article ul li::marker {
-        color: var(--void-accent-cyan);
+        color: var(--endspace-accent-cyan);
         font-weight: bold;
       }
 
       /* Links in Content */
       #notion-article a {
-        color: var(--void-text-primary);
+        color: var(--endspace-text-primary);
         text-decoration: none;
-        border-bottom: 2px solid var(--void-accent-cyan-dim);
+        border-bottom: 2px solid var(--endspace-accent-cyan-dim);
         transition: all 0.2s;
         font-weight: 600;
       }
       #notion-article a:hover {
-        background: var(--void-accent-cyan-dim);
-        border-bottom-color: var(--void-accent-cyan);
+        background: var(--endspace-accent-cyan-dim);
+        border-bottom-color: var(--endspace-accent-cyan);
       }
 
       /* Code Blocks */
@@ -211,16 +211,16 @@ export const Style = () => {
         background: #18181b !important; /* Keep code blocks dark for contrast */
         border: 1px solid rgba(0,0,0,0.1);
         border-radius: 4px !important;
-        box-shadow: var(--void-shadow-base);
+        box-shadow: var(--endspace-shadow-base);
       }
 
       /* ============================================
          Buttons (Cut Corner Aesthetic)
          ============================================ */
-      .void-btn {
+      .endspace-btn {
         background: transparent;
-        border: 2px solid var(--void-border-active);
-        color: var(--void-text-primary);
+        border: 2px solid var(--endspace-border-active);
+        color: var(--endspace-text-primary);
         padding: 0.6rem 1.5rem;
         font-family: 'JetBrains Mono', monospace;
         font-weight: 700;
@@ -232,8 +232,8 @@ export const Style = () => {
         transition: all 0.2s;
       }
       
-      .void-btn:hover {
-        background: var(--void-border-active);
+      .endspace-btn:hover {
+        background: var(--endspace-border-active);
         color: white;
         transform: translateY(-1px);
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -245,7 +245,7 @@ export const Style = () => {
       .scan-line {
         width: 100%;
         height: 1px;
-        background: var(--void-border-base);
+        background: var(--endspace-border-base);
         margin: 1rem 0;
       }
 
@@ -253,8 +253,8 @@ export const Style = () => {
       @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
       .loading-radar {
         width: 24px; height: 24px;
-        border: 2px solid var(--void-border-base);
-        border-top-color: var(--void-text-primary);
+        border: 2px solid var(--endspace-border-base);
+        border-top-color: var(--endspace-text-primary);
         border-radius: 50%;
         animation: spin 0.8s linear infinite;
       }
@@ -276,7 +276,7 @@ export const Style = () => {
         }
 
         /* Reduce padding on mobile */
-        .void-frame {
+        .endspace-frame {
           padding: 1rem !important;
         }
 
@@ -338,7 +338,7 @@ export const Style = () => {
           background-size: 35px 35px;
         }
 
-        .void-frame {
+        .endspace-frame {
           padding: 1.5rem !important;
         }
       }
@@ -354,7 +354,7 @@ export const Style = () => {
           margin-bottom: 1.4em;
         }
 
-        .void-frame {
+        .endspace-frame {
           padding: 2.5rem !important;
         }
 
@@ -374,7 +374,7 @@ export const Style = () => {
           background-size: 50px 50px;
         }
 
-        .void-frame {
+        .endspace-frame {
           padding: 3rem !important;
         }
       }
@@ -389,7 +389,7 @@ export const Style = () => {
       }
 
       /* ============================================
-         VoidPlayer Styles - Sci-Fi Music Player
+         EndspacePlayer Styles - Sci-Fi Music Player
          ============================================ */
       
       /* Rotating album cover animation */
@@ -398,11 +398,11 @@ export const Style = () => {
         to { transform: rotate(360deg); }
       }
       
-      .void-player-rotating {
+      .endspace-player-rotating {
         animation: void-rotate 8s linear infinite;
       }
       
-      .void-player-rotating-slow {
+      .endspace-player-rotating-slow {
         animation: void-rotate 20s linear infinite;
       }
       
@@ -412,35 +412,35 @@ export const Style = () => {
         50% { opacity: 0.6; transform: scale(1.05); }
       }
       
-      .void-player-pulse {
+      .endspace-player-pulse {
         animation: void-pulse 2s ease-in-out infinite;
       }
       
       /* Glow effect for album cover */
-      .void-player-glow {
+      .endspace-player-glow {
         box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
         transition: box-shadow 0.3s ease;
       }
       
-      .void-player-glow:hover {
+      .endspace-player-glow:hover {
         box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
       }
       
       /* Play button glow */
-      .void-player-btn-glow {
+      .endspace-player-btn-glow {
         box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
       }
       
-      .void-player-btn-glow:hover {
+      .endspace-player-btn-glow:hover {
         box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
       }
       
       /* Player container styling */
-      .void-player-full {
+      .endspace-player-full {
         background: transparent;
       }
       
-      .void-player-mini {
+      .endspace-player-mini {
         /* No borders - clean sidebar design */
       }
 
@@ -510,14 +510,14 @@ export const Style = () => {
       .ef-corner-marks::before {
         top: -1px;
         left: -1px;
-        border-top: 2px solid var(--void-accent-yellow);
-        border-left: 2px solid var(--void-accent-yellow);
+        border-top: 2px solid var(--endspace-accent-yellow);
+        border-left: 2px solid var(--endspace-accent-yellow);
       }
       .ef-corner-marks::after {
         bottom: -1px;
         right: -1px;
-        border-bottom: 2px solid var(--void-accent-yellow);
-        border-right: 2px solid var(--void-accent-yellow);
+        border-bottom: 2px solid var(--endspace-accent-yellow);
+        border-right: 2px solid var(--endspace-accent-yellow);
       }
       .ef-corner-marks:hover::before,
       .ef-corner-marks:hover::after {
@@ -535,8 +535,8 @@ export const Style = () => {
         position: absolute;
         top: 0; left: 0;
         width: 12px; height: 12px;
-        border-top: 2px solid var(--void-accent-cyan);
-        border-left: 2px solid var(--void-accent-cyan);
+        border-top: 2px solid var(--endspace-accent-cyan);
+        border-left: 2px solid var(--endspace-accent-cyan);
         opacity: 0.6;
         pointer-events: none;
       }
@@ -545,8 +545,8 @@ export const Style = () => {
         position: absolute;
         bottom: 0; right: 0;
         width: 12px; height: 12px;
-        border-bottom: 2px solid var(--void-accent-cyan);
-        border-right: 2px solid var(--void-accent-cyan);
+        border-bottom: 2px solid var(--endspace-accent-cyan);
+        border-right: 2px solid var(--endspace-accent-cyan);
         opacity: 0.6;
         pointer-events: none;
       }
@@ -570,8 +570,8 @@ export const Style = () => {
         height: 2px;
         background: linear-gradient(90deg, 
           transparent, 
-          var(--void-accent-cyan) 20%, 
-          var(--void-accent-cyan) 80%, 
+          var(--endspace-accent-cyan) 20%, 
+          var(--endspace-accent-cyan) 80%, 
           transparent
         );
         animation: ef-scan-horizontal 4s linear infinite;
@@ -594,8 +594,8 @@ export const Style = () => {
         height: 100%;
         background: linear-gradient(180deg, 
           transparent, 
-          var(--void-accent-cyan) 30%, 
-          var(--void-accent-cyan) 70%, 
+          var(--endspace-accent-cyan) 30%, 
+          var(--endspace-accent-cyan) 70%, 
           transparent
         );
         animation: ef-scan-vertical 6s linear infinite;
@@ -624,8 +624,8 @@ export const Style = () => {
       /* Button with Left Highlight Bar */
       .ef-button {
         position: relative;
-        background: var(--void-bg-primary);
-        border: 1px solid var(--void-border-base);
+        background: var(--endspace-bg-primary);
+        border: 1px solid var(--endspace-border-base);
         padding: 0.75rem 1.5rem 0.75rem 2rem;
         font-family: 'JetBrains Mono', monospace;
         font-weight: 600;
@@ -644,7 +644,7 @@ export const Style = () => {
         transform: translateY(-50%);
         width: 3px;
         height: 55%;
-        background-color: var(--void-accent-yellow);
+        background-color: var(--endspace-accent-yellow);
         transition: all 0.2s ease;
       }
       
@@ -670,9 +670,9 @@ export const Style = () => {
       }
       
       .ef-button:hover {
-        background: var(--void-border-active);
+        background: var(--endspace-border-active);
         color: white;
-        border-color: var(--void-border-active);
+        border-color: var(--endspace-border-active);
       }
       
       .ef-button:hover::before {
@@ -687,8 +687,8 @@ export const Style = () => {
       /* Enhanced Card with texture */
       .ef-card {
         position: relative;
-        background: var(--void-bg-primary);
-        border: 1px solid var(--void-border-base);
+        background: var(--endspace-bg-primary);
+        border: 1px solid var(--endspace-border-base);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
       
@@ -717,7 +717,7 @@ export const Style = () => {
       }
       
       .ef-card:hover {
-        border-color: var(--void-accent-yellow);
+        border-color: var(--endspace-accent-yellow);
         box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
         transform: translateY(-2px);
       }
@@ -732,7 +732,7 @@ export const Style = () => {
         top: -1px;
         left: -1px;
         padding: 0.25rem 0.5rem;
-        background: var(--void-accent-yellow);
+        background: var(--endspace-accent-yellow);
         color: #000;
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.7rem;
@@ -812,11 +812,11 @@ export const Style = () => {
       
       @keyframes ef-border-glow {
         0%, 100% { 
-          border-color: var(--void-border-base);
+          border-color: var(--endspace-border-base);
           box-shadow: none;
         }
         50% { 
-          border-color: var(--void-accent-cyan);
+          border-color: var(--endspace-accent-cyan);
           box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
         }
       }

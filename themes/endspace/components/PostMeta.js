@@ -15,8 +15,8 @@ export const PostMeta = ({ post }) => {
       {/* Header Block */}
       <div className="mb-6 relative">
         {/* Top Identification Line */}
-        <div className="flex items-center gap-3 mb-6 text-xs font-mono text-[var(--void-text-muted)] border-b border-[var(--void-border-base)] pb-2">
-            <span className="font-bold text-[var(--void-text-primary)]">DOC_ID // {post.id?.slice(0,6) || 'UNKNOWN'}</span>
+        <div className="flex items-center gap-3 mb-6 text-xs font-mono text-[var(--endspace-text-muted)] border-b border-[var(--endspace-border-base)] pb-2">
+            <span className="font-bold text-[var(--endspace-text-primary)]">DOC_ID // {post.id?.slice(0,6) || 'UNKNOWN'}</span>
             <span className="flex-1" />
             <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -24,23 +24,23 @@ export const PostMeta = ({ post }) => {
             </span>
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-black text-[var(--void-text-primary)] mb-6 leading-tight tracking-tight">
+        <h1 className="text-4xl md:text-6xl font-black text-[var(--endspace-text-primary)] mb-6 leading-tight tracking-tight">
           {post.title}
         </h1>
 
         {/* Data Grid - Borderless, clean negative space */}
-        <div className="flex flex-wrap items-center gap-x-8 gap-y-4 text-sm font-mono text-[var(--void-text-secondary)]">
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-4 text-sm font-mono text-[var(--endspace-text-secondary)]">
             
             {/* Date */}
             <div className="flex items-center gap-2">
-                <IconClock size={14} stroke={1.5} className="text-[var(--void-text-muted)]" />
+                <IconClock size={14} stroke={1.5} className="text-[var(--endspace-text-muted)]" />
                 <span>{post.publishDay}</span>
             </div>
 
             {/* Last Update Time */}
             {post.lastEditedDay && post.lastEditedDay !== post.publishDay && (
                 <div className="flex items-center gap-2">
-                    <IconRefresh size={14} stroke={1.5} className="text-[var(--void-text-muted)]" />
+                    <IconRefresh size={14} stroke={1.5} className="text-[var(--endspace-text-muted)]" />
                     <span>UPDATED: {post.lastEditedDay}</span>
                 </div>
             )}
@@ -48,14 +48,14 @@ export const PostMeta = ({ post }) => {
             {/* Category */}
             {post.category && (
                 <div className="flex items-center gap-2">
-                    <IconFolder size={14} stroke={1.5} className="text-[var(--void-text-muted)]" />
-                    <span className="font-bold text-[var(--void-text-primary)]">{post.category.toUpperCase()}</span>
+                    <IconFolder size={14} stroke={1.5} className="text-[var(--endspace-text-muted)]" />
+                    <span className="font-bold text-[var(--endspace-text-primary)]">{post.category.toUpperCase()}</span>
                 </div>
             )}
 
             {/* Reading Time / Count */}
             <div className="flex items-center gap-2">
-                <IconFileText size={14} stroke={1.5} className="text-[var(--void-text-muted)]" />
+                <IconFileText size={14} stroke={1.5} className="text-[var(--endspace-text-muted)]" />
                 <span>{post.wordCount || '-'} CHARS</span>
             </div>
 
@@ -63,7 +63,7 @@ export const PostMeta = ({ post }) => {
             {post.tags && post.tags.length > 0 && (
                 <div className="flex items-center gap-2 ml-auto">
                     {post.tags.map(tag => (
-                        <span key={tag} className="px-2 py-1 bg-[var(--void-bg-secondary)] text-[var(--void-text-secondary)] text-xs rounded hover:bg-[var(--void-text-primary)] hover:text-white transition-colors cursor-pointer">
+                        <span key={tag} className="px-2 py-1 bg-[var(--endspace-bg-secondary)] text-[var(--endspace-text-secondary)] text-xs rounded hover:bg-[var(--endspace-text-primary)] hover:text-white transition-colors cursor-pointer">
                             #{tag.toUpperCase()}
                         </span>
                     ))}

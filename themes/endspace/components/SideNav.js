@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import SmartLink from '@/components/SmartLink'
 import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
-import { VoidPlayer } from './VoidPlayer'
+import { EndspacePlayer } from './EndspacePlayer'
 import Home4FillIcon from 'remixicon-react/Home4FillIcon'
 import Folder2FillIcon from 'remixicon-react/Folder2FillIcon'
 import PriceTag3FillIcon from 'remixicon-react/PriceTag3FillIcon'
@@ -69,15 +69,15 @@ export const SideNav = () => {
   // Configure menu items
   const menuItems = [
     { name: 'Home', path: '/' },
-    { name: 'Category', path: '/category', show: siteConfig('VOID_MENU_CATEGORY', null, CONFIG) },
-    { name: 'Tag', path: '/tag', show: siteConfig('VOID_MENU_TAG', null, CONFIG) },
-    { name: 'Archive', path: '/archive', show: siteConfig('VOID_MENU_ARCHIVE', null, CONFIG) },
+    { name: 'Category', path: '/category', show: siteConfig('ENDSPACE_MENU_CATEGORY', null, CONFIG) },
+    { name: 'Tag', path: '/tag', show: siteConfig('ENDSPACE_MENU_TAG', null, CONFIG) },
+    { name: 'Archive', path: '/archive', show: siteConfig('ENDSPACE_MENU_ARCHIVE', null, CONFIG) },
     { name: 'Portfolio', path: '/portfolio' },
     { name: 'Friends', path: '/friend' },
-    { name: 'Search', path: '/search', show: siteConfig('VOID_MENU_SEARCH', null, CONFIG) }
+    { name: 'Search', path: '/search', show: siteConfig('ENDSPACE_MENU_SEARCH', null, CONFIG) }
   ].filter(item => item.show !== false)
 
-  // 社交图标配置 - 使用 contact.config.js 的配置
+  // 社交图标配置 - 使用 contact.config.js 的配�?
   const socialLinks = [
     { key: 'CONTACT_GITHUB', label: 'GitHub' },
     { key: 'CONTACT_TWITTER', label: 'Twitter' },
@@ -86,10 +86,10 @@ export const SideNav = () => {
     { key: 'CONTACT_TELEGRAM', label: 'Telegram' },
     { key: 'CONTACT_INSTAGRAM', label: 'Instagram' },
     { key: 'CONTACT_YOUTUBE', label: 'YouTube' },
-    { key: 'CONTACT_XIAOHONGSHU', svg: '/svg/xiaohongshu.svg', label: '小红书' },
+    { key: 'CONTACT_XIAOHONGSHU', svg: '/svg/xiaohongshu.svg', label: '小红�? },
     { key: 'CONTACT_LINKEDIN', label: 'LinkedIn' },
     { key: 'CONTACT_ZHISHIXINGQIU', label: '知识星球' },
-    { key: 'CONTACT_WEHCHAT_PUBLIC', label: '微信公众号' },
+    { key: 'CONTACT_WEHCHAT_PUBLIC', label: '微信公众�? },
   ]
 
   // 获取邮箱
@@ -159,29 +159,29 @@ export const SideNav = () => {
 
   return (
     <div 
-      className={`fixed left-0 top-0 bottom-0 z-40 hidden md:flex flex-col bg-[var(--void-bg-base)] border-r border-[var(--void-border-base)] transition-all duration-300 ease-in-out ${isHovered ? 'w-[16rem] shadow-2xl' : 'w-[5rem]'}`}
+      className={`fixed left-0 top-0 bottom-0 z-40 hidden md:flex flex-col bg-[var(--endspace-bg-base)] border-r border-[var(--endspace-border-base)] transition-all duration-300 ease-in-out ${isHovered ? 'w-[16rem] shadow-2xl' : 'w-[5rem]'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Avatar Section - Top of sidebar, clickable to personal page */}
       <div className="flex-shrink-0 py-6 flex flex-col items-center">
-        <SmartLink href="/cloud09" title="个人页">
+        <SmartLink href="/cloud09" title="个人�?>
           <div className={`transition-all duration-300 cursor-pointer hover:scale-105 ${isHovered ? 'w-[5rem] h-[5rem]' : 'w-[3rem] h-[3rem]'}`}>
             <img 
               src={AVATAR_URL}
               alt="Avatar"
-              className="w-full h-full rounded-full object-cover border-2 border-[var(--void-accent-yellow)] shadow-lg hover:border-[var(--void-text-primary)] transition-colors"
+              className="w-full h-full rounded-full object-cover border-2 border-[var(--endspace-accent-yellow)] shadow-lg hover:border-[var(--endspace-text-primary)] transition-colors"
             />
           </div>
         </SmartLink>
         {/* Author Info - shown when expanded */}
         <div className={`mt-3 text-center transition-all duration-300 overflow-hidden ${isHovered ? 'opacity-100 max-h-24' : 'opacity-0 max-h-0'}`}>
-          <SmartLink href="/cloud09" className="hover:text-[var(--void-accent-yellow)] transition-colors">
-            <div className="text-sm font-bold text-[var(--void-text-primary)] uppercase tracking-wider">
+          <SmartLink href="/cloud09" className="hover:text-[var(--endspace-accent-yellow)] transition-colors">
+            <div className="text-sm font-bold text-[var(--endspace-text-primary)] uppercase tracking-wider">
               {siteConfig('AUTHOR') || 'Cloud'}
             </div>
           </SmartLink>
-          <div className="text-xs text-[var(--void-text-muted)] mt-1 px-4 line-clamp-2">
+          <div className="text-xs text-[var(--endspace-text-muted)] mt-1 px-4 line-clamp-2">
             {siteConfig('BIO') || ''}
           </div>
         </div>
@@ -191,7 +191,7 @@ export const SideNav = () => {
       <div ref={navRef} className="flex-1 py-4 flex flex-col gap-2 overflow-y-auto overflow-x-hidden relative">
         {/* Animated Active Indicator Bar - Higher z-index */}
         <div 
-          className="absolute left-0 w-[0.25rem] h-[3rem] bg-[var(--void-accent-yellow)] transition-all duration-300 ease-out z-10"
+          className="absolute left-0 w-[0.25rem] h-[3rem] bg-[var(--endspace-accent-yellow)] transition-all duration-300 ease-out z-10"
           style={{ top: indicatorStyle.top, opacity: indicatorStyle.opacity }}
         />
         
@@ -203,8 +203,8 @@ export const SideNav = () => {
                 ref={el => itemRefs.current[item.name] = el}
                 className={`relative h-[3rem] flex items-center cursor-pointer transition-all duration-300 group
                   ${isActive 
-                    ? 'bg-[var(--void-bg-secondary)] text-[var(--void-accent-yellow)]' 
-                    : 'text-gray-300 hover:text-[var(--void-text-primary)] hover:bg-[var(--void-bg-secondary)]'
+                    ? 'bg-[var(--endspace-bg-secondary)] text-[var(--endspace-accent-yellow)]' 
+                    : 'text-gray-300 hover:text-[var(--endspace-text-primary)] hover:bg-[var(--endspace-bg-secondary)]'
                   }
                 `}
               >
@@ -224,7 +224,7 @@ export const SideNav = () => {
       </div>
 
       {/* Music Player Section - Above Contact Links */}
-      <VoidPlayer isExpanded={isHovered} />
+      <EndspacePlayer isExpanded={isHovered} />
 
       {/* Contact Links Section - Above arrow */}
       <div className="py-3 transition-all duration-300">
@@ -283,8 +283,8 @@ export const SideNav = () => {
             <div 
               className={`w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent transition-transform duration-300 ${
                 isHovered 
-                  ? 'border-r-[10px] border-r-[var(--void-text-primary)] border-l-0' 
-                  : 'border-l-[10px] border-l-[var(--void-text-primary)] border-r-0'
+                  ? 'border-r-[10px] border-r-[var(--endspace-text-primary)] border-l-0' 
+                  : 'border-l-[10px] border-l-[var(--endspace-text-primary)] border-r-0'
               }`}
             />
           </div>

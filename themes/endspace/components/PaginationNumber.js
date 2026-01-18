@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { IconChevronsLeft, IconChevronLeft, IconChevronRight, IconChevronsRight } from '@tabler/icons-react'
 
 /**
- * PaginationNumber Component - Void Theme Industrial Style
+ * PaginationNumber Component - Endspace Theme Industrial Style
  * 分页导航组件 - 工业科技风格
  */
 const PaginationNumber = ({ page, totalPage }) => {
@@ -22,7 +22,7 @@ const PaginationNumber = ({ page, totalPage }) => {
   return (
     <div className="mt-12 py-6 flex flex-col items-center gap-4">
       {/* Page Info */}
-      <div className="text-xs font-mono text-[var(--void-text-muted)] uppercase tracking-wider">
+      <div className="text-xs font-mono text-[var(--endspace-text-muted)] uppercase tracking-wider">
         PAGE_{currentPage} / {totalPage}_TOTAL
       </div>
 
@@ -37,10 +37,10 @@ const PaginationNumber = ({ page, totalPage }) => {
           passHref
           legacyBehavior>
           <button
-            className={`w-10 h-10 flex items-center justify-center border border-[var(--void-border-base)] font-mono text-sm transition-all ${
+            className={`w-10 h-10 flex items-center justify-center border border-[var(--endspace-border-base)] font-mono text-sm transition-all ${
               currentPage === 1
-                ? 'opacity-30 cursor-not-allowed bg-[var(--void-bg-secondary)] text-[var(--void-text-muted)]'
-                : 'bg-[var(--void-bg-base)] text-[var(--void-text-secondary)] hover:border-blue-400 hover:text-blue-400 hover:bg-[var(--void-bg-secondary)]'
+                ? 'opacity-30 cursor-not-allowed bg-[var(--endspace-bg-secondary)] text-[var(--endspace-text-muted)]'
+                : 'bg-[var(--endspace-bg-base)] text-[var(--endspace-text-secondary)] hover:border-blue-400 hover:text-blue-400 hover:bg-[var(--endspace-bg-secondary)]'
             }`}
             disabled={currentPage === 1}
           >
@@ -60,10 +60,10 @@ const PaginationNumber = ({ page, totalPage }) => {
           passHref
           legacyBehavior>
           <button
-            className={`w-10 h-10 flex items-center justify-center border border-[var(--void-border-base)] font-mono text-sm transition-all ${
+            className={`w-10 h-10 flex items-center justify-center border border-[var(--endspace-border-base)] font-mono text-sm transition-all ${
               !showPrev
-                ? 'opacity-30 cursor-not-allowed bg-[var(--void-bg-secondary)] text-[var(--void-text-muted)]'
-                : 'bg-[var(--void-bg-base)] text-[var(--void-text-secondary)] hover:border-blue-400 hover:text-blue-400 hover:bg-[var(--void-bg-secondary)]'
+                ? 'opacity-30 cursor-not-allowed bg-[var(--endspace-bg-secondary)] text-[var(--endspace-text-muted)]'
+                : 'bg-[var(--endspace-bg-base)] text-[var(--endspace-text-secondary)] hover:border-blue-400 hover:text-blue-400 hover:bg-[var(--endspace-bg-secondary)]'
             }`}
             disabled={!showPrev}
           >
@@ -85,10 +85,10 @@ const PaginationNumber = ({ page, totalPage }) => {
           passHref
           legacyBehavior>
           <button
-            className={`w-10 h-10 flex items-center justify-center border border-[var(--void-border-base)] font-mono text-sm transition-all ${
+            className={`w-10 h-10 flex items-center justify-center border border-[var(--endspace-border-base)] font-mono text-sm transition-all ${
               !showNext
-                ? 'opacity-30 cursor-not-allowed bg-[var(--void-bg-secondary)] text-[var(--void-text-muted)]'
-                : 'bg-[var(--void-bg-base)] text-[var(--void-text-secondary)] hover:border-blue-400 hover:text-blue-400 hover:bg-[var(--void-bg-secondary)]'
+                ? 'opacity-30 cursor-not-allowed bg-[var(--endspace-bg-secondary)] text-[var(--endspace-text-muted)]'
+                : 'bg-[var(--endspace-bg-base)] text-[var(--endspace-text-secondary)] hover:border-blue-400 hover:text-blue-400 hover:bg-[var(--endspace-bg-secondary)]'
             }`}
             disabled={!showNext}
           >
@@ -105,10 +105,10 @@ const PaginationNumber = ({ page, totalPage }) => {
           passHref
           legacyBehavior>
           <button
-            className={`w-10 h-10 flex items-center justify-center border border-[var(--void-border-base)] font-mono text-sm transition-all ${
+            className={`w-10 h-10 flex items-center justify-center border border-[var(--endspace-border-base)] font-mono text-sm transition-all ${
               currentPage === totalPage
-                ? 'opacity-30 cursor-not-allowed bg-[var(--void-bg-secondary)] text-[var(--void-text-muted)]'
-                : 'bg-[var(--void-bg-base)] text-[var(--void-text-secondary)] hover:border-blue-400 hover:text-blue-400 hover:bg-[var(--void-bg-secondary)]'
+                ? 'opacity-30 cursor-not-allowed bg-[var(--endspace-bg-secondary)] text-[var(--endspace-text-muted)]'
+                : 'bg-[var(--endspace-bg-base)] text-[var(--endspace-text-secondary)] hover:border-blue-400 hover:text-blue-400 hover:bg-[var(--endspace-bg-secondary)]'
             }`}
             disabled={currentPage === totalPage}
           >
@@ -118,7 +118,7 @@ const PaginationNumber = ({ page, totalPage }) => {
       </div>
 
       {/* Progress Indicator */}
-      <div className="w-48 h-1 bg-[var(--void-bg-secondary)] overflow-hidden">
+      <div className="w-48 h-1 bg-[var(--endspace-bg-secondary)] overflow-hidden">
         <div 
           className="h-full bg-blue-400 transition-all duration-300"
           style={{ width: `${(currentPage / totalPage) * 100}%` }}
@@ -129,7 +129,7 @@ const PaginationNumber = ({ page, totalPage }) => {
 }
 
 /**
- * 生成分页按钮组
+ * 生成分页按钮�?
  */
 function generatePages(pagePrefix, page, currentPage, totalPage) {
   const pages = []
@@ -154,7 +154,7 @@ function generatePages(pagePrefix, page, currentPage, totalPage) {
     
     if (startPage > 2) {
       pages.push(
-        <div key={-1} className="w-8 h-10 flex items-center justify-center text-[var(--void-text-muted)] font-mono text-xs">
+        <div key={-1} className="w-8 h-10 flex items-center justify-center text-[var(--endspace-text-muted)] font-mono text-xs">
           ...
         </div>
       )
@@ -168,7 +168,7 @@ function generatePages(pagePrefix, page, currentPage, totalPage) {
 
     if (startPage + dynamicGroupCount < totalPage) {
       pages.push(
-        <div key={-2} className="w-8 h-10 flex items-center justify-center text-[var(--void-text-muted)] font-mono text-xs">
+        <div key={-2} className="w-8 h-10 flex items-center justify-center text-[var(--endspace-text-muted)] font-mono text-xs">
           ...
         </div>
       )
@@ -193,7 +193,7 @@ function getPageElement(pagePrefix, pageNum, currentPage) {
       className={`w-10 h-10 flex items-center justify-center border font-mono text-sm transition-all ${
         isActive
           ? 'bg-blue-500 border-blue-500 text-white font-bold'
-          : 'bg-[var(--void-bg-base)] border-[var(--void-border-base)] text-[var(--void-text-secondary)] hover:border-blue-400 hover:text-blue-400'
+          : 'bg-[var(--endspace-bg-base)] border-[var(--endspace-border-base)] text-[var(--endspace-text-secondary)] hover:border-blue-400 hover:text-blue-400'
       }`}
     >
       {pageNum}

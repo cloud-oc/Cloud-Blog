@@ -33,7 +33,7 @@ import { Style } from './style'
 import { IconChevronUp, IconFolder, IconTag, IconLoader2 } from '@tabler/icons-react'
 
 /**
- * Void Theme - Endfield Style
+ * Endspace Theme - Endfield Style
  * 基础布局框架
  * @returns {JSX.Element}
  * @constructor
@@ -44,20 +44,20 @@ const LayoutBase = (props) => {
 
   // 文章详情页左右布局改为上下布局
   const LAYOUT_VERTICAL =
-    post && siteConfig('VOID_ARTICLE_LAYOUT_VERTICAL', false, CONFIG)
+    post && siteConfig('ENDSPACE_ARTICLE_LAYOUT_VERTICAL', false, CONFIG)
 
-  // 网站左右布局颠倒
+  // 网站左右布局颠�?
   const LAYOUT_SIDEBAR_REVERSE = siteConfig('LAYOUT_SIDEBAR_REVERSE', false)
 
   // 加载动画
-  const LOADING_COVER = siteConfig('VOID_LOADING_COVER', true, CONFIG)
+  const LOADING_COVER = siteConfig('ENDSPACE_LOADING_COVER', true, CONFIG)
 
-  // 视口等比缩放 - Endfield风格 (使用hook默认参数：1920x1080 横屏 / 390x844 竖屏)
+  // 视口等比缩放 - Endfield风格 (使用hook默认参数�?920x1080 横屏 / 390x844 竖屏)
   useViewportScale()
 
   return (
     <div
-      id="theme-void"
+      id="theme-endspace"
       className={`${siteConfig('FONT_STYLE')} min-h-screen relative`}
     >
       <Style />
@@ -65,15 +65,15 @@ const LayoutBase = (props) => {
       {/* 加载动画 */}
       {LOADING_COVER && <LoadingCover />}
 
-      {/* 左侧垂直导航 (桌面端) */}
+      {/* 左侧垂直导航 (桌面�? */}
       <SideNav {...props} />
 
-      {/* 移动端底部导航 */}
+      {/* 移动端底部导�?*/}
       <MobileNav />
 
-      {/* 主体内容区 - 使用flex布局实现sticky footer */}
+      {/* 主体内容�?- 使用flex布局实现sticky footer */}
       <div className="md:ml-[5rem] flex flex-col min-h-screen">
-        {/* 标题栏 */}
+        {/* 标题�?*/}
         {!fullWidth && <TitleBar {...props} />}
 
         {/* 内容容器 - flex-grow让内容区填满剩余空间 */}
@@ -134,7 +134,7 @@ const LayoutBase = (props) => {
       <div className="fixed right-4 bottom-4 z-50">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="void-button w-12 h-12 flex items-center justify-center hover:scale-110 transition-transform"
+          className="endspace-button w-12 h-12 flex items-center justify-center hover:scale-110 transition-transform"
           title={locale?.POST?.TOP || '回到顶部'}
         >
           <IconChevronUp size={20} stroke={1.5} />
@@ -147,7 +147,7 @@ const LayoutBase = (props) => {
 /**
  * 首页
  * @param {*} props
- * @returns 此主题首页就是列表
+ * @returns 此主题首页就是列�?
  */
 const LayoutIndex = (props) => {
   return <LayoutPostList {...props} />
@@ -165,19 +165,19 @@ const LayoutPostList = (props) => {
     <>
       {/* 显示分类 */}
       {category && (
-        <div className="void-card p-6 mb-8">
+        <div className="endspace-card p-6 mb-8">
           <div className="flex items-center gap-3">
-            <IconFolder size={20} stroke={1.5} className="text-[var(--void-text-muted)]" />
-            <h2 className="text-3xl font-black text-[var(--void-text-primary)] uppercase tracking-wide">{category}</h2>
+            <IconFolder size={20} stroke={1.5} className="text-[var(--endspace-text-muted)]" />
+            <h2 className="text-3xl font-black text-[var(--endspace-text-primary)] uppercase tracking-wide">{category}</h2>
           </div>
         </div>
       )}
       {/* 显示标签 */}
       {tag && (
-        <div className="void-card p-6 mb-8">
+        <div className="endspace-card p-6 mb-8">
           <div className="flex items-center gap-3">
-            <IconTag size={20} stroke={1.5} className="text-[var(--void-text-muted)]" />
-            <h2 className="text-3xl font-black text-[var(--void-text-primary)] uppercase tracking-wide">#{tag}</h2>
+            <IconTag size={20} stroke={1.5} className="text-[var(--endspace-text-muted)]" />
+            <h2 className="text-3xl font-black text-[var(--endspace-text-primary)] uppercase tracking-wide">#{tag}</h2>
           </div>
         </div>
       )}
@@ -192,7 +192,7 @@ const LayoutPostList = (props) => {
 }
 
 /**
- * 文章详情页
+ * 文章详情�?
  * @param {*} props
  * @returns
  */
@@ -211,7 +211,7 @@ const LayoutSlug = (props) => {
           )
           if (!article) {
             router.push('/404').then(() => {
-              console.warn('找不到页面', router.asPath)
+              console.warn('找不到页�?, router.asPath)
             })
           }
         }
@@ -230,9 +230,9 @@ const LayoutSlug = (props) => {
             <PostMeta post={post} />
 
              {/* Article Content Frame */}
-            <div id="article-wrapper" className="void-frame p-8 md:p-12 mb-12">
+            <div id="article-wrapper" className="endspace-frame p-8 md:p-12 mb-12">
                {/* Content Watermark/Background decoration */}
-               <div className="absolute top-4 right-4 text-[var(--void-text-muted)] opacity-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black pointer-events-none select-none z-0">
+               <div className="absolute top-4 right-4 text-[var(--endspace-text-muted)] opacity-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black pointer-events-none select-none z-0">
                  CLOUD09
                </div>
                
@@ -242,7 +242,7 @@ const LayoutSlug = (props) => {
 
               {/* Footer of the card - Share Bar */}
               {siteConfig('POST_SHARE_BAR_ENABLE') === 'true' && (
-                <div className="mt-12 pt-8 border-t border-[var(--void-border-base)] flex justify-end items-center">
+                <div className="mt-12 pt-8 border-t border-[var(--endspace-border-base)] flex justify-end items-center">
                    <ShareBar post={post} />
                 </div>
               )}
@@ -270,7 +270,7 @@ const LayoutSlug = (props) => {
 }
 
 /**
- * 404页
+ * 404�?
  * @param {*} props
  * @returns
  */
@@ -284,7 +284,7 @@ const Layout404 = (props) => {
       const article = isBrowser && document.getElementById('article-wrapper')
       if (!article) {
         router.push('/').then(() => {
-          // console.log('找不到页面', router.asPath)
+          // console.log('找不到页�?, router.asPath)
         })
       }
     }, 3000)
@@ -292,13 +292,13 @@ const Layout404 = (props) => {
 
   return (
     <div className="flex items-center justify-center min-h-[60vh]">
-      <div className="void-card p-12 text-center tech-corner max-w-2xl mx-auto">
+      <div className="endspace-card p-12 text-center tech-corner max-w-2xl mx-auto">
         <div className="mb-8">
-          <div className="text-8xl font-black text-[var(--void-border-active)] mb-4">
+          <div className="text-8xl font-black text-[var(--endspace-border-active)] mb-4">
             404
           </div>
-          <div className="text-2xl font-bold text-[var(--void-text-primary)] mb-2">PAGE_NOT_FOUND</div>
-          <div className="text-[var(--void-text-muted)] text-sm font-mono">
+          <div className="text-2xl font-bold text-[var(--endspace-text-primary)] mb-2">PAGE_NOT_FOUND</div>
+          <div className="text-[var(--endspace-text-muted)] text-sm font-mono">
             The requested resource could not be located
           </div>
         </div>
@@ -309,7 +309,7 @@ const Layout404 = (props) => {
         </div>
 
         <SmartLink href="/">
-          <button className="void-button-primary px-8 py-3">
+          <button className="endspace-button-primary px-8 py-3">
             <span className="tech-text">RETURN_HOME</span>
           </button>
         </SmartLink>
@@ -331,7 +331,7 @@ const Layout404 = (props) => {
 }
 
 /**
- * 搜索页
+ * 搜索�?
  * @param {*} props
  * @returns
  */
@@ -361,7 +361,7 @@ const LayoutSearch = (props) => {
       <div className="mb-8">
         <SearchInput {...props} />
       </div>
-      {/* 搜索结果列表 - 不使用分页 */}
+      {/* 搜索结果列表 - 不使用分�?*/}
       <div className="w-full">
         <div id="posts-wrapper">
           {posts?.map((post) => (
@@ -376,7 +376,7 @@ const LayoutSearch = (props) => {
 /**
  * 归档列表
  * @param {*} props
- * @returns 按照日期将文章分组排序
+ * @returns 按照日期将文章分组排�?
  */
 const LayoutArchive = (props) => {
   const { archivePosts } = props
@@ -404,8 +404,8 @@ const LayoutCategoryIndex = (props) => {
   const { categoryOptions } = props
   return (
     <>
-      <div className="void-card p-8">
-        <h2 className="text-3xl font-black text-[var(--void-text-primary)] mb-8 uppercase tracking-wide">
+      <div className="endspace-card p-8">
+        <h2 className="text-3xl font-black text-[var(--endspace-text-primary)] mb-8 uppercase tracking-wide">
           ALL_CATEGORIES
         </h2>
         <div
@@ -419,15 +419,15 @@ const LayoutCategoryIndex = (props) => {
               passHref
               legacyBehavior
             >
-              <div className="tech-corner p-4 bg-[var(--void-bg-secondary)] hover:bg-[var(--void-bg-tertiary)] border border-[var(--void-border-base)] hover:border-[var(--void-accent-yellow)] transition-all cursor-pointer group">
+              <div className="tech-corner p-4 bg-[var(--endspace-bg-secondary)] hover:bg-[var(--endspace-bg-tertiary)] border border-[var(--endspace-border-base)] hover:border-[var(--endspace-accent-yellow)] transition-all cursor-pointer group">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <IconFolder size={16} stroke={1.5} className="text-[var(--void-accent-cyan)] group-hover:text-[var(--void-accent-yellow)] transition-colors" />
-                    <span className="text-[var(--void-text-primary)] group-hover:text-[var(--void-accent-yellow)] transition-colors">
+                    <IconFolder size={16} stroke={1.5} className="text-[var(--endspace-accent-cyan)] group-hover:text-[var(--endspace-accent-yellow)] transition-colors" />
+                    <span className="text-[var(--endspace-text-primary)] group-hover:text-[var(--endspace-accent-yellow)] transition-colors">
                       {category.name}
                     </span>
                   </div>
-                  <span className="tech-text text-xs text-[var(--void-text-muted)]">
+                  <span className="tech-text text-xs text-[var(--endspace-text-muted)]">
                     [{category.count}]
                   </span>
                 </div>
@@ -449,8 +449,8 @@ const LayoutTagIndex = (props) => {
   const { tagOptions } = props
   return (
     <>
-      <div className="void-frame p-8">
-        <h2 className="text-3xl font-black text-[var(--void-text-primary)] mb-8 uppercase tracking-wide">
+      <div className="endspace-frame p-8">
+        <h2 className="text-3xl font-black text-[var(--endspace-text-primary)] mb-8 uppercase tracking-wide">
           ALL_TAGS
         </h2>
         <div id="tags-list" className="flex flex-wrap gap-3">
@@ -459,7 +459,7 @@ const LayoutTagIndex = (props) => {
               key={tag.name}
               href={`/tag/${encodeURIComponent(tag.name)}`}
               passHref
-              className="px-4 py-2 bg-[var(--void-bg-secondary)] text-[var(--void-text-secondary)] border border-[var(--void-border-base)] tech-text hover:bg-[var(--void-text-primary)] hover:text-white hover:border-[var(--void-text-primary)] transition-all text-sm rounded-sm"
+              className="px-4 py-2 bg-[var(--endspace-bg-secondary)] text-[var(--endspace-text-secondary)] border border-[var(--endspace-border-base)] tech-text hover:bg-[var(--endspace-text-primary)] hover:text-white hover:border-[var(--endspace-text-primary)] transition-all text-sm rounded-sm"
             >
               <div>
                 #{tag.name}
