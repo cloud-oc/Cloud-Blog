@@ -1,51 +1,68 @@
-import React from 'react'
-
 /**
- * Endspace Theme Styles - Light Industrial Refined
- * Phase 3: "White Endfield" / Laboratory Aesthetic
+ * Endspace Theme - Global Styles (JSX)
+ * Light Industrial / Endfield-inspired aesthetic
  */
+
 export const Style = () => {
   return (
     <style jsx global>{`
       /* ============================================
-         Light Industrial Color Scheme
+         CSS Custom Properties - Light Industrial Theme
          ============================================ */
       :root {
-        /* Backgrounds - Laboratory / Clean Room */
-        --endspace-bg-base: #F7F7F9;       /* 整体背景 (冷灰�? */
-        --endspace-bg-primary: #FFFFFF;    /* 容器背景 (纯白) */
-        --endspace-bg-secondary: #F0F0F2;  /* 次要/悬停背景 (浅灰) */
-        --endspace-bg-tertiary: #E4E4E7;   /* 装饰性背�?(中灰) */
+        /* Ethereal Whites & Grays */
+        --endspace-bg-base: #fafafa;
+        --endspace-bg-primary: #ffffff;
+        --endspace-bg-secondary: #f4f4f5;
+        --endspace-bg-tertiary: #e4e4e7;
         
-        /* Typography - High Contrast Gunmetal */
-        --endspace-text-primary: #18181b;  /* 主要文字 (深炭�? */
-        --endspace-text-secondary: #52525b;/* 次要文字 (中深�? */
-        --endspace-text-muted: #a1a1aa;    /* 装饰性文�?(浅灰) */
+        /* Dark Text (High Contrast) */
+        --endspace-text-primary: #18181b;
+        --endspace-text-secondary: #52525b;
+        --endspace-text-muted: #a1a1aa;
         
-        /* Accents - Tech Blue Theme */
-        --endspace-accent-yellow: #3b82f6; /* Tech Blue accent color */
-        --endspace-accent-yellow-dim: rgba(59, 130, 246, 0.1);
-        --endspace-accent-cyan: #06b6d4;   /* Deep Tech Cyan */
+        /* Accents (Subtle Industrialism) */
+        --endspace-accent-yellow: #f59e0b;
+        --endspace-accent-yellow-dim: rgba(245, 158, 11, 0.15);
+        --endspace-accent-cyan: #06b6d4;
         --endspace-accent-cyan-dim: rgba(6, 182, 212, 0.1);
         
-        /* Borders & Lines - Heavy Structure */
+        /* Borders & Lines */
         --endspace-border-base: #e4e4e7;
-        --endspace-border-active: #27272a; /* Active borders are dark/heavy */
+        --endspace-border-active: #3b82f6;
+        --endspace-grid-color: rgba(0,0,0,0.03);
         
-        /* Technical Grid */
-        --endspace-grid-color: rgba(0, 0, 0, 0.03); /* Subtle dark grid */
+        /* Shadows */
+        --endspace-shadow-base: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+        --endspace-shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+
+      /* Dark Mode Variables */
+      .dark {
+        --endspace-bg-base: #09090b;
+        --endspace-bg-primary: #18181b;
+        --endspace-bg-secondary: #27272a;
+        --endspace-bg-tertiary: #3f3f46;
         
-        /* Shadow / Glass */
-        --endspace-shadow-base: 0 1px 3px rgba(0,0,0,0.05);
-        --endspace-shadow-hover: 0 10px 30px rgba(0,0,0,0.08);
+        --endspace-text-primary: #fafafa;
+        --endspace-text-secondary: #a1a1aa;
+        --endspace-text-muted: #71717a;
         
-        /* Viewport Scaling - Set dynamically by useViewportScale hook */
-        --endspace-viewport-scale: 1;
-        --endspace-base-font-size: 16px;
+        --endspace-accent-yellow: #fbbf24;
+        --endspace-accent-yellow-dim: rgba(251, 191, 36, 0.15);
+        --endspace-accent-cyan: #22d3ee;
+        --endspace-accent-cyan-dim: rgba(34, 211, 238, 0.1);
+        
+        --endspace-border-base: #27272a;
+        --endspace-border-active: #3b82f6;
+        --endspace-grid-color: rgba(255,255,255,0.02);
+        
+        --endspace-shadow-base: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+        --endspace-shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
       }
 
       /* ============================================
-         Viewport Scaling Base
+         Viewport Scaling (Responsive Font Size)
          ============================================ */
       html {
         /* CSS fallback for viewport scaling when JS not loaded */
@@ -63,7 +80,7 @@ export const Style = () => {
       /* ============================================
          Global Base Styles
          ============================================ */
-      #theme-void {
+      #theme-endspace {
         background-color: var(--endspace-bg-base);
         color: var(--endspace-text-primary);
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -71,7 +88,7 @@ export const Style = () => {
       }
 
       /* Technical Grid Background */
-      #theme-void::before {
+      #theme-endspace::before {
         content: '';
         position: fixed;
         inset: 0;
@@ -110,6 +127,10 @@ export const Style = () => {
         box-shadow: var(--endspace-shadow-base);
       }
 
+      .dark .endspace-frame {
+        background: rgba(24, 24, 27, 0.8);
+      }
+
       /* Corner Markers (Minimalist L-shape) */
       .endspace-frame::before {
         content: '';
@@ -141,6 +162,21 @@ export const Style = () => {
       .endspace-frame:hover::before, .endspace-frame:hover::after {
         opacity: 1;
         width: 12px; height: 12px;
+      }
+
+      /* ============================================
+         Card Styles
+         ============================================ */
+      .endspace-card {
+        background: var(--endspace-bg-primary);
+        border: 1px solid var(--endspace-border-base);
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .endspace-card:hover {
+        border-color: var(--endspace-border-active);
+        box-shadow: var(--endspace-shadow-hover);
       }
 
       /* ============================================
@@ -208,7 +244,7 @@ export const Style = () => {
 
       /* Code Blocks */
       #notion-article pre {
-        background: #18181b !important; /* Keep code blocks dark for contrast */
+        background: #18181b !important;
         border: 1px solid rgba(0,0,0,0.1);
         border-radius: 4px !important;
         box-shadow: var(--endspace-shadow-base);
@@ -239,6 +275,24 @@ export const Style = () => {
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       }
 
+      .endspace-button-primary {
+        background: var(--endspace-border-active);
+        border: none;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.85em;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .endspace-button-primary:hover {
+        background: #2563eb;
+        transform: translateY(-1px);
+      }
+
       /* ============================================
          Tech Decorations Utilities (Minimalist)
          ============================================ */
@@ -247,6 +301,16 @@ export const Style = () => {
         height: 1px;
         background: var(--endspace-border-base);
         margin: 1rem 0;
+      }
+
+      /* Spectrum bar decoration */
+      .spectrum-bar {
+        height: 2px;
+        background: linear-gradient(90deg, 
+          var(--endspace-accent-cyan) 0%, 
+          var(--endspace-accent-yellow) 50%, 
+          var(--endspace-accent-cyan) 100%
+        );
       }
 
       /* Loading Animation (Spinner) */
@@ -259,6 +323,27 @@ export const Style = () => {
         animation: spin 0.8s linear infinite;
       }
 
+      /* Tech corner decoration */
+      .tech-corner {
+        position: relative;
+      }
+      .tech-corner::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 8px; height: 8px;
+        border-top: 2px solid var(--endspace-accent-cyan);
+        border-left: 2px solid var(--endspace-accent-cyan);
+      }
+      .tech-corner::after {
+        content: '';
+        position: absolute;
+        bottom: 0; right: 0;
+        width: 8px; height: 8px;
+        border-bottom: 2px solid var(--endspace-accent-cyan);
+        border-right: 2px solid var(--endspace-accent-cyan);
+      }
+
       /* ============================================
          Mobile Responsive Styles
          ============================================ */
@@ -267,11 +352,14 @@ export const Style = () => {
       .safe-area-bottom {
         padding-bottom: env(safe-area-inset-bottom);
       }
+      .safe-area-top {
+        padding-top: env(safe-area-inset-top);
+      }
 
       /* Mobile-specific adjustments */
       @media (max-width: 767px) {
         /* Smaller grid on mobile */
-        #theme-void::before {
+        #theme-endspace::before {
           background-size: 30px 30px;
         }
 
@@ -298,257 +386,24 @@ export const Style = () => {
         }
 
         #notion-article p {
-          font-size: 1.1rem;
-          margin-bottom: 1.2em;
+          margin-bottom: 1.25em;
         }
-
-        #notion-article h1 { font-size: 1.75rem; }
-        #notion-article h2 { font-size: 1.5rem; }
-        #notion-article h3 { font-size: 1.25rem; }
-
-        #notion-article h1, 
-        #notion-article h2, 
-        #notion-article h3 {
-          margin-top: 1.5em;
-          padding-left: 0.75rem;
-        }
-
-        #notion-article h1::before, 
-        #notion-article h2::before,
-        #notion-article h3::before {
-          width: 3px;
-        }
-
-        /* Code blocks scroll horizontally */
-        #notion-article pre {
-          max-width: 100%;
-          overflow-x: auto;
-        }
-
-        /* Blockquotes */
-        #notion-article blockquote {
-          padding: 0.8rem 1rem;
-          margin: 1.5rem 0;
-        }
-      }
-
-      /* Tablet adjustments */
-      @media (min-width: 768px) and (max-width: 1023px) {
-        #theme-void::before {
-          background-size: 35px 35px;
-        }
-
-        .endspace-frame {
-          padding: 1.5rem !important;
-        }
-      }
-
-      /* Large desktop (1440px+) - Notion-style larger content */
-      @media (min-width: 1440px) {
-        #notion-article {
-          font-size: 1.1rem;
-          line-height: 1.8;
-        }
-
-        #notion-article p {
-          margin-bottom: 1.4em;
-        }
-
-        .endspace-frame {
-          padding: 2.5rem !important;
-        }
-
-        #theme-void::before {
-          background-size: 45px 45px;
-        }
-      }
-
-      /* Ultra-wide / 4K displays (1920px+) */
-      @media (min-width: 1920px) {
-        #notion-article {
-          font-size: 1.15rem;
-          line-height: 1.85;
-        }
-
-        #theme-void::before {
-          background-size: 50px 50px;
-        }
-
-        .endspace-frame {
-          padding: 3rem !important;
-        }
-      }
-
-      /* Hide scrollbar on webkit for mobile nav */
-      .hide-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .hide-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
       }
 
       /* ============================================
-         EndspacePlayer Styles - Sci-Fi Music Player
+         Player Styles
          ============================================ */
-      
-      /* Rotating album cover animation */
-      @keyframes void-rotate {
+      .endspace-player-glow {
+        box-shadow: 0 0 10px var(--endspace-accent-yellow);
+      }
+
+      @keyframes rotate {
         from { transform: rotate(0deg); }
         to { transform: rotate(360deg); }
       }
-      
+
       .endspace-player-rotating {
-        animation: void-rotate 8s linear infinite;
-      }
-      
-      .endspace-player-rotating-slow {
-        animation: void-rotate 20s linear infinite;
-      }
-      
-      /* Pulse animation for playing indicator */
-      @keyframes void-pulse {
-        0%, 100% { opacity: 0.3; transform: scale(1); }
-        50% { opacity: 0.6; transform: scale(1.05); }
-      }
-      
-      .endspace-player-pulse {
-        animation: void-pulse 2s ease-in-out infinite;
-      }
-      
-      /* Glow effect for album cover */
-      .endspace-player-glow {
-        box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
-        transition: box-shadow 0.3s ease;
-      }
-      
-      .endspace-player-glow:hover {
-        box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
-      }
-      
-      /* Play button glow */
-      .endspace-player-btn-glow {
-        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-      }
-      
-      .endspace-player-btn-glow:hover {
-        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
-      }
-      
-      /* Player container styling */
-      .endspace-player-full {
-        background: transparent;
-      }
-      
-      .endspace-player-mini {
-        /* No borders - clean sidebar design */
-      }
-
-      /* ============================================
-         Endfield-Inspired Texture System
-         ============================================ */
-      
-      /* Diagonal Stripe Pattern - 45° Industrial Lines */
-      .ef-diagonal-stripe {
-        position: relative;
-      }
-      .ef-diagonal-stripe::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image: linear-gradient(
-          -45deg,
-          transparent,
-          transparent 13.95%,
-          rgba(0, 0, 0, 0.03) 13.95%,
-          rgba(0, 0, 0, 0.03) 36.05%,
-          transparent 36.05%,
-          transparent 63.95%,
-          rgba(0, 0, 0, 0.03) 63.95%,
-          rgba(0, 0, 0, 0.03) 86.05%,
-          transparent 86.05%,
-          transparent
-        );
-        background-size: 0.5rem 0.5rem;
-        pointer-events: none;
-        z-index: 0;
-      }
-      
-      /* Dotted Grid Overlay - Subtle Point Pattern */
-      .ef-dotted-grid {
-        position: relative;
-      }
-      .ef-dotted-grid::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px);
-        background-size: 1rem 1rem;
-        pointer-events: none;
-        opacity: 0.5;
-        z-index: 0;
-      }
-
-      /* ============================================
-         Corner Decoration System (L-Markers)
-         ============================================ */
-      
-      /* Tech Corner - L-shaped marks on hover */
-      .ef-corner-marks {
-        position: relative;
-      }
-      .ef-corner-marks::before,
-      .ef-corner-marks::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 0;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        pointer-events: none;
-        opacity: 0;
-      }
-      .ef-corner-marks::before {
-        top: -1px;
-        left: -1px;
-        border-top: 2px solid var(--endspace-accent-yellow);
-        border-left: 2px solid var(--endspace-accent-yellow);
-      }
-      .ef-corner-marks::after {
-        bottom: -1px;
-        right: -1px;
-        border-bottom: 2px solid var(--endspace-accent-yellow);
-        border-right: 2px solid var(--endspace-accent-yellow);
-      }
-      .ef-corner-marks:hover::before,
-      .ef-corner-marks:hover::after {
-        width: 16px;
-        height: 16px;
-        opacity: 1;
-      }
-
-      /* Four Corner Marks - All corners */
-      .ef-four-corners {
-        position: relative;
-      }
-      .ef-four-corners::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0;
-        width: 12px; height: 12px;
-        border-top: 2px solid var(--endspace-accent-cyan);
-        border-left: 2px solid var(--endspace-accent-cyan);
-        opacity: 0.6;
-        pointer-events: none;
-      }
-      .ef-four-corners::after {
-        content: '';
-        position: absolute;
-        bottom: 0; right: 0;
-        width: 12px; height: 12px;
-        border-bottom: 2px solid var(--endspace-accent-cyan);
-        border-right: 2px solid var(--endspace-accent-cyan);
-        opacity: 0.6;
-        pointer-events: none;
+        animation: rotate 8s linear infinite;
       }
 
       /* ============================================
@@ -648,27 +503,6 @@ export const Style = () => {
         transition: all 0.2s ease;
       }
       
-      .ef-button::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image: linear-gradient(
-          -45deg,
-          transparent,
-          transparent 16.16%,
-          rgba(0, 0, 0, 0.02) 16.16%,
-          rgba(0, 0, 0, 0.02) 33.84%,
-          transparent 33.84%,
-          transparent 66.16%,
-          rgba(0, 0, 0, 0.02) 66.16%,
-          rgba(0, 0, 0, 0.02) 83.84%,
-          transparent 83.84%,
-          transparent
-        );
-        background-size: 0.5rem 0.5rem;
-        pointer-events: none;
-      }
-      
       .ef-button:hover {
         background: var(--endspace-border-active);
         color: white;
@@ -677,7 +511,7 @@ export const Style = () => {
       
       .ef-button:hover::before {
         height: 70%;
-        background-color: #FFFA00; /* Endfield Yellow */
+        background-color: #FFFA00;
       }
 
       /* ============================================
@@ -692,38 +526,10 @@ export const Style = () => {
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
       
-      .ef-card::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image: linear-gradient(
-          -45deg,
-          transparent,
-          transparent 13.95%,
-          rgba(0, 0, 0, 0.015) 13.95%,
-          rgba(0, 0, 0, 0.015) 36.05%,
-          transparent 36.05%,
-          transparent 63.95%,
-          rgba(0, 0, 0, 0.015) 63.95%,
-          rgba(0, 0, 0, 0.015) 86.05%,
-          transparent 86.05%,
-          transparent
-        );
-        background-size: 0.5rem 0.5rem;
-        pointer-events: none;
-        z-index: 0;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-      
       .ef-card:hover {
         border-color: var(--endspace-accent-yellow);
         box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
         transform: translateY(-2px);
-      }
-      
-      .ef-card:hover::before {
-        opacity: 1;
       }
 
       /* Index Number Badge - Industrial Style */
@@ -738,36 +544,6 @@ export const Style = () => {
         font-size: 0.7rem;
         font-weight: 700;
         letter-spacing: 0.5px;
-      }
-
-      /* ============================================
-         Noise & Grain Overlay
-         ============================================ */
-      
-      @keyframes ef-noise {
-        0%, 100% { transform: translate(0, 0); }
-        10% { transform: translate(-5%, -10%); }
-        20% { transform: translate(-15%, 5%); }
-        30% { transform: translate(7%, -25%); }
-        40% { transform: translate(-5%, 25%); }
-        50% { transform: translate(-15%, 10%); }
-        60% { transform: translate(15%, 0%); }
-        70% { transform: translate(0%, 15%); }
-        80% { transform: translate(3%, 35%); }
-        90% { transform: translate(-10%, 10%); }
-      }
-      
-      .ef-noise-overlay::before {
-        content: '';
-        position: fixed;
-        inset: -50%;
-        width: 200%;
-        height: 200%;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-        animation: ef-noise 8s steps(10) infinite;
-        pointer-events: none;
-        z-index: 9999;
-        opacity: 0.4;
       }
 
       /* ============================================
