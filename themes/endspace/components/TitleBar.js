@@ -2,7 +2,6 @@ import { siteConfig } from '@/lib/config'
 
 /**
  * TitleBar Component - Endfield Style (Light Industrial)
- * 标题栏组�?- 背景层显示循环滚动的 CLOUD09_SPACE 文字动画
  */
 export const TitleBar = ({ post }) => {
   const marqueeText = 'CLOUD09_SPACE'
@@ -42,17 +41,17 @@ export const TitleBar = ({ post }) => {
           <div className="bg-watermark-scroll whitespace-nowrap">
             <span className="text-[15vw] font-black text-[var(--endspace-text-primary)] select-none">
               {marqueeText}
-              <span className="mx-[5vw] text-[var(--endspace-text-muted)]">�?/span>
+              <span className="mx-[5vw] text-[var(--endspace-text-muted)]">&#x2022;</span>
               {marqueeText}
-              <span className="mx-[5vw] text-[var(--endspace-text-muted)]">�?/span>
+              <span className="mx-[5vw] text-[var(--endspace-text-muted)]">&#x2022;</span>
               {marqueeText}
-              <span className="mx-[5vw] text-[var(--endspace-text-muted)]">�?/span>
+              <span className="mx-[5vw] text-[var(--endspace-text-muted)]">&#x2022;</span>
               {marqueeText}
-              <span className="mx-[5vw] text-[var(--endspace-text-muted)]">�?/span>
+              <span className="mx-[5vw] text-[var(--endspace-text-muted)]">&#x2022;</span>
               {marqueeText}
-              <span className="mx-[5vw] text-[var(--endspace-text-muted)]">�?/span>
+              <span className="mx-[5vw] text-[var(--endspace-text-muted)]">&#x2022;</span>
               {marqueeText}
-              <span className="mx-[5vw] text-[var(--endspace-text-muted)]">�?/span>
+              <span className="mx-[5vw] text-[var(--endspace-text-muted)]">&#x2022;</span>
             </span>
           </div>
         </div>
@@ -78,6 +77,3 @@ export const TitleBar = ({ post }) => {
 }
 
 export default TitleBar
-
-
-
