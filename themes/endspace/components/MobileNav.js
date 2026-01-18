@@ -20,25 +20,25 @@ import {
   IconPlanet
 } from '@tabler/icons-react'
 // Conceptual Navigation Icons (Solid, Angular)
-import Apps2FillIcon from 'remixicon-react/Apps2FillIcon'
-import GuideFillIcon from 'remixicon-react/GuideFillIcon'
-import BarcodeBoxFillIcon from 'remixicon-react/BarcodeBoxFillIcon'
+import AppsFillIcon from 'remixicon-react/AppsFillIcon'
+import BookMarkFillIcon from 'remixicon-react/BookMarkFillIcon'
+import BarcodeFillIcon from 'remixicon-react/BarcodeFillIcon'
 import StackFillIcon from 'remixicon-react/StackFillIcon'
-import RadarFillIcon from 'remixicon-react/RadarFillIcon'
-import PlanetFillIcon from 'remixicon-react/PlanetFillIcon'
-import IdCardFillIcon from 'remixicon-react/IdCardFillIcon'
+import Compass3FillIcon from 'remixicon-react/Compass3FillIcon'
+import EarthFillIcon from 'remixicon-react/EarthFillIcon'
+import ProfileFillIcon from 'remixicon-react/ProfileFillIcon'
 
 const AVATAR_URL = siteConfig('AVATAR')
 
 // Icon mapping (Conceptual Remix Icons)
 const IconComponents = {
-  'Home': Apps2FillIcon,
-  'Category': GuideFillIcon,
-  'Tag': BarcodeBoxFillIcon,
+  'Home': AppsFillIcon,
+  'Category': BookMarkFillIcon,
+  'Tag': BarcodeFillIcon,
   'Archive': StackFillIcon,
-  'Search': RadarFillIcon,
-  'Friends': PlanetFillIcon,
-  'Portfolio': IdCardFillIcon
+  'Search': Compass3FillIcon,
+  'Friends': EarthFillIcon,
+  'Portfolio': ProfileFillIcon
 }
 
 // Social icon mapping
