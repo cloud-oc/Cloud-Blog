@@ -201,20 +201,15 @@ export const SideNav = (props) => {
             <SmartLink key={item.name} href={item.path}>
               <div 
                 ref={el => itemRefs.current[item.name] = el}
-                className={`relative h-[3rem] flex items-center cursor-pointer transition-all duration-300 group
-                  ${isActive 
-                    ? 'bg-[var(--endspace-bg-secondary)] text-[var(--endspace-accent-yellow)]' 
-                    : 'text-gray-300 hover:text-[var(--endspace-text-primary)] hover:bg-[var(--endspace-bg-secondary)]'
-                  }
-                `}
+                className={`nier-nav-item relative h-[3rem] flex items-center cursor-pointer group ${isActive ? 'active' : ''}`}
               >
                 {/* Icon Container */}
-                <div className="w-[5rem] flex-shrink-0 flex items-center justify-center">
+                <div className="w-[5rem] flex-shrink-0 flex items-center justify-center z-10">
                   {renderIcon(item.name, isActive)}
                 </div>
 
                 {/* Text Label (Reveal on Hover) */}
-                <span className={`text-sm font-medium tracking-wide uppercase whitespace-nowrap transition-opacity duration-300 ${isHovered ? 'opacity-100 delay-75' : 'opacity-0 w-0'}`}>
+                <span className={`text-sm font-medium tracking-wide uppercase whitespace-nowrap transition-opacity duration-300 z-10 ${isHovered ? 'opacity-100 delay-75' : 'opacity-0 w-0'}`}>
                   {item.name.toUpperCase()}
                 </span>
               </div>

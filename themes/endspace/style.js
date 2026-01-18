@@ -99,12 +99,13 @@ export const Style = () => {
         color: var(--endspace-text-primary);
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         overflow-x: hidden;
-        /* Custom Tech Cursor - Sharp Angular with 3D Shadow */
-        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3Cfilter id='shadow' x='-50%25' y='-50%25' width='200%25' height='200%25'%3E%3CfeDropShadow dx='2' dy='2' stdDeviation='1' flood-color='%23000' flood-opacity='0.4'/%3E%3C/filter%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2362F0F5'/%3E%3Cstop offset='100%25' stop-color='%233b82f6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M4 4 L4 24 L10 18 L16 28 L20 26 L14 16 L22 16 Z' fill='url(%23grad)' stroke='%23fff' stroke-width='1.5' filter='url(%23shadow)'/%3E%3C/svg%3E") 4 4, auto;
+        /* Custom Tech Cursor - Sharp Spearhead with Heavy Shadow */
+        cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M2 2 L12 28 L16 18 L26 14 L2 2 Z' fill='%2318181b' stroke='%23ffffff' stroke-width='1.5' style='filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.3));'/%3E%3C/svg%3E") 2 2, auto;
       }
       
-      #theme-endspace a, #theme-endspace button, #theme-endspace [role="button"] {
-        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3Cfilter id='shadow' x='-50%25' y='-50%25' width='200%25' height='200%25'%3E%3CfeDropShadow dx='2' dy='2' stdDeviation='1.5' flood-color='%2362F0F5' flood-opacity='0.6'/%3E%3C/filter%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2362F0F5'/%3E%3Cstop offset='100%25' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M8 8 L16 16 L12 16 L16 24 L14 25 L10 17 L6 21 Z' fill='url(%23grad)' stroke='%23fff' stroke-width='1' filter='url(%23shadow)'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%2362F0F5' stroke-width='1.5' opacity='0.6'/%3E%3C/svg%3E") 8 8, pointer;
+      #theme-endspace a, #theme-endspace button, #theme-endspace [role="button"], #theme-endspace .cursor-pointer {
+        /* Pointer Cursor - Target Reticle Style */
+        cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M2 2 L12 28 L16 18 L26 14 L2 2 Z' fill='%2362F0F5' stroke='%23000000' stroke-width='1.5' style='filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.3));'/%3E%3Ccircle cx='24' cy='24' r='4' fill='none' stroke='%2362F0F5' stroke-width='2'/%3E%3C/svg%3E") 2 2, pointer;
       }
 
       /* Technical Grid Background */
@@ -136,19 +137,22 @@ export const Style = () => {
       }
 
       /* ============================================
-         "Float" Container Styles (Glassmorphism)
+         "Float" Container Styles (Glassmorphism -> Solid Block)
          ============================================ */
       .endspace-frame {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(12px);
+        background: var(--endspace-bg-primary); /* Solid background for floating block effect */
         border: 1px solid var(--endspace-border-base);
         position: relative;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: var(--endspace-shadow-base);
+        box-shadow: 
+           0 10px 30px -10px rgba(0,0,0,0.1),
+           0 4px 6px -2px rgba(0,0,0,0.05); /* Enhanced shadow for lift */
+        z-index: 10;
       }
 
       .dark .endspace-frame {
-        background: rgba(24, 24, 27, 0.8);
+        background: #18181b; /* Solid dark background */
+        border-color: #3f3f46;
       }
 
       /* Corner Markers (Minimalist L-shape) */
@@ -157,20 +161,22 @@ export const Style = () => {
         position: absolute;
         top: -1px; left: -1px;
         width: 0; height: 0;
-        border-top: 2px solid var(--endspace-text-primary);
-        border-left: 2px solid var(--endspace-text-primary);
+        border-top: 3px solid var(--endspace-text-primary);
+        border-left: 3px solid var(--endspace-text-primary);
         transition: all 0.3s ease;
         opacity: 0;
+        z-index: 20;
       }
       .endspace-frame::after {
         content: '';
         position: absolute;
         bottom: -1px; right: -1px;
         width: 0; height: 0;
-        border-bottom: 2px solid var(--endspace-text-primary);
-        border-right: 2px solid var(--endspace-text-primary);
+        border-bottom: 3px solid var(--endspace-text-primary);
+        border-right: 3px solid var(--endspace-text-primary);
         transition: all 0.3s ease;
         opacity: 0;
+        z-index: 20;
       }
 
       /* Active State: Heavy Corners appear */
@@ -181,40 +187,32 @@ export const Style = () => {
       }
       .endspace-frame:hover::before, .endspace-frame:hover::after {
         opacity: 1;
-        width: 12px; height: 12px;
+        width: 16px; height: 16px;
       }
 
       /* ============================================
          Card Styles - Enhanced 3D Depth
          ============================================ */
       .endspace-card {
-        background: var(--endspace-bg-primary);
+        background: var(--endspace-bg-primary); /* Solid background */
         border: 1px solid var(--endspace-border-base);
         position: relative;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: var(--endspace-shadow-base);
-        /* Subtle inner highlight for depth */
-        background-image: linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.1) 0%,
-          transparent 50%,
-          rgba(0, 0, 0, 0.02) 100%
-        );
       }
 
       .endspace-card:hover {
         border-color: var(--endspace-border-active);
-        box-shadow: var(--endspace-shadow-hover);
+        box-shadow: 
+          0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+          0 10px 10px -5px rgba(0, 0, 0, 0.04),
+          0 0 0 1px var(--endspace-accent-yellow); /* Glow border */
         transform: translateY(-4px) scale(1.01);
+        z-index: 20;
       }
       
       .dark .endspace-card {
-        background-image: linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.03) 0%,
-          transparent 50%,
-          rgba(0, 0, 0, 0.1) 100%
-        );
+         background: #18181b;
       }
 
       /* ============================================
@@ -226,7 +224,8 @@ export const Style = () => {
         line-height: 1.75;
       }
 
-      /* Headers - NieR: Automata Style Text Shadow */
+      /* Headers - NieR: Automata Style Dynamic Shadow */
+      /* Requirement: Misaligned when not hovered, Merged when hovered */
       #notion-article h1, #notion-article h2, #notion-article h3 {
         color: var(--endspace-text-primary);
         font-weight: 800;
@@ -234,19 +233,39 @@ export const Style = () => {
         margin-bottom: 1em;
         position: relative;
         padding-left: 1rem;
-        letter-spacing: -0.02em;
-        /* NieR Automata offset shadow - sharp, layered */
+        letter-spacing: 0.02em; /* Slightly wider spacing for the 'digital' look */
+        transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Snappy tech transition */
+        
+        /* Default: Distinctly Misaligned / Interlaced Layers */
+        /* Layer 1: Cyan Ghost (Top Left) */
+        /* Layer 2: Red/Dark Ghost (Bottom Right) */
         text-shadow: 
-          2px 2px 0 rgba(98, 240, 245, 0.3),
-          4px 4px 0 rgba(98, 240, 245, 0.15),
-          6px 6px 8px rgba(0, 0, 0, 0.1);
+          -4px -2px 0 rgba(6, 182, 212, 0.5), 
+          4px 2px 0 rgba(255, 50, 50, 0.3);
+          
+        /* Subtle opacity drop to emphasize the 'hologram' feel when idle */
+        opacity: 0.85; 
+      }
+      
+      /* Hover: Merge / Snap to focus */
+      #notion-article h1:hover, #notion-article h2:hover, #notion-article h3:hover {
+        /* Shadows merge into the text */
+        text-shadow: 
+          0 0 0 rgba(6, 182, 212, 0),
+          0 0 0 rgba(255, 50, 50, 0);
+        opacity: 1;
+        transform: translateX(2px); /* Slight physical shift on 'lock-on' */
       }
       
       .dark #notion-article h1, .dark #notion-article h2, .dark #notion-article h3 {
+        /* Dark mode: Stronger, glow-like ghosts */
         text-shadow: 
-          2px 2px 0 rgba(98, 240, 245, 0.4),
-          4px 4px 0 rgba(98, 240, 245, 0.2),
-          6px 6px 12px rgba(0, 0, 0, 0.5);
+          -4px -2px 0 rgba(98, 240, 245, 0.5),
+          4px 2px 0 rgba(255, 50, 50, 0.4);
+      }
+      
+      .dark #notion-article h1:hover, .dark #notion-article h2:hover, .dark #notion-article h3:hover {
+         text-shadow: none;
       }
       
       #notion-article h1::before, 
@@ -254,10 +273,20 @@ export const Style = () => {
       #notion-article h3::before {
         content: '';
         position: absolute;
-        left: 0; top: 0.3em; bottom: 0.3em;
-        width: 4px;
+        left: 0; top: 0.2em; bottom: 0.2em;
+        width: 6px;
         background: var(--endspace-accent-yellow);
-        box-shadow: 2px 2px 4px rgba(98, 240, 245, 0.3);
+        box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+      
+      /* Bar also reacts to hover */
+      #notion-article h1:hover::before,
+      #notion-article h2:hover::before,
+      #notion-article h3:hover::before {
+        background: var(--endspace-text-primary);
+        width: 8px;
+        box-shadow: none;
       }
 
       /* Quotes */
@@ -717,6 +746,61 @@ export const Style = () => {
         box-shadow: 
           4px 0 8px rgba(0, 0, 0, 0.3),
           8px 0 16px rgba(0, 0, 0, 0.2);
+      }
+      /* ============================================
+         NieR: Automata Style Navigation Transition
+         ============================================ */
+      .nier-nav-item {
+        position: relative;
+        overflow: hidden;
+        transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        z-index: 1;
+        /* Default Text Color */
+        color: var(--endspace-text-muted); 
+      }
+
+      /* Sliding Background Layer */
+      .nier-nav-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background: var(--endspace-text-primary); /* Inverted Background Color */
+        transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        z-index: -1;
+      }
+      
+      /* Active / Hover State */
+      .nier-nav-item:hover, .nier-nav-item.active {
+        color: var(--endspace-bg-base) !important; /* Text becomes bg color (Inverse) */
+      }
+      
+      .nier-nav-item:hover::before, .nier-nav-item.active::before {
+        width: 100%; /* Slide fill from left */
+      }
+      
+      /* Target the icon specifically if needed to ensure color fill */
+      .nier-nav-item svg, .nier-nav-item .icon-container {
+        transition: color 0.3s ease;
+        z-index: 2;
+      }
+      
+      /* Specific override for the accent color on active items if desired to differ from simple hover */
+      .nier-nav-item.active {
+        /* Optional: Active could be Accent color instead of Black */
+        /* background-color: var(--endspace-accent-yellow) works via ::before? */
+      }
+      .nier-nav-item.active::before {
+        background: var(--endspace-text-primary); /* Keeping it monochrome NieR style for now, or use accent? User asked for 'inverse', usually B&W */
+      }
+      
+      .dark .nier-nav-item::before {
+        background: #f4f4f5; /* Light bg in dark mode */
+      }
+      .dark .nier-nav-item:hover, .dark .nier-nav-item.active {
+        color: #18181b !important; /* Dark text in dark mode */
       }
     `}</style>
   )
