@@ -5,13 +5,6 @@ import CONFIG from '../config'
 import SmartLink from '@/components/SmartLink'
 import { EndspacePlayer } from './EndspacePlayer'
 import {
-  IconHome,
-  IconCategory,
-  IconArchive,
-  IconSearch,
-  IconUsers,
-  IconBriefcase,
-  IconTag,
   IconMenu2,
   IconX,
   IconMail,
@@ -26,18 +19,26 @@ import {
   IconBrandWechat,
   IconPlanet
 } from '@tabler/icons-react'
+// Conceptual Navigation Icons (Solid, Angular)
+import Apps2FillIcon from 'remixicon-react/Apps2FillIcon'
+import GuideFillIcon from 'remixicon-react/GuideFillIcon'
+import BarcodeBoxFillIcon from 'remixicon-react/BarcodeBoxFillIcon'
+import StackFillIcon from 'remixicon-react/StackFillIcon'
+import RadarFillIcon from 'remixicon-react/RadarFillIcon'
+import PlanetFillIcon from 'remixicon-react/PlanetFillIcon'
+import IdCardFillIcon from 'remixicon-react/IdCardFillIcon'
 
-const AVATAR_URL = siteConfig('AUTHOR_AVATAR')
+const AVATAR_URL = siteConfig('AVATAR')
 
-// Icon mapping
+// Icon mapping (Conceptual Remix Icons)
 const IconComponents = {
-  'Home': IconHome,
-  'Category': IconCategory,
-  'Tag': IconTag,
-  'Archive': IconArchive,
-  'Search': IconSearch,
-  'Friends': IconUsers,
-  'Portfolio': IconBriefcase
+  'Home': Apps2FillIcon,
+  'Category': GuideFillIcon,
+  'Tag': BarcodeBoxFillIcon,
+  'Archive': StackFillIcon,
+  'Search': RadarFillIcon,
+  'Friends': PlanetFillIcon,
+  'Portfolio': IdCardFillIcon
 }
 
 // Social icon mapping

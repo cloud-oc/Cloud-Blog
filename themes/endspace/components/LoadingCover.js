@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
+import CONFIG from '../config'
 
 /**
  * LoadingCover Component - Endfield Style
@@ -15,7 +16,13 @@ export const LoadingCover = () => {
   const { onLoading } = useGlobal()
   const hasCompletedRef = useRef(false)
 
-  const siteName = siteConfig('TITLE') || 'CLOUD09_SPACE'
+  // Configurable texts
+  const siteName = siteConfig('ENDSPACE_LOADING_SITE_NAME', null, CONFIG) || siteConfig('TITLE') || 'CLOUD09_SPACE'
+  const textInit = siteConfig('ENDSPACE_LOADING_TEXT_INIT', 'INITIALIZING', CONFIG)
+  const textLoading = siteConfig('ENDSPACE_LOADING_TEXT_LOADING', 'LOADING', CONFIG)
+  const textComplete = siteConfig('ENDSPACE_LOADING_TEXT_COMPLETE', 'READY', CONFIG)
+  const textSweeping = siteConfig('ENDSPACE_LOADING_TEXT_SWEEPING', 'LAUNCHING', CONFIG)
+  const textFadeout = siteConfig('ENDSPACE_LOADING_TEXT_FADEOUT', 'WELCOME', CONFIG)
 
   // Smooth progress simulation
   const updateProgress = useCallback((currentProgress) => {
@@ -117,11 +124,11 @@ export const LoadingCover = () => {
         <div className="status-line">
           <span className="status-dot" />
           <span className="status-text">
-            {phase === 'init' && 'INITIALIZING'}
-            {phase === 'loading' && 'LOADING'}
-            {phase === 'complete' && 'READY'}
-            {phase === 'sweeping' && 'LAUNCHING'}
-            {phase === 'fadeout' && 'WELCOME'}
+            {phase === 'init' && textInit}
+            {phase === 'loading' && textLoading}
+            {phase === 'complete' && textComplete}
+            {phase === 'sweeping' && textSweeping}
+            {phase === 'fadeout' && textFadeout}
           </span>
         </div>
       </div>

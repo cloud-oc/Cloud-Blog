@@ -22,8 +22,8 @@ export const Style = () => {
         --endspace-text-muted: #a1a1aa;
         
         /* Accents (Subtle Industrialism) */
-        --endspace-accent-yellow: #f59e0b;
-        --endspace-accent-yellow-dim: rgba(245, 158, 11, 0.15);
+        --endspace-accent-yellow: #62F0F5;
+        --endspace-accent-yellow-dim: rgba(98, 240, 245, 0.15);
         --endspace-accent-cyan: #06b6d4;
         --endspace-accent-cyan-dim: rgba(6, 182, 212, 0.1);
         
@@ -32,9 +32,16 @@ export const Style = () => {
         --endspace-border-active: #3b82f6;
         --endspace-grid-color: rgba(0,0,0,0.03);
         
-        /* Shadows */
-        --endspace-shadow-base: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-        --endspace-shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+        /* Shadows - Enhanced 3D Depth */
+        --endspace-shadow-base: 
+          0 1px 2px rgba(0, 0, 0, 0.04),
+          0 2px 4px rgba(0, 0, 0, 0.04),
+          0 4px 8px rgba(0, 0, 0, 0.04);
+        --endspace-shadow-hover: 
+          0 4px 8px rgba(0, 0, 0, 0.08),
+          0 8px 16px rgba(0, 0, 0, 0.06),
+          0 16px 32px rgba(0, 0, 0, 0.04),
+          0 0 0 1px var(--endspace-accent-yellow);
       }
 
       /* Dark Mode Variables */
@@ -48,8 +55,8 @@ export const Style = () => {
         --endspace-text-secondary: #a1a1aa;
         --endspace-text-muted: #71717a;
         
-        --endspace-accent-yellow: #fbbf24;
-        --endspace-accent-yellow-dim: rgba(251, 191, 36, 0.15);
+        --endspace-accent-yellow: #62F0F5;
+        --endspace-accent-yellow-dim: rgba(98, 240, 245, 0.15);
         --endspace-accent-cyan: #22d3ee;
         --endspace-accent-cyan-dim: rgba(34, 211, 238, 0.1);
         
@@ -57,8 +64,15 @@ export const Style = () => {
         --endspace-border-active: #3b82f6;
         --endspace-grid-color: rgba(255,255,255,0.02);
         
-        --endspace-shadow-base: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
-        --endspace-shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+        --endspace-shadow-base: 
+          0 1px 2px rgba(0, 0, 0, 0.2),
+          0 2px 4px rgba(0, 0, 0, 0.15),
+          0 4px 8px rgba(0, 0, 0, 0.1);
+        --endspace-shadow-hover: 
+          0 4px 8px rgba(0, 0, 0, 0.3),
+          0 8px 16px rgba(0, 0, 0, 0.25),
+          0 16px 32px rgba(0, 0, 0, 0.2),
+          0 0 0 1px var(--endspace-accent-yellow);
       }
 
       /* ============================================
@@ -85,6 +99,12 @@ export const Style = () => {
         color: var(--endspace-text-primary);
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         overflow-x: hidden;
+        /* Custom Tech Cursor - Sharp Angular with 3D Shadow */
+        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3Cfilter id='shadow' x='-50%25' y='-50%25' width='200%25' height='200%25'%3E%3CfeDropShadow dx='2' dy='2' stdDeviation='1' flood-color='%23000' flood-opacity='0.4'/%3E%3C/filter%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2362F0F5'/%3E%3Cstop offset='100%25' stop-color='%233b82f6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M4 4 L4 24 L10 18 L16 28 L20 26 L14 16 L22 16 Z' fill='url(%23grad)' stroke='%23fff' stroke-width='1.5' filter='url(%23shadow)'/%3E%3C/svg%3E") 4 4, auto;
+      }
+      
+      #theme-endspace a, #theme-endspace button, #theme-endspace [role="button"] {
+        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3Cfilter id='shadow' x='-50%25' y='-50%25' width='200%25' height='200%25'%3E%3CfeDropShadow dx='2' dy='2' stdDeviation='1.5' flood-color='%2362F0F5' flood-opacity='0.6'/%3E%3C/filter%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2362F0F5'/%3E%3Cstop offset='100%25' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M8 8 L16 16 L12 16 L16 24 L14 25 L10 17 L6 21 Z' fill='url(%23grad)' stroke='%23fff' stroke-width='1' filter='url(%23shadow)'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%2362F0F5' stroke-width='1.5' opacity='0.6'/%3E%3C/svg%3E") 8 8, pointer;
       }
 
       /* Technical Grid Background */
@@ -165,18 +185,36 @@ export const Style = () => {
       }
 
       /* ============================================
-         Card Styles
+         Card Styles - Enhanced 3D Depth
          ============================================ */
       .endspace-card {
         background: var(--endspace-bg-primary);
         border: 1px solid var(--endspace-border-base);
         position: relative;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--endspace-shadow-base);
+        /* Subtle inner highlight for depth */
+        background-image: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 50%,
+          rgba(0, 0, 0, 0.02) 100%
+        );
       }
 
       .endspace-card:hover {
         border-color: var(--endspace-border-active);
         box-shadow: var(--endspace-shadow-hover);
+        transform: translateY(-4px) scale(1.01);
+      }
+      
+      .dark .endspace-card {
+        background-image: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.03) 0%,
+          transparent 50%,
+          rgba(0, 0, 0, 0.1) 100%
+        );
       }
 
       /* ============================================
@@ -188,7 +226,7 @@ export const Style = () => {
         line-height: 1.75;
       }
 
-      /* Headers */
+      /* Headers - NieR: Automata Style Text Shadow */
       #notion-article h1, #notion-article h2, #notion-article h3 {
         color: var(--endspace-text-primary);
         font-weight: 800;
@@ -197,6 +235,18 @@ export const Style = () => {
         position: relative;
         padding-left: 1rem;
         letter-spacing: -0.02em;
+        /* NieR Automata offset shadow - sharp, layered */
+        text-shadow: 
+          2px 2px 0 rgba(98, 240, 245, 0.3),
+          4px 4px 0 rgba(98, 240, 245, 0.15),
+          6px 6px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      .dark #notion-article h1, .dark #notion-article h2, .dark #notion-article h3 {
+        text-shadow: 
+          2px 2px 0 rgba(98, 240, 245, 0.4),
+          4px 4px 0 rgba(98, 240, 245, 0.2),
+          6px 6px 12px rgba(0, 0, 0, 0.5);
       }
       
       #notion-article h1::before, 
@@ -207,6 +257,7 @@ export const Style = () => {
         left: 0; top: 0.3em; bottom: 0.3em;
         width: 4px;
         background: var(--endspace-accent-yellow);
+        box-shadow: 2px 2px 4px rgba(98, 240, 245, 0.3);
       }
 
       /* Quotes */
@@ -599,6 +650,73 @@ export const Style = () => {
       
       .ef-glow-border:hover {
         animation: ef-border-glow 2s ease-in-out infinite;
+      }
+
+      /* ============================================
+         NieR: Automata Style Title (Reusable)
+         ============================================ */
+      .nier-title {
+        position: relative;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-shadow: 
+          2px 2px 0 rgba(98, 240, 245, 0.35),
+          4px 4px 0 rgba(98, 240, 245, 0.18),
+          6px 6px 10px rgba(0, 0, 0, 0.15);
+      }
+      
+      .dark .nier-title {
+        text-shadow: 
+          2px 2px 0 rgba(98, 240, 245, 0.45),
+          4px 4px 0 rgba(98, 240, 245, 0.25),
+          6px 6px 15px rgba(0, 0, 0, 0.6);
+      }
+
+      /* ============================================
+         3D Button Effects
+         ============================================ */
+      .endspace-btn-3d {
+        position: relative;
+        background: var(--endspace-bg-primary);
+        border: 2px solid var(--endspace-accent-yellow);
+        color: var(--endspace-text-primary);
+        padding: 0.75rem 1.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 
+          0 4px 0 rgba(98, 240, 245, 0.6),
+          0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+      
+      .endspace-btn-3d:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+          0 6px 0 rgba(98, 240, 245, 0.7),
+          0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      
+      .endspace-btn-3d:active {
+        transform: translateY(2px);
+        box-shadow: 
+          0 2px 0 rgba(98, 240, 245, 0.5),
+          0 3px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* ============================================
+         Sidebar & Navigation 3D Depth
+         ============================================ */
+      .endspace-sidebar-3d {
+        box-shadow: 
+          4px 0 8px rgba(0, 0, 0, 0.05),
+          8px 0 16px rgba(0, 0, 0, 0.03);
+      }
+      
+      .dark .endspace-sidebar-3d {
+        box-shadow: 
+          4px 0 8px rgba(0, 0, 0, 0.3),
+          8px 0 16px rgba(0, 0, 0, 0.2);
       }
     `}</style>
   )
