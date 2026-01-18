@@ -1,72 +1,67 @@
-import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
-import SmartLink from '@/components/SmartLink'
+import { useState, useEffect, useRef } from 'react'
 import { siteConfig } from '@/lib/config'
 import CONFIG from '../config'
+import SmartLink from '@/components/SmartLink'
 import { EndspacePlayer } from './EndspacePlayer'
-import Home4FillIcon from 'remixicon-react/Home4FillIcon'
-import Folder2FillIcon from 'remixicon-react/Folder2FillIcon'
-import PriceTag3FillIcon from 'remixicon-react/PriceTag3FillIcon'
-import ArchiveDrawerFillIcon from 'remixicon-react/ArchiveDrawerFillIcon'
-import Briefcase4FillIcon from 'remixicon-react/Briefcase4FillIcon'
-import GroupFillIcon from 'remixicon-react/GroupFillIcon'
-import Search2FillIcon from 'remixicon-react/Search2FillIcon'
+import {
+  IconHome,
+  IconCategory,
+  IconArchive,
+  IconSearch,
+  IconUsers,
+  IconBriefcase,
+  IconTag,
+  IconBrandGithub,
+  IconBrandTwitter,
+  IconBrandWeibo,
+  IconBrandBilibili,
+  IconBrandTelegram,
+  IconBrandInstagram,
+  IconBrandYoutube,
+  IconBrandLinkedin,
+  IconBrandWechat,
+  IconPlanet
+} from '@tabler/icons-react'
 import ContactsBook2FillIcon from 'remixicon-react/ContactsBook2FillIcon'
 import MailSendFillIcon from 'remixicon-react/MailSendFillIcon'
-import GithubFillIcon from 'remixicon-react/GithubFillIcon'
-import TwitterFillIcon from 'remixicon-react/TwitterFillIcon'
-import BilibiliFillIcon from 'remixicon-react/BilibiliFillIcon'
-import TelegramFillIcon from 'remixicon-react/TelegramFillIcon'
-import InstagramFillIcon from 'remixicon-react/InstagramFillIcon'
-import YoutubeFillIcon from 'remixicon-react/YoutubeFillIcon'
-import LinkedinFillIcon from 'remixicon-react/LinkedinFillIcon'
-import WechatFillIcon from 'remixicon-react/WechatFillIcon'
-import WeiboFillIcon from 'remixicon-react/WeiboFillIcon'
-import EarthFillIcon from 'remixicon-react/EarthFillIcon'
 
-/**
- * SideNav Component - Endfield Intelligent Sidebar
- * 智能侧边栏：默认收起，悬停展开
- * Light Industrial Aesthetic - Tabler Icons for Futuristic Feel
- */
+const AVATAR_URL = siteConfig('AUTHOR_AVATAR')
 
-// Avatar image URL
-const AVATAR_URL = 'https://github.com/cloud-oc/picx-images-hosting/blob/master/Origin/Cloud_icon.pfpafpaii.png?raw=true'
-
-// Icon components mapping
+// Icon mapping
 const IconComponents = {
-  Home: Home4FillIcon,
-  Category: Folder2FillIcon,
-  Tag: PriceTag3FillIcon,
-  Archive: ArchiveDrawerFillIcon,
-  Portfolio: Briefcase4FillIcon,
-  Friends: GroupFillIcon,
-  Search: Search2FillIcon
+  'Home': IconHome,
+  'Category': IconCategory,
+  'Tag': IconTag,
+  'Archive': IconArchive,
+  'Search': IconSearch,
+  'Friends': IconUsers,
+  'Portfolio': IconBriefcase
 }
 
-// Social icon components mapping
+// Social icon mapping
 const SocialIconComponents = {
-  'CONTACT_GITHUB': GithubFillIcon,
-  'CONTACT_TWITTER': TwitterFillIcon,
-  'CONTACT_WEIBO': WeiboFillIcon,
-  'CONTACT_BILIBILI': BilibiliFillIcon,
-  'CONTACT_TELEGRAM': TelegramFillIcon,
-  'CONTACT_INSTAGRAM': InstagramFillIcon,
-  'CONTACT_YOUTUBE': YoutubeFillIcon,
-  'CONTACT_LINKEDIN': LinkedinFillIcon,
-  'CONTACT_WEHCHAT_PUBLIC': WechatFillIcon,
-  'CONTACT_ZHISHIXINGQIU': EarthFillIcon
+  'CONTACT_GITHUB': IconBrandGithub,
+  'CONTACT_TWITTER': IconBrandTwitter,
+  'CONTACT_WEIBO': IconBrandWeibo,
+  'CONTACT_BILIBILI': IconBrandBilibili,
+  'CONTACT_TELEGRAM': IconBrandTelegram,
+  'CONTACT_INSTAGRAM': IconBrandInstagram,
+  'CONTACT_YOUTUBE': IconBrandYoutube,
+  'CONTACT_LINKEDIN': IconBrandLinkedin,
+  'CONTACT_WEHCHAT_PUBLIC': IconBrandWechat,
+  'CONTACT_ZHISHIXINGQIU': IconPlanet
 }
 
 export const SideNav = () => {
   const router = useRouter()
-  const [activeTab, setActiveTab] = useState('Home')
   const [isHovered, setIsHovered] = useState(false)
+  const [activeTab, setActiveTab] = useState('Home')
   const [indicatorStyle, setIndicatorStyle] = useState({ top: 0, opacity: 0 })
   const navRef = useRef(null)
   const itemRefs = useRef({})
 
-  // Configure menu items
+  // All navigation items
   const menuItems = [
     { name: 'Home', path: '/' },
     { name: 'Category', path: '/category', show: siteConfig('ENDSPACE_MENU_CATEGORY', null, CONFIG) },
@@ -77,29 +72,30 @@ export const SideNav = () => {
     { name: 'Search', path: '/search', show: siteConfig('ENDSPACE_MENU_SEARCH', null, CONFIG) }
   ].filter(item => item.show !== false)
 
-  // 社交图标配置 - 使用 contact.config.js 的配�?
+  // Social icon config - using contact.config.js settings
   const socialLinks = [
     { key: 'CONTACT_GITHUB', label: 'GitHub' },
     { key: 'CONTACT_TWITTER', label: 'Twitter' },
-    { key: 'CONTACT_WEIBO', label: '微博' },
+    { key: 'CONTACT_WEIBO', label: 'Weibo' },
     { key: 'CONTACT_BILIBILI', label: 'Bilibili' },
     { key: 'CONTACT_TELEGRAM', label: 'Telegram' },
     { key: 'CONTACT_INSTAGRAM', label: 'Instagram' },
     { key: 'CONTACT_YOUTUBE', label: 'YouTube' },
-    { key: 'CONTACT_XIAOHONGSHU', svg: '/svg/xiaohongshu.svg', label: '小红�? },
+    { key: 'CONTACT_XIAOHONGSHU', svg: '/svg/xiaohongshu.svg', label: 'Xiaohongshu' },
     { key: 'CONTACT_LINKEDIN', label: 'LinkedIn' },
-    { key: 'CONTACT_ZHISHIXINGQIU', label: '知识星球' },
-    { key: 'CONTACT_WEHCHAT_PUBLIC', label: '微信公众�? },
+    { key: 'CONTACT_ZHISHIXINGQIU', label: 'Zhishixingqiu' },
+    { key: 'CONTACT_WEHCHAT_PUBLIC', label: 'WeChat' },
   ]
 
-  // 获取邮箱
+  // Email
   const email = siteConfig('CONTACT_EMAIL')
 
-  // Update active indicator position with smooth animation
+  // Update indicator position
   const updateIndicatorPosition = (tabName) => {
     const itemEl = itemRefs.current[tabName]
-    if (itemEl && navRef.current) {
-      const navRect = navRef.current.getBoundingClientRect()
+    const navEl = navRef.current
+    if (itemEl && navEl) {
+      const navRect = navEl.getBoundingClientRect()
       const itemRect = itemEl.getBoundingClientRect()
       setIndicatorStyle({
         top: itemRect.top - navRect.top,
@@ -165,7 +161,7 @@ export const SideNav = () => {
     >
       {/* Avatar Section - Top of sidebar, clickable to personal page */}
       <div className="flex-shrink-0 py-6 flex flex-col items-center">
-        <SmartLink href="/cloud09" title="个人�?>
+        <SmartLink href="/cloud09" title="Profile">
           <div className={`transition-all duration-300 cursor-pointer hover:scale-105 ${isHovered ? 'w-[5rem] h-[5rem]' : 'w-[3rem] h-[3rem]'}`}>
             <img 
               src={AVATAR_URL}
@@ -293,7 +289,3 @@ export const SideNav = () => {
     </div>
   )
 }
-
-
-
-
