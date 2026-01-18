@@ -1,46 +1,53 @@
+﻿import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
-import { siteConfig } from '@/lib/config'
-import CONFIG from '../config'
 import SmartLink from '@/components/SmartLink'
-import { EndspacePlayer } from './EndspacePlayer'
+import { siteConfig } from '@/lib/config'
+import EndspacePlayer from './EndspacePlayer'
+import CONFIG from '../config'
 import {
-  IconHome,
-  IconCategory,
-  IconArchive,
-  IconSearch,
-  IconUsers,
-  IconBriefcase,
+  IconHome2,
+  IconFolder,
   IconTag,
+  IconArchive,
+  IconBriefcase,
+  IconUsers,
+  IconSearch,
   IconMenu2,
   IconX,
   IconMail,
   IconBrandGithub,
   IconBrandTwitter,
-  IconBrandWeibo,
   IconBrandBilibili,
   IconBrandTelegram,
   IconBrandInstagram,
   IconBrandYoutube,
   IconBrandLinkedin,
   IconBrandWechat,
+  IconBrandWeibo,
   IconPlanet
 } from '@tabler/icons-react'
 
-const AVATAR_URL = siteConfig('AUTHOR_AVATAR')
+/**
+ * MobileNav Component - Top Navigation for Mobile
+ * 移动端顶部导航：左上角头像，右上角汉堡菜�?
+ * Tabler Icons for Futuristic Feel
+ */
 
-// Icon mapping
+// Avatar image URL
+const AVATAR_URL = 'https://github.com/cloud-oc/picx-images-hosting/blob/master/Origin/Cloud_icon.pfpafpaii.png?raw=true'
+
+// Icon components mapping
 const IconComponents = {
-  'Home': IconHome,
-  'Category': IconCategory,
-  'Tag': IconTag,
-  'Archive': IconArchive,
-  'Search': IconSearch,
-  'Friends': IconUsers,
-  'Portfolio': IconBriefcase
+  Home: IconHome2,
+  Category: IconFolder,
+  Tag: IconTag,
+  Archive: IconArchive,
+  Portfolio: IconBriefcase,
+  Friends: IconUsers,
+  Search: IconSearch
 }
 
-// Social icon mapping
+// Social icon components mapping
 const SocialIconComponents = {
   'CONTACT_GITHUB': IconBrandGithub,
   'CONTACT_TWITTER': IconBrandTwitter,
@@ -70,19 +77,19 @@ export const MobileNav = () => {
     { name: 'Search', path: '/search', show: siteConfig('ENDSPACE_MENU_SEARCH', null, CONFIG) }
   ].filter(item => item.show !== false)
 
-  // Social icon config - using contact.config.js settings
+  // 社交图标配置 - 使用 contact.config.js 的配置
   const socialLinks = [
     { key: 'CONTACT_GITHUB', label: 'GitHub' },
     { key: 'CONTACT_TWITTER', label: 'Twitter' },
-    { key: 'CONTACT_WEIBO', label: 'Weibo' },
+    { key: 'CONTACT_WEIBO', label: '微博' },
     { key: 'CONTACT_BILIBILI', label: 'Bilibili' },
     { key: 'CONTACT_TELEGRAM', label: 'Telegram' },
     { key: 'CONTACT_INSTAGRAM', label: 'Instagram' },
     { key: 'CONTACT_YOUTUBE', label: 'YouTube' },
-    { key: 'CONTACT_XIAOHONGSHU', svg: '/svg/xiaohongshu.svg', label: 'Xiaohongshu' },
+    { key: 'CONTACT_XIAOHONGSHU', svg: '/svg/xiaohongshu.svg', label: '小红书' },
     { key: 'CONTACT_LINKEDIN', label: 'LinkedIn' },
-    { key: 'CONTACT_ZHISHIXINGQIU', label: 'Zhishixingqiu' },
-    { key: 'CONTACT_WEHCHAT_PUBLIC', label: 'WeChat' },
+    { key: 'CONTACT_ZHISHIXINGQIU', label: '知识星球' },
+    { key: 'CONTACT_WEHCHAT_PUBLIC', label: '微信公众号' },
   ]
 
   // Email
@@ -141,7 +148,7 @@ export const MobileNav = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 md:hidden bg-[var(--endspace-bg-primary)]/95 backdrop-blur-sm border-b border-[var(--endspace-border-base)] safe-area-top">
         <div className="flex items-center justify-between h-20 px-5">
           {/* Left: Avatar */}
-          <SmartLink href="/cloud09" title="Profile" className="flex-shrink-0 flex items-center">
+          <SmartLink href="/cloud09" title="个人页"flex-shrink-0 flex items-center">
             <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[var(--endspace-accent-yellow)] hover:border-blue-500 transition-colors">
               <img 
                 src={AVATAR_URL}
